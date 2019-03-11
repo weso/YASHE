@@ -105,7 +105,7 @@ shapeOrRef ==> [or(shapeDefinition,shapeRef)].
 %[22] OK
 inlineShapeOrRef ==> [or(inlineShapeDefinition,shapeRef)].
 
-%[23] OK
+%[23] THIS RULE HAS BEEN MODIFYED TO MAKE IT LL1
 %shapeRef ==> ['ATPNAME_NS'].
 shapeRef ==> ['ATPNAME_LN'].
 %shapeRef ==> ['@',shapeExprLabel].
