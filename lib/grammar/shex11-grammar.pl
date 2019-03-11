@@ -27,7 +27,6 @@ stephen.cresswell@tso.co.uk
 %[1] OK
 shexDoC  ==> [*(directive),?([or(notStartAction,startActions),*(statement)]), $ ].
 
-
 %[2] OK
 directive ==> [or(baseDecl,prefixDecl,importDecl)].
 
@@ -107,9 +106,9 @@ shapeOrRef ==> [or(shapeDefinition,shapeRef)].
 inlineShapeOrRef ==> [or(inlineShapeDefinition,shapeRef)].
 
 %[23] OK
+%shapeRef ==> ['ATPNAME_NS'].
 shapeRef ==> ['ATPNAME_LN'].
-shapeRef ==> ['ATPNAME_NS'].
-shapeRef ==> ['@',shapeExprLabel].
+%shapeRef ==> ['@',shapeExprLabel].
 
 
 %[24] OK
@@ -233,16 +232,16 @@ iriExclusion ==> ['-',iri,?('~')].
 literalRange ==> [literal,?(['~',*(literalExclusion)])].
 
 %[54] OK
-%literalExclusion ==> ['-',literal,?('~')]. MISSING THIS CORRECT RULE
-literalExclusion ==> ['.'].
+iteralExclusion ==> ['-',literal,?('~')]. 
+%literalExclusion ==> ['.'].
 
 %[55] OK
 languageRange ==> ['LANGTAG',?(['~',*(languageExclusion)])].
 languageRange ==> ['@','~',*(languageExclusion)].
 
 %[56] OK
-%languageExclusion ==> ['-','LANGTAG',?('~')]. MISSING THIS CORRECT RULE
-languageExclusion ==> ['.'].
+languageExclusion ==> ['-','LANGTAG',?('~')].
+%languageExclusion ==> ['.'].
 
 
 %[57] OK
