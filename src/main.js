@@ -235,13 +235,18 @@ var extendCmInstance = function(yashe) {
     return yashe.queryType;
   };
   /**
+   * 
+   * 
+   * NOT USED
+   * 
 	 * Fetch the query mode: 'query' or 'update'
 	 *
 	 * @method doc.getQueryMode
 	 * @return string
 	 *
 	 */
-  yashe.getQueryMode = function() {
+  /*
+   yashe.getQueryMode = function() {
     var type = yashe.getQueryType();
     if (
       type == "INSERT" ||
@@ -259,6 +264,7 @@ var extendCmInstance = function(yashe) {
       return "query";
     }
   };
+  */
 
   yashe.setCheckSyntaxErrors = function(isEnabled) {
     yashe.options.syntaxErrorCheck = isEnabled;
@@ -298,7 +304,7 @@ var postProcessCmElement = function(yashe) {
     if (valueFromStorage) yashe.setValue(valueFromStorage);
   }
 
-  root.drawButtons(yashe);
+  //root.drawButtons(yashe); NOT USED YET
 
   /**
 	 * Add event handlers
@@ -308,14 +314,14 @@ var postProcessCmElement = function(yashe) {
   });
   yashe.on("change", function(yashe, eventInfo) {
     checkSyntax(yashe);
-    root.updateQueryButton(yashe);
-    root.positionButtons(yashe);
+    //root.updateQueryButton(yashe);
+    //root.positionButtons(yashe);
   });
   yashe.on("changes", function() {
     //e.g. on paste
     checkSyntax(yashe);
-    root.updateQueryButton(yashe);
-    root.positionButtons(yashe);
+    //root.updateQueryButton(yashe);
+    //root.positionButtons(yashe);
   });
 
   yashe.on("cursorActivity", function(yashe, eventInfo) {
@@ -323,7 +329,7 @@ var postProcessCmElement = function(yashe) {
   });
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
-  root.positionButtons(yashe);
+  //root.positionButtons(yashe);
 
   $(yashe.getWrapperElement())
     .on("mouseenter", ".cm-atom", function() {
@@ -407,6 +413,9 @@ var checkSyntax = function(yashe, deepcheck) {
       },
       precise
     );
+
+    //console.log(token)
+
     var state = token.state;
     yashe.queryType = state.queryType;
     if (state.OK == false) {
@@ -416,6 +425,7 @@ var checkSyntax = function(yashe, deepcheck) {
         //we don't want to gutter error, so return
         return;
       }
+
 
       var warningEl = yutils.svg.getElement(imgs.warning);
       if (state.errorMsg) {
@@ -481,6 +491,10 @@ root.registerAutocompleter("properties", require("./autocompleters/properties.js
 root.registerAutocompleter("classes", require("./autocompleters/classes.js"));
 root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
 
+/*
+
+NOT USED YET
+
 root.positionButtons = function(yashe) {
   var scrollBar = $(yashe.getWrapperElement()).find(".CodeMirror-vscrollbar");
   var offset = 0;
@@ -489,6 +503,8 @@ root.positionButtons = function(yashe) {
   }
   if (yashe.buttons.is(":visible")) yashe.buttons.css("right", offset + 4);
 };
+
+*/
 
 /**
  * Create a share link
@@ -520,12 +536,16 @@ root.consumeShareLink = function(yashe, urlParams) {
     yashe.setValue(urlParams.query);
   }
 };
+
+
+//NOT USED YET
+/*
 root.drawButtons = function(yashe) {
   yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
 
-  /**
+  
 	 * draw share link button
-	 */
+	 
   if (yashe.options.createShareLink) {
     var svgShare = $(yutils.svg.getElement(imgs.share));
     svgShare
@@ -597,9 +617,9 @@ root.drawButtons = function(yashe) {
       .appendTo(yashe.buttons);
   }
 
-  /**
+  
 	 * draw fullscreen button
-	 */
+	
 
   var toggleFullscreen = $("<div>", {
     class: "fullscreenToggleBtns"
@@ -647,13 +667,19 @@ var queryButtonIds = {
   error: "queryInvalid"
 };
 
+*/
+
 /**
+ * 
+ * NOT USED YET
+ * 
  * Update the query button depending on current query status. If no query status is passed via the parameter, it auto-detects the current query status
  *
  * @param {doc} YASHE document
  * @param status {string|null, "busy"|"valid"|"error"}
  */
-root.updateQueryButton = function(yashe, status) {
+/*
+ root.updateQueryButton = function(yashe, status) {
   var queryButton = $(yashe.getWrapperElement()).find(".yashe_queryButton");
   if (queryButton.length == 0) return; //no query button drawn
 
@@ -688,6 +714,7 @@ root.updateQueryButton = function(yashe, status) {
     }
   }
 };
+*/
 /**
  * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
  *
