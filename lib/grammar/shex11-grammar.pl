@@ -260,7 +260,7 @@ codeDecl ==> ['%',iri,or('CODE','%')].
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
 %[61] OK
-predicate ==> [or(iri,'RDF_TYPE')].
+predicate ==> [or(iri,'a')].
 
 %[62] OK
 datatype ==> [iri].
@@ -409,6 +409,7 @@ tm_punct([
 '&'='&',
 '//'='\\/\\/',
 '%'='%',
-'^^'= '\\^\\^'
+'^^'= '\\^\\^',
+'a' = 'a'
 
 ]).
