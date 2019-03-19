@@ -225,19 +225,23 @@ var extendCmInstance = function(yashe) {
     return cleanedQuery;
   };
   /**
+   * 
+   *    * NOT USED
+   * 
+   * 
 	 * Fetch the query type (e.g., SELECT||DESCRIBE||INSERT||DELETE||ASK||CONSTRUCT)
 	 *
 	 * @method doc.getQueryType
 	 * @return string
 	 *
-	 */
-  yashe.getQueryType = function() {
+   * 
+   * yashe.getQueryType = function() {
     return yashe.queryType;
   };
-  /**
+   * 
+	
    * 
    * 
-   * NOT USED
    * 
 	 * Fetch the query mode: 'query' or 'update'
 	 *
@@ -324,9 +328,9 @@ var postProcessCmElement = function(yashe) {
     //root.positionButtons(yashe);
   });
 
-  yashe.on("cursorActivity", function(yashe, eventInfo) {
-    updateButtonsTransparency(yashe);
-  });
+  //yashe.on("cursorActivity", function(yashe, eventInfo) {
+   // updateButtonsTransparency(yashe);
+  //});
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
   //root.positionButtons(yashe);
@@ -376,8 +380,11 @@ var getUrlParams = function() {
 };
 
 /**
+ * 
+ *  NOT USED YET
+ * 
  * Update transparency of buttons. Increase transparency when cursor is below buttons
- */
+
 
 var updateButtonsTransparency = function(yashe) {
   yashe.cursor = $(".CodeMirror-cursor");
@@ -389,6 +396,8 @@ var updateButtonsTransparency = function(yashe) {
     }
   }
 };
+
+ */
 
 var clearError = null;
 var checkSyntax = function(yashe, deepcheck) {
