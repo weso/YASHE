@@ -307,11 +307,11 @@ blankNode ==> ['BLANK_NODE_LABEL'].
 
 
 % tokens defined by regular expressions elsewhere
+% RDF_TYPE token now is harcoded in the rules
 tm_regex([
 
 'CODE',
 'REPEAT_RANGE',
-'RDF_TYPE',
 'IRI_REF',
 'PNAME_NS',
 'PNAME_LN',
