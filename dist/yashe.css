@@ -109,6 +109,11 @@
     color: #164; }
   .yashe .cm-s-default .cm-def {
     color: #00f; }
+  .yashe .cm-s-default .cm-variable,
+  .yashe .cm-s-default .cm-punctuation,
+  .yashe .cm-s-default .cm-property,
+  .yashe .cm-s-default .cm-operator {
+    color: #05a; }
   .yashe .cm-s-default .cm-variable-2 {
     color: #05a; }
   .yashe .cm-s-default .cm-variable-3 {
