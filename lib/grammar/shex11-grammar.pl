@@ -165,22 +165,26 @@ extraPropertySet ==> ['EXTRA',+(predicate)].
 tripleExpression ==> [oneOfTripleExpr].
 
 %[37] OK
-%oneOfTripleExpr ==> [or(groupTripleExpr,multiElementOneOf)]. MISSING THIS CORRECT RULE
-oneOfTripleExpr ==> [groupTripleExpr].
+oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
+
+funaryTripleExpr ==>[singleElementGroup, fsingle].
+
+fsingle ==>[].
+fsingle ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 
 
-%[38] OK
-multiElementOneOf ==> [groupTripleExpr,+(['|',groupTripleExpr])].
+fmulti ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
+fmulti ==>[].
 
 
 %[40][41][42] This 3 rules has been modyfied to make it LL(1)
-groupTripleExpr ==> [unaryTripleExpr,singleElementGroup].
 
 singleElementGroup ==> [].
 singleElementGroup ==> [';',elementGroup].
 
 elementGroup ==>[].
-elementGroup ==>[groupTripleExpr].
+elementGroup ==>[unaryTripleExpr,singleElementGroup].
+
 
 
 %[43] OK
