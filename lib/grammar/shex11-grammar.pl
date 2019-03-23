@@ -165,22 +165,26 @@ extraPropertySet ==> ['EXTRA',+(predicate)].
 tripleExpression ==> [oneOfTripleExpr].
 
 %[37] OK
-%oneOfTripleExpr ==> [or(groupTripleExpr,multiElementOneOf)]. MISSING THIS CORRECT RULE
-oneOfTripleExpr ==> [groupTripleExpr].
+oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
+
+funaryTripleExpr ==>[singleElementGroup, fsingle].
+
+fsingle ==>[].
+fsingle ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 
 
-%[38] OK
-multiElementOneOf ==> [groupTripleExpr,+(['|',groupTripleExpr])].
+fmulti ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
+fmulti ==>[].
 
 
-%[40] NOW THIS RULE ONLY CALL THE elementGroup RULE
-groupTripleExpr ==> [elementGroup].
+%[40][41][42] This 3 rules has been modyfied to make it LL(1)
 
-%[41] THIS RULE HAS BEEN REPLACED BY RULE 42
-%singleElementGroup ==> [unaryTripleExpr,?(';')].
+singleElementGroup ==> [].
+singleElementGroup ==> [';',elementGroup].
 
-%[42] THIS RULE NOW REPRESENTS THE RULE 41 (singleElementGroup) TOGETHER WITH RULE 42(multiELementGroup) to make it LL1
-elementGroup ==> [unaryTripleExpr,*([';',unaryTripleExpr])]. 
+elementGroup ==>[].
+elementGroup ==>[unaryTripleExpr,singleElementGroup].
+
 
 
 %[43] OK
@@ -260,7 +264,7 @@ codeDecl ==> ['%',iri,or('CODE','%')].
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
 %[61] OK
-predicate ==> [or(iri,'RDF_TYPE')].
+predicate ==> [or(iri,'a')].
 
 %[62] OK
 datatype ==> [iri].
@@ -307,11 +311,11 @@ blankNode ==> ['BLANK_NODE_LABEL'].
 
 
 % tokens defined by regular expressions elsewhere
+% RDF_TYPE token now is harcoded in the rules
 tm_regex([
 
 'CODE',
 'REPEAT_RANGE',
-'RDF_TYPE',
 'IRI_REF',
 'PNAME_NS',
 'PNAME_LN',
@@ -409,6 +413,7 @@ tm_punct([
 '&'='&',
 '//'='\\/\\/',
 '%'='%',
-'^^'= '\\^\\^'
+'^^'= '\\^\\^',
+'a' = 'a'
 
 ]).
