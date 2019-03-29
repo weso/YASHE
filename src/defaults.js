@@ -9,7 +9,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   mode: "sparql11",
 
   /**
-	 *Default shape String
+	 *  Default shape 
 	 */
   value: "PREFIX :       <http://example.org/>\n"+
          "PREFIX schema: <http://schema.org/>\n"+

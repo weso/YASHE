@@ -3,6 +3,7 @@ var $ = require("jquery"),
   utils = require("./utils.js"),
   YASHE = require("./main.js");
 
+/*
 YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
   var callback = typeof callbackOrConfig == "function" ? callbackOrConfig : null;
   var config = typeof callbackOrConfig == "object" ? callbackOrConfig : {};
@@ -16,7 +17,7 @@ YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
   var queryMode = yashe.getQueryMode();
   /**
 	 * initialize ajax config
-	 */
+	
   var ajaxConfig = {
     url: typeof config.endpoint == "function" ? config.endpoint(yashe) : config.endpoint,
     type: queryMode == "update"
@@ -29,7 +30,7 @@ YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
   if (config.xhrFields) ajaxConfig.xhrFields = config.xhrFields;
   /**
 	 * add complete, beforesend, etc callbacks (if specified)
-	 */
+
   var handlerDefined = false;
   if (config.callbacks) {
     for (var handler in config.callbacks) {
@@ -39,6 +40,7 @@ YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
       }
     }
   }
+
   if (ajaxConfig.type === "GET") {
     //we need to do encoding ourselve, as jquery does not properly encode the url string
     //https://github.com/OpenTriply/YASGUI/issues/75
@@ -57,7 +59,7 @@ YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
 
   /**
 	 * merge additional request headers
-	 */
+	
   if (config.headers && !$.isEmptyObject(config.headers)) $.extend(ajaxConfig.headers, config.headers);
 
   var queryStart = new Date();
@@ -99,7 +101,7 @@ YASHE.getUrlArguments = function(yashe, config) {
 
   /**
 	 * add named graphs to ajax config
-	 */
+	 
   if (config.namedGraphs && config.namedGraphs.length > 0) {
     var argName = queryMode == "query" ? "named-graph-uri" : "using-named-graph-uri ";
     for (var i = 0; i < config.namedGraphs.length; i++)
@@ -110,7 +112,7 @@ YASHE.getUrlArguments = function(yashe, config) {
   }
   /**
 	 * add default graphs to ajax config
-	 */
+	 
   if (config.defaultGraphs && config.defaultGraphs.length > 0) {
     var argName = queryMode == "query" ? "default-graph-uri" : "using-graph-uri ";
     for (var i = 0; i < config.defaultGraphs.length; i++)
@@ -122,7 +124,7 @@ YASHE.getUrlArguments = function(yashe, config) {
 
   /**
 	 * add additional request args
-	 */
+	 
   if (config.args && config.args.length > 0) $.merge(data, config.args);
 
   return data;
@@ -157,6 +159,7 @@ var getAcceptHeader = function(yashe, config) {
   return acceptHeader;
 };
 
+*/
 module.exports = {
   getAjaxConfig: YASHE.getAjaxConfig
 };

@@ -98,50 +98,6 @@ var extendCmInstance = function(yashe) {
       collapse ? "fold" : "unfold"
     );
   };
-  var backdrop = null;
-  var animateSpeed = null;
-  yashe.setBackdrop = function(show) {
-    if (yashe.options.backdrop || yashe.options.backdrop === 0 || yashe.options.backdrop === "0") {
-      if (animateSpeed === null) {
-        animateSpeed = +yashe.options.backdrop;
-        if (animateSpeed === 1) {
-          //ah, yashe.options.backdrop was 'true'. Set this to default animate speed 400
-          animateSpeed = 400;
-        }
-      }
-
-      if (!backdrop) {
-        backdrop = $("<div>", {
-          class: "backdrop"
-        })
-          .click(function() {
-            $(this).hide();
-          })
-          .insertAfter($(yashe.getWrapperElement()));
-      }
-      if (show) {
-        backdrop.show(animateSpeed);
-      } else {
-        backdrop.hide(animateSpeed);
-      }
-    }
-  };
-  /**
-	 * Execute query. Pass a callback function, or a configuration object (see
-	 * default settings below for possible values) I.e., you can change the
-	 * query configuration by either changing the default settings, changing the
-	 * settings of this document, or by passing query settings to this function
-	 *
-	 * @method doc.query
-	 * @param function|object
-	 */
-  yashe.query = function(callbackOrConfig) {
-    root.executeQuery(yashe, callbackOrConfig);
-  };
-
-  yashe.getUrlArguments = function(config) {
-    return root.getUrlArguments(yashe, config);
-  };
 
   /**
 	 * Fetch defined prefixes from query string
@@ -159,116 +115,8 @@ var extendCmInstance = function(yashe) {
   yashe.removePrefixes = function(prefixes) {
     return require("./prefixUtils.js").removePrefixes(yashe, prefixes);
   };
-  yashe.getVariablesFromQuery = function() {
-    //Use precise here. We want to be sure we use the most up to date state. If we're
-    //not, we might get outdated info from the current query (creating loops such
-    //as https://github.com/OpenTriply/YASGUI/issues/84)
-    //on caveat: this function won't work when query is invalid (i.e. when typing)
-    return $.map(yashe.getTokenAt({ line: yashe.lastLine(), ch: yashe.getLine(yashe.lastLine()).length }, true).state.variables, function(val,key) {return key});
-  }
-  //values in the form of {?var: 'value'}, or [{?var: 'value'}]
-  yashe.getQueryWithValues = function(values) {
-    if (!values) return yashe.getValue();
-    var injectString;
-    if (typeof values === 'string') {
-      injectString = values;
-    } else {
-      //start building inject string
-      if (!Array.isArray(values)) values = [values];
-      var variables = values.reduce(function(vars, valueObj) {
-        for (var v in valueObj) {
-          vars[v] = v;
-        }
-        return vars;
-      }, {})
-      var varArray = [];
-      for (var v in variables) {
-        varArray.push(v);
-      }
 
-      if (!varArray.length) return yashe.getValue() ;
-      //ok, we've got enough info to start building the string now
-      injectString = "VALUES (" + varArray.join(' ') + ") {\n";
-      values.forEach(function(valueObj) {
-        injectString += "( ";
-        varArray.forEach(function(variable) {
-          injectString += valueObj[variable] || "UNDEF"
-        })
-        injectString += " )\n"
-      })
-      injectString += "}\n"
-    }
-    if (!injectString) return yashe.getValue();
 
-    var newQuery = ""
-    var injected = false;
-    var gotSelect = false;
-    root.runMode(yashe.getValue(), "sparql11", function(stringVal, className, row, col, state) {
-      if (className === "keyword" && stringVal.toLowerCase() === 'select') gotSelect = true;
-      newQuery += stringVal;
-      if (gotSelect && !injected && className === "punc" && stringVal === "{") {
-        injected = true;
-        //start injecting
-        newQuery += "\n" + injectString;
-      }
-    });
-    return newQuery
-  }
-
-  yashe.getValueWithoutComments = function() {
-    var cleanedQuery = "";
-    root.runMode(yashe.getValue(), "sparql11", function(stringVal, className) {
-      if (className != "comment") {
-        cleanedQuery += stringVal;
-      }
-    });
-    return cleanedQuery;
-  };
-  /**
-   * 
-   *    * NOT USED
-   * 
-   * 
-	 * Fetch the query type (e.g., SELECT||DESCRIBE||INSERT||DELETE||ASK||CONSTRUCT)
-	 *
-	 * @method doc.getQueryType
-	 * @return string
-	 *
-   * 
-   * yashe.getQueryType = function() {
-    return yashe.queryType;
-  };
-   * 
-	
-   * 
-   * 
-   * 
-	 * Fetch the query mode: 'query' or 'update'
-	 *
-	 * @method doc.getQueryMode
-	 * @return string
-	 *
-	 */
-  /*
-   yashe.getQueryMode = function() {
-    var type = yashe.getQueryType();
-    if (
-      type == "INSERT" ||
-      type == "DELETE" ||
-      type == "LOAD" ||
-      type == "CLEAR" ||
-      type == "CREATE" ||
-      type == "DROP" ||
-      type == "COPY" ||
-      type == "MOVE" ||
-      type == "ADD"
-    ) {
-      return "update";
-    } else {
-      return "query";
-    }
-  };
-  */
 
   yashe.setCheckSyntaxErrors = function(isEnabled) {
     yashe.options.syntaxErrorCheck = isEnabled;
@@ -335,71 +183,11 @@ var postProcessCmElement = function(yashe) {
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
   //root.positionButtons(yashe);
 
-  $(yashe.getWrapperElement())
-    .on("mouseenter", ".cm-atom", function() {
-      var matchText = $(this).text();
-      $(yashe.getWrapperElement())
-        .find(".cm-atom")
-        .filter(function() {
-          return $(this).text() === matchText;
-        })
-        .addClass("matchingVar");
-    })
-    .on("mouseleave", ".cm-atom", function() {
-      $(yashe.getWrapperElement()).find(".matchingVar").removeClass("matchingVar");
-    });
-  /**
-	 * check url args and modify yashe settings if needed
-	 */
-  if (yashe.options.consumeShareLink) {
-    yashe.options.consumeShareLink(yashe, getUrlParams());
-    //and: add a hash listener!
-    window.addEventListener("hashchange", function() {
-      yashe.options.consumeShareLink(yashe, getUrlParams());
-    });
-  }
-  if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
 };
 
-/**
- * get url params. first try fetching using hash. If it fails, try the regular query parameters (for backwards compatability)
- */
-var getUrlParams = function() {
-  //first try hash
-  var urlParams = null;
-  if (window.location.hash.length > 1) {
-    //firefox does some decoding if we're using window.location.hash (e.g. the + sign in contentType settings)
-    //Don't want this. So simply get the hash string ourselves
-    urlParams = $.deparam(location.href.split("#")[1]);
-  }
-  if ((!urlParams || !("query" in urlParams)) && window.location.search.length > 1) {
-    //ok, then just try regular url params
-    urlParams = $.deparam(window.location.search.substring(1));
-  }
-  return urlParams;
-};
-
-/**
- * 
- *  NOT USED YET
- * 
- * Update transparency of buttons. Increase transparency when cursor is below buttons
 
 
-var updateButtonsTransparency = function(yashe) {
-  yashe.cursor = $(".CodeMirror-cursor");
-  if (yashe.buttons && yashe.buttons.is(":visible") && yashe.cursor.length > 0) {
-    if (utils.elementsOverlap(yashe.cursor, yashe.buttons)) {
-      yashe.buttons.find("svg").attr("opacity", "0.2");
-    } else {
-      yashe.buttons.find("svg").attr("opacity", "1.0");
-    }
-  }
-};
-
- */
-
-var clearError = null;
+//var clearError = null;
 var checkSyntax = function(yashe, deepcheck) {
   yashe.queryValid = true;
 
@@ -500,230 +288,7 @@ root.registerAutocompleter("properties", require("./autocompleters/properties.js
 root.registerAutocompleter("classes", require("./autocompleters/classes.js"));
 root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
 
-/*
 
-NOT USED YET
-
-root.positionButtons = function(yashe) {
-  var scrollBar = $(yashe.getWrapperElement()).find(".CodeMirror-vscrollbar");
-  var offset = 0;
-  if (scrollBar.is(":visible")) {
-    offset = scrollBar.outerWidth();
-  }
-  if (yashe.buttons.is(":visible")) yashe.buttons.css("right", offset + 4);
-};
-
-*/
-
-/**
- * Create a share link
- *
- * @method YASHE.createShareLink
- * @param {doc} YASHE document
- * @default {query: doc.getValue()}
- * @return object
- */
-root.createShareLink = function(yashe) {
-  //extend existing link, so first fetch current arguments
-  var urlParams = {};
-  if (window.location.hash.length > 1) urlParams = $.deparam(window.location.hash.substring(1));
-  urlParams["query"] = yashe.getValue();
-  return urlParams;
-};
-root.getAsCurl = function(yashe, ajaxConfig) {
-  var curl = require("./curl.js");
-  return curl.createCurlString(yashe, ajaxConfig);
-};
-/**
- * Consume the share link, by parsing the document URL for possible yashe arguments, and setting the appropriate values in the YASHE doc
- *
- * @method YASHE.consumeShareLink
- * @param {doc} YASHE document
- */
-root.consumeShareLink = function(yashe, urlParams) {
-  if (urlParams && urlParams.query) {
-    yashe.setValue(urlParams.query);
-  }
-};
-
-
-//NOT USED YET
-/*
-root.drawButtons = function(yashe) {
-  yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
-
-  
-	 * draw share link button
-	 
-  if (yashe.options.createShareLink) {
-    var svgShare = $(yutils.svg.getElement(imgs.share));
-    svgShare
-      .click(function(event) {
-        event.stopPropagation();
-        var popup = $("<div class='yashe_sharePopup'></div>").appendTo(yashe.buttons);
-        $("html").click(function() {
-          if (popup) popup.remove();
-        });
-
-        popup.click(function(event) {
-          event.stopPropagation();
-        });
-        var $input = $("<input>").val(
-          location.protocol +
-            "//" +
-            location.host +
-            location.pathname +
-            location.search +
-            "#" +
-            $.param(yashe.options.createShareLink(yashe))
-        );
-
-        $input.focus(function() {
-          var $this = $(this);
-          $this.select();
-
-          // Work around Chrome's little problem
-          $this.mouseup(function() {
-            // Prevent further mouseup intervention
-            $this.unbind("mouseup");
-            return false;
-          });
-        });
-
-        popup.empty().append($("<div>", { class: "inputWrapper" }).append($input));
-        if (yashe.options.createShortLink) {
-          popup.addClass("enableShort");
-          $("<button>Shorten</button>")
-            .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
-            .click(function() {
-              $(this).parent().find("button").attr("disabled", "disabled");
-              yashe.options.createShortLink($input.val(), function(errString, shortLink) {
-                if (errString) {
-                  $input.remove();
-                  popup.find(".inputWrapper").append($("<span>", { class: "shortlinkErr" }).text(errString));
-                } else {
-                  $input.val(shortLink).focus();
-                }
-              });
-            })
-            .appendTo(popup);
-        }
-        $("<button>CURL</button>")
-          .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
-          .click(function() {
-            $(this).parent().find("button").attr("disabled", "disabled");
-            $input.val(root.getAsCurl(yashe)).focus();
-          })
-          .appendTo(popup);
-        var positions = svgShare.position();
-        popup
-          .css("top", positions.top + svgShare.outerHeight() + parseInt(popup.css("padding-top")) + "px")
-          .css("left", positions.left + svgShare.outerWidth() - popup.outerWidth() + "px");
-        $input.focus();
-      })
-      .addClass("yashe_share")
-      .attr("title", "Share your query")
-      .appendTo(yashe.buttons);
-  }
-
-  
-	 * draw fullscreen button
-	
-
-  var toggleFullscreen = $("<div>", {
-    class: "fullscreenToggleBtns"
-  })
-    .append(
-      $(yutils.svg.getElement(imgs.fullscreen))
-        .addClass("yashe_fullscreenBtn")
-        .attr("title", "Set editor full screen")
-        .click(function() {
-          yashe.setOption("fullScreen", true);
-          yashe.emit('fullscreen-enter')
-        })
-    )
-    .append(
-      $(yutils.svg.getElement(imgs.smallscreen))
-        .addClass("yashe_smallscreenBtn")
-        .attr("title", "Set editor to normal size")
-        .click(function() {
-          yashe.setOption("fullScreen", false);
-          yashe.emit('fullscreen-leave')
-        })
-    );
-  yashe.buttons.append(toggleFullscreen);
-
-  if (yashe.options.sparql.showQueryButton) {
-    $("<div>", {
-      class: "yashe_queryButton"
-    })
-      .click(function() {
-        if ($(this).hasClass("query_busy")) {
-          if (yashe.xhr) yashe.xhr.abort();
-          root.updateQueryButton(yashe);
-        } else {
-          yashe.query();
-        }
-      })
-      .appendTo(yashe.buttons);
-    root.updateQueryButton(yashe);
-  }
-};
-
-var queryButtonIds = {
-  busy: "loader",
-  valid: "query",
-  error: "queryInvalid"
-};
-
-*/
-
-/**
- * 
- * NOT USED YET
- * 
- * Update the query button depending on current query status. If no query status is passed via the parameter, it auto-detects the current query status
- *
- * @param {doc} YASHE document
- * @param status {string|null, "busy"|"valid"|"error"}
- */
-/*
- root.updateQueryButton = function(yashe, status) {
-  var queryButton = $(yashe.getWrapperElement()).find(".yashe_queryButton");
-  if (queryButton.length == 0) return; //no query button drawn
-
-  //detect status
-  if (!status) {
-    status = "valid";
-    if (yashe.queryValid === false) status = "error";
-  }
-
-  if (status != yashe.queryStatus) {
-    queryButton.empty().removeClass(function(index, classNames) {
-      return classNames
-        .split(" ")
-        .filter(function(c) {
-          //remove classname from previous status
-          return c.indexOf("query_") == 0;
-        })
-        .join(" ");
-    });
-
-    if (status == "busy") {
-      queryButton.append(
-        $("<div>", {
-          class: "loader"
-        })
-      );
-      yashe.queryStatus = status;
-    } else if (status == "valid" || status == "error") {
-      queryButton.addClass("query_" + status);
-      yutils.svg.draw(queryButton, imgs[queryButtonIds[status]]);
-      yashe.queryStatus = status;
-    }
-  }
-};
-*/
 /**
  * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
  *
@@ -910,3 +475,477 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
+
+
+  /*
+
+  /** Execute query. Pass a callback function, or a configuration object (see
+	 * default settings below for possible values) I.e., you can change the
+	 * query configuration by either changing the default settings, changing the
+	 * settings of this document, or by passing query settings to this function
+	 *
+	 * @method doc.query
+	 * @param function|object
+	 
+  yashe.query = function(callbackOrConfig) {
+    root.executeQuery(yashe, callbackOrConfig);
+  };
+
+
+   yashe.getUrlArguments = function(config) {
+    return root.getUrlArguments(yashe, config);
+  };
+
+  
+
+
+    NOT USED
+
+  var backdrop = null;
+  var animateSpeed = null;
+  yashe.setBackdrop = function(show) {
+    if (yashe.options.backdrop || yashe.options.backdrop === 0 || yashe.options.backdrop === "0") {
+      if (animateSpeed === null) {
+        animateSpeed = +yashe.options.backdrop;
+        if (animateSpeed === 1) {
+          //ah, yashe.options.backdrop was 'true'. Set this to default animate speed 400
+          animateSpeed = 400;
+        }
+      }
+
+      if (!backdrop) {
+        backdrop = $("<div>", {
+          class: "backdrop"
+        })
+          .click(function() {
+            $(this).hide();
+          })
+          .insertAfter($(yashe.getWrapperElement()));
+      }
+      if (show) {
+        backdrop.show(animateSpeed);
+      } else {
+        backdrop.hide(animateSpeed);
+      }
+    }
+  };
+  
+    NOT USED
+
+  yashe.getVariablesFromQuery = function() {
+    //Use precise here. We want to be sure we use the most up to date state. If we're
+    //not, we might get outdated info from the current query (creating loops such
+    //as https://github.com/OpenTriply/YASGUI/issues/84)
+    //on caveat: this function won't work when query is invalid (i.e. when typing)
+    return $.map(yashe.getTokenAt({ line: yashe.lastLine(), ch: yashe.getLine(yashe.lastLine()).length }, true).state.variables, function(val,key) {return key});
+  }
+  //values in the form of {?var: 'value'}, or [{?var: 'value'}]
+
+
+      NOT USED
+
+  yashe.getQueryWithValues = function(values) {
+    if (!values) return yashe.getValue();
+    var injectString;
+    if (typeof values === 'string') {
+      injectString = values;
+    } else {
+      //start building inject string
+      if (!Array.isArray(values)) values = [values];
+      var variables = values.reduce(function(vars, valueObj) {
+        for (var v in valueObj) {
+          vars[v] = v;
+        }
+        return vars;
+      }, {})
+      var varArray = [];
+      for (var v in variables) {
+        varArray.push(v);
+      }
+
+      if (!varArray.length) return yashe.getValue() ;
+      //ok, we've got enough info to start building the string now
+      injectString = "VALUES (" + varArray.join(' ') + ") {\n";
+      values.forEach(function(valueObj) {
+        injectString += "( ";
+        varArray.forEach(function(variable) {
+          injectString += valueObj[variable] || "UNDEF"
+        })
+        injectString += " )\n"
+      })
+      injectString += "}\n"
+    }
+    if (!injectString) return yashe.getValue();
+
+    var newQuery = ""
+    var injected = false;
+    var gotSelect = false;
+    root.runMode(yashe.getValue(), "sparql11", function(stringVal, className, row, col, state) {
+      if (className === "keyword" && stringVal.toLowerCase() === 'select') gotSelect = true;
+      newQuery += stringVal;
+      if (gotSelect && !injected && className === "punc" && stringVal === "{") {
+        injected = true;
+        //start injecting
+        newQuery += "\n" + injectString;
+      }
+    });
+    return newQuery
+  }
+
+  yashe.getValueWithoutComments = function() {
+    var cleanedQuery = "";
+    root.runMode(yashe.getValue(), "sparql11", function(stringVal, className) {
+      if (className != "comment") {
+        cleanedQuery += stringVal;
+      }
+    });
+    return cleanedQuery;
+  };
+
+ 
+   * 
+   *    * NOT USED
+   * 
+   * 
+	 * Fetch the query type (e.g., SELECT||DESCRIBE||INSERT||DELETE||ASK||CONSTRUCT)
+	 *
+	 * @method doc.getQueryType
+	 * @return string
+	 *
+   * 
+   * yashe.getQueryType = function() {
+    return yashe.queryType;
+  };
+   * 
+	
+   * 
+   * 
+   * 
+	 * Fetch the query mode: 'query' or 'update'
+	 *
+	 * @method doc.getQueryMode
+	 * @return string
+	 *
+	 */
+  /*
+   yashe.getQueryMode = function() {
+    var type = yashe.getQueryType();
+    if (
+      type == "INSERT" ||
+      type == "DELETE" ||
+      type == "LOAD" ||
+      type == "CLEAR" ||
+      type == "CREATE" ||
+      type == "DROP" ||
+      type == "COPY" ||
+      type == "MOVE" ||
+      type == "ADD"
+    ) {
+      return "update";
+    } else {
+      return "query";
+    }
+  };
+  */
+
+
+    /**
+     * 
+     * NOT USED
+     * 
+  $(yashe.getWrapperElement())
+    .on("mouseenter", ".cm-atom", function() {
+      var matchText = $(this).text();
+      $(yashe.getWrapperElement())
+        .find(".cm-atom")
+        .filter(function() {
+          return $(this).text() === matchText;
+        })
+        .addClass("matchingVar");
+    })
+    .on("mouseleave", ".cm-atom", function() {
+      $(yashe.getWrapperElement()).find(".matchingVar").removeClass("matchingVar");
+    });
+
+	 * check url args and modify yashe settings if needed
+	 
+  if (yashe.options.consumeShareLink) {
+    yashe.options.consumeShareLink(yashe, getUrlParams());
+    //and: add a hash listener!
+    window.addEventListener("hashchange", function() {
+      yashe.options.consumeShareLink(yashe, getUrlParams());
+    });
+  }
+  if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+
+
+ * 
+ * NOT USED YET
+ * 
+ * get url params. first try fetching using hash. If it fails, try the regular query parameters (for backwards compatability)
+
+var getUrlParams = function() {
+  //first try hash
+  var urlParams = null;
+  if (window.location.hash.length > 1) {
+    //firefox does some decoding if we're using window.location.hash (e.g. the + sign in contentType settings)
+    //Don't want this. So simply get the hash string ourselves
+    urlParams = $.deparam(location.href.split("#")[1]);
+  }
+  if ((!urlParams || !("query" in urlParams)) && window.location.search.length > 1) {
+    //ok, then just try regular url params
+    urlParams = $.deparam(window.location.search.substring(1));
+  }
+  return urlParams;
+};
+
+
+ * 
+ *  NOT USED YET
+ * 
+ * Update transparency of buttons. Increase transparency when cursor is below buttons
+
+
+var updateButtonsTransparency = function(yashe) {
+  yashe.cursor = $(".CodeMirror-cursor");
+  if (yashe.buttons && yashe.buttons.is(":visible") && yashe.cursor.length > 0) {
+    if (utils.elementsOverlap(yashe.cursor, yashe.buttons)) {
+      yashe.buttons.find("svg").attr("opacity", "0.2");
+    } else {
+      yashe.buttons.find("svg").attr("opacity", "1.0");
+    }
+  }
+};
+
+
+NOT USED YET
+
+root.positionButtons = function(yashe) {
+  var scrollBar = $(yashe.getWrapperElement()).find(".CodeMirror-vscrollbar");
+  var offset = 0;
+  if (scrollBar.is(":visible")) {
+    offset = scrollBar.outerWidth();
+  }
+  if (yashe.buttons.is(":visible")) yashe.buttons.css("right", offset + 4);
+};
+
+*/
+
+/**
+ * 
+ * NOT USED YET
+ * 
+ * Create a share link
+ *
+ * @method YASHE.createShareLink
+ * @param {doc} YASHE document
+ * @default {query: doc.getValue()}
+ * @return object
+ 
+root.createShareLink = function(yashe) {
+  //extend existing link, so first fetch current arguments
+  var urlParams = {};
+  if (window.location.hash.length > 1) urlParams = $.deparam(window.location.hash.substring(1));
+  urlParams["query"] = yashe.getValue();
+  return urlParams;
+};
+root.getAsCurl = function(yashe, ajaxConfig) {
+  var curl = require("./curl.js");
+  return curl.createCurlString(yashe, ajaxConfig);
+};
+
+ *  NOT USED YET
+ * 
+ * 
+ * Consume the share link, by parsing the document URL for possible yashe arguments, and setting the appropriate values in the YASHE doc
+ *
+ * @method YASHE.consumeShareLink
+ * @param {doc} YASHE document
+ 
+root.consumeShareLink = function(yashe, urlParams) {
+  if (urlParams && urlParams.query) {
+    yashe.setValue(urlParams.query);
+  }
+};
+
+
+
+
+//NOT USED YET
+
+root.drawButtons = function(yashe) {
+  yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
+
+  
+	 * draw share link button
+	 
+  if (yashe.options.createShareLink) {
+    var svgShare = $(yutils.svg.getElement(imgs.share));
+    svgShare
+      .click(function(event) {
+        event.stopPropagation();
+        var popup = $("<div class='yashe_sharePopup'></div>").appendTo(yashe.buttons);
+        $("html").click(function() {
+          if (popup) popup.remove();
+        });
+
+        popup.click(function(event) {
+          event.stopPropagation();
+        });
+        var $input = $("<input>").val(
+          location.protocol +
+            "//" +
+            location.host +
+            location.pathname +
+            location.search +
+            "#" +
+            $.param(yashe.options.createShareLink(yashe))
+        );
+
+        $input.focus(function() {
+          var $this = $(this);
+          $this.select();
+
+          // Work around Chrome's little problem
+          $this.mouseup(function() {
+            // Prevent further mouseup intervention
+            $this.unbind("mouseup");
+            return false;
+          });
+        });
+
+        popup.empty().append($("<div>", { class: "inputWrapper" }).append($input));
+        if (yashe.options.createShortLink) {
+          popup.addClass("enableShort");
+          $("<button>Shorten</button>")
+            .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
+            .click(function() {
+              $(this).parent().find("button").attr("disabled", "disabled");
+              yashe.options.createShortLink($input.val(), function(errString, shortLink) {
+                if (errString) {
+                  $input.remove();
+                  popup.find(".inputWrapper").append($("<span>", { class: "shortlinkErr" }).text(errString));
+                } else {
+                  $input.val(shortLink).focus();
+                }
+              });
+            })
+            .appendTo(popup);
+        }
+        $("<button>CURL</button>")
+          .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
+          .click(function() {
+            $(this).parent().find("button").attr("disabled", "disabled");
+            $input.val(root.getAsCurl(yashe)).focus();
+          })
+          .appendTo(popup);
+        var positions = svgShare.position();
+        popup
+          .css("top", positions.top + svgShare.outerHeight() + parseInt(popup.css("padding-top")) + "px")
+          .css("left", positions.left + svgShare.outerWidth() - popup.outerWidth() + "px");
+        $input.focus();
+      })
+      .addClass("yashe_share")
+      .attr("title", "Share your query")
+      .appendTo(yashe.buttons);
+  }
+
+  
+	 * draw fullscreen button
+	
+
+  var toggleFullscreen = $("<div>", {
+    class: "fullscreenToggleBtns"
+  })
+    .append(
+      $(yutils.svg.getElement(imgs.fullscreen))
+        .addClass("yashe_fullscreenBtn")
+        .attr("title", "Set editor full screen")
+        .click(function() {
+          yashe.setOption("fullScreen", true);
+          yashe.emit('fullscreen-enter')
+        })
+    )
+    .append(
+      $(yutils.svg.getElement(imgs.smallscreen))
+        .addClass("yashe_smallscreenBtn")
+        .attr("title", "Set editor to normal size")
+        .click(function() {
+          yashe.setOption("fullScreen", false);
+          yashe.emit('fullscreen-leave')
+        })
+    );
+  yashe.buttons.append(toggleFullscreen);
+
+  if (yashe.options.sparql.showQueryButton) {
+    $("<div>", {
+      class: "yashe_queryButton"
+    })
+      .click(function() {
+        if ($(this).hasClass("query_busy")) {
+          if (yashe.xhr) yashe.xhr.abort();
+          root.updateQueryButton(yashe);
+        } else {
+          yashe.query();
+        }
+      })
+      .appendTo(yashe.buttons);
+    root.updateQueryButton(yashe);
+  }
+};
+
+var queryButtonIds = {
+  busy: "loader",
+  valid: "query",
+  error: "queryInvalid"
+};
+
+*/
+
+/**
+ * 
+ * NOT USED YET
+ * 
+ * Update the query button depending on current query status. If no query status is passed via the parameter, it auto-detects the current query status
+ *
+ * @param {doc} YASHE document
+ * @param status {string|null, "busy"|"valid"|"error"}
+ */
+/*
+ root.updateQueryButton = function(yashe, status) {
+  var queryButton = $(yashe.getWrapperElement()).find(".yashe_queryButton");
+  if (queryButton.length == 0) return; //no query button drawn
+
+  //detect status
+  if (!status) {
+    status = "valid";
+    if (yashe.queryValid === false) status = "error";
+  }
+
+  if (status != yashe.queryStatus) {
+    queryButton.empty().removeClass(function(index, classNames) {
+      return classNames
+        .split(" ")
+        .filter(function(c) {
+          //remove classname from previous status
+          return c.indexOf("query_") == 0;
+        })
+        .join(" ");
+    });
+
+    if (status == "busy") {
+      queryButton.append(
+        $("<div>", {
+          class: "loader"
+        })
+      );
+      yashe.queryStatus = status;
+    } else if (status == "valid" || status == "error") {
+      queryButton.addClass("query_" + status);
+      yutils.svg.draw(queryButton, imgs[queryButtonIds[status]]);
+      yashe.queryStatus = status;
+    }
+  }
+};
+*/
+
