@@ -15,13 +15,21 @@ var getCompleteToken = function(yashe, token, cur) {
   if (!cur) {
     cur = yashe.getCursor();
   }
+
   if (!token) {
     token = yashe.getTokenAt(cur);
   }
+ /*
+
   var prevToken = yashe.getTokenAt({
     line: cur.line,
     ch: token.start
   });
+
+ 
+
+      NOT USED YET
+
   // not start of line, and not whitespace
   if (prevToken.type != null && prevToken.type != "ws" && token.type != null && token.type != "ws") {
     token.start = prevToken.start;
@@ -38,6 +46,11 @@ var getCompleteToken = function(yashe, token, cur) {
   } else {
     return token;
   }
+
+  */
+
+  return token;
+
 };
 var getPreviousNonWsToken = function(yashe, line, token) {
   var previousToken = yashe.getTokenAt({

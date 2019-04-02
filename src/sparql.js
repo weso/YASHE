@@ -17,7 +17,7 @@ YASHE.getAjaxConfig = function(yashe, callbackOrConfig) {
   var queryMode = yashe.getQueryMode();
   /**
 	 * initialize ajax config
-	
+	s
   var ajaxConfig = {
     url: typeof config.endpoint == "function" ? config.endpoint(yashe) : config.endpoint,
     type: queryMode == "update"
