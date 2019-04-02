@@ -6,7 +6,7 @@
  */
 var $ = require("jquery"), YASHE = require("./main.js");
 YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
-  mode: "sparql11",
+  mode: "shex",
 
   /**
 	 *  Default shape 
@@ -113,9 +113,9 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   },
 
   /**
-	 * Settings for querying sparql endpoints
+	 * Settings for querying shex endpoints
 	 */
-  sparql: {
+  shex: {
     queryName: function(yashe) {
       return yashe.getQueryMode();
     },

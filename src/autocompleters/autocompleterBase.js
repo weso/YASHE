@@ -1,6 +1,6 @@
 "use strict";
 var $ = require("jquery"),
-  utils = require("../utils.js"),
+  utils = require("../util.js"),
   yutils = require("yasgui-utils"),
   Trie = require("../../lib/trie.js"),
   YASHE = require("../main.js");

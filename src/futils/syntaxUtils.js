@@ -1,7 +1,7 @@
 "use strict";
 var $ = require("jquery"),
   yutils = require("yasgui-utils"),
-  imgs = require("./imgs.js");
+  imgs = require("../imgs.js");
 
 var checkSyntax = function(yashe, deepcheck) {
     yashe.queryValid = true;
@@ -42,12 +42,12 @@ var checkSyntax = function(yashe, deepcheck) {
   
         var warningEl = yutils.svg.getElement(imgs.warning);
         if (state.errorMsg) {
-          require("./tooltip.js")(yashe, warningEl, function() {
+          require("../tooltip.js")(yashe, warningEl, function() {
             return $("<div/>").text(token.state.errorMsg).html();
           });
         } else if (state.possibleCurrent && state.possibleCurrent.length > 0) {
           //				warningEl.style.zIndex = "99999999";
-          require("./tooltip")(yashe, warningEl, function() {
+          require("../tooltip")(yashe, warningEl, function() {
             var expectedEncoded = [];
             state.possibleCurrent.forEach(function(expected) {
               expectedEncoded.push(

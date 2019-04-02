@@ -9,7 +9,7 @@ window.console = window.console || {
  */
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
-  utils = require("./utils.js"),
+  utils = require("./util.js"),
   yutils = require("yasgui-utils");
 
 require("../lib/deparam.js");
@@ -210,7 +210,7 @@ root.storeQuery = function(yashe) {
 
 
 var checkSyntax = function(yashe, deepcheck) {
-  return require("./syntaxUtils.js").checkSyntax(yashe,deepcheck);
+  return require("./futils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
 };
 
 
@@ -239,29 +239,26 @@ root.registerAutocompleter("variables", require("./autocompleters/variables.js")
 
 
 
-  /***
-   * 
-   * Format utils
-   * 
-   */
-  root.commentLines = function(yashe) {
-    return require("./formatUtils.js").commentLines(yashe);
-  };
+/***
+ * Format utils
+ */
+root.commentLines = function(yashe) {
+  return require("./formatUtils.js").commentLines(yashe);
+};
 
-  root.copyLineUp = function(yashe) {
-    return require("./formatUtils.js").copyLineUp(yashe);
-  };
+root.copyLineUp = function(yashe) {
+  return require("./formatUtils.js").copyLineUp(yashe);
+};
 
-  root.copyLineDown = function(yashe) {
-    return require("./formatUtils.js").copyLineDown(yashe);
-  };
-  root.doAutoFormat = function(yashe) {
-    return require("./formatUtils.js").doAutoFormat(yashe);
-  };
+root.copyLineDown = function(yashe) {
+  return require("./formatUtils.js").copyLineDown(yashe);
+};
+root.doAutoFormat = function(yashe) {
+  return require("./formatUtils.js").doAutoFormat(yashe);
+};
 
 
-
-require("./sparql.js"), require("./defaults.js");
+require("./defaults.js");
 root.$ = $;
 root.version = {
   CodeMirror: CodeMirror.version,
