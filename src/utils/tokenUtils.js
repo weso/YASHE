@@ -19,35 +19,6 @@ var getCompleteToken = function(yashe, token, cur) {
   if (!token) {
     token = yashe.getTokenAt(cur);
   }
- /*
-
-  var prevToken = yashe.getTokenAt({
-    line: cur.line,
-    ch: token.start
-  });
-
- 
-
-      NOT USED YET
-
-  // not start of line, and not whitespace
-  if (prevToken.type != null && prevToken.type != "ws" && token.type != null && token.type != "ws") {
-    token.start = prevToken.start;
-    token.string = prevToken.string + token.string;
-    return getCompleteToken(yashe, token, {
-      line: cur.line,
-      ch: prevToken.start
-    }); // recursively, might have multiple tokens which it should include
-  } else if (token.type != null && token.type == "ws") {
-    //always keep 1 char of whitespace between tokens. Otherwise, autocompletions might end up next to the previous node, without whitespace between them
-    token.start = token.start + 1;
-    token.string = token.string.substring(1);
-    return token;
-  } else {
-    return token;
-  }
-
-  */
 
   return token;
 

@@ -1,5 +1,5 @@
 "use strict";
-var $ = require("jquery"), utils = require("./utils/baseUtils.js");
+var $ = require("jquery"), utils = require("./baseUtils.js");
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution

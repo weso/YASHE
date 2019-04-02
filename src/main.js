@@ -243,18 +243,18 @@ root.registerAutocompleter("variables", require("./autocompleters/variables.js")
  * Format utils
  */
 root.commentLines = function(yashe) {
-  return require("./formatUtils.js").commentLines(yashe);
+  return require("./utils/formatUtils.js").commentLines(yashe);
 };
 
 root.copyLineUp = function(yashe) {
-  return require("./formatUtils.js").copyLineUp(yashe);
+  return require("./utils/formatUtils.js").copyLineUp(yashe);
 };
 
 root.copyLineDown = function(yashe) {
-  return require("./formatUtils.js").copyLineDown(yashe);
+  return require("./utils/formatUtils.js").copyLineDown(yashe);
 };
 root.doAutoFormat = function(yashe) {
-  return require("./formatUtils.js").doAutoFormat(yashe);
+  return require("./utils/formatUtils.js").doAutoFormat(yashe);
 };
 
 
