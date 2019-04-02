@@ -258,7 +258,7 @@ root.doAutoFormat = function(yashe) {
 };
 
 
-require("./options/defaults.js");
+require("./config/defaults.js");
 root.$ = $;
 root.version = {
   CodeMirror: CodeMirror.version,
