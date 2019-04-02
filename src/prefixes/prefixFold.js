@@ -1,4 +1,4 @@
-var CodeMirror = require("codemirror"), tokenUtils = require("./tokenUtils.js");
+var CodeMirror = require("codemirror"), tokenUtils = require("../utils/tokenUtils.js");
 
 ("use strict");
 var lookFor = "PREFIX ";
