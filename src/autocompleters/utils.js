@@ -1,5 +1,5 @@
 "use strict";
-var $ = require("jquery"), utils = require("./utils.js"), yutils = require("yasgui-utils");
+var $ = require("jquery"), utils = require("../utils/baseUtils.js"), yutils = require("yasgui-utils");
 /**
  * Where the base class only contains functionality related to -all- completions, this class contains some utils used here and there in our autocompletions
  */
@@ -107,7 +107,7 @@ var fetchFromLov = function(yashe, completer, token, callback) {
     .getEl(completer)
     .empty()
     .append($("<span>Fetchting autocompletions &nbsp;</span>"))
-    .append($(yutils.svg.getElement(require("../imgs.js").loader)).addClass("notificationLoader"));
+    .append($(yutils.svg.getElement(require("../utils/imgsUtils.js").loader)).addClass("notificationLoader"));
   doRequests();
 };
 
