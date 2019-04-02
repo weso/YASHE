@@ -17,7 +17,7 @@ require("codemirror/addon/fold/foldcode.js");
 require("codemirror/addon/fold/foldgutter.js");
 require("codemirror/addon/fold/xml-fold.js");
 require("codemirror/addon/fold/brace-fold.js");
-require("./prefixFold.js");
+require("./prefixes/prefixFold.js");
 require("codemirror/addon/hint/show-hint.js");
 require("codemirror/addon/search/searchcursor.js");
 require("codemirror/addon/edit/matchbrackets.js");
@@ -116,7 +116,7 @@ var extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-      require("./prefixFold.js").findFirstPrefixLine(yashe),
+      require("./prefixes/prefixFold.js").findFirstPrefixLine(yashe),
       root.fold.prefix,
       collapse ? "fold" : "unfold"
     );
@@ -258,7 +258,7 @@ root.doAutoFormat = function(yashe) {
 };
 
 
-require("./defaults.js");
+require("./options/defaults.js");
 root.$ = $;
 root.version = {
   CodeMirror: CodeMirror.version,

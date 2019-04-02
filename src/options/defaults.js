@@ -4,7 +4,7 @@
  * keys). Either change the default options by setting YASHE.defaults, or by
  * passing your own options as second argument to the YASHE constructor
  */
-var $ = require("jquery"), YASHE = require("./main.js");
+var $ = require("jquery"), YASHE = require("../main.js");
 YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   mode: "shex",
 
