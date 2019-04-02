@@ -9,7 +9,7 @@ window.console = window.console || {
  */
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
-  utils = require("./util.js"),
+  utils = require("./utils/baseUtils.js"),
   yutils = require("yasgui-utils");
 
 require("../lib/deparam.js");
@@ -105,13 +105,13 @@ var extendCmInstance = function(yashe) {
   }
   yashe.lastQueryDuration = null;
   yashe.getCompleteToken = function(token, cur) {
-    return require("./tokenUtils.js").getCompleteToken(yashe, token, cur);
+    return require("./utils/tokenUtils.js").getCompleteToken(yashe, token, cur);
   };
   yashe.getPreviousNonWsToken = function(line, token) {
-    return require("./tokenUtils.js").getPreviousNonWsToken(yashe, line, token);
+    return require("./utils/tokenUtils.js").getPreviousNonWsToken(yashe, line, token);
   };
   yashe.getNextNonWsToken = function(lineNumber, charNumber) {
-    return require("./tokenUtils.js").getNextNonWsToken(yashe, lineNumber, charNumber);
+    return require("./utils/tokenUtils.js").getNextNonWsToken(yashe, lineNumber, charNumber);
   };
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
@@ -129,14 +129,14 @@ var extendCmInstance = function(yashe) {
 	 * @return object
 	 */
   yashe.getPrefixesFromQuery = function() {
-    return require("./prefixUtils.js").getPrefixesFromQuery(yashe);
+    return require("./utils/prefixUtils.js").getPrefixesFromQuery(yashe);
   };
 
   yashe.addPrefixes = function(prefixes) {
-    return require("./prefixUtils.js").addPrefixes(yashe, prefixes);
+    return require("./utils/prefixUtils.js").addPrefixes(yashe, prefixes);
   };
   yashe.removePrefixes = function(prefixes) {
-    return require("./prefixUtils.js").removePrefixes(yashe, prefixes);
+    return require("./utils/prefixUtils.js").removePrefixes(yashe, prefixes);
   };
 
 
@@ -210,7 +210,7 @@ root.storeQuery = function(yashe) {
 
 
 var checkSyntax = function(yashe, deepcheck) {
-  return require("./futils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
+  return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
 };
 
 

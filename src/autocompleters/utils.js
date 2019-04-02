@@ -1,5 +1,5 @@
 "use strict";
-var $ = require("jquery"), utils = require("../util.js"), yutils = require("yasgui-utils");
+var $ = require("jquery"), utils = require("../utils/baseUtils.js"), yutils = require("yasgui-utils");
 /**
  * Where the base class only contains functionality related to -all- completions, this class contains some utils used here and there in our autocompletions
  */

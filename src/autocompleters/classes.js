@@ -6,7 +6,7 @@ module.exports = function(yashe, name) {
       return module.exports.isValidCompletionPosition(yashe);
     },
     get: function(token, callback) {
-      return require("../util.js").fetchFromLov(yashe, this, token, callback);
+      return require("../utils/baseUtils.js").fetchFromLov(yashe, this, token, callback);
     },
     preProcessToken: function(token) {
       return module.exports.preProcessToken(yashe, token);
@@ -37,8 +37,8 @@ module.exports.isValidCompletionPosition = function(yashe) {
   return false;
 };
 module.exports.preProcessToken = function(yashe, token) {
-  return require("../util.js").preprocessResourceTokenForCompletion(yashe, token);
+  return require("../utils/baseUtils.js").preprocessResourceTokenForCompletion(yashe, token);
 };
 module.exports.postProcessToken = function(yashe, token, suggestedString) {
-  return require("../util.js").postprocessResourceTokenForCompletion(yashe, token, suggestedString);
+  return require("../utils/baseUtils.js").postprocessResourceTokenForCompletion(yashe, token, suggestedString);
 };
