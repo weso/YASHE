@@ -2,6 +2,8 @@ const btnRDF = document.getElementById('btnRDF')
 const btnWiki = document.getElementById('btnWiki')
 const btnJapan = document.getElementById('btnJapan')
 
+
+
   btnRDF.addEventListener('click', function(e) {
     // Set editor Size
     yashe.setSize(null,"250")
