@@ -203,6 +203,15 @@ var postProcessCmElement = function(yashe,activateStore) {
     checkSyntax(yashe);
   });
 
+
+  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  function( e ) {
+    triggerTooltip( e );
+  }, 300 );
+
+  var triggerTooltip = function( e ) {
+    console.log(yashe.getWrapperElement())
+  };
+
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
