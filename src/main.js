@@ -46,6 +46,9 @@ var root = (module.exports = function(parent, config,activateStore) {
 });
 
 
+
+
+
 /**
  * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
  *
@@ -94,8 +97,8 @@ var extendConfig = function(config) {
  */
 var extendCmInstance = function(yashe) {
 
-  // Set editor Size
-  yashe.setSize(null,"600")
+  // Set editor default size
+  yashe.setSize(null,"250")
 
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
@@ -178,13 +181,14 @@ var postProcessCmElement = function(yashe,activateStore) {
 	 * Set doc value
 	 */
 
- // if(activateStore){
+
+  if(activateStore){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
       if (valueFromStorage) yashe.setValue(valueFromStorage);
     }
- // }
+  }
 
   /**
 	 * Add event handlers
@@ -241,7 +245,7 @@ root.registerAutocompleter("properties", require("./autocompleters/properties.js
 root.registerAutocompleter("classes", require("./autocompleters/classes.js"));
 root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
 
-
+ 
 
 /***
  * Format utils
@@ -260,6 +264,7 @@ root.copyLineDown = function(yashe) {
 root.doAutoFormat = function(yashe) {
   return require("./utils/formatUtils.js").doAutoFormat(yashe);
 };
+
 
 
 require("./config/defaults.js");
