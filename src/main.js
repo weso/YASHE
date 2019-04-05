@@ -10,10 +10,6 @@ window.console = window.console || {
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
   utils = require("./utils/baseUtils.js"),
-  tokenUtils = require("./utils/tokenUtils.js"),
-  formatUtils  = require("./utils/formatUtils.js"),
-  prefixUtils  = require("./utils/prefixUtils.js"),
-  syntaxUtils  = require("./utils/syntaxUtils.js"),
   yutils = require("yasgui-utils");
 
 require("../lib/deparam.js");
@@ -48,6 +44,9 @@ var root = (module.exports = function(parent, config,activateStore) {
   postProcessCmElement(yashe,activateStore);
   return yashe;
 });
+
+
+
 
 
 /**
@@ -97,6 +96,10 @@ var extendConfig = function(config) {
  * @private
  */
 var extendCmInstance = function(yashe) {
+
+  // Set editor default size
+  yashe.setSize(null,"250")
+
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
   if (yashe.options.autocompleters) {
@@ -109,13 +112,13 @@ var extendCmInstance = function(yashe) {
   }
   yashe.lastQueryDuration = null;
   yashe.getCompleteToken = function(token, cur) {
-    return tokenUtils.getCompleteToken(yashe, token, cur);
+    return require("./utils/tokenUtils.js").getCompleteToken(yashe, token, cur);
   };
   yashe.getPreviousNonWsToken = function(line, token) {
-    return tokenUtils.getPreviousNonWsToken(yashe, line, token);
+    return require("./utils/tokenUtils.js").getPreviousNonWsToken(yashe, line, token);
   };
   yashe.getNextNonWsToken = function(lineNumber, charNumber) {
-    return tokenUtils.getNextNonWsToken(yashe, lineNumber, charNumber);
+    return require("./utils/tokenUtils.js").getNextNonWsToken(yashe, lineNumber, charNumber);
   };
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
@@ -133,14 +136,14 @@ var extendCmInstance = function(yashe) {
 	 * @return object
 	 */
   yashe.getPrefixesFromQuery = function() {
-    return prefixUtils.getPrefixesFromQuery(yashe);
+    return require("./utils/prefixUtils.js").getPrefixesFromQuery(yashe);
   };
 
   yashe.addPrefixes = function(prefixes) {
-    return prefixUtils.addPrefixes(yashe, prefixes);
+    return require("./utils/prefixUtils.js").addPrefixes(yashe, prefixes);
   };
   yashe.removePrefixes = function(prefixes) {
-    return prefixUtils.removePrefixes(yashe, prefixes);
+    return require("./utils/prefixUtils.js").removePrefixes(yashe, prefixes);
   };
 
 
@@ -178,6 +181,7 @@ var postProcessCmElement = function(yashe,activateStore) {
 	 * Set doc value
 	 */
 
+
   if(activateStore){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
@@ -214,7 +218,7 @@ root.storeQuery = function(yashe) {
 
 
 var checkSyntax = function(yashe, deepcheck) {
-  return syntaxUtils.checkSyntax(yashe,deepcheck);
+  return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
 };
 
 
@@ -241,25 +245,26 @@ root.registerAutocompleter("properties", require("./autocompleters/properties.js
 root.registerAutocompleter("classes", require("./autocompleters/classes.js"));
 root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
 
-
+ 
 
 /***
  * Format utils
  */
 root.commentLines = function(yashe) {
-  return formatUtils.commentLines(yashe);
+  return require("./utils/formatUtils.js").commentLines(yashe);
 };
 
 root.copyLineUp = function(yashe) {
-  return formatUtils.copyLineUp(yashe);
+  return require("./utils/formatUtils.js").copyLineUp(yashe);
 };
 
 root.copyLineDown = function(yashe) {
-  return formatUtils.copyLineDown(yashe);
+  return require("./utils/formatUtils.js").copyLineDown(yashe);
 };
 root.doAutoFormat = function(yashe) {
-  return formatUtils.doAutoFormat(yashe);
+  return require("./utils/formatUtils.js").doAutoFormat(yashe);
 };
+
 
 
 require("./config/defaults.js");
