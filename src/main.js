@@ -93,6 +93,10 @@ var extendConfig = function(config) {
  * @private
  */
 var extendCmInstance = function(yashe) {
+
+  // Set editor Size
+  yashe.setSize(null,"600")
+
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
   if (yashe.options.autocompleters) {
@@ -174,13 +178,13 @@ var postProcessCmElement = function(yashe,activateStore) {
 	 * Set doc value
 	 */
 
-  if(activateStore){
+ // if(activateStore){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
       if (valueFromStorage) yashe.setValue(valueFromStorage);
     }
-  }
+ // }
 
   /**
 	 * Add event handlers

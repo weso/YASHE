@@ -354,7 +354,6 @@ tm_keywords([
 'BASE',
 'PREFIX',
 'IMPORT',
-'start',
 'EXTERNAL',
 'OR',
 'AND',
@@ -408,6 +407,7 @@ tm_punct([
 '//'='\\/\\/',
 '%'='%',
 '^^'= '\\^\\^',
-'a' = 'a'
+'a' = 'a',
+'start' = 'start'
 
 ]).
