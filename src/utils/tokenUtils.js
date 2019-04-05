@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 /**
  * When typing a query, this query is sometimes syntactically invalid, causing
  * the current tokens to be incorrect This causes problem for autocompletion.
@@ -11,45 +11,46 @@
  * @return token {object}
  * @method YASHE.getCompleteToken
  */
-var getCompleteToken = function(yashe, token, cur) {
+var getCompleteToken = function (yashe, token, cur) {
   if (!cur) {
-    cur = yashe.getCursor();
+    cur = yashe.getCursor()
   }
 
   if (!token) {
-    token = yashe.getTokenAt(cur);
+    token = yashe.getTokenAt(cur)
   }
 
-  return token;
+  return token
+}
 
-};
-var getPreviousNonWsToken = function(yashe, line, token) {
+var getPreviousNonWsToken = function (yashe, line, token) {
   var previousToken = yashe.getTokenAt({
     line: line,
     ch: token.start
-  });
-  if (previousToken != null && previousToken.type == "ws") {
-    previousToken = getPreviousNonWsToken(yashe, line, previousToken);
+  })
+  if (previousToken != null && previousToken.type === 'ws') {
+    previousToken = getPreviousNonWsToken(yashe, line, previousToken)
   }
-  return previousToken;
-};
-var getNextNonWsToken = function(yashe, lineNumber, charNumber) {
-  if (charNumber == undefined) charNumber = 1;
+  return previousToken
+}
+
+var getNextNonWsToken = function (yashe, lineNumber, charNumber) {
+  if (charNumber === undefined) charNumber = 1
   var token = yashe.getTokenAt({
     line: lineNumber,
     ch: charNumber
-  });
-  if (token == null || token == undefined || token.end < charNumber) {
-    return null;
+  })
+  if (token == null || token === undefined || token.end < charNumber) {
+    return null
   }
-  if (token.type == "ws") {
-    return getNextNonWsToken(yashe, lineNumber, token.end + 1);
+  if (token.type === 'ws') {
+    return getNextNonWsToken(yashe, lineNumber, token.end + 1)
   }
-  return token;
-};
+  return token
+}
 
 module.exports = {
   getPreviousNonWsToken: getPreviousNonWsToken,
   getCompleteToken: getCompleteToken,
   getNextNonWsToken: getNextNonWsToken
-};
+}
