@@ -99,10 +99,10 @@ shapeOrRef ==> [or(shapeDefinition,shapeRef)].
 %[22] OK
 inlineShapeOrRef ==> [or(inlineShapeDefinition,shapeRef)].
 
-%[23] THIS RULE HAS BEEN MODIFYED TO MAKE IT LL1
-%shapeRef ==> ['ATPNAME_NS'].
+%[23] 
+shapeRef ==> ['ATPNAME_NS'].
 shapeRef ==> ['ATPNAME_LN'].
-%shapeRef ==> ['@',shapeExprLabel].
+shapeRef ==> ['@',shapeExprLabel].
 
 
 %[24] OK
@@ -409,5 +409,4 @@ tm_punct([
 '^^'= '\\^\\^',
 'a' = 'a',
 'start' = 'start'
-
 ]).
