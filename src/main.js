@@ -266,7 +266,7 @@ var postProcessCmElement = function(yashe,activateStore) {
   //$.getJSON('http://cors.io/?https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property',function(data){console.log(data)})
 
 
-  var myurl = 'http://cors.io/?https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
+  var myurl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
 
   $.ajax({
     dataType: "json",
