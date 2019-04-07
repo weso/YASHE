@@ -242,7 +242,7 @@ var postProcessCmElement = function(yashe,activateStore) {
     }
 
 
-     var myurl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
+   var myurl = 'htts://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
 
     $.ajax({
       dataType: "json",
@@ -251,19 +251,31 @@ var postProcessCmElement = function(yashe,activateStore) {
       console.log(data)
     })
 
-    
-   
-
-    var myurl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
+     var myurl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
 
     fetch(myurl).then(data=>{return data.json()}).then(res=>{console.log(res)})
 
 
 
-    $.getJSON('https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property' + '&callback=?',function(data){console.log(data)})
+    $.getJSON('http://cors.io/?https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property' + '&callback=?',function(data){console.log(data)})
+
+   */
+  
+
+    
+  //$.getJSON('http://cors.io/?https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property',function(data){console.log(data)})
 
 
-     */
+  var myurl = 'http://cors.io/?https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property'
+
+  $.ajax({
+    dataType: "json",
+    url: myurl + '&callback=?',
+    }).done(function ( data ) {
+    console.log(data)
+  })
+
+
     $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
     .css( 'max-width', '200px' ).css( { 
       top: posY + 2,
