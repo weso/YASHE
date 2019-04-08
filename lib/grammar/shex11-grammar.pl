@@ -215,10 +215,12 @@ valueSet ==> ['[',*(valueSetValue),']'].
 valueSetValue ==> [iriRange].
 valueSetValue ==> [literalRange].
 valueSetValue ==> [languageRange].
-%valueSetValue ==> [+(exclusion)]. MISSING THIS CORRECT RULE
+%valueSetValue ==> [+(exclusion)]. 
+
 
 %[50] OK
-exclusion ==> ['-',or(iri,literal,'LANGTAG'),?('~')].
+exclusion ==>['-',or(iri,literal,'LANTAG'),?('~')].
+
 
 %[51] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
@@ -229,9 +231,10 @@ iriExclusion ==> ['-',iri,?('~')].
 %[53] OK
 literalRange ==> [literal,?(['~',*(literalExclusion)])].
 
+
 %[54] OK
-iteralExclusion ==> ['-',literal,?('~')]. 
-%literalExclusion ==> ['.'].
+literalExclusion ==> ['-',literal,?('~')]. 
+
 
 %[55] OK
 languageRange ==> ['LANGTAG',?(['~',*(languageExclusion)])].
@@ -239,7 +242,6 @@ languageRange ==> ['@','~',*(languageExclusion)].
 
 %[56] OK
 languageExclusion ==> ['-','LANGTAG',?('~')].
-%languageExclusion ==> ['.'].
 
 
 %[57] OK

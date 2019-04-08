@@ -203,10 +203,43 @@ var postProcessCmElement = function(yashe,activateStore) {
     checkSyntax(yashe);
   });
 
+
+  /**
+   * Wikidata tooltip
+   */
+  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {
+    removeToolTip()
+    triggerTooltip( e )
+  }, 300 ))
+
+  var triggerTooltip = function( e ) {
+    var posX = e.clientX,
+    posY = e.clientY + $( window ).scrollTop()
+
+    var token = yashe.getTokenAt( yashe.coordsChar( {
+      left: posX,
+      top: posY
+    } ) ).string;
+
+    console.log(token)
+/*
+    $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
+    .css( 'max-width', '200px' ).css( { 
+      top: posY + 2,
+      left: posX + 2
+    } ).addClass( 'wikibaseRDFtoolTip' ).html("instanceOf").appendTo('body')
+        
+*/
+  };
+
+
+  var removeToolTip = function() {
+		$( '.wikibaseRDFtoolTip' ).remove();
+	};
+
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
-
 
 
 root.storeQuery = function(yashe) {
@@ -221,6 +254,23 @@ var checkSyntax = function(yashe, deepcheck) {
   return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
 };
 
+
+
+var debounce = function(func, wait, immediate) {
+  var timeout, result;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) result = func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) result = func.apply(context, args);
+    return result;
+  };
+};
 
 /**
  * Static Utils

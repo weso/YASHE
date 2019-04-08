@@ -11,7 +11,7 @@
   </head>
   <body>
 
-  <a href="https://github.com/YASGUI/YASHE" target="_blank"><img style="z-index: 1; position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <a href="https://github.com/weso/YASHE" target="_blank"><img style="z-index: 1; position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
    <!-- Fixed navbar -->
     <div class="navbar navbar-inverse" role="navigation">
       <div class="container">
@@ -43,19 +43,17 @@
         YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yasqe.yasgui.org/'>YASQE</a> (which is based on SPARQL)
         <br>
         <br>
+
+        <br>
         <button id="btnRDF" type="button" class="btn btn-default">RDF Book</button>
         <button id="btnWiki" type="button" class="btn btn-default">Wikidata</button>
         <button id="btnJapan" type="button" class="btn btn-default">Japan Sarch Metadata</button>
-        <div id="showcase"></div>
+        <div id="showcase" class = "show"></div>
+
       	<code>var yashe = YASHE(document.getElementById("showcase"));</code> <br>
       	(or, if you would like to instantiate YASHE from an existing text area, use <code>var yashe = YASHE.fromTextArea(document.getElementById('textAreaItem'));</code>
       	</div>
       	</div>
-
-
-    </div> <!-- /container -->
-
-
 
 <script src="dist/yashe.bundled.min.js"></script>
 <script src="doc/doc.min.js"></script>
@@ -71,7 +69,6 @@
       }
     }
   });
-
 
 </script>
 </body>
