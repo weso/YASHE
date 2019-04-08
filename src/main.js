@@ -327,4 +327,10 @@ root.version = {
 };
 
 
+
+$.get("https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property", function(data) {
+  console.log(data)
+  })
+
+
   
