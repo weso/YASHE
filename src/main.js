@@ -221,7 +221,21 @@ var postProcessCmElement = function(yashe,activateStore) {
       top: posY
     } ) ).string;
 
-    console.log(token)
+
+   var i=0
+   for(var x in props){
+    if(props[i].id === token.split(":")[1]){
+      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
+      .css( 'max-width', '200px' ).css( { 
+        top: posY + 2,
+        left: posX + 2
+      } ).addClass( 'wikibaseRDFtoolTip' ).html(""+props[i].label).appendTo('body')
+    }
+    i++
+   }
+
+  
+        
 /*
     $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
     .css( 'max-width', '200px' ).css( { 
@@ -326,41 +340,16 @@ root.version = {
   "yasgui-utils": yutils.version
 };
 
-
-/*
-$.get("https://prefix.cc/popular/all.file.json", function(data) {
-  console.log(data)
-  })
-
-  $.get("https://wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property&format=json", function(data) {
-    console.log(data)
-    })
-  
-  
-    */
-    
- $.get('./src/props.json', function(data) {
-  
-  parse(data)
+var props = {}
+$.get('./src/props.json', function(data) {
+  props = parse(data)
+  console.log(props)
  
  }, 'text');
 
  
 var parse = function (data){
-  /*
-  var obj = JSON.parse(data, function (key, value) {
-    var 
-    if(key == 'id'){
-      console.log(value)
-    }
-
-    if(key == 'label'){
-      console.log(value)
-    }
-
-    });
-    */
-
+  
     var obj = JSON.parse(data)
     var i=0
     var dicionary={}
@@ -369,8 +358,10 @@ var parse = function (data){
       dicionary[i] = prop
       i++
     }
-    console.log(dicionary[0])  
+   return dicionary
       
 }
+
+
   
   
