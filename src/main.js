@@ -180,8 +180,6 @@ var postProcessCmElement = function(yashe,activateStore) {
   /**
 	 * Set doc value
 	 */
-
-
   if(activateStore){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
@@ -210,6 +208,7 @@ var postProcessCmElement = function(yashe,activateStore) {
   CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {
     removeToolTip()
     triggerTooltip( e )
+
   }, 300 ))
 
   var triggerTooltip = function( e ) {
@@ -221,7 +220,7 @@ var postProcessCmElement = function(yashe,activateStore) {
       top: posY
     } ) ).string;
 
-
+  //Check wikidata prefixes
    var i=0
    for(var x in props){
     if(props[i].id === token.split(":")[1]){
@@ -229,21 +228,11 @@ var postProcessCmElement = function(yashe,activateStore) {
       .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' ).html(""+props[i].label).appendTo('body')
+      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='tooltip-inner'>"+props[i].label+"</div>").appendTo('body')
     }
     i++
    }
 
-  
-        
-/*
-    $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
-    .css( 'max-width', '200px' ).css( { 
-      top: posY + 2,
-      left: posX + 2
-    } ).addClass( 'wikibaseRDFtoolTip' ).html("instanceOf").appendTo('body')
-        
-*/
   };
 
 
@@ -340,11 +329,13 @@ root.version = {
   "yasgui-utils": yutils.version
 };
 
+
+/**
+ * Load Wikidata properties
+ */
 var props = {}
 $.get('./src/props.json', function(data) {
   props = parse(data)
-  console.log(props)
- 
  }, 'text');
 
  
