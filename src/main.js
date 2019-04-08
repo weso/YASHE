@@ -327,10 +327,50 @@ root.version = {
 };
 
 
-
-$.get("https://www.wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property", function(data) {
+/*
+$.get("https://prefix.cc/popular/all.file.json", function(data) {
   console.log(data)
   })
 
+  $.get("https://wikidata.org/w/api.php?action=wbsearchentities&search=doctoral%20advisor&language=en&type=property&format=json", function(data) {
+    console.log(data)
+    })
+  
+  
+    */
+    
+ $.get('./src/props.json', function(data) {
+  
+  parse(data)
+ 
+ }, 'text');
 
+ 
+var parse = function (data){
+  /*
+  var obj = JSON.parse(data, function (key, value) {
+    var 
+    if(key == 'id'){
+      console.log(value)
+    }
+
+    if(key == 'label'){
+      console.log(value)
+    }
+
+    });
+    */
+
+    var obj = JSON.parse(data)
+    var i=0
+    var dicionary={}
+    for(var x in obj){
+      var prop = {id:obj[i].id,label:obj[i].label}
+      dicionary[i] = prop
+      i++
+    }
+    console.log(dicionary[0])  
+      
+}
+  
   
