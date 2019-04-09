@@ -221,6 +221,8 @@ var postProcessCmElement = function(yashe,activateStore) {
     } ) ).string;
 
   //Check wikidata prefixes
+  checkEntity(token)
+  /*
    var i=0
    for(var x in props){
     if(props[i].id === token.split(":")[1]){
@@ -232,6 +234,7 @@ var postProcessCmElement = function(yashe,activateStore) {
     }
     i++
    }
+   */
 
   };
 
@@ -330,15 +333,7 @@ root.version = {
 };
 
 
-/**
- * Load Wikidata properties
- */
-var props = {}
-$.get('./src/props.json', function(data) {
-  props = parse(data)
- }, 'text');
 
- 
 var parse = function (data){
   
     var obj = JSON.parse(data)
@@ -354,5 +349,25 @@ var parse = function (data){
 }
 
 
+var checkEntity = function (entity){
+
+  $.get(
+    {
   
+      url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
+      dataType: 'jsonp'
+  
+    },function(data) {
+    
+  console.log(data)
+  
+  
+   });
+}
+
+
+
+
+
+
   
