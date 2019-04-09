@@ -201,11 +201,16 @@ var postProcessCmElement = function(yashe,activateStore) {
     checkSyntax(yashe);
   });
 
+  yashe.on("scroll", function() {
+    removeToolTip()
+  });
+
 
   /**
    * Wikidata tooltip
    */
-  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {
+  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
+
     removeToolTip()
     triggerTooltip( e )
 
@@ -224,12 +229,14 @@ var postProcessCmElement = function(yashe,activateStore) {
   var possibleEntity = token.split(':')[1]
   checkEntity(possibleEntity).done( function( data ) {
     if(!data.error){
-      var entity = data.entities[possibleEntity].labels.en.value 
+      console.log(data)
+      var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
+      var description = data.entities[possibleEntity].descriptions.en.value
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
       .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='tooltip-inner'>"+entity+"</div>").appendTo('body')
+      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
     }
   })
 
@@ -239,6 +246,8 @@ var postProcessCmElement = function(yashe,activateStore) {
 		$( '.wikibaseRDFtoolTip' ).remove();
 	};
 
+
+ 
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
