@@ -359,7 +359,12 @@ var checkEntity = function (entity){
   
     },function(data) {
     
-  console.log(data)
+      //var obj = JSON.parse(data.entities)
+      console.log(data)
+      
+      for(var x in data.entities){
+        //console.log(x.title)
+      }
   
   
    });
