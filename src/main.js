@@ -221,23 +221,19 @@ var postProcessCmElement = function(yashe,activateStore) {
     } ) ).string;
 
   //Check wikidata prefixes
-  checkEntity(token)
-  /*
-   var i=0
-   for(var x in props){
-    if(props[i].id === token.split(":")[1]){
+  var possibleEntity = token.split(':')[1]
+  checkEntity(possibleEntity).done( function( data ) {
+    if(!data.error){
+      var entity = data.entities[possibleEntity].labels.en.value 
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
       .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='tooltip-inner'>"+props[i].label+"</div>").appendTo('body')
+      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='tooltip-inner'>"+entity+"</div>").appendTo('body')
     }
-    i++
-   }
-   */
+  })
 
   };
-
 
   var removeToolTip = function() {
 		$( '.wikibaseRDFtoolTip' ).remove();
@@ -334,40 +330,14 @@ root.version = {
 
 
 
-var parse = function (data){
-  
-    var obj = JSON.parse(data)
-    var i=0
-    var dicionary={}
-    for(var x in obj){
-      var prop = {id:obj[i].id,label:obj[i].label}
-      dicionary[i] = prop
-      i++
-    }
-   return dicionary
-      
-}
-
-
 var checkEntity = function (entity){
-
-  $.get(
+  return $.get(
     {
   
       url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
-      dataType: 'jsonp'
+      dataType: 'jsonp',
   
-    },function(data) {
-    
-      //var obj = JSON.parse(data.entities)
-      console.log(data)
-      
-      for(var x in data.entities){
-        //console.log(x.title)
-      }
-  
-  
-   });
+    })
 }
 
 
