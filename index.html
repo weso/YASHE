@@ -44,10 +44,31 @@
         <br>
         <br>
 
-        <br>
-        <button id="btnRDF" type="button" class="btn btn-default">RDF Book</button>
-        <button id="btnWiki" type="button" class="btn btn-default">Wikidata</button>
-        <button id="btnJapan" type="button" class="btn btn-default">Japan Sarch Metadata</button>
+        <table>
+       
+      <tr>
+
+        <td>
+        <select id="exSelector" class="form-control">
+            <option value="" disabled selected>Select an example</option>
+            <option id="btnRDF"value="rdf">RDF Book</option>
+            <option id="btnWiki"value="wiki">Wikidata</option>
+            <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
+          </select>
+
+        </td>
+
+        <td>
+          <select class="form-control">
+              <option id="btnRDF"value="rdf">RDF Book</option>
+              <option id="btnWiki"value="wiki">Wikidata</option>
+              <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
+            </select>
+
+          </td>
+
+          </tr>
+        </table>
         <div id="showcase" class = "show"></div>
 
       	<code>var yashe = YASHE(document.getElementById("showcase"));</code> <br>

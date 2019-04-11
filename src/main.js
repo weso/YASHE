@@ -98,7 +98,7 @@ var extendConfig = function(config) {
 var extendCmInstance = function(yashe) {
 
   // Set editor default size
-  yashe.setSize(null,"250")
+  yashe.setSize(null,"300")
 
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
@@ -350,10 +350,9 @@ var checkEntity = function (entity){
 }
 
 
+var selector = document.getElementById('exSelector')
 
-const btnRDF = document.getElementById('btnRDF')
-const btnWiki = document.getElementById('btnWiki')
-const btnJapan = document.getElementById('btnJapan')
+
 
 var rdfShape 
 var wikiShape 
@@ -372,25 +371,26 @@ $.get('./src/rdfBookShape.txt', function(data) {
  }, 'text');
 
 
-  btnRDF.addEventListener('click', function(e) {
-    // Set editor Size
-    yashe.setSize(null,"250")
+ selector.addEventListener('click', function(e) {
+  if(selector.value == "rdf"){
     yashe.setValue(rdfShape)
-  })
-
-  btnWiki.addEventListener('click', function(e) {
-    // Set editor Size
-    yashe.setSize(null,"600")
+    yashe.setSize(null,"250")
+  }
+   if(selector.value == "wiki"){
     yashe.setValue(wikiShape)
-  })
-
-  btnJapan.addEventListener('click', function(e) {
-    // Set editor Size
     yashe.setSize(null,"600")
+
+   }
+  if(selector.value == "japan"){
     yashe.setValue(japanShape)
-  })
+    yashe.setSize(null,"600")
+  }    
 
+  $('.CodeMirror').css({"font-size":"12pxs"});
 
+})
+
+  
 
 
 

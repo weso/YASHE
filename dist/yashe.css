@@ -23,7 +23,8 @@
     /* Set height, width, borders, and global font properties here */
     font-family: monospace;
     height: 300px;
-    color: black; }
+    color: black;
+    font-size: 15px; }
   .yashe .CodeMirror-lines {
     padding: 4px 0;
     /* Vertical padding around content */ }
