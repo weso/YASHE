@@ -119,11 +119,11 @@
   .yashe .cm-s-default .cm-variable-3 {
     color: #085; }
   .yashe .cm-s-default .cm-comment {
-    color: #a50; }
+    color: #999; }
   .yashe .cm-s-default .cm-string {
-    color: #a11; }
+    color: #b98003; }
   .yashe .cm-s-default .cm-string-2 {
-    color: #f50; }
+    color: #05a; }
   .yashe .cm-s-default .cm-meta {
     color: #555; }
   .yashe .cm-s-default .cm-qualifier {
@@ -140,6 +140,8 @@
     color: #999; }
   .yashe .cm-s-default .cm-link {
     color: #00c; }
+  .yashe .cm-s-default .cm-directive {
+    color: #a11; }
   .yashe .cm-s-default .cm-error {
     color: #f00; }
   .yashe .cm-invalidchar {
