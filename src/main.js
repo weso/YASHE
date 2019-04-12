@@ -205,6 +205,10 @@ var postProcessCmElement = function(yashe,activateStore) {
     removeToolTip()
   });
 
+  yashe.on("update", function() {
+    root.setTheme(themeSelector.value)
+  });
+
 
   /**
    * Wikidata tooltip
@@ -229,7 +233,6 @@ var postProcessCmElement = function(yashe,activateStore) {
   var possibleEntity = token.split(':')[1]
   checkEntity(possibleEntity).done( function( data ) {
     if(!data.error){
-      console.log(data)
       var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
       var description = data.entities[possibleEntity].descriptions.en.value
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
@@ -328,6 +331,7 @@ root.doAutoFormat = function(yashe) {
 
 
 
+
 require("./config/defaults.js");
 root.$ = $;
 root.version = {
@@ -336,6 +340,76 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
+
+
+root.clearTheme = function(){
+
+  $('.cm-logical').css('color','')
+  $('.cm-punc').css('color','')
+  $('.cm-variable-2').css('color','')
+  $('.cm-variable-3').css('color','')
+  $('.cm-directive').css('color','')
+  $('.cm-string-2').css('color','')
+  $('.cm-number').css('color','')
+
+}
+
+root.setTheme = function(theme){
+
+  /*
+  if(theme == "default"){
+   
+    //Editor
+    $('.CodeMirror').css('background','363130')
+    $('.CodeMirror-gutters').css('background-color','363130')
+
+    //Tokens
+    $('.cm-logical').css('color','B271FF')
+    $('.cm-punc').css('color','FFFFFF')
+    $('.cm-variable-2').css('color','68BEEB')
+    $('.cm-directive').css('color','FC4C46')
+    $('.cm-string-2').css('color','7DB647')
+    $('.cm-number').css('color','FFFFFF')
+
+
+  }
+  */
+
+  if(theme == "wiki"){
+    
+    //Editor
+    $('.CodeMirror').css('background','white')
+    $('.CodeMirror-gutters').css('background-color','white')
+
+    //Tokens
+    $('.cm-logical').css('color','#f00')
+    $('.cm-punc').css('color','black')
+    $('.cm-variable-2').css('color','#085')
+    $('.cm-variable-3').css('color','#05a')
+    $('.cm-directive').css('color','#f00')
+    $('.cm-string-2').css('color','#05a')
+    $('.cm-number').css('color','#085')
+
+  }
+
+  if(theme == "dark"){
+    
+    //Editor
+    $('.CodeMirror').css('background','#212121')
+    $('.CodeMirror-gutters').css('background-color','#212121')
+
+    //Tokens
+    $('.cm-logical').css('color','B271FF')
+    $('.cm-punc').css('color','FFFFFF')
+    $('.cm-variable-2').css('color','68BEEB')
+    $('.cm-variable-3').css('color','68BEEB')
+    $('.cm-directive').css('color','FC4C46')
+    $('.cm-string-2').css('color','7DB647')
+    $('.cm-number').css('color','E5F439')
+
+  }
+
+}
 
 
 
@@ -350,8 +424,9 @@ var checkEntity = function (entity){
 }
 
 
-var selector = document.getElementById('exSelector')
 
+var exSelector = document.getElementById('exSelector')
+var themeSelector = document.getElementById('themeSelector')
 
 
 var rdfShape 
@@ -371,24 +446,42 @@ $.get('./src/rdfBookShape.txt', function(data) {
  }, 'text');
 
 
- selector.addEventListener('click', function(e) {
-  if(selector.value == "rdf"){
-    yashe.setValue(rdfShape)
-    yashe.setSize(null,"250")
-  }
-   if(selector.value == "wiki"){
-    yashe.setValue(wikiShape)
-    yashe.setSize(null,"600")
+ exSelector.addEventListener('click', function(e) {
+    if(exSelector.value == "rdf"){
+      yashe.setValue(rdfShape)
+      yashe.setSize(null,"300")   
+    }
+    if(exSelector.value == "wiki"){
+      yashe.setValue(wikiShape)
+      yashe.setSize(null,"600")
 
-   }
-  if(selector.value == "japan"){
-    yashe.setValue(japanShape)
-    yashe.setSize(null,"600")
-  }    
+    }
+    if(exSelector.value == "japan"){
+      yashe.setValue(japanShape)
+      yashe.setSize(null,"600")
+    }   
 
-  $('.CodeMirror').css({"font-size":"12pxs"});
-
+    root.clearTheme()
+    root.setTheme(themeSelector.value)
+    
 })
+
+themeSelector.addEventListener('click', function(e) {
+  
+  root.clearTheme()
+  root.setTheme(themeSelector.value)
+
+  
+}
+
+
+
+
+
+
+//$('.CodeMirror').css({"font-size":"12pxs"});
+
+)
 
   
 
