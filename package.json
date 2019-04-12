@@ -68,8 +68,10 @@
   },
   "dependencies": {
     "codemirror": "5.17.0",
+    "file-reader": "^1.1.1",
     "jquery": "^2.2.4",
     "prettier": "^1.4.4",
+    "read-file": "^0.2.0",
     "yasgui-utils": "^1.6.7"
   },
   "optionalShim": {

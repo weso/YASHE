@@ -98,7 +98,7 @@ var extendConfig = function(config) {
 var extendCmInstance = function(yashe) {
 
   // Set editor default size
-  yashe.setSize(null,"250")
+  yashe.setSize(null,"300")
 
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
@@ -180,8 +180,6 @@ var postProcessCmElement = function(yashe,activateStore) {
   /**
 	 * Set doc value
 	 */
-
-
   if(activateStore){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
@@ -203,10 +201,59 @@ var postProcessCmElement = function(yashe,activateStore) {
     checkSyntax(yashe);
   });
 
+  yashe.on("scroll", function() {
+    removeToolTip()
+  });
+
+  yashe.on("update", function() {
+    root.setTheme(themeSelector.value)
+  });
+
+
+  /**
+   * Wikidata tooltip
+   */
+  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
+
+    removeToolTip()
+    triggerTooltip( e )
+
+  }, 300 ))
+
+  var triggerTooltip = function( e ) {
+    var posX = e.clientX,
+    posY = e.clientY + $( window ).scrollTop()
+
+    var token = yashe.getTokenAt( yashe.coordsChar( {
+      left: posX,
+      top: posY
+    } ) ).string;
+
+  //Check wikidata prefixes
+  var possibleEntity = token.split(':')[1]
+  checkEntity(possibleEntity).done( function( data ) {
+    if(!data.error){
+      var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
+      var description = data.entities[possibleEntity].descriptions.en.value
+      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
+      .css( 'max-width', '200px' ).css( { 
+        top: posY + 2,
+        left: posX + 2
+      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
+    }
+  })
+
+  };
+
+  var removeToolTip = function() {
+		$( '.wikibaseRDFtoolTip' ).remove();
+	};
+
+
+ 
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
-
 
 
 root.storeQuery = function(yashe) {
@@ -221,6 +268,23 @@ var checkSyntax = function(yashe, deepcheck) {
   return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
 };
 
+
+
+var debounce = function(func, wait, immediate) {
+  var timeout, result;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) result = func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) result = func.apply(context, args);
+    return result;
+  };
+};
 
 /**
  * Static Utils
@@ -267,6 +331,7 @@ root.doAutoFormat = function(yashe) {
 
 
 
+
 require("./config/defaults.js");
 root.$ = $;
 root.version = {
@@ -275,6 +340,152 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
+
+
+root.clearTheme = function(){
+
+  $('.cm-logical').css('color','')
+  $('.cm-punc').css('color','')
+  $('.cm-variable-2').css('color','')
+  $('.cm-variable-3').css('color','')
+  $('.cm-directive').css('color','')
+  $('.cm-string-2').css('color','')
+  $('.cm-number').css('color','')
+
+}
+
+root.setTheme = function(theme){
+
+  /*
+  if(theme == "default"){
+   
+    //Editor
+    $('.CodeMirror').css('background','363130')
+    $('.CodeMirror-gutters').css('background-color','363130')
+
+    //Tokens
+    $('.cm-logical').css('color','B271FF')
+    $('.cm-punc').css('color','FFFFFF')
+    $('.cm-variable-2').css('color','68BEEB')
+    $('.cm-directive').css('color','FC4C46')
+    $('.cm-string-2').css('color','7DB647')
+    $('.cm-number').css('color','FFFFFF')
+
+
+  }
+  */
+
+  if(theme == "wiki"){
+    
+    //Editor
+    $('.CodeMirror').css('background','white')
+    $('.CodeMirror-gutters').css('background-color','white')
+
+    //Tokens
+    $('.cm-logical').css('color','#f00')
+    $('.cm-punc').css('color','black')
+    $('.cm-variable-2').css('color','#0F7A50')
+    $('.cm-variable-3').css('color','#05a')
+    $('.cm-directive').css('color','#f00')
+    $('.cm-string-2').css('color','#05a')
+    $('.cm-number').css('color','#085')
+
+  }
+
+  if(theme == "dark"){
+    
+    //Editor
+    $('.CodeMirror').css('background','#212121')
+    $('.CodeMirror-gutters').css('background-color','#212121')
+
+    //Tokens
+    $('.cm-logical').css('color','#B271FF')
+    $('.cm-punc').css('color','#FFFFFF')
+    $('.cm-variable-2').css('color','#68BEEB')
+    $('.cm-variable-3').css('color','#68BEEB')
+    $('.cm-directive').css('color','#FC4C46')
+    $('.cm-string-2').css('color','#7DB647')
+    $('.cm-number').css('color','#E5F439')
+
+  }
+
+}
+
+
+
+var checkEntity = function (entity){
+  return $.get(
+    {
+  
+      url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
+      dataType: 'jsonp',
+  
+    })
+}
+
+
+
+var exSelector = document.getElementById('exSelector')
+var themeSelector = document.getElementById('themeSelector')
+
+
+var rdfShape 
+var wikiShape 
+var japanShape 
+
+$.get('./src/rdfBookShape.txt', function(data) {
+  rdfShape = data
+ }, 'text');
+
+ $.get('./src/wikidataShape.txt', function(data) {
+  wikiShape = data
+ }, 'text');
+
+ $.get('./src/jps.txt', function(data) {
+  japanShape = data
+ }, 'text');
+
+
+ exSelector.addEventListener('click', function(e) {
+    if(exSelector.value == "rdf"){
+      yashe.setValue(rdfShape)
+      yashe.setSize(null,"300")   
+    }
+    if(exSelector.value == "wiki"){
+      yashe.setValue(wikiShape)
+      yashe.setSize(null,"600")
+
+    }
+    if(exSelector.value == "japan"){
+      yashe.setValue(japanShape)
+      yashe.setSize(null,"600")
+    }   
+
+    root.clearTheme()
+    root.setTheme(themeSelector.value)
+    
+})
+
+themeSelector.addEventListener('click', function(e) {
+  
+  root.clearTheme()
+  root.setTheme(themeSelector.value)
+
+  
+}
+
+
+
+
+
+
+//$('.CodeMirror').css({"font-size":"12pxs"});
+
+)
+
+  
+
+
 
 
   

@@ -23,7 +23,8 @@
     /* Set height, width, borders, and global font properties here */
     font-family: monospace;
     height: 300px;
-    color: black; }
+    color: black;
+    font-size: 14px; }
   .yashe .CodeMirror-lines {
     padding: 4px 0;
     /* Vertical padding around content */ }
@@ -35,7 +36,7 @@
     /* The little square between H and V scrollbars */ }
   .yashe .CodeMirror-gutters {
     border-right: 1px solid #ddd;
-    background-color: #f7f7f7;
+    background-color: white;
     white-space: nowrap; }
   .yashe .CodeMirror-linenumber {
     padding: 0 3px 0 5px;
@@ -106,7 +107,7 @@
   .yashe .cm-s-default .cm-atom {
     color: #219; }
   .yashe .cm-s-default .cm-number {
-    color: #164; }
+    color: #085; }
   .yashe .cm-s-default .cm-def {
     color: #00f; }
   .yashe .cm-s-default .cm-variable,
@@ -115,15 +116,15 @@
   .yashe .cm-s-default .cm-operator {
     color: #05a; }
   .yashe .cm-s-default .cm-variable-2 {
-    color: #05a; }
+    color: #0F7A50; }
   .yashe .cm-s-default .cm-variable-3 {
-    color: #085; }
+    color: #05a; }
   .yashe .cm-s-default .cm-comment {
-    color: #a50; }
+    color: #999; }
   .yashe .cm-s-default .cm-string {
-    color: #a11; }
+    color: #b98003; }
   .yashe .cm-s-default .cm-string-2 {
-    color: #f50; }
+    color: #05a; }
   .yashe .cm-s-default .cm-meta {
     color: #555; }
   .yashe .cm-s-default .cm-qualifier {
@@ -140,6 +141,12 @@
     color: #999; }
   .yashe .cm-s-default .cm-link {
     color: #00c; }
+  .yashe .cm-s-default .cm-directive {
+    color: #f00; }
+  .yashe .cm-s-default .cm-punc {
+    color: black; }
+  .yashe .cm-s-default .cm-logical {
+    color: #f00; }
   .yashe .cm-s-default .cm-error {
     color: #f00; }
   .yashe .cm-invalidchar {
