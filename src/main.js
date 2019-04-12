@@ -384,7 +384,7 @@ root.setTheme = function(theme){
     //Tokens
     $('.cm-logical').css('color','#f00')
     $('.cm-punc').css('color','black')
-    $('.cm-variable-2').css('color','#085')
+    $('.cm-variable-2').css('color','#0F7A50')
     $('.cm-variable-3').css('color','#05a')
     $('.cm-directive').css('color','#f00')
     $('.cm-string-2').css('color','#05a')
@@ -399,13 +399,13 @@ root.setTheme = function(theme){
     $('.CodeMirror-gutters').css('background-color','#212121')
 
     //Tokens
-    $('.cm-logical').css('color','B271FF')
-    $('.cm-punc').css('color','FFFFFF')
-    $('.cm-variable-2').css('color','68BEEB')
-    $('.cm-variable-3').css('color','68BEEB')
-    $('.cm-directive').css('color','FC4C46')
-    $('.cm-string-2').css('color','7DB647')
-    $('.cm-number').css('color','E5F439')
+    $('.cm-logical').css('color','#B271FF')
+    $('.cm-punc').css('color','#FFFFFF')
+    $('.cm-variable-2').css('color','#68BEEB')
+    $('.cm-variable-3').css('color','#68BEEB')
+    $('.cm-directive').css('color','#FC4C46')
+    $('.cm-string-2').css('color','#7DB647')
+    $('.cm-number').css('color','#E5F439')
 
   }
 
