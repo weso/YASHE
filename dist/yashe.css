@@ -230,7 +230,6 @@
     cursor: default;
     z-index: 4; }
   .yashe .CodeMirror-gutter-wrapper {
-    -webkit-user-select: none;
     user-select: none; }
   .yashe .CodeMirror-lines {
     cursor: text;
@@ -357,7 +356,6 @@
     white-space: nowrap;
     padding: 6px 12px;
     border-radius: 4px;
-    -webkit-user-select: none;
     user-select: none;
     -webkit-appearance: button;
     /* margin: 0; */
