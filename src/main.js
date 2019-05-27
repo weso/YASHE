@@ -433,15 +433,15 @@ var rdfShape
 var wikiShape 
 var japanShape 
 
-$.get('./src/rdfBookShape.txt', function(data) {
+$.get('./src/shapes/rdfBookShape.txt', function(data) {
   rdfShape = data
  }, 'text');
 
- $.get('./src/wikidataShape.txt', function(data) {
+ $.get('./src/shapes/wikidataShape.txt', function(data) {
   wikiShape = data
  }, 'text');
 
- $.get('./src/jps.txt', function(data) {
+ $.get('./src/shapes/jps.txt', function(data) {
   japanShape = data
  }, 'text');
 
