@@ -10,7 +10,8 @@ window.console = window.console || {
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
   utils = require("./utils/baseUtils.js"),
-  yutils = require("yasgui-utils");
+  yutils = require("yasgui-utils"),
+  tooltipUtils = require("./utils/tooltipUtils.js")
 
 require("../lib/deparam.js");
 require("codemirror/addon/fold/foldcode.js");
@@ -202,52 +203,19 @@ var postProcessCmElement = function(yashe,activateStore) {
   });
 
   yashe.on("scroll", function() {
-    removeToolTip()
+    tooltipUtils.removeToolTip()
   });
 
   yashe.on("update", function() {
     root.setTheme(themeSelector.value)
   });
 
-
-  /**
-   * Wikidata tooltip
-   */
   CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
-    removeToolTip()
-    triggerTooltip( e )
+    tooltipUtils.removeToolTip()
+    tooltipUtils.triggerTooltip( e )
 
   }, 300 ))
-
-  var triggerTooltip = function( e ) {
-    var posX = e.clientX,
-    posY = e.clientY + $( window ).scrollTop()
-
-    var token = yashe.getTokenAt( yashe.coordsChar( {
-      left: posX,
-      top: posY
-    } ) ).string;
-
-  //Check wikidata prefixes
-  var possibleEntity = token.split(':')[1]
-  checkEntity(possibleEntity).done( function( data ) {
-    if(!data.error){
-      var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
-      var description = data.entities[possibleEntity].descriptions.en.value
-      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
-      .css( 'max-width', '200px' ).css( { 
-        top: posY + 2,
-        left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
-    }
-  })
-
-  };
-
-  var removeToolTip = function() {
-		$( '.wikibaseRDFtoolTip' ).remove();
-	};
 
 
  
@@ -410,19 +378,6 @@ root.setTheme = function(theme){
   }
 
 }
-
-
-
-var checkEntity = function (entity){
-  return $.get(
-    {
-  
-      url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
-      dataType: 'jsonp',
-  
-    })
-}
-
 
 
 var exSelector = document.getElementById('exSelector')
