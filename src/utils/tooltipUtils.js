@@ -7,7 +7,7 @@ var $ = require("jquery"), utils = require("./baseUtils.js");
  * 		position tooltip within codemirror frame as much as possible, to avoid z-index issues with external things on page
  * 		use html as content
  */
-var sintaxTootlip = function(yashe, parent, html) {
+var grammarTootlip = function(yashe, parent, html) {
   var parent = $(parent);
   var tooltip;
   parent.hover(
@@ -82,7 +82,7 @@ var removeToolTip = function() {
 
 
 module.exports = {
-  sintaxTootlip:sintaxTootlip,
+  grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
   removeToolTip:removeToolTip
 };

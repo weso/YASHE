@@ -42,12 +42,12 @@ var checkSyntax = function(yashe, deepcheck) {
   
         var warningEl = yutils.svg.getElement(imgs.warning);
         if (state.errorMsg) {
-          require("./tooltipUtils.js").sintaxTootlip(yashe, warningEl, function() {
+          require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
             return $("<div/>").text(token.state.errorMsg).html();
           });
         } else if (state.possibleCurrent && state.possibleCurrent.length > 0) {
           //				warningEl.style.zIndex = "99999999";
-          require("./tooltipUtils.js").sintaxTootlip(yashe, warningEl, function() {
+          require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
             var expectedEncoded = [];
             state.possibleCurrent.forEach(function(expected) {
               expectedEncoded.push(
