@@ -5,13 +5,19 @@ window.console = window.console || {
 };
 
 /**
- * Load libraries
+ * Load libraries and utils
  */
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
   utils = require("./utils/baseUtils.js"),
   yutils = require("yasgui-utils"),
-  tooltipUtils = require("./utils/tooltipUtils.js")
+  prefixUtils = require("./utils/prefixUtils.js"),
+  tokenUtils = require("./utils/tokenUtils.js"),
+  syntaxUtils = require("./utils/syntaxUtils.js"),
+  tooltipUtils = require("./utils/tooltipUtils.js"),
+  formatUtils = require('./utils/formatUtils.js'),
+  themeUtils = require("./utils/themeUtils.js"),
+  exampleUtils = require("./utils/exampleUtils.js")
 
 require("../lib/deparam.js");
 require("codemirror/addon/fold/foldcode.js");
@@ -113,13 +119,13 @@ var extendCmInstance = function(yashe) {
   }
   yashe.lastQueryDuration = null;
   yashe.getCompleteToken = function(token, cur) {
-    return require("./utils/tokenUtils.js").getCompleteToken(yashe, token, cur);
+    return tokenUtils.getCompleteToken(yashe, token, cur);
   };
   yashe.getPreviousNonWsToken = function(line, token) {
-    return require("./utils/tokenUtils.js").getPreviousNonWsToken(yashe, line, token);
+    return tokenUtils.getPreviousNonWsToken(yashe, line, token);
   };
   yashe.getNextNonWsToken = function(lineNumber, charNumber) {
-    return require("./utils/tokenUtils.js").getNextNonWsToken(yashe, lineNumber, charNumber);
+    return tokenUtils.getNextNonWsToken(yashe, lineNumber, charNumber);
   };
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
@@ -137,14 +143,14 @@ var extendCmInstance = function(yashe) {
 	 * @return object
 	 */
   yashe.getPrefixesFromQuery = function() {
-    return require("./utils/prefixUtils.js").getPrefixesFromQuery(yashe);
+    return prefixUtils.getPrefixesFromQuery(yashe);
   };
 
   yashe.addPrefixes = function(prefixes) {
-    return require("./utils/prefixUtils.js").addPrefixes(yashe, prefixes);
+    return prefixUtils.addPrefixes(yashe, prefixes);
   };
   yashe.removePrefixes = function(prefixes) {
-    return require("./utils/prefixUtils.js").removePrefixes(yashe, prefixes);
+    return prefixUtils.removePrefixes(yashe, prefixes);
   };
 
 
@@ -233,7 +239,7 @@ root.storeQuery = function(yashe) {
 
 
 var checkSyntax = function(yashe, deepcheck) {
-  return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
+  return syntaxUtils.checkSyntax(yashe,deepcheck);
 };
 
 
@@ -283,22 +289,40 @@ root.registerAutocompleter("variables", require("./autocompleters/variables.js")
  * Format utils
  */
 root.commentLines = function(yashe) {
-  return require("./utils/formatUtils.js").commentLines(yashe);
+  return formatUtils.commentLines(yashe);
 };
 
 root.copyLineUp = function(yashe) {
-  return require("./utils/formatUtils.js").copyLineUp(yashe);
+  return formatUtils.copyLineUp(yashe);
 };
 
 root.copyLineDown = function(yashe) {
-  return require("./utils/formatUtils.js").copyLineDown(yashe);
+  return formatUtils.copyLineDown(yashe);
 };
 root.doAutoFormat = function(yashe) {
-  return require("./utils/formatUtils.js").doAutoFormat(yashe);
+  return formatUtils.doAutoFormat(yashe);
 };
 
 
+/**
+ *  Theme utils
+ */
 
+root.clearTheme = function(){
+  return themeUtils.clearTheme()
+}
+
+root.setTheme = function(theme){
+ return themeUtils.setTheme(theme)
+}
+
+/**
+ *  Example utils
+ */
+exampleUtils.startListeners()
+
+
+//$('.CodeMirror').css({"font-size":"12pxs"});
 
 require("./config/defaults.js");
 root.$ = $;
@@ -308,135 +332,6 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
-
-
-root.clearTheme = function(){
-
-  $('.cm-logical').css('color','')
-  $('.cm-punc').css('color','')
-  $('.cm-variable-2').css('color','')
-  $('.cm-variable-3').css('color','')
-  $('.cm-directive').css('color','')
-  $('.cm-string-2').css('color','')
-  $('.cm-number').css('color','')
-
-}
-
-root.setTheme = function(theme){
-
-  /*
-  if(theme == "default"){
-   
-    //Editor
-    $('.CodeMirror').css('background','363130')
-    $('.CodeMirror-gutters').css('background-color','363130')
-
-    //Tokens
-    $('.cm-logical').css('color','B271FF')
-    $('.cm-punc').css('color','FFFFFF')
-    $('.cm-variable-2').css('color','68BEEB')
-    $('.cm-directive').css('color','FC4C46')
-    $('.cm-string-2').css('color','7DB647')
-    $('.cm-number').css('color','FFFFFF')
-
-
-  }
-  */
-
-  if(theme == "wiki"){
-    
-    //Editor
-    $('.CodeMirror').css('background','white')
-    $('.CodeMirror-gutters').css('background-color','white')
-
-    //Tokens
-    $('.cm-logical').css('color','#f00')
-    $('.cm-punc').css('color','black')
-    $('.cm-variable-2').css('color','#0F7A50')
-    $('.cm-variable-3').css('color','#05a')
-    $('.cm-directive').css('color','#f00')
-    $('.cm-string-2').css('color','#05a')
-    $('.cm-number').css('color','#085')
-
-  }
-
-  if(theme == "dark"){
-    
-    //Editor
-    $('.CodeMirror').css('background','#212121')
-    $('.CodeMirror-gutters').css('background-color','#212121')
-
-    //Tokens
-    $('.cm-logical').css('color','#B271FF')
-    $('.cm-punc').css('color','#FFFFFF')
-    $('.cm-variable-2').css('color','#68BEEB')
-    $('.cm-variable-3').css('color','#68BEEB')
-    $('.cm-directive').css('color','#FC4C46')
-    $('.cm-string-2').css('color','#7DB647')
-    $('.cm-number').css('color','#E5F439')
-
-  }
-
-}
-
-
-var exSelector = document.getElementById('exSelector')
-var themeSelector = document.getElementById('themeSelector')
-
-
-var rdfShape 
-var wikiShape 
-var japanShape 
-
-$.get('./src/shapes/rdfBookShape.txt', function(data) {
-  rdfShape = data
- }, 'text');
-
- $.get('./src/shapes/wikidataShape.txt', function(data) {
-  wikiShape = data
- }, 'text');
-
- $.get('./src/shapes/jps.txt', function(data) {
-  japanShape = data
- }, 'text');
-
-
- exSelector.addEventListener('click', function(e) {
-    if(exSelector.value == "rdf"){
-      yashe.setValue(rdfShape)
-      yashe.setSize(null,"300")   
-    }
-    if(exSelector.value == "wiki"){
-      yashe.setValue(wikiShape)
-      yashe.setSize(null,"600")
-
-    }
-    if(exSelector.value == "japan"){
-      yashe.setValue(japanShape)
-      yashe.setSize(null,"600")
-    }   
-
-    root.clearTheme()
-    root.setTheme(themeSelector.value)
-    
-})
-
-themeSelector.addEventListener('click', function(e) {
-  
-  root.clearTheme()
-  root.setTheme(themeSelector.value)
-
-  
-}
-
-
-
-
-
-
-//$('.CodeMirror').css({"font-size":"12pxs"});
-
-)
 
   
 
