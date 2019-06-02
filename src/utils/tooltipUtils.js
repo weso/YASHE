@@ -50,7 +50,6 @@ var triggerTooltip = function( e ) {
 
 //Check wikidata prefixes
 var possibleEntity = token.split(':')[1]
-console.log(possibleEntity)
 if(possibleEntity!= undefined){
   checkEntity(possibleEntity).done( function( data ) {
     if(!data.error){
