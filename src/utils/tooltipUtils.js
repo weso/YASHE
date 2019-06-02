@@ -50,19 +50,23 @@ var triggerTooltip = function( e ) {
 
 //Check wikidata prefixes
 var possibleEntity = token.split(':')[1]
-checkEntity(possibleEntity).done( function( data ) {
-  if(!data.error){
-    var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
-    var description = data.entities[possibleEntity].descriptions.en.value
-    $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
-    .css( 'max-width', '200px' ).css( { 
-      top: posY + 2,
-      left: posX + 2
-    } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
-  }
-})
+console.log(possibleEntity)
+if(possibleEntity!= undefined){
+  checkEntity(possibleEntity).done( function( data ) {
+    if(!data.error){
+      var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
+      var description = data.entities[possibleEntity].descriptions.en.value
+      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
+      .css( 'max-width', '200px' ).css( { 
+        top: posY + 2,
+        left: posX + 2
+      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
+    }
+  })
 
-};
+  };  
+
+}
 
 
 var checkEntity = function (entity){
