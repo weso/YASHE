@@ -5,13 +5,19 @@ window.console = window.console || {
 };
 
 /**
- * Load libraries
+ * Load libraries and utils
  */
 var $ = require("jquery"),
   CodeMirror = require("codemirror"),
   utils = require("./utils/baseUtils.js"),
   yutils = require("yasgui-utils"),
-  tooltipUtils = require("./utils/tooltipUtils.js")
+  prefixUtils = require("./utils/prefixUtils.js"),
+  tokenUtils = require("./utils/tokenUtils.js"),
+  syntaxUtils = require("./utils/syntaxUtils.js"),
+  tooltipUtils = require("./utils/tooltipUtils.js"),
+  formatUtils = require('./utils/formatUtils.js'),
+  themeUtils = require("./utils/themeUtils.js"),
+  exampleUtils = require("./utils/exampleUtils.js")
 
 require("../lib/deparam.js");
 require("codemirror/addon/fold/foldcode.js");
@@ -113,13 +119,13 @@ var extendCmInstance = function(yashe) {
   }
   yashe.lastQueryDuration = null;
   yashe.getCompleteToken = function(token, cur) {
-    return require("./utils/tokenUtils.js").getCompleteToken(yashe, token, cur);
+    return tokenUtils.getCompleteToken(yashe, token, cur);
   };
   yashe.getPreviousNonWsToken = function(line, token) {
-    return require("./utils/tokenUtils.js").getPreviousNonWsToken(yashe, line, token);
+    return tokenUtils.getPreviousNonWsToken(yashe, line, token);
   };
   yashe.getNextNonWsToken = function(lineNumber, charNumber) {
-    return require("./utils/tokenUtils.js").getNextNonWsToken(yashe, lineNumber, charNumber);
+    return tokenUtils.getNextNonWsToken(yashe, lineNumber, charNumber);
   };
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
@@ -137,14 +143,14 @@ var extendCmInstance = function(yashe) {
 	 * @return object
 	 */
   yashe.getPrefixesFromQuery = function() {
-    return require("./utils/prefixUtils.js").getPrefixesFromQuery(yashe);
+    return prefixUtils.getPrefixesFromQuery(yashe);
   };
 
   yashe.addPrefixes = function(prefixes) {
-    return require("./utils/prefixUtils.js").addPrefixes(yashe, prefixes);
+    return prefixUtils.addPrefixes(yashe, prefixes);
   };
   yashe.removePrefixes = function(prefixes) {
-    return require("./utils/prefixUtils.js").removePrefixes(yashe, prefixes);
+    return prefixUtils.removePrefixes(yashe, prefixes);
   };
 
 
@@ -233,7 +239,7 @@ root.storeQuery = function(yashe) {
 
 
 var checkSyntax = function(yashe, deepcheck) {
-  return require("./utils/syntaxUtils.js").checkSyntax(yashe,deepcheck);
+  return syntaxUtils.checkSyntax(yashe,deepcheck);
 };
 
 
@@ -283,18 +289,18 @@ root.registerAutocompleter("variables", require("./autocompleters/variables.js")
  * Format utils
  */
 root.commentLines = function(yashe) {
-  return require("./utils/formatUtils.js").commentLines(yashe);
+  return formatUtils.commentLines(yashe);
 };
 
 root.copyLineUp = function(yashe) {
-  return require("./utils/formatUtils.js").copyLineUp(yashe);
+  return formatUtils.copyLineUp(yashe);
 };
 
 root.copyLineDown = function(yashe) {
-  return require("./utils/formatUtils.js").copyLineDown(yashe);
+  return formatUtils.copyLineDown(yashe);
 };
 root.doAutoFormat = function(yashe) {
-  return require("./utils/formatUtils.js").doAutoFormat(yashe);
+  return formatUtils.doAutoFormat(yashe);
 };
 
 
@@ -303,62 +309,18 @@ root.doAutoFormat = function(yashe) {
  */
 
 root.clearTheme = function(){
-  return require('./utils/themeUtils').clearTheme()
+  return themeUtils.clearTheme()
 }
 
 root.setTheme = function(theme){
- return require('./utils/themeUtils').setTheme(theme)
+ return themeUtils.setTheme(theme)
 }
 
+/**
+ *  Example utils
+ */
+exampleUtils.startListeners()
 
-var exSelector = document.getElementById('exSelector')
-var themeSelector = document.getElementById('themeSelector')
-
-
-var rdfShape 
-var wikiShape 
-var japanShape 
-
-$.get('./src/shapes/rdfBookShape.txt', function(data) {
-  rdfShape = data
- }, 'text');
-
- $.get('./src/shapes/wikidataShape.txt', function(data) {
-  wikiShape = data
- }, 'text');
-
- $.get('./src/shapes/jps.txt', function(data) {
-  japanShape = data
- }, 'text');
-
-
- exSelector.addEventListener('click', function(e) {
-    if(exSelector.value == "rdf"){
-      yashe.setValue(rdfShape)
-      yashe.setSize(null,"300")   
-    }
-    if(exSelector.value == "wiki"){
-      yashe.setValue(wikiShape)
-      yashe.setSize(null,"600")
-
-    }
-    if(exSelector.value == "japan"){
-      yashe.setValue(japanShape)
-      yashe.setSize(null,"600")
-    }   
-
-    root.clearTheme()
-    root.setTheme(themeSelector.value)
-    
-})
-
-themeSelector.addEventListener('click', function(e) {
-  
-  root.clearTheme()
-  root.setTheme(themeSelector.value)
-
-  
-})
 
 //$('.CodeMirror').css({"font-size":"12pxs"});
 
