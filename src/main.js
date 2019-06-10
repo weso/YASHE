@@ -18,7 +18,7 @@ var $ = require("jquery"),
   formatUtils = require('./utils/formatUtils.js'),
   themeUtils = require("./utils/themeUtils.js"),
   exampleUtils = require("./utils/exampleUtils.js"),
-  imgs = require("./imgs.js"),
+  imgs = require("./utils/imgs.js"),
   Clipboard = require("clipboard");
 
 require("../lib/deparam.js");
