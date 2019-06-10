@@ -139,3 +139,13 @@
   			display: none;
   		}
   	}
+
+	  .downloadBtns {
+		display:inline-block;
+		margin-top: 3px;
+		div {
+		  cursor:pointer;
+		  width: 20px;
+		  height: 20px;
+		}
+	  }

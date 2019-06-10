@@ -67,6 +67,7 @@
     "url": "https://github.com/YASGUI/YASQE.git"
   },
   "dependencies": {
+    "clipboard": "^2.0.4",
     "codemirror": "5.17.0",
     "file-reader": "^1.1.1",
     "jquery": "^2.2.4",
