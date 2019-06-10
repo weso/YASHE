@@ -17,7 +17,9 @@ var $ = require("jquery"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
   themeUtils = require("./utils/themeUtils.js"),
-  exampleUtils = require("./utils/exampleUtils.js")
+  exampleUtils = require("./utils/exampleUtils.js"),
+  imgs = require("./utils/imgs.js"),
+  Clipboard = require("clipboard");
 
 require("../lib/deparam.js");
 require("codemirror/addon/fold/foldcode.js");
@@ -184,6 +186,17 @@ var removeCompleterFromSettings = function(settings, name) {
 };
 
 var postProcessCmElement = function(yashe,activateStore) {
+
+
+  root.drawButtons(yashe);
+
+  new Clipboard('#copy', {
+    text: function(trigger) {
+        return yashe.getValue();
+    }
+  });
+
+
   /**
 	 * Set doc value
 	 */
@@ -259,6 +272,173 @@ var debounce = function(func, wait, immediate) {
     return result;
   };
 };
+
+
+root.drawButtons = function(yashe) {
+  yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
+
+
+ /**
+	 * draw share link button
+	 */
+  if (yashe.options.createShareLink) {
+    var svgShare = $(yutils.svg.getElement(imgs.share));
+    svgShare
+      .click(function(event) {
+        event.stopPropagation();
+        var popup = $("<div class='yashe_sharePopup'></div>").appendTo(yashe.buttons);
+        $("html").click(function() {
+          if (popup) popup.remove();
+        });
+
+        popup.click(function(event) {
+          event.stopPropagation();
+        });
+        var $input = $("<input>").val(
+          location.protocol +
+            "//" +
+            location.host +
+            location.pathname +
+            location.search +
+            "#" +
+            $.param(yashe.options.createShareLink(yashe))
+        );
+
+        $input.focus(function() {
+          var $this = $(this);
+          $this.select();
+
+          // Work around Chrome's little problem
+          $this.mouseup(function() {
+            // Prevent further mouseup intervention
+            $this.unbind("mouseup");
+            return false;
+          });
+        });
+
+        popup.empty().append($("<div>", { class: "inputWrapper" }).append($input));
+        if (yashe.options.createShortLink) {
+          popup.addClass("enableShort");
+          $("<button>Shorten</button>")
+            .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
+            .click(function() {
+              $(this).parent().find("button").attr("disabled", "disabled");
+              yashe.options.createShortLink($input.val(), function(errString, shortLink) {
+                if (errString) {
+                  $input.remove();
+                  popup.find(".inputWrapper").append($("<span>", { class: "shortlinkErr" }).text(errString));
+                } else {
+                  $input.val(shortLink).focus();
+                }
+              });
+            })
+            .appendTo(popup);
+        }
+        var positions = svgShare.position();
+        popup
+          .css("top", positions.top + svgShare.outerHeight() + parseInt(popup.css("padding-top")) + "px")
+          .css("left", positions.left + svgShare.outerWidth() - popup.outerWidth() + "px");
+        $input.focus();
+      })
+      .addClass("yashe_share")
+      .attr("title", "Share your document")
+      .appendTo(yashe.buttons);
+  }
+
+  /**
+   * draw download button
+   */
+
+  var downloadButton = $("<div>", {
+    class: "downloadBtns"
+  })
+    .append(
+      $(yutils.svg.getElement(imgs.download))
+        .addClass("yashe_downloadBtn")
+        .attr("title", "Download File")
+        .click(function() {          
+          var textFileAsBlob = new Blob([ yashe.getValue() ], { type: 'text/shex' });
+          var fileNameToSaveAs = "document.shex";
+
+          var downloadLink = document.createElement("a");
+          downloadLink.download = fileNameToSaveAs;
+          downloadLink.innerHTML = "Download File";
+          if (window.URL != null) {
+            // Chrome allows the link to be clicked without actually adding it to the DOM.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+          } else {
+            // Firefox requires the link to be added to the DOM before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+          }
+          downloadLink.click();
+        })
+    );
+  yashe.buttons.append(downloadButton);
+
+
+  /**
+   * draw copy button
+   */
+
+  var copyButton = $("<div>", {
+    class: "downloadBtns"
+  })
+    .append(
+      $(yutils.svg.getElement(imgs.copy))
+        .addClass("yashe_downloadBtn")
+        .attr("id", "copy")
+        .attr("title", "Copy to the clipboard")
+      );
+  yashe.buttons.append(copyButton);
+
+  /**
+	 * draw fullscreen button
+	 */
+
+  var toggleFullscreen = $("<div>", {
+    class: "fullscreenToggleBtns"
+  })
+    .append(
+      $(yutils.svg.getElement(imgs.fullscreen))
+        .addClass("yashe_fullscreenBtn")
+        .attr("title", "Set editor full screen")
+        .click(function() {
+          yashe.setOption("fullScreen", true);
+        })
+    )
+    .append(
+      $(yutils.svg.getElement(imgs.smallscreen))
+        .addClass("yashe_smallscreenBtn")
+        .attr("title", "Set editor to normal size")
+        .click(function() {
+          yashe.setOption("fullScreen", false);
+        })
+    );
+  yashe.buttons.append(toggleFullscreen);
+
+};
+
+
+
+/**
+ * Create a share link
+ *
+ * @method yashe.createShareLink
+ * @param {yashe} yashe document
+ * @default {doc: doc.getValue()}
+ * @return object
+ */
+root.createShareLink = function(yashe) {
+  //extend existing link, so first fetch current arguments
+  var urlParams = {};
+  if (window.location.hash.length > 1) urlParams = $.deparam(window.location.hash.substring(1));
+  urlParams["doc"] = yashe.getValue();
+  return urlParams;
+};
+
 
 /**
  * Static Utils

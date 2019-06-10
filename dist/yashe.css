@@ -230,6 +230,7 @@
     cursor: default;
     z-index: 4; }
   .yashe .CodeMirror-gutter-wrapper {
+    -webkit-user-select: none;
     user-select: none; }
   .yashe .CodeMirror-lines {
     cursor: text;
@@ -356,6 +357,7 @@
     white-space: nowrap;
     padding: 6px 12px;
     border-radius: 4px;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-appearance: button;
     /* margin: 0; */
@@ -460,6 +462,13 @@
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
+  .yashe .downloadBtns {
+    display: inline-block;
+    margin-top: 3px; }
+    .yashe .downloadBtns div {
+      cursor: pointer;
+      width: 20px;
+      height: 20px; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

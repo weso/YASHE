@@ -31,12 +31,12 @@ var startListeners = function(){
         }
         if(exSelector.value == "wiki"){
         yashe.setValue(wikiShape)
-        yashe.setSize(null,"600")
+       // yashe.setSize(null,"600")
 
         }
         if(exSelector.value == "japan"){
         yashe.setValue(japanShape)
-        yashe.setSize(null,"600")
+       // yashe.setSize(null,"600")
         }   
 
         themeUtils.clearTheme()
