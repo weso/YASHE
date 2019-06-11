@@ -24,17 +24,19 @@ var setTheme = function(theme){
     if(theme == "wiki"){
       
       //Editor
-       $('.CodeMirror').css('background','363130')
-      $('.CodeMirror-gutters').css('background-color','363130')
+      $('.CodeMirror').css('background','white')
+      $('.CodeMirror-gutters').css('background-color','white')
   
       //Tokens
-      $('.cm-logical').css('color','B271FF')
-      $('.cm-punc').css('color','FFFFFF')
-      $('.cm-variable-2').css('color','68BEEB')
-      $('.cm-directive').css('color','FC4C46')
-      $('.cm-string-2').css('color','7DB647')
-      $('.cm-number').css('color','FFFFFF')
-  
+      $('.cm-logical').css('color','#f00')
+      $('.cm-punc').css('color','black')
+      $('.cm-variable-2').css('color','#0F7A50')
+      $('.cm-variable-3').css('color','#05a')
+      $('.cm-directive').css('color','#f00')
+      $('.cm-string-2').css('color','#05a')
+      $('.cm-number').css('color','#085')
+      $('.cm-at').css('color','#0F7A50')
+
     }
   
     if(theme == "dark"){
@@ -52,7 +54,8 @@ var setTheme = function(theme){
       $('.cm-string-2').css('color','#7DB647')
       $('.cm-number').css('color','#E5F439')
       $('.cm-at').css('color','#68BEEB')
-  
+
+
     }
   
   }
