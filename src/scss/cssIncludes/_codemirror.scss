@@ -43,7 +43,7 @@
 /* CURSOR */
 
 .CodeMirror-cursor {
-  border-left: 1px solid black;
+  border-left: 1px solid red;
   border-right: none;
   width: 0;
 }
@@ -135,6 +135,7 @@
 .cm-s-default .cm-directive {color: #f00;}
 .cm-s-default .cm-punc {color: black;}
 .cm-s-default .cm-logical {color:#f00;}
+.cm-s-default .cm-at {color:#0F7A50;}
 
 
 .cm-s-default .cm-error {color: #f00;}

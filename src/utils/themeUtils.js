@@ -35,7 +35,8 @@ var setTheme = function(theme){
       $('.cm-directive').css('color','#f00')
       $('.cm-string-2').css('color','#05a')
       $('.cm-number').css('color','#085')
-  
+      $('.cm-at').css('color','#0F7A50')
+
     }
   
     if(theme == "dark"){
@@ -52,7 +53,9 @@ var setTheme = function(theme){
       $('.cm-directive').css('color','#FC4C46')
       $('.cm-string-2').css('color','#7DB647')
       $('.cm-number').css('color','#E5F439')
-  
+      $('.cm-at').css('color','#68BEEB')
+
+
     }
   
   }
