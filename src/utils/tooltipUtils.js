@@ -58,9 +58,9 @@ if(possibleEntity!= undefined){
       var theme = listeners.themeSelector.value
       var cssTheme
       if(theme != 'dark')
-        cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radious':'1px','padding':'1px','line-height':'15px','text-align':'center'}
+        cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
       else
-        cssTheme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radious':'1px','padding':'1px','line-height':'15px','text-align':'center'}
+        cssTheme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
 
 
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
