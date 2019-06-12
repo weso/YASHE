@@ -1,5 +1,5 @@
 "use strict";
-var $ = require("jquery"), utils = require("./baseUtils.js");
+var $ = require("jquery"), listeners = require("../listeners.js");
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -55,11 +55,22 @@ if(possibleEntity!= undefined){
     if(!data.error){
       var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
       var description = data.entities[possibleEntity].descriptions.en.value
+      var theme = listeners.themeSelector.value
+      var cssTheme
+      if(theme != 'dark')
+        cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
+      else
+        cssTheme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
+
+
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
       .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' ).html("<div class='panel-body'>"+entity+" <br><br>"+description+"</div>").appendTo('body')
+      } ).addClass( 'wikibaseRDFtoolTip' )
+      .html("<div class='wikidata_tooltip'>"+entity+" <br><br>"+description+"</div>")
+      .css(cssTheme)
+      .appendTo('body')
     }
   })
 

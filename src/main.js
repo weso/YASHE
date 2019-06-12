@@ -17,7 +17,7 @@ var $ = require("jquery"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
   themeUtils = require("./utils/themeUtils.js"),
-  exampleUtils = require("./utils/exampleUtils.js"),
+  listeners = require("./listeners.js"),
   imgs = require("./utils/imgs.js"),
   Clipboard = require("clipboard");
 
@@ -499,7 +499,7 @@ root.setTheme = function(theme){
 /**
  *  Example utils
  */
-exampleUtils.startListeners()
+listeners.startListeners()
 
 
 //$('.CodeMirror').css({"font-size":"12pxs"});

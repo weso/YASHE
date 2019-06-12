@@ -1,5 +1,5 @@
 var $ = require("jquery")  
-var themeUtils = require('./themeUtils')
+var themeUtils = require('./utils/themeUtils')
 
 var rdfShape 
 var wikiShape 
@@ -54,6 +54,11 @@ var startListeners = function(){
 
 }
 
+
+
+
+
 module.exports = {
-    startListeners:startListeners
+    startListeners:startListeners,
+    themeSelector:themeSelector
 }
