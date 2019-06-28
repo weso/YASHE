@@ -40,17 +40,17 @@ require("../lib/grammar/tokenizer.js");
  * @constructor
  * @param {DOM-Element} parent element to append editor to.
  * @param {object} settings
- * @param {boolean} activateStore Set whether the shape will be store or not
  * @class YASHE
  * @return {doc} YASHE document
  */
-var root = (module.exports = function(parent, config,activateStore) {
+var root = (module.exports = function(parent, config) {
   var rootEl = $("<div>", {
     class: "yashe"
   }).appendTo($(parent));
+  console.log(config)
   config = extendConfig(config);
   var yashe = extendCmInstance(CodeMirror(rootEl[0], config));
-  postProcessCmElement(yashe,activateStore);
+  postProcessCmElement(yashe);
   return yashe;
 });
 
@@ -185,7 +185,7 @@ var removeCompleterFromSettings = function(settings, name) {
   }
 };
 
-var postProcessCmElement = function(yashe,activateStore) {
+var postProcessCmElement = function(yashe) {
 
 
   root.drawButtons(yashe);
@@ -200,7 +200,8 @@ var postProcessCmElement = function(yashe,activateStore) {
   /**
 	 * Set doc value
 	 */
-  if(activateStore){
+  console.log(yashe)
+  if(yashe.options.shex.storeShape){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
@@ -236,7 +237,7 @@ var postProcessCmElement = function(yashe,activateStore) {
   tooltipUtils.removeToolTip()
   tooltipUtils.triggerTooltip( e )
 
-}, 300 ))
+  }, 300 ))
 
  
   yashe.prevQueryValid = false;
@@ -433,7 +434,7 @@ root.drawButtons = function(yashe) {
  * @param {yashe} yashe document
  * @default {doc: doc.getValue()}
  * @return object
- */
+
 root.createShareLink = function(yashe) {
   //extend existing link, so first fetch current arguments
   var urlParams = {};
@@ -442,6 +443,7 @@ root.createShareLink = function(yashe) {
   return urlParams;
 };
 
+ */
 
 /**
  * Static Utils
