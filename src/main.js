@@ -229,18 +229,20 @@ var postProcessCmElement = function(yashe,activateStore) {
     root.setTheme(themeSelector.value)
   });
 
-  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
-    tooltipUtils.removeToolTip()
-    tooltipUtils.triggerTooltip( e )
+  //Wikidata Tooltip Listener
+  root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
-  }, 300 ))
+  tooltipUtils.removeToolTip()
+  tooltipUtils.triggerTooltip( e )
 
+}, 300 ))
 
  
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
+
 
 
 root.storeQuery = function(yashe) {
@@ -280,7 +282,7 @@ root.drawButtons = function(yashe) {
 
  /**
 	 * draw share link button
-	 */
+	
   if (yashe.options.createShareLink) {
     var svgShare = $(yutils.svg.getElement(imgs.share));
     svgShare
@@ -344,6 +346,7 @@ root.drawButtons = function(yashe) {
       .attr("title", "Share your document")
       .appendTo(yashe.buttons);
   }
+   */
 
   /**
    * draw download button
