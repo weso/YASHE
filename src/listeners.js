@@ -49,8 +49,16 @@ var startListeners = function(){
     themeSelector.addEventListener('change', function(e) {
     
 
-     yashe.setOption("theme","dark")
-     console.log(yashe.options.shex)  
+        yashe.setOption("theme","dark")
+         
+/*
+     var shexConfig = yashe.getOption("shex")
+     shexConfig.theme = themeSelector.value  
+     yashe.setOption("shex",shexConfig)
+     console.log(yashe.getOption("shex"))  
+     */
+
+     //yashe.setOption("fullScreen","true")
     //themeUtils.clearTheme()
     //themeUtils.setTheme(themeSelector.value)
 

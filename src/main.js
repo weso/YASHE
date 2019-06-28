@@ -47,8 +47,8 @@ var root = (module.exports = function(parent, config) {
   var rootEl = $("<div>", {
     class: "yashe"
   }).appendTo($(parent));
-  console.log(config)
   config = extendConfig(config);
+  console.log(config)
   var yashe = extendCmInstance(CodeMirror(rootEl[0], config));
   postProcessCmElement(yashe);
   return yashe;
@@ -229,10 +229,6 @@ var postProcessCmElement = function(yashe) {
    // root.setTheme(yashe.options.shex.theme)
   });
 
-
-  yashe.on("optionChange", function() {
-    root.setTheme(yashe.options.shex.theme)
-  });
 
 
   //Wikidata Tooltip Listener

@@ -7,6 +7,7 @@
   /* Shown when moving in bi-directional text */
   /* Can style cursor different in overwrite (non-insert) mode */
   /* DEFAULT THEME */
+  /* DARK THEME */
   /* Default styles for common addons */
   /* STOP */
   /* The rest of this file contains styles related to the mechanics of
@@ -150,6 +151,75 @@
   .yashe .cm-s-default .cm-at {
     color: #0F7A50; }
   .yashe .cm-s-default .cm-error {
+    color: #f00; }
+  .yashe .cm-invalidchar {
+    color: #f00; }
+  .yashe .CodeMirror-composing {
+    border-bottom: 2px solid; }
+  .yashe .cm-s-dark .cm-header {
+    color: blue; }
+  .yashe .cm-s-dark .cm-quote {
+    color: #090; }
+  .yashe .cm-negative {
+    color: #d44; }
+  .yashe .cm-positive {
+    color: #292; }
+  .yashe .cm-header, .yashe .cm-strong {
+    font-weight: bold; }
+  .yashe .cm-em {
+    font-style: italic; }
+  .yashe .cm-link {
+    text-decoration: underline; }
+  .yashe .cm-strikethrough {
+    text-decoration: line-through; }
+  .yashe .cm-s-dark .cm-keyword {
+    color: #708; }
+  .yashe .cm-s-dark .cm-atom {
+    color: #219; }
+  .yashe .cm-s-dark .cm-number {
+    color: #E5F439; }
+  .yashe .cm-s-dark .cm-def {
+    color: #00f; }
+  .yashe .cm-s-dark .cm-variable,
+  .yashe .cm-s-dark .cm-punctuation,
+  .yashe .cm-s-dark .cm-property,
+  .yashe .cm-s-dark .cm-operator {
+    color: #05a; }
+  .yashe .cm-s-dark .cm-variable-2 {
+    color: #68BEEB; }
+  .yashe .cm-s-dark .cm-variable-3 {
+    color: #68BEEB; }
+  .yashe .cm-s-dark .cm-comment {
+    color: #999; }
+  .yashe .cm-s-dark .cm-string {
+    color: #b98003; }
+  .yashe .cm-s-dark .cm-string-2 {
+    color: #7DB647; }
+  .yashe .cm-s-dark .cm-meta {
+    color: #555; }
+  .yashe .cm-s-dark .cm-qualifier {
+    color: #555; }
+  .yashe .cm-s-dark .cm-builtin {
+    color: #30a; }
+  .yashe .cm-s-dark .cm-bracket {
+    color: #997; }
+  .yashe .cm-s-dark .cm-tag {
+    color: #170; }
+  .yashe .cm-s-dark .cm-attribute {
+    color: #00c; }
+  .yashe .cm-s-dark .cm-hr {
+    color: #999; }
+  .yashe .cm-s-dark .cm-link {
+    color: #00c; }
+  .yashe .cm-s-dark .cm-directive {
+    color: #FC4C46; }
+  .yashe .cm-s-dark .cm-punc {
+    color: #FFFFFF; }
+  .yashe .cm-s-dark .cm-logical {
+    color: #B271FF; }
+  .yashe .cm-s-dark .cm-at {
+    color: #68BEEB; }
+  .yashe .cm-s-dark .cm-error {
     color: #f00; }
   .yashe .cm-invalidchar {
     color: #f00; }
