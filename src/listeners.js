@@ -24,7 +24,8 @@ var startListeners = function(){
     }, 'text');
 
 
-    exSelector.addEventListener('click', function(e) {
+    //Example Listener
+    exSelector.addEventListener('change', function(e) {
         if(exSelector.value == "rdf"){
         yashe.setValue(rdfShape)
         yashe.setSize(null,"300")   
@@ -44,10 +45,14 @@ var startListeners = function(){
         
     })
 
-    themeSelector.addEventListener('click', function(e) {
+    //Theme Listener
+    themeSelector.addEventListener('change', function(e) {
     
-    themeUtils.clearTheme()
-    themeUtils.setTheme(themeSelector.value)
+
+     yashe.setOption("theme","dark")
+     console.log(yashe.options.shex)  
+    //themeUtils.clearTheme()
+    //themeUtils.setTheme(themeSelector.value)
 
     
     })

@@ -198,9 +198,8 @@ var postProcessCmElement = function(yashe) {
 
 
   /**
-	 * Set doc value
+	 * Set doc value if option storeShape is activated
 	 */
-  console.log(yashe)
   if(yashe.options.shex.storeShape){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
@@ -227,7 +226,12 @@ var postProcessCmElement = function(yashe) {
   });
 
   yashe.on("update", function() {
-    root.setTheme(themeSelector.value)
+   // root.setTheme(yashe.options.shex.theme)
+  });
+
+
+  yashe.on("optionChange", function() {
+    root.setTheme(yashe.options.shex.theme)
   });
 
 
