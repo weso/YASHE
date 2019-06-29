@@ -8,6 +8,7 @@
   <link rel="icon"  type="image/png" href="doc/imgs/favicon.png">
   <link href="dist/yashe.min.css" rel="stylesheet" type="text/css" />
   <link href="doc/doc.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -94,16 +95,19 @@
         shex: {
           showQueryButton: true,
           storeShape:false,
-          theme:"wikidata",
           callbacks:{
             success: function(data){
               console.log("success", data);
             }
           }
-        }
+        }, 
+        theme:"wiki"
       });
 
     </script>
+
+
+     <script src="scripts/listeners.js"></script>
 
 
 </body>

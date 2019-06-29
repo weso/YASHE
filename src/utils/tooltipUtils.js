@@ -1,5 +1,5 @@
 "use strict";
-var $ = require("jquery"), listeners = require("../listeners.js");
+var $ = require("jquery")
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -55,7 +55,7 @@ if(possibleEntity!= undefined){
     if(!data.error){
       var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
       var description = data.entities[possibleEntity].descriptions.en.value
-      var theme = listeners.themeSelector.value
+      var theme = yashe.getOption('theme')
       var cssTheme
       if(theme != 'dark')
         cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}

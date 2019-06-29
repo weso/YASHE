@@ -16,8 +16,6 @@ var $ = require("jquery"),
   syntaxUtils = require("./utils/syntaxUtils.js"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
-  themeUtils = require("./utils/themeUtils.js"),
-  listeners = require("./listeners.js"),
   imgs = require("./utils/imgs.js"),
   Clipboard = require("clipboard");
 
@@ -234,8 +232,8 @@ var postProcessCmElement = function(yashe) {
   //Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
-  tooltipUtils.removeToolTip()
-  tooltipUtils.triggerTooltip( e )
+      tooltipUtils.removeToolTip()
+      tooltipUtils.triggerTooltip( e )
 
   }, 300 ))
 
@@ -488,26 +486,6 @@ root.doAutoFormat = function(yashe) {
   return formatUtils.doAutoFormat(yashe);
 };
 
-
-/**
- *  Theme utils
- */
-
-root.clearTheme = function(){
-  return themeUtils.clearTheme()
-}
-
-root.setTheme = function(theme){
- return themeUtils.setTheme(theme)
-}
-
-/**
- *  Example utils
- */
-listeners.startListeners()
-
-
-//$('.CodeMirror').css({"font-size":"12pxs"});
 
 require("./config/defaults.js");
 root.$ = $;
