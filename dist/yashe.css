@@ -7,7 +7,8 @@
   /* Shown when moving in bi-directional text */
   /* Can style cursor different in overwrite (non-insert) mode */
   /* DEFAULT THEME */
-  /* DARK THEME */
+  /* WIKIDATA THEME */
+  /* DARK THEME  */
   /* Default styles for common addons */
   /* STOP */
   /* The rest of this file contains styles related to the mechanics of
@@ -156,22 +157,56 @@
     color: #f00; }
   .yashe .CodeMirror-composing {
     border-bottom: 2px solid; }
-  .yashe .cm-s-dark .cm-header {
-    color: blue; }
-  .yashe .cm-s-dark .cm-quote {
-    color: #090; }
-  .yashe .cm-negative {
-    color: #d44; }
-  .yashe .cm-positive {
-    color: #292; }
-  .yashe .cm-header, .yashe .cm-strong {
-    font-weight: bold; }
-  .yashe .cm-em {
-    font-style: italic; }
-  .yashe .cm-link {
-    text-decoration: underline; }
-  .yashe .cm-strikethrough {
-    text-decoration: line-through; }
+  .yashe .cm-s-wiki .cm-keyword {
+    color: #708; }
+  .yashe .cm-s-wiki .cm-atom {
+    color: #219; }
+  .yashe .cm-s-wiki .cm-number {
+    color: #085; }
+  .yashe .cm-s-wiki .cm-def {
+    color: #00f; }
+  .yashe .cm-s-wiki .cm-variable,
+  .yashe .cm-s-default .cm-punctuation,
+  .yashe .cm-s-wiki .cm-property,
+  .yashe .cm-s-wiki .cm-operator {
+    color: #05a; }
+  .yashe .cm-s-wiki .cm-variable-2 {
+    color: #0F7A50; }
+  .yashe .cm-s-wiki .cm-variable-3 {
+    color: #05a; }
+  .yashe .cm-s-wiki .cm-comment {
+    color: #999; }
+  .yashe .cm-s-wiki .cm-string {
+    color: #b98003; }
+  .yashe .cm-s-wiki .cm-string-2 {
+    color: #05a; }
+  .yashe .cm-s-wiki .cm-meta {
+    color: #555; }
+  .yashe .cm-s-wiki .cm-qualifier {
+    color: #555; }
+  .yashe .cm-s-wiki .cm-builtin {
+    color: #30a; }
+  .yashe .cm-s-wiki .cm-bracket {
+    color: #997; }
+  .yashe .cm-s-wiki .cm-tag {
+    color: #170; }
+  .yashe .cm-s-wiki .cm-attribute {
+    color: #00c; }
+  .yashe .cm-s-wiki .cm-hr {
+    color: #999; }
+  .yashe .cm-s-wiki .cm-link {
+    color: #00c; }
+  .yashe .cm-s-wiki .cm-directive {
+    color: #f00; }
+  .yashe .cm-s-wiki .cm-punc {
+    color: black; }
+  .yashe .cm-s-wiki .cm-logical {
+    color: #f00; }
+  .yashe .cm-s-wiki .cm-at {
+    color: #0F7A50; }
+  .yashe .cm-s-dark.CodeMirror {
+    background: #2B2B2B;
+    color: #A9B7C6; }
   .yashe .cm-s-dark .cm-keyword {
     color: #708; }
   .yashe .cm-s-dark .cm-atom {
@@ -219,12 +254,31 @@
     color: #B271FF; }
   .yashe .cm-s-dark .cm-at {
     color: #68BEEB; }
-  .yashe .cm-s-dark .cm-error {
-    color: #f00; }
-  .yashe .cm-invalidchar {
-    color: #f00; }
-  .yashe .CodeMirror-composing {
-    border-bottom: 2px solid; }
+  .yashe .cm-s-dark .CodeMirror-cursor {
+    border-left: 1px solid #A9B7C6; }
+  .yashe .cm-s-dark .CodeMirror-activeline-background {
+    background: #323232; }
+  .yashe .cm-s-dark .CodeMirror-gutters {
+    background: #313335;
+    border-right: 1px solid #313335; }
+  .yashe .cm-s-dark .CodeMirror-guttermarker {
+    color: #FFEE80; }
+  .yashe .cm-s-dark .CodeMirror-guttermarker-subtle {
+    color: #D0D0D0; }
+  .yashe .cm-s-dark .CodeMirrir-linenumber {
+    color: #606366; }
+  .yashe .cm-s-dark .CodeMirror-matchingbracket {
+    background-color: #3B514D;
+    color: #FFEF28 !important;
+    font-weight: bold; }
+  .yashe .cm-s-dark div.CodeMirror-selected {
+    background: #214283; }
+  .yashe .CodeMirror-hints.dark {
+    color: #9C9E9E;
+    background-color: #3B3E3F !important; }
+  .yashe .CodeMirror-hints.dark .CodeMirror-hint-active {
+    background-color: #494D4E !important;
+    color: #9C9E9E !important; }
   .yashe div.CodeMirror span.CodeMirror-matchingbracket {
     color: #0f0; }
   .yashe div.CodeMirror span.CodeMirror-nonmatchingbracket {

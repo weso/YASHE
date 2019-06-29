@@ -49,7 +49,8 @@ var startListeners = function(){
     themeSelector.addEventListener('change', function(e) {
     
 
-        yashe.setOption("theme","dark")
+        yashe.setOption("theme",themeSelector.value)
+      
          
 /*
      var shexConfig = yashe.getOption("shex")
