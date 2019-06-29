@@ -8,6 +8,7 @@
   <link rel="icon"  type="image/png" href="doc/imgs/favicon.png">
   <link href="dist/yashe.min.css" rel="stylesheet" type="text/css" />
   <link href="doc/doc.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -76,13 +77,14 @@
 
           </tr>
         </table>
+   
         <div id="showcase" class = "show"></div>
 
       	<code>var yashe = YASHE(document.getElementById("showcase"));</code> <br>
         (or, if you would like to instantiate YASHE from an existing text area, use <code>var yashe = YASHE.fromTextArea(document.getElementById('textAreaItem'));</code>
         </div>
         </div>
-        <img src="poweredWiki.svg" width="200" height="80">
+        <img src="doc/imgs/poweredWiki.svg" width="200" height="80">
       
       
     <script src="dist/yashe.bundled.min.js"></script>
@@ -92,15 +94,20 @@
       
         shex: {
           showQueryButton: true,
+          storeShape:false,
           callbacks:{
             success: function(data){
               console.log("success", data);
             }
           }
-        }
+        }, 
+        theme:"wiki"
       });
 
     </script>
+
+
+     <script src="scripts/listeners.js"></script>
 
 
 </body>

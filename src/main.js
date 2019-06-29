@@ -16,8 +16,6 @@ var $ = require("jquery"),
   syntaxUtils = require("./utils/syntaxUtils.js"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
-  themeUtils = require("./utils/themeUtils.js"),
-  listeners = require("./listeners.js"),
   imgs = require("./utils/imgs.js"),
   Clipboard = require("clipboard");
 
@@ -40,17 +38,17 @@ require("../lib/grammar/tokenizer.js");
  * @constructor
  * @param {DOM-Element} parent element to append editor to.
  * @param {object} settings
- * @param {boolean} activateStore Set whether the shape will be store or not
  * @class YASHE
  * @return {doc} YASHE document
  */
-var root = (module.exports = function(parent, config,activateStore) {
+var root = (module.exports = function(parent, config) {
   var rootEl = $("<div>", {
     class: "yashe"
   }).appendTo($(parent));
   config = extendConfig(config);
+  console.log(config)
   var yashe = extendCmInstance(CodeMirror(rootEl[0], config));
-  postProcessCmElement(yashe,activateStore);
+  postProcessCmElement(yashe);
   return yashe;
 });
 
@@ -185,7 +183,7 @@ var removeCompleterFromSettings = function(settings, name) {
   }
 };
 
-var postProcessCmElement = function(yashe,activateStore) {
+var postProcessCmElement = function(yashe) {
 
 
   root.drawButtons(yashe);
@@ -198,9 +196,9 @@ var postProcessCmElement = function(yashe,activateStore) {
 
 
   /**
-	 * Set doc value
+	 * Set doc value if option storeShape is activated
 	 */
-  if(activateStore){
+  if(yashe.options.shex.storeShape){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
@@ -226,21 +224,24 @@ var postProcessCmElement = function(yashe,activateStore) {
   });
 
   yashe.on("update", function() {
-    root.setTheme(themeSelector.value)
+   // root.setTheme(yashe.options.shex.theme)
   });
 
-  CodeMirror.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
-    tooltipUtils.removeToolTip()
-    tooltipUtils.triggerTooltip( e )
+
+  //Wikidata Tooltip Listener
+  root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
+
+      tooltipUtils.removeToolTip()
+      tooltipUtils.triggerTooltip( e )
 
   }, 300 ))
-
 
  
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
+
 
 
 root.storeQuery = function(yashe) {
@@ -280,7 +281,7 @@ root.drawButtons = function(yashe) {
 
  /**
 	 * draw share link button
-	 */
+	
   if (yashe.options.createShareLink) {
     var svgShare = $(yutils.svg.getElement(imgs.share));
     svgShare
@@ -344,6 +345,7 @@ root.drawButtons = function(yashe) {
       .attr("title", "Share your document")
       .appendTo(yashe.buttons);
   }
+   */
 
   /**
    * draw download button
@@ -430,7 +432,7 @@ root.drawButtons = function(yashe) {
  * @param {yashe} yashe document
  * @default {doc: doc.getValue()}
  * @return object
- */
+
 root.createShareLink = function(yashe) {
   //extend existing link, so first fetch current arguments
   var urlParams = {};
@@ -439,6 +441,7 @@ root.createShareLink = function(yashe) {
   return urlParams;
 };
 
+ */
 
 /**
  * Static Utils
@@ -484,26 +487,6 @@ root.doAutoFormat = function(yashe) {
 };
 
 
-/**
- *  Theme utils
- */
-
-root.clearTheme = function(){
-  return themeUtils.clearTheme()
-}
-
-root.setTheme = function(theme){
- return themeUtils.setTheme(theme)
-}
-
-/**
- *  Example utils
- */
-listeners.startListeners()
-
-
-//$('.CodeMirror').css({"font-size":"12pxs"});
-
 require("./config/defaults.js");
 root.$ = $;
 root.version = {
@@ -512,10 +495,5 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
-
-  
-
-
-
 
   

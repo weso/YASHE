@@ -1,3 +1,7 @@
+@import "../variables.scss";
+@import "themes/wikitheme";
+@import "themes/darkTheme";
+
 /* BASICS */
 
 .CodeMirror {
@@ -137,11 +141,12 @@
 .cm-s-default .cm-logical {color:#f00;}
 .cm-s-default .cm-at {color:#0F7A50;}
 
-
 .cm-s-default .cm-error {color: #f00;}
 .cm-invalidchar {color: #f00;}
 
 .CodeMirror-composing { border-bottom: 2px solid; }
+
+
 
 /* Default styles for common addons */
 
