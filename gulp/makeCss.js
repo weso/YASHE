@@ -2,10 +2,12 @@ var gulp = require("gulp"),
   concat = require("gulp-concat"),
   paths = require("./paths.js"),
   connect = require("gulp-connect"),
-  sourcemaps = require("gulp-sourcemaps");
-sass = require("gulp-sass"), autoprefixer = require("gulp-autoprefixer"), rename = require(
-  "gulp-rename"
-), notify = require("gulp-notify"), minifyCSS = require("gulp-cssnano");
+  sourcemaps = require("gulp-sourcemaps"),
+  sass = require("gulp-sass"), 
+  autoprefixer = require("gulp-autoprefixer"), 
+  rename = require("gulp-rename"),
+  notify = require("gulp-notify"), 
+  minifyCSS = require("gulp-cssnano");
 
 gulp.task("makeCss", function() {
   return gulp

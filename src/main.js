@@ -104,8 +104,6 @@ var extendConfig = function(config) {
  */
 var extendCmInstance = function(yashe) {
 
-  // Set editor default size
-  yashe.setSize(null,"300")
 
   //instantiate autocompleters
   yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
@@ -223,12 +221,6 @@ var postProcessCmElement = function(yashe) {
     tooltipUtils.removeToolTip()
   });
 
-  yashe.on("update", function() {
-   // root.setTheme(yashe.options.shex.theme)
-  });
-
-
-
   //Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
@@ -237,7 +229,8 @@ var postProcessCmElement = function(yashe) {
 
   }, 300 ))
 
- 
+
+
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
@@ -278,74 +271,6 @@ var debounce = function(func, wait, immediate) {
 root.drawButtons = function(yashe) {
   yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
 
-
- /**
-	 * draw share link button
-	
-  if (yashe.options.createShareLink) {
-    var svgShare = $(yutils.svg.getElement(imgs.share));
-    svgShare
-      .click(function(event) {
-        event.stopPropagation();
-        var popup = $("<div class='yashe_sharePopup'></div>").appendTo(yashe.buttons);
-        $("html").click(function() {
-          if (popup) popup.remove();
-        });
-
-        popup.click(function(event) {
-          event.stopPropagation();
-        });
-        var $input = $("<input>").val(
-          location.protocol +
-            "//" +
-            location.host +
-            location.pathname +
-            location.search +
-            "#" +
-            $.param(yashe.options.createShareLink(yashe))
-        );
-
-        $input.focus(function() {
-          var $this = $(this);
-          $this.select();
-
-          // Work around Chrome's little problem
-          $this.mouseup(function() {
-            // Prevent further mouseup intervention
-            $this.unbind("mouseup");
-            return false;
-          });
-        });
-
-        popup.empty().append($("<div>", { class: "inputWrapper" }).append($input));
-        if (yashe.options.createShortLink) {
-          popup.addClass("enableShort");
-          $("<button>Shorten</button>")
-            .addClass("yashe_btn yashe_btn-sm yashe_btn-primary")
-            .click(function() {
-              $(this).parent().find("button").attr("disabled", "disabled");
-              yashe.options.createShortLink($input.val(), function(errString, shortLink) {
-                if (errString) {
-                  $input.remove();
-                  popup.find(".inputWrapper").append($("<span>", { class: "shortlinkErr" }).text(errString));
-                } else {
-                  $input.val(shortLink).focus();
-                }
-              });
-            })
-            .appendTo(popup);
-        }
-        var positions = svgShare.position();
-        popup
-          .css("top", positions.top + svgShare.outerHeight() + parseInt(popup.css("padding-top")) + "px")
-          .css("left", positions.left + svgShare.outerWidth() - popup.outerWidth() + "px");
-        $input.focus();
-      })
-      .addClass("yashe_share")
-      .attr("title", "Share your document")
-      .appendTo(yashe.buttons);
-  }
-   */
 
   /**
    * draw download button
@@ -425,23 +350,6 @@ root.drawButtons = function(yashe) {
 
 
 
-/**
- * Create a share link
- *
- * @method yashe.createShareLink
- * @param {yashe} yashe document
- * @default {doc: doc.getValue()}
- * @return object
-
-root.createShareLink = function(yashe) {
-  //extend existing link, so first fetch current arguments
-  var urlParams = {};
-  if (window.location.hash.length > 1) urlParams = $.deparam(window.location.hash.substring(1));
-  urlParams["doc"] = yashe.getValue();
-  return urlParams;
-};
-
- */
 
 /**
  * Static Utils
@@ -496,4 +404,4 @@ root.version = {
   "yasgui-utils": yutils.version
 };
 
-  
+ 
