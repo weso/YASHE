@@ -221,12 +221,6 @@ var postProcessCmElement = function(yashe) {
     tooltipUtils.removeToolTip()
   });
 
-  yashe.on("update", function() {
-   // root.setTheme(yashe.options.shex.theme)
-  });
-
-
-
   //Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
@@ -235,7 +229,8 @@ var postProcessCmElement = function(yashe) {
 
   }, 300 ))
 
- 
+
+
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 };
@@ -409,4 +404,4 @@ root.version = {
   "yasgui-utils": yutils.version
 };
 
-  
+ 
