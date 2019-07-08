@@ -279,6 +279,7 @@ root.drawButtons = function(yashe) {
   var uploadButton = $("<div>", {
     class: "downloadBtns"
   }).append($(imgs.upload)
+  .attr("title", "Upload you ShEx file")
   .on('change',utils.readFile)
       );
   yashe.buttons.append(uploadButton);
