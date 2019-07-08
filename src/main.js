@@ -276,10 +276,10 @@ root.drawButtons = function(yashe) {
   /**
    * draw upload button
    */
-
   var uploadButton = $("<div>", {
     class: "downloadBtns"
-  }).append(imgs.upload
+  }).append($(imgs.upload)
+  .on('change',utils.readFile)
       );
   yashe.buttons.append(uploadButton);
 

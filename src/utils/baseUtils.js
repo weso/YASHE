@@ -51,9 +51,22 @@ var getString = function(yashe, item) {
     return item;
   }
 };
+
+var readFile = function handleFileSelect(evt) {
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function(event) {
+    // El texto del archivo se mostrará por consola aquí
+    yashe.setValue(event.target.result)
+  };
+
+reader.readAsText(file);
+}
+
 module.exports = {
   keyExists: keyExists,
   getPersistencyId: getPersistencyId,
   elementsOverlap: elementsOverlap,
-  getString: getString
+  getString: getString,
+  readFile: readFile
 };
