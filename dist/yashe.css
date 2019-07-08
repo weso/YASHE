@@ -596,6 +596,27 @@
       cursor: pointer;
       width: 20px;
       height: 20px; }
+  .yashe .inputfileBtn {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1; }
+  .yashe .inputfileBtn + label {
+    margin-top: 3px;
+    max-width: 100%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    /* 10px 20px */
+    color: black;
+    background-color: transparent; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

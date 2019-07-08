@@ -46,7 +46,6 @@ var root = (module.exports = function(parent, config) {
     class: "yashe"
   }).appendTo($(parent));
   config = extendConfig(config);
-  console.log(config)
   var yashe = extendCmInstance(CodeMirror(rootEl[0], config));
   postProcessCmElement(yashe);
   return yashe;
@@ -186,6 +185,8 @@ var postProcessCmElement = function(yashe) {
 
   root.drawButtons(yashe);
 
+  //Trigger of the button with id="copy"
+  //Copies the contents of the editor in the clipboard
   new Clipboard('#copy', {
     text: function(trigger) {
         return yashe.getValue();
@@ -270,6 +271,18 @@ var debounce = function(func, wait, immediate) {
 
 root.drawButtons = function(yashe) {
   yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
+
+
+  /**
+   * draw upload button
+   */
+  var uploadButton = $("<div>", {
+    class: "downloadBtns"
+  }).append($(imgs.upload)
+  .attr("title", "Upload you ShEx file")
+  .on('change',utils.readFile)
+      );
+  yashe.buttons.append(uploadButton);
 
 
   /**
