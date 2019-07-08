@@ -53,8 +53,9 @@ var possibleEntity = token.split(':')[1]
 if(possibleEntity!= undefined){
   checkEntity(possibleEntity).done( function( data ) {
     if(!data.error){
-      var entity = data.entities[possibleEntity].labels.en.value +' ('+possibleEntity+')'
-      var description = data.entities[possibleEntity].descriptions.en.value
+      var userLang = (navigator.language || navigator.userLanguage).split("-")[0]; 
+      var entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')'
+      var description = data.entities[possibleEntity].descriptions[userLang].value
       var theme = yashe.getOption('theme')
       var cssTheme
       if(theme != 'dark')

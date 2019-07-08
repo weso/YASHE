@@ -251,7 +251,10 @@ var checkSyntax = function(yashe, deepcheck) {
 };
 
 
-
+/**
+ * 
+      REMEMBRER: COMMENT THIS FUNCTION
+ */
 var debounce = function(func, wait, immediate) {
   var timeout, result;
   return function() {
@@ -328,5 +331,3 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
-
- 
