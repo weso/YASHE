@@ -278,7 +278,8 @@ root.drawButtons = function(yashe) {
    */
   var uploadButton = $("<div>", {
     class: "downloadBtns"
-  }).append($(imgs.upload)
+  }).append($('<input type="file" accept=".shex" name="file-1[]" id="file-1" class="inputfileBtn" data-multiple-caption="{count}'
+  +'files selected" multiple /><label for="file-1">'+imgs.upload+'</label>')
   .attr("title", "Upload you ShEx file")
   .on('change',utils.readFile)
       );
