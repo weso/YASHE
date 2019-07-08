@@ -26,6 +26,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   highlightSelectionMatches: {
     showToken: /\w/
   },
+  theme:"wiki",
   tabMode: "indent",
   lineNumbers: true,
   lineWrapping: true,
