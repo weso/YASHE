@@ -20,7 +20,8 @@
   /* IE7 hack to prevent it from returning funny offsetTops on the spans */
   /* Used to force a border model for a node */
   /* See issue #2901 */
-  /* Help users use markselection to safely style text background */ }
+  /* Help users use markselection to safely style text background */
+  /* style 1 */ }
   .yashe .cm-s-wiki .cm-keyword {
     color: #708; }
   .yashe .cm-s-wiki .cm-atom {
@@ -596,6 +597,28 @@
       cursor: pointer;
       width: 20px;
       height: 20px; }
+  .yashe .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1; }
+  .yashe .inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */ }
+  .yashe .inputfile-1 + label {
+    color: black;
+    background-color: transparent; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }
