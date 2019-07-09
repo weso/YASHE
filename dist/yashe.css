@@ -581,8 +581,8 @@
         animation: spin 1s infinite linear; }
   .yashe .fullscreenToggleBtns {
     display: inline-block;
-    margin-top: 3px;
-    margin-right: 20px; }
+    margin-top: 4px;
+    margin-right: 16px; }
     .yashe .fullscreenToggleBtns div {
       cursor: pointer;
       width: 20px;
@@ -617,6 +617,15 @@
     /* 10px 20px */
     color: black;
     background-color: transparent; }
+  .yashe .yashe_deletedBtn {
+    margin-top: -1px;
+    display: inline-block; }
+  .yashe .yashe_uploadBtn {
+    margin-top: -1px;
+    display: inline-block; }
+  .yashe .yashe_downloadBtn {
+    margin-top: 1px;
+    display: inline-block; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

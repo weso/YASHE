@@ -8,7 +8,17 @@ var drawButtons = function(yashe){
 
 
 
+ /**
+     * draw delete button
+     */
+    var deleteButton = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.delete))
+    .addClass("yashe_deletedBtn")
+    .attr("title", "Delete content")
+    .click(function() { yashe.setValue("")}))
 
+    yashe.buttons.append(deleteButton);
 
 
     /**
@@ -18,6 +28,7 @@ var drawButtons = function(yashe){
       class: "downloadBtns"
     }).append($('<input type="file" accept=".shex" name="file-1[]" id="file-1" class="inputfileBtn" data-multiple-caption="{count}'
     +'files selected" multiple /><label for="file-1">'+imgs.upload+'</label>')
+    .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
     .on('change',utils.readFile)
         );
