@@ -61,6 +61,7 @@
 }
 
 	.yashe_buttons {
+		background: white;
 		position: absolute;
 		top: 5px;
 		right: 5px;
@@ -110,23 +111,8 @@
 				}
 			}
 		}
-		.yashe_queryButton {
-			display:inline-block;
-			cursor: pointer;
-			width: $queryButtonWidth;
-			height: $queryButtonHeight;
-			div {
-				margin-left: 0px;
-			}
-			margin-left: 10px;
-			.svgImg {
-				display:block;
-				height: inherit;
-			}
-			.loader {
-			  @include spinner($queryButtonWidth, $queryButtonHeight);
-			}
-		}
+
+		
 
 	
 
