@@ -80,7 +80,7 @@ var drawButtons = function(yashe){
     var deleteButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.delete))
-    .addClass("yashe_downloadBtn")
+    .addClass("yashe_deletedBtn")
     .attr('id','deleteBtn')
     .attr("title", "Delete content")
     .click(function() { yashe.setValue("")}))
