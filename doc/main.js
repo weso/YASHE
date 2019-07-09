@@ -47,6 +47,7 @@ $(document).ready(function() {
     //Theme Listener
     themeSelector.addEventListener('change', function(e) {
         yashe.setOption("theme",themeSelector.value)
+        yashe.drawButtons()
     })
 
 

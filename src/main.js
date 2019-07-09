@@ -133,6 +133,10 @@ var extendCmInstance = function(yashe) {
     );
   };  
 
+  yashe.drawButtons = function() {
+    return buttonsUtils.drawButtons(yashe)
+  }
+
  /**
 	 * Fetch defined prefixes from query string
 	 *
@@ -332,3 +336,4 @@ root.version = {
   jquery: $.fn.jquery,
   "yasgui-utils": yutils.version
 };
+

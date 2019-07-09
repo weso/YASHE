@@ -147,17 +147,36 @@
   		.yashe_smallscreenBtn {
   			display: none;
   		}
+		}
+		
+		.yashe_fullscreenBtn:hover {
+			stroke:red;
+			background: red;
+		}
+		
+		.yashe_smallscreenBtn:hover {
+			stroke:red;
+			background: red;
   	}
 
 	  .downloadBtns {
 		display:inline-block;
+		margin:2px;
 		margin-top: 3px;
 		div {
-		  cursor:pointer;
+			cursor:pointer;
 		  width: 20px;
 		  height: 20px;
 		}
-	  }
+	}
+		.downloadBtns:hover {
+			div {
+				width: 40px;
+				height: 40px;
+			}
+			background: red;
+		}
+
 
 		.inputfileBtn {
 			width: 0.1px;
@@ -192,6 +211,8 @@
 	
 	}
 
+
+
 	.yashe_uploadBtn {
 		margin-top: -1px;
 		display:inline-block;
@@ -202,3 +223,4 @@
 		margin-top: 1px;
 		display:inline-block;
 	}
+

@@ -5,10 +5,7 @@ var imgs = require("./imgs.js"),
 var drawButtons = function(yashe){
 
     yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
-
-
-
-
+ 
 
     /**
      * draw upload button
@@ -19,6 +16,7 @@ var drawButtons = function(yashe){
     +'files selected" multiple /><label for="file-1">'+imgs.upload+'</label>')
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
+    .attr("id", "uploadBtn")
     .on('change',utils.readFile)
         );
     yashe.buttons.append(uploadButton);
@@ -35,6 +33,7 @@ var drawButtons = function(yashe){
         $(yutils.svg.getElement(imgs.download))
           .addClass("yashe_downloadBtn")
           .attr("title", "Download File")
+          .attr("id", "downloadBtn")
           .click(function() {          
             var textFileAsBlob = new Blob([ yashe.getValue() ], { type: 'text/shex' });
             var fileNameToSaveAs = "document.shex";
@@ -74,29 +73,15 @@ var drawButtons = function(yashe){
     yashe.buttons.append(copyButton);
   
 
-    var uploadImg,
-        downloadImg,
-        copyImg,
-        deleteImg=imgs.delete,
-        fullScreenImg,
-        test = "negro"
-
-
-    
-    if(yashe.options.theme == 'dark'){
-      deleteImg = imgs.ligth_delete
-      test = "blanco"
-    }
-
-
-    console.log(test)    
+   
     /**
      * draw delete button
      */
     var deleteButton = $("<div>", {
       class: "downloadBtns"
-    }).append($(yutils.svg.getElement(deleteImg))
-    .addClass("yashe_deletedBtn")
+    }).append($(yutils.svg.getElement(imgs.delete))
+    .addClass("yashe_downloadBtn")
+    .attr('id','deleteBtn')
     .attr("title", "Delete content")
     .click(function() { yashe.setValue("")}))
 
@@ -114,6 +99,7 @@ var drawButtons = function(yashe){
         $(yutils.svg.getElement(imgs.fullscreen))
           .addClass("yashe_fullscreenBtn")
           .attr("title", "Set editor full screen")
+          .attr("id", "fullBtn")
           .click(function() {
             yashe.setOption("fullScreen", true);
           })
@@ -122,6 +108,7 @@ var drawButtons = function(yashe){
         $(yutils.svg.getElement(imgs.smallscreen))
           .addClass("yashe_smallscreenBtn")
           .attr("title", "Set editor to normal size")
+          .attr("id", "smallBtn")
           .click(function() {
             yashe.setOption("fullScreen", false);
           })
