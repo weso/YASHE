@@ -597,8 +597,7 @@
     background: red; }
   .yashe .downloadBtns {
     display: inline-block;
-    margin: 2px;
-    margin-top: 3px; }
+    margin: 2px; }
     .yashe .downloadBtns div {
       cursor: pointer;
       width: 20px;
@@ -627,13 +626,14 @@
     color: black;
     background-color: transparent; }
   .yashe .yashe_deletedBtn {
-    margin-top: -1px;
+    margin-bottom: 4px;
     display: inline-block; }
   .yashe .yashe_uploadBtn {
-    margin-top: -1px;
+    margin: 1px;
+    height: 17px;
     display: inline-block; }
   .yashe .yashe_downloadBtn {
-    margin-top: 1px;
+    margin-top: 2px;
     display: inline-block; }
   .yashe .CodeMirror {
     line-height: 1.5em;

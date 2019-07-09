@@ -16,7 +16,6 @@ var drawButtons = function(yashe){
     +'files selected" multiple /><label for="file-1">'+imgs.upload+'</label>')
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
-    .attr("id", "uploadBtn")
     .on('change',utils.readFile)
         );
     yashe.buttons.append(uploadButton);
