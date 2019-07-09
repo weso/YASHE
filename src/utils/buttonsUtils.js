@@ -8,17 +8,6 @@ var drawButtons = function(yashe){
 
 
 
- /**
-     * draw delete button
-     */
-    var deleteButton = $("<div>", {
-      class: "downloadBtns"
-    }).append($(yutils.svg.getElement(imgs.delete))
-    .addClass("yashe_deletedBtn")
-    .attr("title", "Delete content")
-    .click(function() { yashe.setValue("")}))
-
-    yashe.buttons.append(deleteButton);
 
 
     /**
@@ -84,6 +73,20 @@ var drawButtons = function(yashe){
         );
     yashe.buttons.append(copyButton);
   
+
+    /**
+     * draw delete button
+     */
+    var deleteButton = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.delete))
+    .addClass("yashe_deletedBtn")
+    .attr("title", "Delete content")
+    .click(function() { yashe.setValue("")}))
+
+    yashe.buttons.append(deleteButton);
+
+
     /**
        * draw fullscreen button
        */
