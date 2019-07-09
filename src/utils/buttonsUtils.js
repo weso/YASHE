@@ -74,12 +74,28 @@ var drawButtons = function(yashe){
     yashe.buttons.append(copyButton);
   
 
+    var uploadImg,
+        downloadImg,
+        copyImg,
+        deleteImg=imgs.delete,
+        fullScreenImg,
+        test = "negro"
+
+
+    
+    if(yashe.options.theme == 'dark'){
+      deleteImg = imgs.ligth_delete
+      test = "blanco"
+    }
+
+
+    console.log(test)    
     /**
      * draw delete button
      */
     var deleteButton = $("<div>", {
       class: "downloadBtns"
-    }).append($(yutils.svg.getElement(imgs.delete))
+    }).append($(yutils.svg.getElement(deleteImg))
     .addClass("yashe_deletedBtn")
     .attr("title", "Delete content")
     .click(function() { yashe.setValue("")}))

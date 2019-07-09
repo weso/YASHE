@@ -222,6 +222,7 @@ var postProcessCmElement = function(yashe) {
     tooltipUtils.removeToolTip()
   });
 
+
   //Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover',  debounce(function( e ) {  
 
