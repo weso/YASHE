@@ -7,6 +7,10 @@ var drawButtons = function(yashe){
     yashe.buttons = $("<div class='yashe_buttons'></div>").appendTo($(yashe.getWrapperElement()));
 
 
+
+
+
+
     /**
      * draw upload button
      */
