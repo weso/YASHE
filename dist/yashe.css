@@ -516,6 +516,7 @@
       line-height: 1.5;
       border-radius: 3px; }
   .yashe .yashe_buttons {
+    background: white;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -560,42 +561,31 @@
           margin-left: 5px; }
         .yashe .yashe_buttons div.yashe_sharePopup textarea {
           width: 100%; }
-    .yashe .yashe_buttons .yashe_queryButton {
-      display: inline-block;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      margin-left: 10px; }
-      .yashe .yashe_buttons .yashe_queryButton div {
-        margin-left: 0px; }
-      .yashe .yashe_buttons .yashe_queryButton .svgImg {
-        display: block;
-        height: inherit; }
-      .yashe .yashe_buttons .yashe_queryButton .loader {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        box-sizing: border-box;
-        border: solid 4px rgba(0, 0, 0, 0.2);
-        border-top-color: #000;
-        animation: spin 1s infinite linear; }
   .yashe .fullscreenToggleBtns {
     display: inline-block;
-    margin-top: 3px;
-    margin-right: 20px; }
+    margin-top: 4px;
+    margin-right: 16px; }
     .yashe .fullscreenToggleBtns div {
       cursor: pointer;
       width: 20px;
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
+  .yashe .yashe_fullscreenBtn:hover {
+    stroke: red;
+    background: red; }
+  .yashe .yashe_smallscreenBtn:hover {
+    stroke: red;
+    background: red; }
   .yashe .downloadBtns {
     display: inline-block;
-    margin-top: 3px; }
+    margin: 2px; }
     .yashe .downloadBtns div {
       cursor: pointer;
       width: 20px;
       height: 20px; }
+  .yashe .downloadBtns:hover {
+    background: red; }
   .yashe .inputfileBtn {
     width: 0.1px;
     height: 0.1px;
@@ -617,6 +607,16 @@
     /* 10px 20px */
     color: black;
     background-color: transparent; }
+  .yashe .yashe_deletedBtn {
+    margin-bottom: 4px;
+    display: inline-block; }
+  .yashe .yashe_uploadBtn {
+    margin: 1px;
+    height: 17px;
+    display: inline-block; }
+  .yashe .yashe_downloadBtn {
+    margin-top: 2px;
+    display: inline-block; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

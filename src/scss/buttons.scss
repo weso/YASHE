@@ -61,6 +61,7 @@
 }
 
 	.yashe_buttons {
+		background: white;
 		position: absolute;
 		top: 5px;
 		right: 5px;
@@ -110,30 +111,20 @@
 				}
 			}
 		}
-		.yashe_queryButton {
-			display:inline-block;
-			cursor: pointer;
-			width: $queryButtonWidth;
-			height: $queryButtonHeight;
-			div {
-				margin-left: 0px;
-			}
-			margin-left: 10px;
-			.svgImg {
-				display:block;
-				height: inherit;
-			}
-			.loader {
-			  @include spinner($queryButtonWidth, $queryButtonHeight);
-			}
-		}
+
+		
+
+	
+
+		
 	}
+
 
 
   	.fullscreenToggleBtns {
   		display:inline-block;
-		  margin-top: 3px;
-		  margin-right: 20px;
+		  margin-top: 4px;
+		  margin-right: 16px;
   		div {
   			cursor:pointer;
   			width: 20px;
@@ -142,17 +133,31 @@
   		.yashe_smallscreenBtn {
   			display: none;
   		}
+		}
+		
+		.yashe_fullscreenBtn:hover {
+			stroke:red;
+			background: red;
+		}
+		
+		.yashe_smallscreenBtn:hover {
+			stroke:red;
+			background: red;
   	}
 
 	  .downloadBtns {
 		display:inline-block;
-		margin-top: 3px;
+		margin:2px;
 		div {
-		  cursor:pointer;
+			cursor:pointer;
 		  width: 20px;
 		  height: 20px;
 		}
-	  }
+	}
+		.downloadBtns:hover {
+			background: red;
+		}
+
 
 		.inputfileBtn {
 			width: 0.1px;
@@ -181,4 +186,23 @@
 	}
 	
 	
+	.yashe_deletedBtn {
+		margin-bottom: 4px;
+		display:inline-block;
 	
+	}
+
+
+
+	.yashe_uploadBtn {
+		margin: 1px;
+		height: 17px;
+		display:inline-block;
+	
+	}
+
+	.yashe_downloadBtn{
+		margin-top: 2px;
+		display:inline-block;
+	}
+

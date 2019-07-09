@@ -2,6 +2,7 @@ var $ = jQuery = require("jquery");
 require("../node_modules/bootstrap-sass/assets/javascripts/bootstrap/affix.js");
 require("../node_modules/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js");
 
+
 $(document).ready(function() {
   
     var exSelector = document.getElementById('exSelector')
@@ -46,6 +47,7 @@ $(document).ready(function() {
     //Theme Listener
     themeSelector.addEventListener('change', function(e) {
         yashe.setOption("theme",themeSelector.value)
+        yashe.drawButtons()
     })
 
 
