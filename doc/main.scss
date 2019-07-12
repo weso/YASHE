@@ -36,10 +36,12 @@
 .switch {
 	float: right;
 	position: relative;
+	margin-left: 900px;
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-  }
+	}
+	
   
   .switch input { 
 	float: right;
@@ -74,11 +76,11 @@
   }
   
   input:checked + .slider {
-	background-color: #2196F3;
+	background-color: red;
   }
   
   input:focus + .slider {
-	box-shadow: 0 0 1px #2196F3;
+	box-shadow: 0 0 1px red;
   }
   
   input:checked + .slider:before {
