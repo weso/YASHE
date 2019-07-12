@@ -571,12 +571,6 @@
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
-  .yashe .yashe_fullscreenBtn:hover {
-    stroke: red;
-    background: red; }
-  .yashe .yashe_smallscreenBtn:hover {
-    stroke: red;
-    background: red; }
   .yashe .downloadBtns {
     display: inline-block;
     margin: 2px; }
@@ -584,8 +578,6 @@
       cursor: pointer;
       width: 20px;
       height: 20px; }
-  .yashe .downloadBtns:hover {
-    background: red; }
   .yashe .inputfileBtn {
     width: 0.1px;
     height: 0.1px;
