@@ -35,7 +35,7 @@ var grammarTootlip = function(yashe, parent, html) {
 
 /**
  * 
- * WIKIDATA Tooltip
+ * WIKIDATA Tooltip for properties and entities
  * 
  */
 

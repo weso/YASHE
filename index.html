@@ -50,36 +50,28 @@
       	<h1>About YASHE</h1>
         YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yasqe.yasgui.org/'>YASQE</a> (which is based on SPARQL)
 
-        <br>
-
         <table>
-       
-      <tr>
+          <tr>
 
-        <td>
-        <select id="exSelector" class="form-control">
-            <option value="" disabled selected>Select an example</option>
-            <option id="btnRDF"value="rdf">RDF Book</option>
-            <option id="btnWiki"value="wiki">Wikidata</option>
-            <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
-          </select>
+            <td>
+                <select id="exSelector" class="form-control">
+                    <option value="" disabled selected>Select an example</option>
+                    <option id="btnRDF"value="rdf">RDF Book</option>
+                    <option id="btnWiki"value="wiki">Wikidata</option>
+                    <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
+                  </select>
+            </td>
 
-        </td>
-
-        <td>
-          <select id='themeSelector' class="form-control">
-              <option value="" disabled selected>Choose a theme</option>
-              <!--<option id="defaultTheme" disabled value="default">YASHE</option>-->
-              <option id="wikiTheme"value="wiki">Wikidata Style</option>
-              <option id="darkTheme"value="dark">Dark Lovers</option>
-            </select>
-
-          </td>
-
+            <td>
+              <label class="switch">
+                <input id="themeSlider" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </td>
+  
           </tr>
         </table>
-   
-       
+
             
        <div id="showcase" class = "show"></div>  </th>
                
@@ -90,7 +82,7 @@
         </div>
         <img src="doc/imgs/poweredWiki.svg" width="200" height="80">
       
-  
+      
 	    
     <script src="dist/yashe.bundled.min.js"></script>
     <script src="doc/doc.min.js"></script>
