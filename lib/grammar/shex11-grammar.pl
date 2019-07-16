@@ -1,6 +1,6 @@
 /*
-SPARQL 1.1 grammar rules based on the Last Call Working Draft of 24/07/2012:
-  http://www.w3.org/TR/2012/WD-sparql11-query-20120724/#sparqlGrammar
+ShEx grammar rules based on the Last Call Working Draft of 16/07/2019:
+  http://shex.io/shex-semantics/#shexc
 Be careful with grammar notation - it is EBNF in prolog syntax!
 [...] lists always represent sequence.
 or can be used as binary operator or n-ary prefix term - do not put [...] 
