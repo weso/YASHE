@@ -50,14 +50,15 @@ var triggerTooltip = function( e ) {
 
 //Check wikidata prefixes
 var possibleEntity = token.split(':')[1]
-if(possibleEntity!= undefined){
+if(possibleEntity!== undefined  && possibleEntity!== ''){
   checkEntity(possibleEntity).done( function( data ) {
     if(!data.error){
-      var userLang = (navigator.language || navigator.userLanguage).split("-")[0]; 
-      var entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')'
-      var description = data.entities[possibleEntity].descriptions[userLang].value
-      var theme = yashe.getOption('theme')
-      var cssTheme
+      var userLang = (navigator.language || navigator.userLanguage).split("-")[0],
+          entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')',
+          description = data.entities[possibleEntity].descriptions[userLang].value,
+          theme = yashe.getOption('theme'),
+          cssTheme
+
       if(theme != 'dark')
         cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
       else
