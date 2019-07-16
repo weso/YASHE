@@ -51,18 +51,34 @@ var triggerTooltip = function( e ) {
 //Check wikidata prefixes
 var possibleEntity = token.split(':')[1]
 if(possibleEntity!== undefined  && possibleEntity!== ''){
-  checkEntity(possibleEntity).done( function( data ) {
-    if(!data.error){
-      var userLang = (navigator.language || navigator.userLanguage).split("-")[0],
-          entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')',
-          description = data.entities[possibleEntity].descriptions[userLang].value,
-          theme = yashe.getOption('theme'),
-          cssTheme
 
-      if(theme != 'dark')
-        cssTheme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
+  checkEntity(possibleEntity).done( function( data ) {
+
+    if(!data.error){
+
+      var userLang,entity,description,theme
+
+      userLang = (navigator.language || navigator.userLanguage).split("-")[0]
+
+      if(data.entities[possibleEntity].labels[userLang] && data.entities[possibleEntity].descriptions[userLang]){
+         
+          entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')'
+          description = data.entities[possibleEntity].descriptions[userLang].value
+
+      }else{
+
+          entity = data.entities[possibleEntity].labels['en'].value +' ('+possibleEntity+')'
+          description = data.entities[possibleEntity].descriptions['en'].value
+
+      }
+
+ 
+
+
+      if(yashe.getOption('theme') != 'dark')
+        theme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
       else
-        cssTheme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
+        heme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
 
 
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
@@ -71,7 +87,7 @@ if(possibleEntity!== undefined  && possibleEntity!== ''){
         left: posX + 2
       } ).addClass( 'wikibaseRDFtoolTip' )
       .html("<div class='wikidata_tooltip'>"+entity+" <br><br>"+description+"</div>")
-      .css(cssTheme)
+      .css(theme)
       .appendTo('body')
     }
   })
