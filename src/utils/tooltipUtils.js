@@ -48,8 +48,19 @@ var triggerTooltip = function( e ) {
     top: posY
   } ) ).string;
 
+
+
 //Check wikidata prefixes
-var possibleEntity = token.split(':')[1]
+var prefixName = token.split(':')[0],
+possibleEntity = token.split(':')[1]
+
+console.log(Array.from(yashe.getDefinedPrefixes()))
+
+for(var prefix in yashe.getDefinedPrefixes()){
+
+     console.log(prefix)
+}
+
 if(possibleEntity!== undefined  && possibleEntity!== ''){
 
   checkEntity(possibleEntity).done( function( data ) {

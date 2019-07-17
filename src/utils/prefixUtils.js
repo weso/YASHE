@@ -53,12 +53,12 @@ var removePrefixes = function(yashe, prefixes) {
 };
 
 /**
- * Get defined prefixes from query as array, in format {"prefix:" "uri"}
+ * Get defined prefixes  as array, in format {"prefix:" "uri"}
  *
  * @param cm
  * @returns {Array}
  */
-var getPrefixesFromQuery = function(yashe) {
+var getDefinedPrefixes = function(yashe) {
   //Use precise here. We want to be sure we use the most up to date state. If we're
   //not, we might get outdated prefixes from the current query (creating loops such
   //as https://github.com/OpenTriply/YASGUI/issues/84)
@@ -91,6 +91,6 @@ var getIndentFromLine = function(yashe, line, charNumber) {
 
 module.exports = {
   addPrefixes: addPrefixes,
-  getPrefixesFromQuery: getPrefixesFromQuery,
+  getDefinedPrefixes: getDefinedPrefixes,
   removePrefixes: removePrefixes
 };
