@@ -1,5 +1,6 @@
 "use strict";
-var $ = require("jquery")
+var $ = require("jquery"),
+    prefixUtils = require('./prefixUtils.js')
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -49,37 +50,33 @@ var triggerTooltip = function( e ) {
   } ) ).string;
 
 
-
 //Check wikidata prefixes
 var prefixName = token.split(':')[0],
 possibleEntity = token.split(':')[1]
 
-console.log(Array.from(yashe.getDefinedPrefixes()))
 
-for(var prefix in yashe.getDefinedPrefixes()){
-
-     console.log(prefix)
-}
-
-if(possibleEntity!== undefined  && possibleEntity!== ''){
+if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
 
   checkEntity(possibleEntity).done( function( data ) {
 
     if(!data.error){
 
       var userLang,entity,description,theme
-
+      //Gets the preference languaje from the navigator
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
-      if(data.entities[possibleEntity].labels[userLang] && data.entities[possibleEntity].descriptions[userLang]){
+      var content = data.entities[possibleEntity]
+      //Some properties and entities are only avalible in English
+      //So if they do not exist we take it in English
+      if(content.labels[userLang] && content.descriptions[userLang]){
          
-          entity = data.entities[possibleEntity].labels[userLang].value +' ('+possibleEntity+')'
-          description = data.entities[possibleEntity].descriptions[userLang].value
+          entity = content.labels[userLang].value +' ('+possibleEntity+')'
+          description = content.descriptions[userLang].value
 
       }else{
 
-          entity = data.entities[possibleEntity].labels['en'].value +' ('+possibleEntity+')'
-          description = data.entities[possibleEntity].descriptions['en'].value
+          entity = content.labels['en'].value +' ('+possibleEntity+')'
+          description = content.descriptions['en'].value
 
       }
 
@@ -121,6 +118,27 @@ var checkEntity = function (entity){
 var removeToolTip = function() {
   $( '.wikibaseRDFtoolTip' ).remove();
 };
+
+
+var isWikidataPrefix = function(prefixName){
+
+    var definedPrefixex = yashe.getDefinedPrefixes(),
+    iriPrefix
+
+    //Gets de iri of the prefix from the defined
+    for (const prop in definedPrefixex) {
+      if(prop === prefixName)
+        iriPrefix = definedPrefixex[prop]
+    }
+
+    //Check if it is a valid wikidata prefix
+    var wikiPrefixes = prefixUtils.wikiPrefixes
+    for(const pref in wikiPrefixes){
+      if(wikiPrefixes[pref] === iriPrefix)
+        return true
+    }
+    return false
+}
 
 
 module.exports = {
