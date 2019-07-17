@@ -53,12 +53,12 @@ var removePrefixes = function(yashe, prefixes) {
 };
 
 /**
- * Get defined prefixes from query as array, in format {"prefix:" "uri"}
+ * Get defined prefixes  as array, in format {"prefix:" "uri"}
  *
  * @param cm
  * @returns {Array}
  */
-var getPrefixesFromQuery = function(yashe) {
+var getDefinedPrefixes = function(yashe) {
   //Use precise here. We want to be sure we use the most up to date state. If we're
   //not, we might get outdated prefixes from the current query (creating loops such
   //as https://github.com/OpenTriply/YASGUI/issues/84)
@@ -89,8 +89,26 @@ var getIndentFromLine = function(yashe, line, charNumber) {
   }
 };
 
+/**
+ * Valid wikidata prefixes
+ */
+var wikiPrefixes = [
+
+  'http://www.wikidata.org/entity/',
+  'http://www.wikidata.org/entity/statement/',
+  'http://www.wikidata.org/prop/direct/',
+  'http://www.wikidata.org/prop/',
+  'http://www.wikidata.org/prop/statement/',
+  'http://www.wikidata.org/prop/qualifier/',
+  'http://www.wikidata.org/prop/reference/',
+  'http://www.wikidata.org/prop/reference/value/'
+
+]
+
+
 module.exports = {
   addPrefixes: addPrefixes,
-  getPrefixesFromQuery: getPrefixesFromQuery,
-  removePrefixes: removePrefixes
+  getDefinedPrefixes: getDefinedPrefixes,
+  removePrefixes: removePrefixes,
+  wikiPrefixes:wikiPrefixes
 };

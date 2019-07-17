@@ -138,13 +138,13 @@ var extendCmInstance = function(yashe) {
   }
 
  /**
-	 * Fetch defined prefixes from query string
+	 * Fetch defined prefixes 
 	 *
-	 * @method doc.getPrefixesFromQuery
+	 * @method doc.getDefinedPrefixes
 	 * @return object
 	 */
-  yashe.getPrefixesFromQuery = function() {
-    return prefixUtils.getPrefixesFromQuery(yashe);
+  yashe.getDefinedPrefixes = function() {
+    return prefixUtils.getDefinedPrefixes(yashe);
   };
 
   yashe.addPrefixes = function(prefixes) {

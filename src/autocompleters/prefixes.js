@@ -109,7 +109,7 @@ module.exports.appendPrefixIfNeeded = function(yashe, completerName) {
         // check whether it isnt defined already (saves us from looping
         // through the array)
         var currentPrefix = token.string.substring(0, colonIndex + 1);
-        var queryPrefixes = yashe.getPrefixesFromQuery();
+        var queryPrefixes = yashe.getDefinedPrefixes();
         if (queryPrefixes[currentPrefix.slice(0, -1)] == null) {
           // ok, so it isnt added yet!
           var completions = yashe.autocompleters.getTrie(completerName).autoComplete(currentPrefix);
