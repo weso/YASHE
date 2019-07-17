@@ -72,7 +72,6 @@ if(possibleEntity!== undefined  && possibleEntity!== ''){
 
       }
 
- 
 
 
       if(yashe.getOption('theme') != 'dark')
