@@ -53,7 +53,6 @@ module.exports = function(YASHE, yashe) {
   var initCompleter = function(name, completionInit) {
     var completer = (completers[name] = new completionInit(yashe, name));
     completer.name = name;
-    console.log(completer)
     if (completer.bulk) {
       var storeArrayAsBulk = function(suggestions) {
         if (suggestions && suggestions instanceof Array && suggestions.length > 0) {
