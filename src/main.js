@@ -302,7 +302,8 @@ root.autoComplete = function(yashe) {
   yashe.autocompleters.autoComplete(false);
 };
 //include the autocompleters we provide out-of-the-box
-root.registerAutocompleter("prefixes", require("./autocompleters/prefixes.js"));
+//root.registerAutocompleter("prefixes", require("./autocompleters/prefixes.js"));
+root.registerAutocompleter("wikidata", require("./autocompleters/wikidata.js"));
 //root.registerAutocompleter("properties", require("./autocompleters/properties.js"));
 //root.registerAutocompleter("classes", require("./autocompleters/classes.js"));
 //root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
