@@ -104,6 +104,7 @@ if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEnti
 }
 
 
+//  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
 var checkEntity = function (entity){
   return $.get(
     {

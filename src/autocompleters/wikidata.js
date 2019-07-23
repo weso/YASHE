@@ -25,20 +25,19 @@ module.exports = function(yashe, name) {
           
     },
     async: true,
-    bulk: true,
-    autoShow: true
+    bulk: false,
+    autoShow: false
   };
 };
 
 module.exports.isValidCompletionPosition = function(yashe) {
  
     
-    /*
   var token = yashe.getCompleteToken();
   console.log(token)
   if(token.type == 'string-2') return true
 
-  */
-  return true;
+  
+  return false;
   
 };
