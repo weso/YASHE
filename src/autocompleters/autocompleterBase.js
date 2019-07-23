@@ -87,6 +87,7 @@ module.exports = function(YASHE, yashe) {
   };
 
   var autoComplete = function(fromAutoShow) {
+    console.log("autocomplete")
     if (yashe.somethingSelected()) return;
     var tryHintType = function(completer) {
       if (
@@ -166,6 +167,7 @@ module.exports = function(YASHE, yashe) {
         var wrappedCallback = function(suggestions) {
           callback(getSuggestionsAsHintObject(suggestions, completer, token));
         };
+       
         completer.get(token, wrappedCallback);
       } else {
         return getSuggestionsFromToken(token);
