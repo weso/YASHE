@@ -145,5 +145,6 @@ var isWikidataPrefix = function(prefixName){
 module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
-  removeToolTip:removeToolTip
+  removeToolTip:removeToolTip,
+  isWikidataPrefix:isWikidataPrefix
 };

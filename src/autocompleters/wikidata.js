@@ -1,24 +1,34 @@
 "use strict";
-var $ = require("jquery");
+var $ = require("jquery"),
+tooltipUtils = require('../utils/tooltipUtils.js')
+
 module.exports = function(yashe, name) {
   return {
     isValidCompletionPosition: function() {
       return module.exports.isValidCompletionPosition(yashe);
     },
     get: function(token, callback) {
-      console.log(token.string)
+     
+        var possibleEntity = token.string.split(':')[1]
         var entities = []
         $.get(
             {
           
-              url: 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+token.string+'&language=en&continue=0&limit=50&format=json',
+              url: 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json',
               dataType: 'jsonp',
           
             }).done( function( data ) {
              
-              console.log(data)
+                var label,id,description
                 for(var entity in data.search){
-                    entities.push(data.search[entity].label)
+
+                    console.log(data.search[entity])
+
+                    label = data.search[entity].label
+                    id = data.search[entity].id
+                    description = data.search[entity].description
+
+                    entities.push(label + " (" + id + ") \n " + description)
                    
                 }
                 entities.sort()
@@ -34,14 +44,19 @@ module.exports = function(yashe, name) {
 };
 
 module.exports.isValidCompletionPosition = function(yashe) {
- 
-  return true; 
+
   
   //Check previous token!!
 
   var token = yashe.getCompleteToken();
-  if(token.type == 'string-2') return true
+  
+  var prefixName = token.string.split(':')[0]
 
+
+  if(token.type == 'string-2' 
+  && tooltipUtils.isWikidataPrefix(prefixName))return true
+
+ 
   return false;
   
 };
