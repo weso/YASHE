@@ -9,8 +9,19 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
-        var possibleEntity = token.string.split(':')[1]
+      console.log(token)
+        var possibleEntity = token.split(':')[1]
         var entities = []
+
+
+        var list = [ {
+          text: 'Q1234',
+          displayText: 'Persona (Q12312) Me lasdjasdijlaksdj'
+        } ];
+
+        return list
+
+        /*
         $.get(
             {
           
@@ -22,22 +33,27 @@ module.exports = function(yashe, name) {
                 var label,id,description
                 for(var entity in data.search){
 
-                    console.log(data.search[entity])
-
                     label = data.search[entity].label
                     id = data.search[entity].id
                     description = data.search[entity].description
 
-                    entities.push(label + " (" + id + ") \n " + description)
+                    var list = [ {
+                      text: id,
+                      displayText: label + " (" + id + ") \n " + description
+                    } ];
+
+      
+                    entities.push(hintObject)
                    
                 }
                 entities.sort()
                 callback(entities)
             })
+            */
         
           
     },
-    async: true,
+    async: false,
     bulk: false,
     autoShow: false
   };
