@@ -2,6 +2,15 @@
 var $ = require("jquery"),
 rdfUtils = require('../utils/rdfUtils.js')
 
+var API_ENDPOINT = 'https://www.wikidata.org/w/api.php/';
+var QUERY = {
+
+  action:'wbsearchentities',
+  language:(navigator.language || navigator.userLanguage).split("-")[0],
+  continue:0,
+  limit:50,
+  format: 'json',
+}
 
 module.exports = function(yashe, name) {
   return {
@@ -11,23 +20,25 @@ module.exports = function(yashe, name) {
     get: function(token, callback) {
      
         var possibleEntity = token.string.split(':')[1]
-      
-        var url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json'
+
+        var query = QUERY
+        query.search=possibleEntity
 
         if(rdfUtils.isWikidataPropertiesPrefix()){
-          url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json&type=property'
+          query.type='property'
         }
-
 
         $.get(
             {
           
-              url: url,
+              url: API_ENDPOINT + '?' + $.param(query),
               dataType: 'jsonp',
           
             }).done( function( data ) {
-             
+
               var list =[]
+              
+              //This condition is for an empty search
               if(data.error){
                 list = [ {
                   text: '',
