@@ -1,6 +1,7 @@
 "use strict";
 var $ = require("jquery"),
-tooltipUtils = require('../utils/tooltipUtils.js')
+rdfUtils = require('../utils/rdfUtils.js')
+
 
 module.exports = function(yashe, name) {
   return {
@@ -63,15 +64,15 @@ module.exports = function(yashe, name) {
 module.exports.isValidCompletionPosition = function(yashe) {
 
 
-  //Check previous token!!
-
-  var token = yashe.getCompleteToken();
   
+  var token = yashe.getCompleteToken();
   var prefixName = token.string.split(':')[0]
+
+  //if()
 
 
   if(token.type == 'string-2' 
-  && tooltipUtils.isWikidataPrefix(prefixName))return true
+&& rdfUtils.isWikidataValidPrefix(prefixName))return true
 
  
   return false;

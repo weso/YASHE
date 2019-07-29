@@ -55,7 +55,7 @@ var prefixName = token.split(':')[0],
 possibleEntity = token.split(':')[1]
 
 
-if( isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
+if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
 
   checkEntity(possibleEntity).done( function( data ) {
 
@@ -121,31 +121,9 @@ var removeToolTip = function() {
 };
 
 
-var isWikidataValidPrefix = function(prefixName){
-
-    var definedPrefixex = yashe.getDefinedPrefixes()
-    var iriPrefix
-    
-    //Gets de IRI of the prefix from the defined
-    for (const prop in definedPrefixex) {
-      if(prop === prefixName)
-        iriPrefix = definedPrefixex[prop]
-    }
-
-    
-    //Compare iriPrefix with the valid wikidata prefixes
-    var wikiPrefixes = rdfUtils.validTootlipPrefixes
-    for(const pref in wikiPrefixes){
-      if(wikiPrefixes[pref] === iriPrefix)
-        return true
-    }
-    return false
-}
-
 
 module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
-  removeToolTip:removeToolTip,
-  isWikidataValidPrefix:isWikidataValidPrefix
+  removeToolTip:removeToolTip
 };

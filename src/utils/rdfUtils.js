@@ -58,10 +58,32 @@ var  VALID_TOOLTIP_PREFIXES = [
 ]
 
 
+var isWikidataValidPrefix = function(prefixName){
+
+    var definedPrefixex = yashe.getDefinedPrefixes()
+    var iriPrefix
+    
+    //Gets de IRI of the prefix from the defined
+    for (const prop in definedPrefixex) {
+      if(prop === prefixName)
+        iriPrefix = definedPrefixex[prop]
+    }
+
+    
+    //Compare iriPrefix with the valid wikidata prefixes
+    for(const pref in VALID_TOOLTIP_PREFIXES){
+      if(VALID_TOOLTIP_PREFIXES[pref] === iriPrefix)
+        return true
+    }
+    return false
+}
+
+
 module.exports = {
 
     entityTypes:ENTITY_TYPES,
     namespaceShortCuts: NAMESPACE_SHORTCUTS,
-    validTootlipPrefixes:VALID_TOOLTIP_PREFIXES
+    validTootlipPrefixes:VALID_TOOLTIP_PREFIXES,
+    isWikidataValidPrefix:isWikidataValidPrefix
 
 }
