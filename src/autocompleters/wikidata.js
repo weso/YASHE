@@ -9,19 +9,11 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
-      console.log(token)
-        var possibleEntity = token.split(':')[1]
+
+        var possibleEntity = token.string.split(':')[1]
         var entities = []
-
-
-        var list = [ {
-          text: 'Q1234',
-          displayText: 'Persona (Q12312) Me lasdjasdijlaksdj'
-        } ];
-
-        return list
-
-        /*
+        
+    
         $.get(
             {
           
@@ -37,23 +29,49 @@ module.exports = function(yashe, name) {
                     id = data.search[entity].id
                     description = data.search[entity].description
 
+                    
                     var list = [ {
                       text: id,
                       displayText: label + " (" + id + ") \n " + description
                     } ];
 
-      
-                    entities.push(hintObject)
+                    
+
+                    //var content = label + " (" + id + ") \n " + description
+                    entities.push(list)
                    
                 }
                 entities.sort()
                 callback(entities)
             })
+            
+            /*
+
+
+        var list = [ {
+          text: 'term',
+          displayText: 'Unknown prefi'
+        } ];
+
+        var completion = {
+          list: []
+        };
+        completion.from = {
+          line: lineNum,
+          char: token.start + prefix.length + 1
+        };
+        completion.to = {
+          line: lineNum,
+          char: token.end
+        };
+
+        completion.list = list
+
             */
-        
+      
           
     },
-    async: false,
+    async: true,
     bulk: false,
     autoShow: false
   };
@@ -61,6 +79,7 @@ module.exports = function(yashe, name) {
 
 module.exports.isValidCompletionPosition = function(yashe) {
 
+  return true
   
   //Check previous token!!
 

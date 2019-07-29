@@ -87,7 +87,6 @@ module.exports = function(YASHE, yashe) {
   };
 
   var autoComplete = function(fromAutoShow) {
-    console.log("autocomplete")
     if (yashe.somethingSelected()) return;
     var tryHintType = function(completer) {
       if (
@@ -108,6 +107,8 @@ module.exports = function(YASHE, yashe) {
       var wrappedHintCallback = function(yashe, callback) {
         return getCompletionHintsObject(completer, callback);
       };
+      
+
       var result = YASHE.showHint(yashe, wrappedHintCallback, hintConfig);
       return true;
     };
@@ -167,7 +168,8 @@ module.exports = function(YASHE, yashe) {
         var wrappedCallback = function(suggestions) {
           callback(getSuggestionsAsHintObject(suggestions, completer, token));
         };
-       
+    
+
         completer.get(token, wrappedCallback);
       } else {
         return getSuggestionsFromToken(token);
@@ -179,17 +181,35 @@ module.exports = function(YASHE, yashe) {
 	 *  get our array of suggestions (strings) in the codemirror hint format
 	 */
   var getSuggestionsAsHintObject = function(suggestions, completer, token) {
+    
     var hintList = [];
-    for (var i = 0; i < suggestions.length; i++) {
-      var suggestedString = suggestions[i];
-      if (completer.postProcessToken) {
-        suggestedString = completer.postProcessToken(token, suggestedString);
+    if(suggestions[0] instanceof Object){
+
+  
+      for (var i = 0; i < suggestions.length; i++) {
+                
+        hintList.push({
+          text: suggestions[i][0].text,
+          displayText: suggestions[i][0].displayText,
+          hint: selectHint
+        });
       }
-      hintList.push({
-        text: suggestedString,
-        displayText: suggestedString,
-        hint: selectHint
-      });
+
+    }else{
+
+  
+      for (var i = 0; i < suggestions.length; i++) {
+        var suggestedString = suggestions[i];
+        if (completer.postProcessToken) {
+          suggestedString = completer.postProcessToken(token, suggestedString);
+        }
+    
+        hintList.push({
+          text: suggestedString,
+          displayText: suggestedString,
+          hint: selectHint
+        });
+      }
     }
 
     var cur = yashe.getCursor();
