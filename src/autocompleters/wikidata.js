@@ -45,31 +45,7 @@ module.exports = function(yashe, name) {
                 callback(entities)
             })
             
-            /*
-
-
-        var list = [ {
-          text: 'term',
-          displayText: 'Unknown prefi'
-        } ];
-
-        var completion = {
-          list: []
-        };
-        completion.from = {
-          line: lineNum,
-          char: token.start + prefix.length + 1
-        };
-        completion.to = {
-          line: lineNum,
-          char: token.end
-        };
-
-        completion.list = list
-
-            */
-      
-          
+        
     },
     async: true,
     bulk: false,
@@ -79,8 +55,7 @@ module.exports = function(yashe, name) {
 
 module.exports.isValidCompletionPosition = function(yashe) {
 
-  return true
-  
+
   //Check previous token!!
 
   var token = yashe.getCompleteToken();
