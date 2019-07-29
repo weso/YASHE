@@ -10,6 +10,7 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
+        console.log(token)
         var possibleEntity = token.string.split(':')[1]
       
         $.get(
@@ -66,13 +67,19 @@ module.exports.isValidCompletionPosition = function(yashe) {
 
   
   var token = yashe.getCompleteToken();
+  var cur = yashe.getCursor()
+
+  //The cursor should stay at the end of the token
+  if(token.end!=cur.ch)return false
+
   var prefixName = token.string.split(':')[0]
+  var previousToken = yashe.getPreviousNonWsToken(cur.line, token);
 
-  //if()
+  //This line avoid the autocomplete in the prefix definition
+  if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-
-  if(token.type == 'string-2' 
-&& rdfUtils.isWikidataEntitiesPrefix(prefixName))return true
+  
+  if(token.type == 'string-2' && rdfUtils.isWikidataEntitiesPrefix(prefixName))return true
 
  
   return false;
