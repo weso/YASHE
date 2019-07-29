@@ -20,13 +20,18 @@ module.exports = function(yashe, name) {
     get: function(token, callback) {
      
         var possibleEntity = token.string.split(':')[1]
+        var prefix = token.string.split(':')[0]
 
         var query = QUERY
         query.search=possibleEntity
 
-        if(rdfUtils.isWikidataPropertiesPrefix()){
+        //Add extra param if it is a property
+        if(rdfUtils.isWikidataPropertiesPrefix(prefix)){
           query.type='property'
+        }else{
+          delete query.type
         }
+
 
         $.get(
             {
