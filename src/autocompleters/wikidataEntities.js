@@ -10,13 +10,19 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
-        console.log(token)
         var possibleEntity = token.string.split(':')[1]
       
+        var url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json'
+
+        if(rdfUtils.isWikidataPropertiesPrefix()){
+          url = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json&type=property'
+        }
+
+
         $.get(
             {
           
-              url: 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json',
+              url: url,
               dataType: 'jsonp',
           
             }).done( function( data ) {
@@ -78,8 +84,10 @@ module.exports.isValidCompletionPosition = function(yashe) {
   //This line avoid the autocomplete in the prefix definition
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-  
-  if(token.type == 'string-2' && rdfUtils.isWikidataEntitiesPrefix(prefixName))return true
+
+  if(token.type == 'string-2' && 
+  (rdfUtils.isWikidataEntitiesPrefix(prefixName) 
+  || rdfUtils.isWikidataPropertiesPrefix(prefixName)) )return true
 
  
   return false;
