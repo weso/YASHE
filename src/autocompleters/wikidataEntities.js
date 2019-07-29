@@ -72,7 +72,7 @@ module.exports.isValidCompletionPosition = function(yashe) {
 
 
   if(token.type == 'string-2' 
-&& rdfUtils.isWikidataValidPrefix(prefixName))return true
+&& rdfUtils.isWikidataEntitiesPrefix(prefixName))return true
 
  
   return false;

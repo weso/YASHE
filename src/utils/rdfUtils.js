@@ -39,23 +39,6 @@ var NAMESPACE_SHORTCUTS = {
     }
 
 
-var  VALID_TOOLTIP_PREFIXES = [
-    'http://www.wikidata.org/prop/direct/',
-    'http://www.wikidata.org/prop/direct-normalized/',
-    'http://www.wikidata.org/prop/',
-    'http://www.wikidata.org/prop/novalue/',
-    'http://www.wikidata.org/prop/statement/',
-    'http://www.wikidata.org/prop/statement/value/',
-    'http://www.wikidata.org/prop/statement/value-normalized/',
-    'http://www.wikidata.org/prop/qualifier/',
-    'http://www.wikidata.org/prop/qualifier/value/',
-    'http://www.wikidata.org/prop/qualifier/value-normalized/',
-    'http://www.wikidata.org/prop/reference/',
-    'http://www.wikidata.org/prop/reference/value/',
-    'http://www.wikidata.org/prop/reference/value-normalized/',
-    'http://www.wikidata.org/wiki/Special:EntityData/',
-    'http://www.wikidata.org/entity/'
-]
 
 
 var isWikidataValidPrefix = function(prefixName){
@@ -69,12 +52,53 @@ var isWikidataValidPrefix = function(prefixName){
         iriPrefix = definedPrefixex[prop]
     }
 
-    
+
     //Compare iriPrefix with the valid wikidata prefixes
-    for(const pref in VALID_TOOLTIP_PREFIXES){
-      if(VALID_TOOLTIP_PREFIXES[pref] === iriPrefix)
-        return true
+    for(const pref in ENTITY_TYPES){
+        if(pref === iriPrefix)
+          return true
     }
+    return false
+}
+
+
+var isWikidataEntitiesPrefix = function(prefixName){
+
+    var definedPrefixex = yashe.getDefinedPrefixes()
+    var iriPrefix
+    
+    //Gets de IRI of the prefix from the defined
+    for (const prop in definedPrefixex) {
+      if(prop === prefixName)
+        iriPrefix = definedPrefixex[prop]
+    }
+
+    
+    //Compare iriPrefix with the valid wikidata entities prefixes
+    for(const pref in ENTITY_TYPES){
+        if(ENTITY_TYPES[pref] === 'item' && pref == iriPrefix)
+          return true
+      }
+    return false
+}
+
+var isWikidataPropertiesPrefix = function(prefixName){
+
+    var definedPrefixex = yashe.getDefinedPrefixes()
+    var iriPrefix
+    
+    //Gets de IRI of the prefix from the defined
+    for (const prop in definedPrefixex) {
+      if(prop === prefixName)
+        iriPrefix = definedPrefixex[prop]
+    }
+
+    
+    //Compare iriPrefix with the valid wikidata properties prefixes
+    for(const pref in ENTITY_TYPES){
+        if(ENTITY_TYPES[pref] === 'property')
+          return true
+      }
     return false
 }
 
@@ -83,7 +107,8 @@ module.exports = {
 
     entityTypes:ENTITY_TYPES,
     namespaceShortCuts: NAMESPACE_SHORTCUTS,
-    validTootlipPrefixes:VALID_TOOLTIP_PREFIXES,
-    isWikidataValidPrefix:isWikidataValidPrefix
+    isWikidataValidPrefix:isWikidataValidPrefix,
+    isWikidataEntitiesPrefix:isWikidataEntitiesPrefix,
+    isWikidataPropertiesPrefix:isWikidataPropertiesPrefix
 
 }
