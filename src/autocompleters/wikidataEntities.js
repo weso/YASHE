@@ -9,11 +9,8 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
-
         var possibleEntity = token.string.split(':')[1]
-        var entities = []
-        
-    
+      
         $.get(
             {
           
@@ -22,7 +19,19 @@ module.exports = function(yashe, name) {
           
             }).done( function( data ) {
              
-                var label,id,description
+              var list =[]
+              if(data.error){
+                list = [ {
+                  text: '',
+                  displayText: 'Type to search for an entity'
+                } ];
+                callback(list)
+    
+              }else{
+
+                var entities = []
+
+                var label,id,description,entities
                 for(var entity in data.search){
 
                     label = data.search[entity].label
@@ -30,19 +39,17 @@ module.exports = function(yashe, name) {
                     description = data.search[entity].description
 
                     
-                    var list = [ {
+                    list =  {
                       text: id,
                       displayText: label + " (" + id + ") \n " + description
-                    } ];
+                    } ;
 
-                    
-
-                    //var content = label + " (" + id + ") \n " + description
                     entities.push(list)
                    
                 }
                 entities.sort()
                 callback(entities)
+              }
             })
             
         

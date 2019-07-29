@@ -188,20 +188,20 @@ module.exports = function(YASHE, yashe) {
     if(suggestions[0] instanceof Object){
 
       for (var i = 0; i < suggestions.length; i++) {
-                
         hintList.push({
-          text: suggestions[i][0].text,
-          displayText: suggestions[i][0].displayText,
+          text: suggestions[i].text,
+          displayText: suggestions[i].displayText,
           hint: selectHint
         });
         
       }
 
-      startChar = token.start + token.string.split(':')[0].length + 1
+      //Do not replace the prefix 
+      var prefix = token.string.split(':')[0]
+      startChar = token.start + prefix.length + 1
 
     }else{
 
-  
       for (var i = 0; i < suggestions.length; i++) {
         var suggestedString = suggestions[i];
         if (completer.postProcessToken) {

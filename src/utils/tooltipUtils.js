@@ -1,6 +1,6 @@
 "use strict";
 var $ = require("jquery"),
-    prefixUtils = require('./prefixUtils.js')
+    rdfUtils = require('./rdfUtils.js')
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -55,7 +55,7 @@ var prefixName = token.split(':')[0],
 possibleEntity = token.split(':')[1]
 
 
-if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
+if( isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
 
   checkEntity(possibleEntity).done( function( data ) {
 
@@ -121,19 +121,20 @@ var removeToolTip = function() {
 };
 
 
-var isWikidataPrefix = function(prefixName){
+var isWikidataValidPrefix = function(prefixName){
 
-    var definedPrefixex = yashe.getDefinedPrefixes(),
-    iriPrefix
-
-    //Gets de iri of the prefix from the defined
+    var definedPrefixex = yashe.getDefinedPrefixes()
+    var iriPrefix
+    
+    //Gets de IRI of the prefix from the defined
     for (const prop in definedPrefixex) {
       if(prop === prefixName)
         iriPrefix = definedPrefixex[prop]
     }
 
-    //Check if it is a valid wikidata prefix
-    var wikiPrefixes = prefixUtils.wikiPrefixes
+    
+    //Compare iriPrefix with the valid wikidata prefixes
+    var wikiPrefixes = rdfUtils.validTootlipPrefixes
     for(const pref in wikiPrefixes){
       if(wikiPrefixes[pref] === iriPrefix)
         return true
@@ -146,5 +147,5 @@ module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
   removeToolTip:removeToolTip,
-  isWikidataPrefix:isWikidataPrefix
+  isWikidataValidPrefix:isWikidataValidPrefix
 };
