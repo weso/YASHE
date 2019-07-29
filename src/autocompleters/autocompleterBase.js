@@ -183,9 +183,10 @@ module.exports = function(YASHE, yashe) {
   var getSuggestionsAsHintObject = function(suggestions, completer, token) {
     
     var hintList = [];
+    var startChar;
+    //Check if the suggestions is a List of {text, displayText} object
     if(suggestions[0] instanceof Object){
 
-  
       for (var i = 0; i < suggestions.length; i++) {
                 
         hintList.push({
@@ -193,7 +194,10 @@ module.exports = function(YASHE, yashe) {
           displayText: suggestions[i][0].displayText,
           hint: selectHint
         });
+        
       }
+
+      startChar = token.start + token.string.split(':')[0].length + 1
 
     }else{
 
@@ -210,6 +214,9 @@ module.exports = function(YASHE, yashe) {
           hint: selectHint
         });
       }
+
+      startChar = token.start
+ 
     }
 
     var cur = yashe.getCursor();
@@ -218,13 +225,14 @@ module.exports = function(YASHE, yashe) {
       list: hintList,
       from: {
         line: cur.line,
-        ch: token.start
+        ch: startChar
       },
       to: {
         line: cur.line,
         ch: token.end
       }
     };
+
     //if we have some autocompletion handlers specified, add these these to the object. Codemirror will take care of firing these
     if (completer.callbacks) {
       for (var callbackName in completer.callbacks) {
