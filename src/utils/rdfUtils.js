@@ -93,10 +93,9 @@ var isWikidataPropertiesPrefix = function(prefixName){
         iriPrefix = definedPrefixex[prop]
     }
 
-    
     //Compare iriPrefix with the valid wikidata properties prefixes
     for(const pref in ENTITY_TYPES){
-        if(ENTITY_TYPES[pref] === 'property')
+        if(ENTITY_TYPES[pref] === 'property' && pref == iriPrefix)
           return true
       }
     return false

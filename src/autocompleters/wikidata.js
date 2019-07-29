@@ -2,6 +2,15 @@
 var $ = require("jquery"),
 rdfUtils = require('../utils/rdfUtils.js')
 
+var API_ENDPOINT = 'https://www.wikidata.org/w/api.php/';
+var QUERY = {
+
+  action:'wbsearchentities',
+  language:(navigator.language || navigator.userLanguage).split("-")[0],
+  continue:0,
+  limit:50,
+  format: 'json',
+}
 
 module.exports = function(yashe, name) {
   return {
@@ -10,18 +19,31 @@ module.exports = function(yashe, name) {
     },
     get: function(token, callback) {
      
-        console.log(token)
         var possibleEntity = token.string.split(':')[1]
-      
+        var prefix = token.string.split(':')[0]
+
+        var query = QUERY
+        query.search=possibleEntity
+
+        //Add extra param if it is a property
+        if(rdfUtils.isWikidataPropertiesPrefix(prefix)){
+          query.type='property'
+        }else{
+          delete query.type
+        }
+
+
         $.get(
             {
           
-              url: 'https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+possibleEntity+'&language=en&continue=0&limit=50&format=json',
+              url: API_ENDPOINT + '?' + $.param(query),
               dataType: 'jsonp',
           
             }).done( function( data ) {
-             
+
               var list =[]
+              
+              //This condition is for an empty search
               if(data.error){
                 list = [ {
                   text: '',
@@ -78,8 +100,10 @@ module.exports.isValidCompletionPosition = function(yashe) {
   //This line avoid the autocomplete in the prefix definition
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-  
-  if(token.type == 'string-2' && rdfUtils.isWikidataEntitiesPrefix(prefixName))return true
+
+  if(token.type == 'string-2' && 
+  (rdfUtils.isWikidataEntitiesPrefix(prefixName) 
+  || rdfUtils.isWikidataPropertiesPrefix(prefixName)) )return true
 
  
   return false;
