@@ -1,6 +1,6 @@
 "use strict";
 var $ = require("jquery"),
-    prefixUtils = require('./prefixUtils.js')
+    rdfUtils = require('./rdfUtils.js')
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -55,7 +55,7 @@ var prefixName = token.split(':')[0],
 possibleEntity = token.split(':')[1]
 
 
-if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
+if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
 
   checkEntity(possibleEntity).done( function( data ) {
 
@@ -85,7 +85,7 @@ if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEnti
       if(yashe.getOption('theme') != 'dark')
         theme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
       else
-        heme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
+        theme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
 
 
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
@@ -104,6 +104,7 @@ if( isWikidataPrefix(prefixName) && possibleEntity!== undefined  && possibleEnti
 }
 
 
+//  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
 var checkEntity = function (entity){
   return $.get(
     {
@@ -119,26 +120,6 @@ var removeToolTip = function() {
   $( '.wikibaseRDFtoolTip' ).remove();
 };
 
-
-var isWikidataPrefix = function(prefixName){
-
-    var definedPrefixex = yashe.getDefinedPrefixes(),
-    iriPrefix
-
-    //Gets de iri of the prefix from the defined
-    for (const prop in definedPrefixex) {
-      if(prop === prefixName)
-        iriPrefix = definedPrefixex[prop]
-    }
-
-    //Check if it is a valid wikidata prefix
-    var wikiPrefixes = prefixUtils.wikiPrefixes
-    for(const pref in wikiPrefixes){
-      if(wikiPrefixes[pref] === iriPrefix)
-        return true
-    }
-    return false
-}
 
 
 module.exports = {

@@ -107,6 +107,8 @@ module.exports = function(YASHE, yashe) {
       var wrappedHintCallback = function(yashe, callback) {
         return getCompletionHintsObject(completer, callback);
       };
+      
+
       var result = YASHE.showHint(yashe, wrappedHintCallback, hintConfig);
       return true;
     };
@@ -166,6 +168,8 @@ module.exports = function(YASHE, yashe) {
         var wrappedCallback = function(suggestions) {
           callback(getSuggestionsAsHintObject(suggestions, completer, token));
         };
+    
+
         completer.get(token, wrappedCallback);
       } else {
         return getSuggestionsFromToken(token);
@@ -177,17 +181,42 @@ module.exports = function(YASHE, yashe) {
 	 *  get our array of suggestions (strings) in the codemirror hint format
 	 */
   var getSuggestionsAsHintObject = function(suggestions, completer, token) {
+    
     var hintList = [];
-    for (var i = 0; i < suggestions.length; i++) {
-      var suggestedString = suggestions[i];
-      if (completer.postProcessToken) {
-        suggestedString = completer.postProcessToken(token, suggestedString);
+    var startChar;
+    //Check if the suggestions is a List of {text, displayText} object
+    if(suggestions[0] instanceof Object){
+
+      for (var i = 0; i < suggestions.length; i++) {
+        hintList.push({
+          text: suggestions[i].text,
+          displayText: suggestions[i].displayText,
+          hint: selectHint
+        });
+        
       }
-      hintList.push({
-        text: suggestedString,
-        displayText: suggestedString,
-        hint: selectHint
-      });
+
+      //Do not replace the prefix 
+      var prefix = token.string.split(':')[0]
+      startChar = token.start + prefix.length + 1
+
+    }else{
+
+      for (var i = 0; i < suggestions.length; i++) {
+        var suggestedString = suggestions[i];
+        if (completer.postProcessToken) {
+          suggestedString = completer.postProcessToken(token, suggestedString);
+        }
+    
+        hintList.push({
+          text: suggestedString,
+          displayText: suggestedString,
+          hint: selectHint
+        });
+      }
+
+      startChar = token.start
+ 
     }
 
     var cur = yashe.getCursor();
@@ -196,13 +225,14 @@ module.exports = function(YASHE, yashe) {
       list: hintList,
       from: {
         line: cur.line,
-        ch: token.start
+        ch: startChar
       },
       to: {
         line: cur.line,
         ch: token.end
       }
     };
+
     //if we have some autocompletion handlers specified, add these these to the object. Codemirror will take care of firing these
     if (completer.callbacks) {
       for (var callbackName in completer.callbacks) {

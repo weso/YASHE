@@ -89,26 +89,10 @@ var getIndentFromLine = function(yashe, line, charNumber) {
   }
 };
 
-/**
- * Valid wikidata prefixes
- */
-var wikiPrefixes = [
-
-  'http://www.wikidata.org/entity/',
-  'http://www.wikidata.org/entity/statement/',
-  'http://www.wikidata.org/prop/direct/',
-  'http://www.wikidata.org/prop/',
-  'http://www.wikidata.org/prop/statement/',
-  'http://www.wikidata.org/prop/qualifier/',
-  'http://www.wikidata.org/prop/reference/',
-  'http://www.wikidata.org/prop/reference/value/'
-
-]
 
 
 module.exports = {
   addPrefixes: addPrefixes,
   getDefinedPrefixes: getDefinedPrefixes,
-  removePrefixes: removePrefixes,
-  wikiPrefixes:wikiPrefixes
+  removePrefixes: removePrefixes
 };
