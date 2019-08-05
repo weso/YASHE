@@ -53,31 +53,6 @@ var root = (module.exports = function(parent, config) {
 
 
 
-
-
-/**
- * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
- *
- * @method YASHE.fromTextArea
- * @param textArea {DOM element}
- * @param config {object}
- * @param {boolean} activateStore Set whether the shape will be store or not
- * @returns {doc} YASHE document
- */
-root.fromTextArea = function(textAreaEl, config,activateStore) {
-  config = extendConfig(config);
-  //add yashe div as parent (needed for styles to be manageable and scoped).
-  //In this case, I -also- put it as parent el of the text area. This is wrapped in a div now
-  var rootEl = $("<div>", {
-    class: "yashe"
-  })
-    .insertBefore($(textAreaEl))
-    .append($(textAreaEl));
-  var yashe = extendCmInstance(CodeMirror.fromTextArea(textAreaEl, config));
-  postProcessCmElement(yashe,activateStore);
-  return yashe;
-};
-
 /**
  * Extend config object, which we will pass on to the CM constructor later on.
  * Need this, to make sure our own 'onBlur' etc events do not get overwritten by
@@ -309,6 +284,29 @@ root.registerAutocompleter("wikidata", require("./autocompleters/wikidata.js"));
 //root.registerAutocompleter("variables", require("./autocompleters/variables.js"));
 
  
+/**
+ * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
+ *
+ * @method YASHE.fromTextArea
+ * @param textArea {DOM element}
+ * @param config {object}
+ * @returns {doc} YASHE document
+ */
+root.fromTextArea = function(textAreaEl, config) {
+  config = extendConfig(config);
+  //add yashe div as parent (needed for styles to be manageable and scoped).
+  //In this case, I -also- put it as parent el of the text area. This is wrapped in a div now
+ 
+  var rootEl = $("<div>", {
+    class: "yashe"
+  })
+    .insertBefore($(textAreaEl))
+    .append($(textAreaEl));
+  var yashe = extendCmInstance(CodeMirror.fromTextArea(textAreaEl, config));
+  postProcessCmElement(yashe);
+  return yashe;
+};
+
 
 /***
  * Format utils
