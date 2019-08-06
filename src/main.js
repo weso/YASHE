@@ -302,8 +302,11 @@ root.fromTextArea = function(textAreaEl, config) {
   })
     .insertBefore($(textAreaEl))
     .append($(textAreaEl));
+
+  
   var yashe = extendCmInstance(CodeMirror.fromTextArea(textAreaEl, config));
   postProcessCmElement(yashe);
+  
   return yashe;
 };
 
