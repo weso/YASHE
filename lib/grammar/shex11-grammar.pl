@@ -18,7 +18,7 @@ stephen.cresswell@tso.co.uk
 :-dynamic '==>'/2.
 
 
-%[1] 
+%[1] OK
 shexDoC  ==> [*(directive),?([or(notStartAction,startActions),*(statement)]), $ ].
 
 %[2] OK
@@ -33,79 +33,79 @@ prefixDecl ==> ['PREFIX','PNAME_NS','IRI_REF'].
 %[4.5] OK
 importDecl ==> ['IMPORT','IRI_REF'].
 
-%[5] 
+%[5] OK
 notStartAction ==> [or(startt,shapeExprDecl)].
 
-%[6] 
+%[6] OK
 startt ==> ['start','=',inlineShapeExpression].
 
-%[7] 
+%[7] OK
 startActions ==> [+(codeDecl)].
 
-%[8] 
+%[8] OK
 statement ==> [or(directive,notStartAction)].
 
-%[9] 
+%[9] OK
 shapeExprDecl ==> [shapeExprLabel,or(shapeExpression,'EXTERNAL')].
 
-%[10] 
+%[10] OK
 shapeExpression ==> [shapeOr].
 
-%[11] 
+%[11] OK
 inlineShapeExpression ==> [inlineShapeOr].
 
-%[12] 
+%[12] OK
 shapeOr ==> [shapeAnd,*(['OR',shapeAnd])].
 
-%[13] 
+%[13] OK
 inlineShapeOr ==> [inlineShapeAnd,*(['OR',inlineShapeAnd])].
 
-%[14] 
+%[14] OK
 shapeAnd ==> [shapeNot,*(['AND',shapeNot])].
 
-%[15] 
+%[15] OK
 inlineShapeAnd ==> [inlineShapeNot,*(['AND',inlineShapeNot])].
 
-%[16] 
+%[16] OK
 shapeNot ==> [?('NOT'),shapeAtom].
 
-%[17] 
+%[17] OK
 inlineShapeNot ==> [?('NOT'),inlineShapeAtom].
 
-%[18] 
+%[18] OK
 shapeAtom ==> [nonLitNodeConstraint,?(shapeOrRef)].
 shapeAtom ==> [litNodeConstraint].
 shapeAtom ==> [shapeOrRef,?(nonLitNodeConstraint)].
 shapeAtom ==> ['(',shapeExpression,')'].
 shapeAtom ==> ['.'].
 
-%[19] 
+%[19] This rule is in the official grammar but it is never called
 shapeAtomNoRef ==> [nonLitNodeConstraint,?(shapeOrRef)].
 shapeAtomNoRef ==> [litNodeConstraint].
 shapeAtomNoRef ==> [shapeDefinition,?(nonLitNodeConstraint)].
 shapeAtomNoRef ==> ['(',shapeExpression,')'].
 shapeAtomNoRef ==> ['.'].
 
-%[20] 
+%[20] OK
 inlineShapeAtom ==> [nonLitNodeConstraint,?(inlineShapeOrRef)].
 inlineShapeAtom ==> [litNodeConstraint].
 inlineShapeAtom ==> [inlineShapeOrRef,?(nonLitNodeConstraint)].
 inlineShapeAtom ==> ['(',shapeExpression,')'].
 inlineShapeAtom ==> ['.'].
 
-%[21] 
+%[21] OK
 shapeOrRef ==> [or(shapeDefinition,shapeRef)].
 
-%[22] 
+%[22] OK
 inlineShapeOrRef ==> [or(inlineShapeDefinition,shapeRef)].
 
-%[23] 
+%[23] OK
 shapeRef ==> ['ATPNAME_NS'].
 shapeRef ==> ['ATPNAME_LN'].
 shapeRef ==> ['@',shapeExprLabel].
 
 
-%[24] 
+%[24] OK
 litNodeConstraint ==> ['LITERAL',*(xsFacet)].
 litNodeConstraint ==> [datatype,*(xsFacet)].
 litNodeConstraint ==> [valueSet,*(xsFacet)].
@@ -124,7 +124,8 @@ nonLiteralKind ==> ['NONLITERAL'].
 xsFacet ==> [or(stringFacet,numericFacet)].
 
 %[28] 
-stringFacet ==> [stringLength,or('INTEGER','REGEXP')].
+stringFacet ==> [stringLength,'INTEGER'].
+stringFacet ==> ['REGEXP'].
 
 %[29] 
 stringLength ==> ['LENGTH'].
