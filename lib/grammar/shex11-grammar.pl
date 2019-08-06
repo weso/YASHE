@@ -124,29 +124,29 @@ stringLength ==> ['MAXLENGTH'].
 numericFacet ==> [numericRange,numericLiteral].
 numericFacet ==> [numericLength,'INTEGER'].
 
-%[31] 
+%[28] OK
 numericRange ==> ['MININCLUSIVE'].
 numericRange ==> ['MINEXCLUSIVE'].
 numericRange ==> ['MAXINCLUSIVE'].
 numericRange ==> ['MAXEXCLUSIVE'].
 
-%[32] 
+%[29] OK
 numericLength ==> ['TOTALDIGITS'].
 numericLength ==> ['FRACTIONDIGITS'].
 
-%[33] 
-shapeDefinition ==>[*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}',*(annotation),semanticActions].
+%[30] OK
+shapeDefinition ==>[*(or(includeSet,extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}',*(annotation),semanticActions].
 
-%[34] 
-inlineShapeDefinition ==> [*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}'].
+%[31] OK
+inlineShapeDefinition ==> [*(or(includeSet,extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}'].
 
-%[35] 
+%[32] OK
 extraPropertySet ==> ['EXTRA',+(predicate)].
 
-%[36] 
+%[33] OK
 tripleExpression ==> [oneOfTripleExpr].
 
-%[37] Modify to make it LL(1)
+%[34][35][37][38][39] This rules has been modyfied to make it LL(1)
 oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
 
 funaryTripleExpr ==>[singleElementGroup, fsingle].
@@ -158,8 +158,6 @@ fsingle ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 fmulti ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 fmulti ==>[].
 
-
-%[40][41][42] This 3 rules has been modyfied to make it LL(1)
 singleElementGroup ==> [].
 singleElementGroup ==> [';',elementGroup].
 
@@ -167,46 +165,48 @@ elementGroup ==>[].
 elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
 
+%[40] OK
+unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)]].
+unaryTripleExpr ==> [include].
 
-%[43] 
-unaryTripleExpr ==> [?(['$',tripleExprLabel]),or([or(tripleConstraint,bracketedTripleExpr)],include)].
 
-
-
-%[44] 
+%[41] 
 bracketedTripleExpr ==> ['(',tripleExpression,')', ?(cardinality),*(annotation),semanticActions].
 
-%[45]  
+%[43] OK 
 tripleConstraint ==> [?(senseFlags),predicate,
                     inlineShapeExpression,
                     ?(cardinality),*(annotation),
                     semanticActions].
 
-%[46] 
+%[44] OK
 cardinality ==> ['*'].
 cardinality ==> ['+'].
 cardinality ==> ['?'].
 cardinality ==> ['REPEAT_RANGE'].
 
-%[47] 
+%[45] OK
 senseFlags ==> ['^'].
 
-%[48] 
+%[46] OK
 valueSet ==> ['[',*(valueSetValue),']'].
 
-%[49] 
+%[47] OK
 valueSetValue ==> [iriRange].
-valueSetValue ==> [literalRange].
-valueSetValue ==> [languageRange].
-%valueSetValue ==> [+(exclusion)]. 
+valueSetValue ==> [literal].
 
-
-%[50] 
-exclusion ==>['-',or(iri,literal,'LANTAG'),?('~')].
-
-
-%[51] 
+%[48] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
+iriRange ==> ['.',+(exclusion)].
+
+%[49] OK
+exclusion ==>['-',iri,?('~')].
+
+%[50] OK
+include ==> ['&',tripleExprLabel].
+
+%[51] OK
+annotation ==>['//',predicate,or(iri,literal)].
 
 %[52] 
 iriExclusion ==> ['-',iri,?('~')].
@@ -227,11 +227,6 @@ languageRange ==> ['@','~',*(languageExclusion)].
 languageExclusion ==> ['-','LANGTAG',?('~')].
 
 
-%[57] 
-include ==> ['&',tripleExprLabel].
-
-%[58] 
-annotation ==>['//',predicate,or(iri,literal)].
 
 %[59] 
 semanticActions ==> [*(codeDecl)].
