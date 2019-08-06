@@ -111,54 +111,54 @@ litNodeConstraint ==> [datatype,*(xsFacet)].
 litNodeConstraint ==> [valueSet,*(xsFacet)].
 litNodeConstraint ==> [+(numericFacet)].
 
-%[25] 
+%[25] OK
 nonLitNodeConstraint ==> [nonLiteralKind,*(stringFacet)].
 nonLitNodeConstraint ==> [+(stringFacet)].
 
-%[26] 
+%[26] OK
 nonLiteralKind ==> ['IRI'].
 nonLiteralKind ==> ['BNODE'].
 nonLiteralKind ==> ['NONLITERAL'].
 
-%[27] 
+%[27] OK
 xsFacet ==> [or(stringFacet,numericFacet)].
 
-%[28] 
+%[28] OK
 stringFacet ==> [stringLength,'INTEGER'].
 stringFacet ==> ['REGEXP'].
 
-%[29] 
+%[29] OK
 stringLength ==> ['LENGTH'].
 stringLength ==> ['MINLENGTH'].
 stringLength ==> ['MAXLENGTH'].
 
-%[30] 
+%[30] OK
 numericFacet ==> [numericRange,numericLiteral].
 numericFacet ==> [numericLength,'INTEGER'].
 
-%[31] 
+%[31] OK
 numericRange ==> ['MININCLUSIVE'].
 numericRange ==> ['MINEXCLUSIVE'].
 numericRange ==> ['MAXINCLUSIVE'].
 numericRange ==> ['MAXEXCLUSIVE'].
 
-%[32] 
+%[32] OK
 numericLength ==> ['TOTALDIGITS'].
 numericLength ==> ['FRACTIONDIGITS'].
 
-%[33] 
+%[33] OK
 shapeDefinition ==>[*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}',*(annotation),semanticActions].
 
-%[34] 
+%[34] OK
 inlineShapeDefinition ==> [*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}'].
 
-%[35] 
+%[35] OK
 extraPropertySet ==> ['EXTRA',+(predicate)].
 
-%[36] 
+%[36] OK
 tripleExpression ==> [oneOfTripleExpr].
 
-%[37] 
+%[37] Modify to make it LL(1)
 oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
 
 funaryTripleExpr ==>[singleElementGroup, fsingle].
@@ -172,7 +172,6 @@ fmulti ==>[].
 
 
 %[40][41][42] This 3 rules has been modyfied to make it LL(1)
-
 singleElementGroup ==> [].
 singleElementGroup ==> [';',elementGroup].
 
@@ -181,34 +180,30 @@ elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
 
 
-%[43] 
-unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)].
-unaryTripleExpr ==> [include].
+%[43] OK
+unaryTripleExpr ==> [?(['$',tripleExprLabel]),or([or(tripleConstraint,bracketedTripleExpr)],include)].
 
 
 
-%[44] 
-bracketedTripleExpr ==> ['(',tripleExpression,')',
+%[44] OK
+bracketedTripleExpr ==> ['(',tripleExpression,')', ?(cardinality),*(annotation),semanticActions].
 
-                        ?(or),*(annotation),
-                        semanticActions].
-
-%[45]  
+%[45] OK 
 tripleConstraint ==> [?(senseFlags),predicate,
                     inlineShapeExpression,
                     ?(cardinality),*(annotation),
                     semanticActions].
 
-%[46] 
+%[46] OK
 cardinality ==> ['*'].
 cardinality ==> ['+'].
 cardinality ==> ['?'].
 cardinality ==> ['REPEAT_RANGE'].
 
-%[47] 
+%[47] OK
 senseFlags ==> ['^'].
 
-%[48] 
+%[48] OK
 valueSet ==> ['[',*(valueSetValue),']'].
 
 %[49] 
@@ -218,90 +213,90 @@ valueSetValue ==> [languageRange].
 %valueSetValue ==> [+(exclusion)]. 
 
 
-%[50] 
+%[50] OK
 exclusion ==>['-',or(iri,literal,'LANTAG'),?('~')].
 
 
-%[51] 
+%[51] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
 
-%[52] 
+%[52] OK
 iriExclusion ==> ['-',iri,?('~')].
 
-%[53] 
+%[53] OK
 literalRange ==> [literal,?(['~',*(literalExclusion)])].
 
 
-%[54] 
+%[54] OK
 literalExclusion ==> ['-',literal,?('~')]. 
 
 
-%[55] 
+%[55] OK
 languageRange ==> ['LANGTAG',?(['~',*(languageExclusion)])].
 languageRange ==> ['@','~',*(languageExclusion)].
 
-%[56] 
+%[56] OK
 languageExclusion ==> ['-','LANGTAG',?('~')].
 
 
-%[57] 
+%[57] OK
 include ==> ['&',tripleExprLabel].
 
-%[58] 
+%[58] OK
 annotation ==>['//',predicate,or(iri,literal)].
 
-%[59] 
+%[59] OK
 semanticActions ==> [*(codeDecl)].
 
-%[60] 
+%[60] OK
 codeDecl ==> ['%',iri,or('CODE','%')].
 
-%[13t] 
+%[13t] OK
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
-%[61] 
+%[61] OK
 predicate ==> [or(iri,'a')].
 
-%[62] 
+%[62] OK
 datatype ==> [iri].
 
-%[63] 
+%[63] OK
 shapeExprLabel ==> [or(iri,blankNode)].
 
-%[64] 
+%[64] OK
 tripleExprLabel ==> [or(iri,blankNode)].
 
-%[16t] 
+%[16t] OK
 numericLiteral ==>['INTEGER'].
 numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
-%[65] 
+%[65] OK
 rdfLiteral ==> [or(langString,[string,?(['^^',datatype])])].
 
 
-%[134s] 
+%[134s] OK
 booleanLiteral ==> [or('true', 'false')].
 
-%[135s] 
+%[135s] OK
 string ==> ['STRING_LITERAL1'].
 string ==> ['STRING_LITERAL_LONG1'].
 string ==> ['STRING_LITERAL2'].
 string ==> ['STRING_LITERAL_LONG2'].
 
-%[66] 
+%[66] OK
 langString ==> ['LANG_STRING_LITERAL1'].
 langString ==> ['LANG_STRING_LITERAL_LONG1'].
 langString ==> ['LANG_STRING_LITERAL2'].
 langString ==> ['LANG_STRING_LITERAL_LONG2'].
 
-%[136s] 
+%[136s] OK
 iri ==> [or('IRI_REF',prefixedName)].
 
-%[137s] 
+%[137s] OK
 prefixedName ==> [ or('PNAME_LN', 'PNAME_NS') ].
 
-%[138]
+%[138] OK
 blankNode ==> ['BLANK_NODE_LABEL'].
 
 
