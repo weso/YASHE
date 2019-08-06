@@ -124,8 +124,7 @@ nonLiteralKind ==> ['NONLITERAL'].
 xsFacet ==> [or(stringFacet,numericFacet)].
 
 %[28] 
-stringFacet ==> [stringLength,'INTEGER'].
-stringFacet ==> ['REGEXP'].
+stringFacet ==> [stringLength,or('INTEGER','REGEXP')].
 
 %[29] 
 stringLength ==> ['LENGTH'].
