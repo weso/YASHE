@@ -146,7 +146,7 @@ extraPropertySet ==> ['EXTRA',+(predicate)].
 %[33] OK
 tripleExpression ==> [oneOfTripleExpr].
 
-%[34][35][37][38][39] This rules has been modyfied to make it LL(1)
+%[34][35][37][38][39] This nonterminals has been modyfied to make it LL(1)
 oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
 
 funaryTripleExpr ==>[singleElementGroup, fsingle].
@@ -163,6 +163,10 @@ singleElementGroup ==> [';',elementGroup].
 
 elementGroup ==>[].
 elementGroup ==>[unaryTripleExpr,singleElementGroup].
+
+%Nonterminal [36] has been modyfied to make it LL(1)
+
+
 
 
 %[40] OK
