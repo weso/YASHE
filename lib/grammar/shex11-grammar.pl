@@ -1,6 +1,7 @@
 /*
-ShEx grammar rules based on the Last Call Working Draft of 16/07/2019:
-  http://shex.io/shex-semantics/#shexc
+ShEx grammar rules based on the Last Call Working Draft of 03/03/2017:
+  https://github.com/shexSpec/grammar/blob/shex2.1/bnf
+
 Be careful with grammar notation - it is EBNF in prolog syntax!
 [...] lists always represent sequence.
 or can be used as binary operator or n-ary prefix term - do not put [...] 
@@ -22,7 +23,7 @@ stephen.cresswell@tso.co.uk
 shexDoC  ==> [*(directive),?([or(notStartAction,startActions),*(statement)]), $ ].
 
 %[2] OK
-directive ==> [or(baseDecl,prefixDecl,importDecl)].
+directive ==> [or(baseDecl,prefixDecl)].
 
 %[3] OK
 baseDecl ==> ['BASE','IRI_REF'].
@@ -30,14 +31,11 @@ baseDecl ==> ['BASE','IRI_REF'].
 %[4] OK
 prefixDecl ==> ['PREFIX','PNAME_NS','IRI_REF'].
 
-%[4.5] OK
-importDecl ==> ['IMPORT','IRI_REF'].
-
 %[5] OK
 notStartAction ==> [or(startt,shapeExprDecl)].
 
 %[6] OK
-startt ==> ['start','=',inlineShapeExpression].
+startt ==> ['start','=',shapeExpression].
 
 %[7] OK
 startActions ==> [+(codeDecl)].
@@ -73,92 +71,82 @@ shapeNot ==> [?('NOT'),shapeAtom].
 inlineShapeNot ==> [?('NOT'),inlineShapeAtom].
 
 %[18] OK
-shapeAtom ==> [nonLitNodeConstraint,?(shapeOrRef)].
-shapeAtom ==> [litNodeConstraint].
-shapeAtom ==> [shapeOrRef,?(nonLitNodeConstraint)].
+shapeAtom ==> [nodeConstraint,?(shapeOrRef)].
+shapeAtom ==> [shapeOrRef].
 shapeAtom ==> ['(',shapeExpression,')'].
 shapeAtom ==> ['.'].
 
-%[19] OK
-shapeAtomNoRef ==> [nonLitNodeConstraint,?(shapeOrRef)].
-shapeAtomNoRef ==> [litNodeConstraint].
-shapeAtomNoRef ==> [shapeDefinition,?(nonLitNodeConstraint)].
-shapeAtomNoRef ==> ['(',shapeExpression,')'].
-shapeAtomNoRef ==> ['.'].
 
-%[20] OK
-inlineShapeAtom ==> [nonLitNodeConstraint,?(inlineShapeOrRef)].
-inlineShapeAtom ==> [litNodeConstraint].
-inlineShapeAtom ==> [inlineShapeOrRef,?(nonLitNodeConstraint)].
+%[19] OK
+inlineShapeAtom ==> [nodeConstraint,?(inlineShapeOrRef)].
+inlineShapeAtom ==> [inlineShapeOrRef,?(nodeConstraint)].
 inlineShapeAtom ==> ['(',shapeExpression,')'].
 inlineShapeAtom ==> ['.'].
 
+%[20] OK
+shapeOrRef ==> [shapeDefinition].
+shapeOrRef ==> ['ATPNAME_NS'].
+shapeOrRef ==> ['ATPNAME_LN'].
+shapeOrRef ==> ['@',shapeExprLabel].
+
 %[21] OK
-shapeOrRef ==> [or(shapeDefinition,shapeRef)].
+inlineShapeOrRef ==> [inlineShapeDefinition].
+inlineShapeOrRef ==> ['ATPNAME_NS'].
+inlineShapeOrRef ==> ['ATPNAME_LN'].
+inlineShapeOrRef ==> ['@',shapeExprLabel].
+
 
 %[22] OK
-inlineShapeOrRef ==> [or(inlineShapeDefinition,shapeRef)].
+nodeConstraint ==> ['LITERAL',*(stringFacet)].
+nodeConstraint ==> [nonLiteralKind,*(xsFacet)].
+nodeConstraint ==> [datatype,*(xsFacet)].
+nodeConstraint ==> [valueSet,*(xsFacet)].
+nodeConstraint ==> [+(xsFacet)].
 
-%[23] 
-shapeRef ==> ['ATPNAME_NS'].
-shapeRef ==> ['ATPNAME_LN'].
-shapeRef ==> ['@',shapeExprLabel].
-
-
-%[24] OK
-litNodeConstraint ==> ['LITERAL',*(xsFacet)].
-litNodeConstraint ==> [datatype,*(xsFacet)].
-litNodeConstraint ==> [valueSet,*(xsFacet)].
-litNodeConstraint ==> [+(numericFacet)].
-
-%[25] OK
-nonLitNodeConstraint ==> [nonLiteralKind,*(stringFacet)].
-nonLitNodeConstraint ==> [+(stringFacet)].
-
-%[26] OK
+%[23] OK
 nonLiteralKind ==> ['IRI'].
 nonLiteralKind ==> ['BNODE'].
 nonLiteralKind ==> ['NONLITERAL'].
 
-%[27] OK
+%[24] OK
 xsFacet ==> [or(stringFacet,numericFacet)].
 
-%[28] OK
+%[25] OK
 stringFacet ==> [stringLength,'INTEGER'].
 stringFacet ==> ['REGEXP'].
 
-%[29] OK
+%[26] OK
 stringLength ==> ['LENGTH'].
 stringLength ==> ['MINLENGTH'].
 stringLength ==> ['MAXLENGTH'].
 
-%[30] OK
+%[27] OK
 numericFacet ==> [numericRange,numericLiteral].
 numericFacet ==> [numericLength,'INTEGER'].
 
-%[31] OK
+%[28] OK
 numericRange ==> ['MININCLUSIVE'].
 numericRange ==> ['MINEXCLUSIVE'].
 numericRange ==> ['MAXINCLUSIVE'].
 numericRange ==> ['MAXEXCLUSIVE'].
 
-%[32] OK
+%[29] OK
 numericLength ==> ['TOTALDIGITS'].
 numericLength ==> ['FRACTIONDIGITS'].
 
-%[33] OK
+%[30] OK
 shapeDefinition ==>[*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}',*(annotation),semanticActions].
 
-%[34] OK
+%[31] OK
 inlineShapeDefinition ==> [*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}'].
 
-%[35] OK
+%[32] OK
 extraPropertySet ==> ['EXTRA',+(predicate)].
 
-%[36] OK
+%[33] OK
 tripleExpression ==> [oneOfTripleExpr].
 
-%[37] OK
+%[34][35][37][38][39] This nonterminals has been modyfied to make it LL(1)
 oneOfTripleExpr ==> [unaryTripleExpr, funaryTripleExpr]. 
 
 funaryTripleExpr ==>[singleElementGroup, fsingle].
@@ -170,115 +158,88 @@ fsingle ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 fmulti ==>['|',unaryTripleExpr,singleElementGroup,fmulti].
 fmulti ==>[].
 
-
-%[40][41][42] This 3 rules has been modyfied to make it LL(1)
-
 singleElementGroup ==> [].
 singleElementGroup ==> [';',elementGroup].
 
 elementGroup ==>[].
 elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
+%Nonterminal [36] has been modyfied to make it LL(1)
 
 
-%[43] OK
+
+
+%[40] OK
 unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)].
 unaryTripleExpr ==> [include].
 
 
+%[41] 
+bracketedTripleExpr ==> ['(',tripleExpression,')', ?(cardinality),*(annotation),semanticActions].
 
-%[44] OK
-bracketedTripleExpr ==> ['(',tripleExpression,')',
-
-                        ?(or),*(annotation),
-                        semanticActions].
-
-%[45]  OK
+%[43] OK 
 tripleConstraint ==> [?(senseFlags),predicate,
                     inlineShapeExpression,
                     ?(cardinality),*(annotation),
                     semanticActions].
 
-%[46] OK
+%[44] OK
 cardinality ==> ['*'].
 cardinality ==> ['+'].
 cardinality ==> ['?'].
 cardinality ==> ['REPEAT_RANGE'].
 
-%[47] OK
+%[45] OK
 senseFlags ==> ['^'].
 
-%[48] OK
+%[46] OK
 valueSet ==> ['[',*(valueSetValue),']'].
 
-%[49] OK
+%[47] OK
 valueSetValue ==> [iriRange].
-valueSetValue ==> [literalRange].
-valueSetValue ==> [languageRange].
-%valueSetValue ==> [+(exclusion)]. 
+valueSetValue ==> [literal].
 
+%[48] OK
+iriRange ==> [iri,?(['~',*(exclusion)])].
+iriRange ==> ['.',+(exclusion)].
+
+%[49] OK
+exclusion ==>['-',iri,?('~')].
 
 %[50] OK
-exclusion ==>['-',or(iri,literal,'LANTAG'),?('~')].
-
-
-%[51] OK
-iriRange ==> [iri,?(['~',*(exclusion)])].
-
-%[52] OK
-iriExclusion ==> ['-',iri,?('~')].
-
-%[53] OK
-literalRange ==> [literal,?(['~',*(literalExclusion)])].
-
-
-%[54] OK
-literalExclusion ==> ['-',literal,?('~')]. 
-
-
-%[55] OK
-languageRange ==> ['LANGTAG',?(['~',*(languageExclusion)])].
-languageRange ==> ['@','~',*(languageExclusion)].
-
-%[56] OK
-languageExclusion ==> ['-','LANGTAG',?('~')].
-
-
-%[57] OK
 include ==> ['&',tripleExprLabel].
 
-%[58] OK
+%[51] OK
 annotation ==>['//',predicate,or(iri,literal)].
 
-%[59] OK
+%[52] OK
 semanticActions ==> [*(codeDecl)].
 
-%[60] OK
+%[53] OK
 codeDecl ==> ['%',iri,or('CODE','%')].
 
 %[13t] OK
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
-%[61] OK
+%[54] OK
 predicate ==> [or(iri,'a')].
 
-%[62] OK
+%[55] OK
 datatype ==> [iri].
 
-%[63] OK
+%[56] OK
 shapeExprLabel ==> [or(iri,blankNode)].
 
-%[64] OK
-tripleExprLabel ==> [or(iri,blankNode)].
+%[42] OK
+tripleExprLabel ==> ['$',or(iri,blankNode)].
 
 %[16t] OK
 numericLiteral ==>['INTEGER'].
 numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
-%[65] OK
-rdfLiteral ==> [or(langString,[string,?(['^^',datatype])])].
-
+%[129s] OK
+rdfLiteral ==> [string,?(or('LANGTAG',['^^',datatype]))].
 
 %[134s] OK
 booleanLiteral ==> [or('true', 'false')].
@@ -289,11 +250,6 @@ string ==> ['STRING_LITERAL_LONG1'].
 string ==> ['STRING_LITERAL2'].
 string ==> ['STRING_LITERAL_LONG2'].
 
-%[66] OK
-langString ==> ['LANG_STRING_LITERAL1'].
-langString ==> ['LANG_STRING_LITERAL_LONG1'].
-langString ==> ['LANG_STRING_LITERAL2'].
-langString ==> ['LANG_STRING_LITERAL_LONG2'].
 
 %[136s] OK
 iri ==> [or('IRI_REF',prefixedName)].
@@ -301,13 +257,13 @@ iri ==> [or('IRI_REF',prefixedName)].
 %[137s] OK
 prefixedName ==> [ or('PNAME_LN', 'PNAME_NS') ].
 
-%[138]
+%[138] OK
 blankNode ==> ['BLANK_NODE_LABEL'].
 
 
 
-% tokens defined by regular expressions elsewhere
-% RDF_TYPE token now is harcoded in the rules
+% tens defined by regular expressions elsewhere
+% RDF_TYPE ten now is harcoded in the rules
 tm_regex([
 
 'CODE',
@@ -350,7 +306,7 @@ tm_regex([
 'false'
 ]).
 
-% Terminals where name of terminal is uppercased token content
+% Terminals where name of terminal is uppercased ten content
 tm_keywords([
 
 'BASE',
@@ -378,8 +334,8 @@ tm_keywords([
 
 ]).
 
-% Other tokens representing fixed, case sensitive, strings
-% Care! order longer tokens first - e.g. IRI_REF, <=, <
+% Other tens representing fixed, case sensitive, strings
+% Care! order longer tens first - e.g. IRI_REF, <=, <
 % e.g. >=, >
 % e.g. NIL, '('
 % e.g. ANON, [
@@ -396,7 +352,7 @@ tm_punct([
 '}'= '\\}',
 '|' = '\\|',
 ';'= ';',
-'$'= '$',
+'$'= '\\$',
 '*'= '\\*',
 '+'= '\\+',
 '?' = '\\?',

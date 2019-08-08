@@ -54,7 +54,6 @@ module.exports = function(yashe, name) {
               }else{
 
                 var entities = []
-
                 var label,id,description,entities
                 for(var entity in data.search){
 
@@ -62,7 +61,6 @@ module.exports = function(yashe, name) {
                     id = data.search[entity].id
                     description = data.search[entity].description
 
-                    
                     list =  {
                       text: id,
                       displayText: label + " (" + id + ") \n " + description
