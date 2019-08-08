@@ -1,22 +1,28 @@
-MultiElementGroup
-A →	a Fa .
-Fa →	';' F';'1 .
-F';'1 →	a Fa2 .
-Fa2 →	
-|	B .
-B →	';' F';' .
-F';' →	
-|	a Fa1 .
-Fa1 →	
-|	B .
+Inner -> MultiElementGroup | MultiElementOneOf .
 
-MultiElementGroup
-M →	A '@' A M1 .
-M1 →	'@' A M1
-|	.
-A →	unary FU .
-FU →	
-|	';' FA .
-FA →	
-|	A .
+MultiElementGroup -> unaryTripleExpr ';' unaryTripleExpr MEG.
+
+MEG ->
+    | ';' FUnary .
+
+
+FUnary ->
+   | unaryTripleExpr FAUnary .
+
+FAUnary ->
+    | ';' FUnary .
+
+MultiElementOneOf -> Mult '@' Mult FMultiElementOneOf .
+
+FMultiElementOneOf -> '@' Mult FMultiElementOneOf
+                   |
+                   .
+
+Mult -> unaryTripleExpr FMult .
+
+FMult ->	
+   | ';' OFFMult .
+
+OFFMult ->
+   | Mult .
 
