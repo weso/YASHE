@@ -139,7 +139,6 @@ module.exports = function(YASHE, yashe) {
       var stringToAutocomplete = partialToken.autocompletionString || partialToken.string;
       var suggestions = [];
       if (tries[completer.name]) {
-        //if(completer.name == 'keywords')stringToAutocomplete = stringToAutocomplete.toUpperCase()
         suggestions = tries[completer.name].autoComplete(stringToAutocomplete);
       } else if (typeof completer.get == "function" && completer.async == false) {
         suggestions = completer.get(stringToAutocomplete);
@@ -186,7 +185,7 @@ module.exports = function(YASHE, yashe) {
     var hintList = [];
     var startChar;
     //For the wikidata completer we recive the {text, displayText} object
-    if(completer.name == 'wikidata' || completer.name == 'prefixes'){
+    if(completer.name == 'wikidata' || completer.name == 'prefixesAndKeywords'){
 
       for (var i = 0; i < suggestions.length; i++) {
         hintList.push({
