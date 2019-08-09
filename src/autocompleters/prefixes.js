@@ -21,8 +21,30 @@ module.exports = function(yashe, name) {
      for(var key in KEYWORDS){
       trie.insert(KEYWORDS[key]);
      }
+
+
+     var completions = trie.autoComplete(token)
+     var final = []
+     var list={}
+     for(var c in completions){
+
+        var text = completions[c]
+        var displayText = completions[c]
+
+        if(!module.exports.isInPrefixList(completions[c])){
+          text = text.toUpperCase()
+        }
+
+        list =  {
+          text: text,
+          displayText: displayText
+        } 
+
+        final.push(list)
+      }
     
-     return trie.autoComplete(token)
+
+      return final
 
     },
     async: false,
@@ -34,39 +56,41 @@ module.exports = function(yashe, name) {
 module.exports.isValidCompletionPosition = function(yashe) {
   module.exports.PREFIXES = yashe.getDefinedPrefixes()
 
-  /*
-  var token = yashe.getCompleteToken();
-  var possibleNext  = token.state.possibleNext
-  console.log(possibleNext)
-  for(var possibility in possibleNext){
-    if(possibleNext[possibility] == 'PREFIX')return false
-  }
-*/
   return true
 };
 
+
+
+module.exports.isInPrefixList = function(completion){
+
+  for(var prefix in module.exports.PREFIXES){
+      if(completion == prefix+":")return true
+  }
+  return false
+
+}
+
 module.exports.PREFIXES = []
 
-
 var KEYWORDS = [
-  'BASE',
-  'PREFIX',
-  'EXTERNAL',
-  'OR',
-  'AND',
-  'NOT"',
-  'IRI',
-  'BNODE',
-  'NONLITERAL',
-  'LENGTH',
-  'MINLENGTH',
-  'MAXLENGTH',
-  'MININCLUSIVE',
-  'MINEXCLUSIVE',
-  'MAXINCLUSIVE',
-  'MAXEXCLUSIVE',
-  'TOTALDIGITS',
-  'FRACTIONDIGITS',
-  'CLOSED',
-  'EXTRA'
+  'base',
+  'prefix',
+  'external',
+  'or',
+  'and',
+  'not"',
+  'iri',
+  'bnode',
+  'nonliteral',
+  'length',
+  'minlength',
+  'maxlength',
+  'mininclusive',
+  'minexclusive',
+  'maxinclusive',
+  'maxexclusive',
+  'totaldigits',
+  'fractiondigits',
+  'closed',
+  'extra'
   ]
