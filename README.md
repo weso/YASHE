@@ -24,6 +24,20 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
 
 
+## Use YASHE on your own project
+You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
+
+`YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
+
+Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
+
+`YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
+
+Initialize YASQE from an existing text area (see CodeMirror for more info)
+
+
+[Here](https://gist.github.com/mistermboy/843d5633e5408d7d79a37b890da167f3) you can see a code example of the two diferent ways to initialize YASHE
+
 ## Developing YASHE
 
 Feel free to fork and develop this tool.  You can submit your
