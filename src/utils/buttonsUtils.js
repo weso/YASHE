@@ -1,6 +1,7 @@
 var imgs = require("./imgs.js"),
     yutils = require("yasgui-utils"),
-    utils = require("./baseUtils.js")
+    utils = require("./baseUtils.js"),
+    $ = require("jquery")
 
 var drawButtons = function(yashe){
 
