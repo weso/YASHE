@@ -9,10 +9,10 @@ for including it in your own web site, visit http://www.weso.es/YASHE/
 The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
 
 #### CSS
-     <link href='https://cdn.jsdelivr.net/npm/yashe@1.0.5/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
+     <link href='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
   
 #### JS 
-     <script src='https://cdn.jsdelivr.net/npm/yashe@1.0.5/dist/yashe.bundled.min.js'></script>
+     <script src='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.bundled.min.js'></script>
 
 
 
