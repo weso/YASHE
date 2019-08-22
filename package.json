@@ -1,11 +1,11 @@
 {
-  "name": "yasgui-yasqe",
-  "description": "Yet Another SPARQL Query Editor",
-  "version": "2.11.21",
+  "name": "yashe",
+  "description": "Yet Another ShEx Query Editor",
+  "version": "1.1.0",
   "main": "src/main.js",
   "license": "MIT",
-  "author": "Laurens Rietveld",
-  "homepage": "http://yasqe.yasgui.org",
+  "author": "Pablo Menéndez",
+  "homepage": "http://www.weso.es/YASHE/",
   "scripts": {
     "dev": "gulp serve",
     "build": "gulp",
@@ -47,7 +47,7 @@
     "vinyl-transform": "1.0.0",
     "watchify": "^3.7.0"
   },
-  "bugs": "https://github.com/YASGUI/YASQE/issues/",
+  "bugs": "https://github.com/weso/YASHE/issues/",
   "keywords": [
     "JavaScript",
     "SPARQL",
@@ -57,14 +57,14 @@
   ],
   "maintainers": [
     {
-      "name": "Laurens Rietveld",
-      "email": "laurens.rietveld@gmail.com",
-      "web": "http://laurensrietveld.nl"
+      "name": "Pablo Menéndez",
+      "email": "pabloyo97@hotmail.com",
+      "web": "https://github.com/mistermboy"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YASGUI/YASQE.git"
+    "url": "https://github.com/weso/YASHE.git"
   },
   "dependencies": {
     "clipboard": "^2.0.4",
