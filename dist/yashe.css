@@ -70,7 +70,8 @@
     color: #0F7A50; }
   .yashe .cm-s-dark.CodeMirror {
     background: #2B2B2B;
-    color: #A9B7C6; }
+    color: #A9B7C6;
+    border: 10px; }
   .yashe .cm-s-dark .cm-keyword {
     color: #708; }
   .yashe .cm-s-dark .cm-atom {
