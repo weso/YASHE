@@ -39,7 +39,11 @@ $(document).ready(function() {
     //get the ShEx examples
     var rdfShape,wikiShape,japanShape
     
-    var exSelector = document.getElementById('exSelector')
+    var btnRDF = document.getElementById('btnRDF')
+    var btnWiki = document.getElementById('btnWiki')
+    var btnJapan = document.getElementById('btnJapan')
+
+
     var themeSlider = document.getElementById('themeSlider')
 
 
@@ -57,26 +61,11 @@ $(document).ready(function() {
     }, 'text');
 
 
-    //Examples Listener
-    exSelector.addEventListener('change', function(e) {
+    //Examples Listeners
+    btnRDF.addEventListener('click', function(e) { yashe.setValue(rdfShape)})
+    btnWiki.addEventListener('click', function(e) { yashe.setValue(wikiShape)})
+    btnJapan.addEventListener('click', function(e) { yashe.setValue(japanShape)})
 
-        switch(exSelector.value){
-
-            case "rdf":
-                yashe.setValue(rdfShape)
-                break
-
-            case "wiki":
-                yashe.setValue(wikiShape)
-                break
-
-            case "japan":
-                yashe.setValue(japanShape)
-                break
-
-        }
-        
-    })
 
     //Theme Listener
     themeSlider.addEventListener('change', function(e) {

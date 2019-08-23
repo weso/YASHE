@@ -50,73 +50,34 @@
       	<h1>About YASHE</h1>
         YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yashe.yasgui.org/'>YASHE</a> (which is based on SPARQL)
 
-        <table>
-          <tr>
-
-            <td>
-                <select id="exSelector" class="form-control">
-                    <option value="" disabled selected>Select an example</option>
-                    <option id="btnRDF"value="rdf">RDF Book</option>
-                    <option id="btnWiki"value="wiki">Wikidata</option>
-                    <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
-                  </select>
-
-                  
-
-            </td>
-
-            <td>
+    
+        <ul id='navEx' class="nav-ex">
+           
+          <li class="nav-el"><button id="btnRDF"value="rdf">RDF Book</button></li>
+          <li class="nav-el"> <button id="btnWiki"value="wiki">Wikidata</button></li>
+          <li class="nav-el"><button id="btnJapan"value="japan">Japan Sarch Metadata</button></li>
+          <li style="float:right">
+            
               <label class="switch">
-                <input id="themeSlider" type="checkbox">
-                <span class="slider round"></span>
-              </label>
-            </td>
-  
-          </tr>
-        </table>
-
-        <ul class="nav-ex">
-          <li class="nav-el"><a href="default.asp">Home</a></li>
-          <li class="nav-el"><a href="news.asp">News</a></li>
-          <li class="nav-el"><a href="contact.asp">Contact</a></li>
-          <li class="nav-el"><a href="about.asp">About</a></li>
+                  <input id="themeSlider" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+          
+          </li>
         </ul>
         
-
-        <style>
+        <script>
         
-        .nav-ex {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          background-color: #333;
-          }
+        var ul = document.getElementById('navEx')
+    for(let el in ul.childNodes){
+        if(ul.childNodes[el].childNodes.length != 0){
+          console.log(ul.childNodes[el].childNodes)
+        }
+            
+    }
 
-          .nav-el {
-            float: left;
-           
-          }
-
-          .nav-el a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-          }
-
-            /* Change the link color to #111 (black) on hover */
-            .nav-el a:hover {
-              background-color: #111;
-            }
-
-          .active {
-            background-color: #4CAF50;
-          }
-
-        </style>
-
+        
+        </script>
             
        <div id="showcase" ></div></th>
                
