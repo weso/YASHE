@@ -14,7 +14,7 @@ var drawButtons = function(yashe){
     var uploadButton = $("<div>", {
       class: "downloadBtns"
     }).append($('<input type="file" accept=".shex" name="file-1[]" id="file-1" class="inputfileBtn" data-multiple-caption="{count}'
-    +'files selected" multiple /><label for="file-1">'+imgs.upload+'</label>')
+    +'files selected" multiple /><label id="uploadBntLabel" for="file-1">'+imgs.upload+'</label>')
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
     .on('change',utils.readFile)
@@ -67,7 +67,7 @@ var drawButtons = function(yashe){
       .append(
         $(yutils.svg.getElement(imgs.copy))
           .addClass("yashe_downloadBtn")
-          .attr("id", "copy")
+          .attr("id", "copyBtn")
           .attr("title", "Copy to the clipboard")
         );
     yashe.buttons.append(copyButton);
@@ -92,6 +92,8 @@ var drawButtons = function(yashe){
      * theme button
      */
 
+   
+
     var themeButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.theme))
@@ -101,21 +103,26 @@ var drawButtons = function(yashe){
     .click(function() { 
       
       var themeValue = 'wiki'
-      var btnClass = 'downloadBtns'
+      var color = 'black'
       if(yashe.getOption('theme') == 'wiki'){
         themeValue='dark'
-        btnClass = 'downloadBtnsWhite'
+        color = 'white'
       }
       
 
       yashe.setOption("theme",themeValue)
 
-      
-      uploadButton.attr('class',btnClass)
-      downloadButton.attr('class',btnClass)
-      deleteButton.attr('class',btnClass)
-      copyButton.attr('class',btnClass)
-      themeButton.attr('class',btnClass)
+      //Change fill of buttons
+      $('#uploadBntLabel').css('fill', color)
+      $('#downloadBtn').css('fill', color)
+      $('#copyBtn').css('fill', color)
+      $('#deleteBtn').css('fill', color)
+      $('#themeBtn').css('fill', color)
+      $('#fullBtn').css('fill', color)
+      $('#smallBtn').css('fill', color)
+
+
+    
 
     }))
 
@@ -150,21 +157,6 @@ var drawButtons = function(yashe){
     yashe.buttons.append(toggleFullscreen);
   
 
-  /*
-    var full = $("<div>", {
-      class: "downloadBtns"
-    }).append($(yutils.svg.getElement(imgs.fullscreen))
-    .addClass("yashe_fullBtn")
-    .attr('id','fullBtn')
-    .attr("title", "Fullscreen")
-    .click(function() { yashe.setValue("")}))
-
-    yashe.buttons.append(full);
-
-
-
-    document.getElementById('themeBtn').remove()
-*/
   }
 
 
