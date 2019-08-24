@@ -107,7 +107,6 @@ var drawButtons = function(yashe){
       
       yashe.setOption("theme",themeValue)
     
-    
     }))
 
     yashe.buttons.append(themeButton);

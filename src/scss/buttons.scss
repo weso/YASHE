@@ -111,12 +111,7 @@
 				}
 			}
 		}
-
-		
-
 	
-
-		
 	}
 
 
@@ -129,13 +124,22 @@
   			cursor:pointer;
   			width: 20px;
   			height: 20px;
-  		}
+		  }
+		  
   		.yashe_smallscreenBtn {
   			display: none;
-  		}
+		  }
+		  
+			
 		
-		
-  	}
+	  }
+	  
+	  .yashe_fullscreenBtn:hover {
+		background: #DA4567
+		}
+		.yashe_smallscreenBtn:hover{
+			background: #DA4567
+		}
 
 	  .downloadBtns {
 		display:inline-block;
@@ -145,8 +149,13 @@
 		  width: 20px;
 		  height: 20px;
 		}
+		}
+
+	
+	.downloadBtns:hover {
+		fill: #DA4567;
 	}
-		
+
 
 		.inputfileBtn {
 			width: 0.1px;
