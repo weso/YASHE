@@ -572,6 +572,16 @@
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
+  .yashe .yashe_smallscreenBtn:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+  .yashe .yashe_smallscreenBtn:active {
+    fill: #DA4567;
+    transform: translateY(4px); }
+  .yashe .yashe_fullscreenBtn:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+  .yashe .yashe_fullscreenBtn:active {
+    fill: #DA4567;
+    transform: translateY(4px); }
   .yashe .downloadBtns {
     display: inline-block;
     margin: 2px; }
@@ -580,7 +590,7 @@
       width: 20px;
       height: 20px; }
   .yashe .downloadBtns:hover {
-    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1); }
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
   .yashe .downloadBtns:active {
     fill: #DA4567;
     transform: translateY(4px); }

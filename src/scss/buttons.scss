@@ -134,6 +134,36 @@
 	  }
 	  
 
+	  .yashe_smallscreenBtn:hover {
+		filter: 
+		invert(0.4)
+		sepia(0.5)
+		hue-rotate(313.2deg)
+		saturate(16.2)
+		brightness(1.7);
+		}
+
+		.yashe_smallscreenBtn:active {
+			fill: #DA4567;
+			transform: translateY(4px);
+		}
+
+
+		.yashe_fullscreenBtn:hover {
+			filter: 
+			invert(0.4)
+			sepia(0.5)
+			hue-rotate(313.2deg)
+			saturate(16.2)
+			brightness(1.7);
+		}
+	
+		.yashe_fullscreenBtn:active {
+			fill: #DA4567;
+			transform: translateY(4px);
+		}
+
+
 	  .downloadBtns {
 		display:inline-block;
 		margin:2px;
@@ -152,7 +182,7 @@
 			sepia(0.5)
 			hue-rotate(313.2deg)
 			saturate(16.2)
-			brightness(1);
+			brightness(1.7);
 		}
 
 		.downloadBtns:active {
