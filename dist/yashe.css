@@ -517,7 +517,7 @@
       line-height: 1.5;
       border-radius: 3px; }
   .yashe .yashe_buttons {
-    background: white;
+    background: transparent;
     position: absolute;
     top: 5px;
     right: 5px;
