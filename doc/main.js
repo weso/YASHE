@@ -35,7 +35,7 @@ $(document).ready(function() {
         });
     }
 
-
+/*
     //get the ShEx examples
     var rdfShape,wikiShape,japanShape
     
@@ -79,5 +79,6 @@ $(document).ready(function() {
     })
 
 
+    */
 });
 
