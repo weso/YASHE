@@ -70,7 +70,8 @@
     color: #0F7A50; }
   .yashe .cm-s-dark.CodeMirror {
     background: #2B2B2B;
-    color: #A9B7C6; }
+    color: #A9B7C6;
+    border: 10px; }
   .yashe .cm-s-dark .cm-keyword {
     color: #708; }
   .yashe .cm-s-dark .cm-atom {
@@ -160,7 +161,7 @@
     /* The little square between H and V scrollbars */ }
   .yashe .CodeMirror-gutters {
     border-right: 1px solid #ddd;
-    background-color: white;
+    background-color: #f7f7f7;
     white-space: nowrap; }
   .yashe .CodeMirror-linenumber {
     padding: 0 3px 0 5px;
@@ -516,7 +517,7 @@
       line-height: 1.5;
       border-radius: 3px; }
   .yashe .yashe_buttons {
-    background: white;
+    background: transparent;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -571,6 +572,16 @@
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
+  .yashe .yashe_smallscreenBtn:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+  .yashe .yashe_smallscreenBtn:active {
+    fill: #DA4567;
+    transform: translateY(4px); }
+  .yashe .yashe_fullscreenBtn:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+  .yashe .yashe_fullscreenBtn:active {
+    fill: #DA4567;
+    transform: translateY(4px); }
   .yashe .downloadBtns {
     display: inline-block;
     margin: 2px; }
@@ -578,6 +589,11 @@
       cursor: pointer;
       width: 20px;
       height: 20px; }
+  .yashe .downloadBtns:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+  .yashe .downloadBtns:active {
+    fill: #DA4567;
+    transform: translateY(4px); }
   .yashe .inputfileBtn {
     width: 0.1px;
     height: 0.1px;
@@ -599,13 +615,6 @@
     /* 10px 20px */
     color: black;
     background-color: transparent; }
-  .yashe .yashe_deletedBtn {
-    margin-bottom: 4px;
-    display: inline-block; }
-  .yashe .yashe_uploadBtn {
-    margin: 1px;
-    height: 17px;
-    display: inline-block; }
   .yashe .yashe_downloadBtn {
     margin-top: 2px;
     display: inline-block; }

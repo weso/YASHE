@@ -38,7 +38,7 @@
     </div>
 
     <div class="container" role="main" >
-      <img  src="doc/imgs/yashe_logo.png"></img>
+      <img src="doc/imgs/yashe_logo.png"></img>
       </div>
 
 
@@ -49,32 +49,17 @@
       	<div class="col-md-12">
       	<h1>About YASHE</h1>
         YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yashe.yasgui.org/'>YASHE</a> (which is based on SPARQL)
-
-        <table>
-          <tr>
-
-            <td>
-                <select id="exSelector" class="form-control">
-                    <option value="" disabled selected>Select an example</option>
-                    <option id="btnRDF"value="rdf">RDF Book</option>
-                    <option id="btnWiki"value="wiki">Wikidata</option>
-                    <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
-                  </select>
-            </td>
-
-            <td>
-              <label class="switch">
-                <input id="themeSlider" type="checkbox">
-                <span class="slider round"></span>
-              </label>
-            </td>
   
-          </tr>
-        </table>
+       
 
-            
-       <div id="showcase" ></div></th>
-               
+        <select id="exSelector" class="form-control">
+          <option value="" disabled selected>Select an example</option>
+          <option id="btnRDF"value="rdf">RDF Book</option>
+          <option id="btnWiki"value="wiki">Wikidata</option>
+          <option id="btnJapan"value="japan">Japan Sarch Metadata</option>
+        </select>
+
+        <div id="showcase"></div>
 
       	<code>var yashe = YASHE(document.getElementById("showcase"));</code> <br>
         (or, if you would like to instantiate YASHE from an existing text area, use <code>var yashe = YASHE.fromTextArea(document.getElementById('textAreaItem'));</code>
@@ -93,7 +78,8 @@
           <li>Persistent values (optional): your query is stored for easier reuse between browser sessions</li>
           <li>Prefix definition autocompletion (using <a href="http://prefix.cc" target="_blank">prefix.cc</a>)</li>
           <li>Prefix and ShEx keywords autocompletion</li>
-          <li>Wikidata property and entity autocompletion (using the <a href="https://www.mediawiki.org/wiki/API:Main_page" target="_blank">MediaWiki API</a>)</li>
+          <li>Wikidata property and entity autocompletion (using the <a href="https://www.mediawiki.org/wiki/API:Main_page" target="_blank">MediaWiki API</a>)</li> 
+          <img  style="float: right;" src="doc/imgs/Wikidata_stamp.png" width="300" height="200">
           <li>Information tooltip when hovering over wikidata properties and entities (using the <a href="https://www.mediawiki.org/wiki/API:Main_page" target="_blank">MediaWiki API</a>)</li>
           <li>Handy <a href="doc/#keyboardShortcuts">keyboard shortcuts</a></li>
           <li>Integrated buttons that alows to:</li>
@@ -102,22 +88,19 @@
             <li>Download the editor content as a ShEx file</li>
             <li>Copy the editor content to the clipboard</li>
             <li>Delete all the editor content</li>
+            <li>Change between light and dark mode</li>
             <li>FullScreen Mode (F11 shortcut too!)</li>
           </ul>
           
-
           </ul>
         
           </div>
           </div>
-          <img src="doc/imgs/poweredWiki.svg" width="200" height="80">
-
-          <br>
-          <br>
-          
+         
+    
 
           <h1>Download the latest release</h1>
-          <p>We provide the following options to download YASHE and use it in your own projects</p>
+          <p>We provide the following options to download YASHE and use it in your own projects:</p>
           <div id="downloads">
             <div class="row">
               <div id="cdnDownload" class="row">

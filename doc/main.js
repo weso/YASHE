@@ -38,10 +38,7 @@ $(document).ready(function() {
 
     //get the ShEx examples
     var rdfShape,wikiShape,japanShape
-    
     var exSelector = document.getElementById('exSelector')
-    var themeSlider = document.getElementById('themeSlider')
-
 
     //Parse Shapes
     $.get('./doc/shapes/rdfBookShape.txt', function(data) {
@@ -78,17 +75,5 @@ $(document).ready(function() {
         
     })
 
-    //Theme Listener
-    themeSlider.addEventListener('change', function(e) {
-        
-        if(this.checked) {
-            yashe.setOption("theme","dark")
-        } else {
-            yashe.setOption("theme","wiki")
-        }
-        yashe.drawButtons()
-    })
-
 
 });
-

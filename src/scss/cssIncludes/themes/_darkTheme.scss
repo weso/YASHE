@@ -1,6 +1,11 @@
 /* DARK THEME  */
 
-.cm-s-dark.CodeMirror { background: #2B2B2B; color: #A9B7C6; } 
+.cm-s-dark.CodeMirror { 
+  background: #2B2B2B; 
+  color: #A9B7C6; 
+  border: 10px;
+}
+
 
 .cm-s-dark .cm-keyword {color: #708;}
 .cm-s-dark .cm-atom {color: #219;}
