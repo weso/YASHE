@@ -89,6 +89,31 @@ var drawButtons = function(yashe){
 
 
     /**
+     * theme button
+     */
+
+    var themeButton = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.theme))
+    .addClass("yashe_themeBtn")
+    .attr('id','themeBtn')
+    .attr("title", 'Change the theme')
+    .click(function() { 
+      
+      var themeValue = 'wiki'
+      if(yashe.getOption('theme') == 'wiki'){
+        themeValue='dark'
+      }
+      
+      yashe.setOption("theme",themeValue)
+    
+    
+    }))
+
+    yashe.buttons.append(themeButton);
+
+
+    /**
        * draw fullscreen button
        */
   

@@ -35,17 +35,10 @@ $(document).ready(function() {
         });
     }
 
-/*
+
     //get the ShEx examples
     var rdfShape,wikiShape,japanShape
-    
-    var btnRDF = document.getElementById('btnRDF')
-    var btnWiki = document.getElementById('btnWiki')
-    var btnJapan = document.getElementById('btnJapan')
-
-
-    var themeSlider = document.getElementById('themeSlider')
-
+    var exSelector = document.getElementById('exSelector')
 
     //Parse Shapes
     $.get('./doc/shapes/rdfBookShape.txt', function(data) {
@@ -61,24 +54,26 @@ $(document).ready(function() {
     }, 'text');
 
 
-    //Examples Listeners
-    btnRDF.addEventListener('click', function(e) { yashe.setValue(rdfShape)})
-    btnWiki.addEventListener('click', function(e) { yashe.setValue(wikiShape)})
-    btnJapan.addEventListener('click', function(e) { yashe.setValue(japanShape)})
+    //Examples Listener
+    exSelector.addEventListener('change', function(e) {
 
+        switch(exSelector.value){
 
-    //Theme Listener
-    themeSlider.addEventListener('change', function(e) {
-        
-        if(this.checked) {
-            yashe.setOption("theme","dark")
-        } else {
-            yashe.setOption("theme","wiki")
+            case "rdf":
+                yashe.setValue(rdfShape)
+                break
+
+            case "wiki":
+                yashe.setValue(wikiShape)
+                break
+
+            case "japan":
+                yashe.setValue(japanShape)
+                break
+
         }
-        yashe.drawButtons()
+        
     })
 
 
-    */
 });
-
