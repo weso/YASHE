@@ -572,10 +572,12 @@
       height: 20px; }
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
+    .yashe .fullscreenToggleBtns .yashe_smallscreenBtnWhite {
+      display: none; }
   .yashe .yashe_fullscreenBtn:hover {
-    background: #DA4567; }
+    fill: #DA4567; }
   .yashe .yashe_smallscreenBtn:hover {
-    background: #DA4567; }
+    fill: #DA4567; }
   .yashe .downloadBtns {
     display: inline-block;
     margin: 2px; }
@@ -616,6 +618,16 @@
   .yashe .yashe_downloadBtn {
     margin-top: 2px;
     display: inline-block; }
+  .yashe .downloadBtnsWhite {
+    fill: white;
+    display: inline-block;
+    margin: 2px; }
+    .yashe .downloadBtnsWhite div {
+      cursor: pointer;
+      width: 20px;
+      height: 20px; }
+  .yashe .downloadBtnsWhite:hover {
+    fill: #DA4567; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

@@ -88,7 +88,7 @@ var drawButtons = function(yashe){
     yashe.buttons.append(deleteButton);
 
 
-    /**
+/**
      * theme button
      */
 
@@ -101,12 +101,22 @@ var drawButtons = function(yashe){
     .click(function() { 
       
       var themeValue = 'wiki'
+      var btnClass = 'downloadBtns'
       if(yashe.getOption('theme') == 'wiki'){
         themeValue='dark'
+        btnClass = 'downloadBtnsWhite'
       }
       
+
       yashe.setOption("theme",themeValue)
-    
+
+      
+      uploadButton.attr('class',btnClass)
+      downloadButton.attr('class',btnClass)
+      deleteButton.attr('class',btnClass)
+      copyButton.attr('class',btnClass)
+      themeButton.attr('class',btnClass)
+
     }))
 
     yashe.buttons.append(themeButton);
@@ -114,8 +124,8 @@ var drawButtons = function(yashe){
 
     /**
        * draw fullscreen button
-       */
-  
+     
+  */
     var toggleFullscreen = $("<div>", {
       class: "fullscreenToggleBtns"
     })
@@ -139,6 +149,22 @@ var drawButtons = function(yashe){
       );
     yashe.buttons.append(toggleFullscreen);
   
+
+  /*
+    var full = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.fullscreen))
+    .addClass("yashe_fullBtn")
+    .attr('id','fullBtn')
+    .attr("title", "Fullscreen")
+    .click(function() { yashe.setValue("")}))
+
+    yashe.buttons.append(full);
+
+
+
+    document.getElementById('themeBtn').remove()
+*/
   }
 
 

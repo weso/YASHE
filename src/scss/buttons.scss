@@ -130,16 +130,19 @@
   			display: none;
 		  }
 		  
+		  .yashe_smallscreenBtnWhite {
+			display: none;
+		}
 			
 		
 	  }
 	  
-	  .yashe_fullscreenBtn:hover {
-		background: #DA4567
-		}
-		.yashe_smallscreenBtn:hover{
-			background: #DA4567
-		}
+	.yashe_fullscreenBtn:hover {
+	fill: #DA4567
+	}
+	.yashe_smallscreenBtn:hover{
+		fill: #DA4567
+	}
 
 	  .downloadBtns {
 		display:inline-block;
@@ -203,4 +206,21 @@
 		margin-top: 2px;
 		display:inline-block;
 	}
+
+	.downloadBtnsWhite {
+		fill: white;
+		display:inline-block;
+		margin:2px;
+		div {
+			cursor:pointer;
+		  width: 20px;
+		  height: 20px;
+		}
+		}
+
+	
+	.downloadBtnsWhite:hover {
+		fill: #DA4567;
+	}
+
 
