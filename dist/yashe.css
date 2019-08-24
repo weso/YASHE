@@ -580,8 +580,10 @@
       width: 20px;
       height: 20px; }
   .yashe .downloadBtns:hover {
+    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1); }
+  .yashe .downloadBtns:active {
     fill: #DA4567;
-    margin-top: 1px; }
+    transform: translateY(4px); }
   .yashe .inputfileBtn {
     width: 0.1px;
     height: 0.1px;

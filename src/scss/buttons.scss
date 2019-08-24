@@ -145,10 +145,20 @@
 		}
 
 	
-	.downloadBtns:hover {
-		fill: #DA4567;
-		margin-top: 1px;
-	}
+
+		.downloadBtns:hover {
+			filter: 
+			invert(0.4)
+			sepia(0.5)
+			hue-rotate(313.2deg)
+			saturate(16.2)
+			brightness(1);
+		}
+
+		.downloadBtns:active {
+			fill: #DA4567;
+			transform: translateY(4px);
+		}
 
 	
 
