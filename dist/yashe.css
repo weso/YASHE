@@ -689,7 +689,8 @@
     /* Opera 7 */
     white-space: pre-wrap;
     /* css-3 */
-    white-space: normal; }
+    white-space: normal;
+    z-index: 1200; }
   .yashe .notificationLoader {
     width: 18px;
     height: 18px;
