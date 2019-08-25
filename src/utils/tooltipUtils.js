@@ -94,7 +94,7 @@ if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  &
         left: posX + 2
       } ).addClass( 'wikibaseRDFtoolTip' )
       .html("<div class='wikidata_tooltip'>"+entity+" <br><br>"+description+"</div>")
-      .css(theme)
+      .css(theme).css('z-index', 1200)
       .appendTo('body')
     }
   })
@@ -102,7 +102,6 @@ if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  &
   };  
 
 }
-
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
 var checkEntity = function (entity){

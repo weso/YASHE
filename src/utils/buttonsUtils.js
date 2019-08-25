@@ -88,12 +88,9 @@ var drawButtons = function(yashe){
     yashe.buttons.append(deleteButton);
 
 
-/**
+    /**
      * theme button
      */
-
-   
-
     var themeButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.theme))
@@ -120,9 +117,7 @@ var drawButtons = function(yashe){
       $('#themeBtn').css('fill', color)
       $('#fullBtn').css('fill', color)
       $('#smallBtn').css('fill', color)
-
-
-    
+ 
 
     }))
 
@@ -130,9 +125,8 @@ var drawButtons = function(yashe){
 
 
     /**
-       * draw fullscreen button
-     
-  */
+       * draw fullscreen button   
+    */
     var toggleFullscreen = $("<div>", {
       class: "fullscreenToggleBtns"
     })
