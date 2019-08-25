@@ -1,9 +1,9 @@
 {
   "name": "yashe",
   "version": "2.11.19",
-  "homepage": "http://yashe.yasgui.org",
+  "homepage": "http://www.weso.es/YASHE/",
   "authors": [
-    "Laurens Rietveld <laurens.rietveld@gmail.com>"
+    "Pablo Menéndez <pabloyo97@hotmail.com>"
   ],
   "description": "Yet Another SPARQL Query Editor",
   "main": "dist/yashe.bundled.min.js",
