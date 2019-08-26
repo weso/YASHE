@@ -101,52 +101,15 @@
    			<code>YASHE.registerAutocompleter(name: String, autocompleter: function)</code>
    			<p>Register an <a href="#autocompletions">autocompleter</a> in YASHE. This automatically enables the completer as well</p>
  		</div>
-   		<div class="doc">
-   			<code>YASHE.consumeShareLink(doc: yashe, urlArgs: object)</code>
-   			<p>Consume the share link, by parsing the document URL for possible yashe arguments, and setting the appropriate values in the YASHE doc</p>
- 		</div>
- 		<div class="doc">
- 			<code>YASHE.createShareLink(doc: yashe) → object: </code>
-			<p>Create a share link</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.determineId(doc: yashe)</code>
-			<p>Determine unique ID of the YASHE object. Useful when several objects are
-			loaded on the same page, and all have 'persistency' enabled. Currently, the
-			ID is determined by selecting the nearest parent in the DOM with an ID set</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.fetchFromLov(doc: yashe, partialToken: Object, type: "properties" | "classes", callback: Function)</code>
-			<p>Fetch property and class autocompletions the Linked Open Vocabulary services. Issues an async autocompletion call</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.fetchFromPrefixCc(doc: yashe)</code>
-			<p>Fetch prefixes from prefix.cc, and store in the YASHE object</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.getAcceptHeader(doc: yashe)</code>
-			<p>Get accept header for this particular query. Get JSON for regular queries, and text/plain for update queries</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.getAllVariableNames(doc: yashe, token: Object) → variableNames: Array</code>
-			<p>Fetch all the used variables names from this query</p>
-		</div>
+   
 		<div class="doc">
 			<code>YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object</code>
-			<p>When typing a query, this query is sometimes syntactically invalid, causing
+			<p>When typing a shape, this shape is sometimes syntactically invalid, causing
 			the current tokens to be incorrect This causes problem for autocompletion.
 			http://bla might result in two tokens: http:// and bla. We'll want to combine
 			these</p>
 		</div>
-		<div class="doc">
-			<code>YASHE.hideCompletionNotification(doc: yashe, autocompletionType: String)</code>
-			<p>Hide completion notification</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.showCompletionNotification(doc: yashe, autocompletionType: String)</code>
-			<p>Show notification</p>
-		</div>
-
+		
 
      	<h2 id="config">Configuration</h2>
      	This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
