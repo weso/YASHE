@@ -17,6 +17,7 @@ var $ = require("jquery"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
   buttonsUtils = require("./utils/buttonsUtils.js"),
+  prefixFold = require("./utils/prefixFold.js")
   Clipboard = require("clipboard");
 
 require("../lib/deparam.js");
@@ -24,7 +25,6 @@ require("codemirror/addon/fold/foldcode.js");
 require("codemirror/addon/fold/foldgutter.js");
 require("codemirror/addon/fold/xml-fold.js");
 require("codemirror/addon/fold/brace-fold.js");
-require("./prefixes/prefixFold.js");
 require("codemirror/addon/hint/show-hint.js");
 require("codemirror/addon/search/searchcursor.js");
 require("codemirror/addon/edit/matchbrackets.js");
@@ -102,7 +102,7 @@ var extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-      require("./prefixes/prefixFold.js").findFirstPrefixLine(yashe),
+      prefixFold.findFirstPrefixLine(yashe),
       root.fold.prefix,
       collapse ? "fold" : "unfold"
     );
@@ -211,10 +211,12 @@ var postProcessCmElement = function(yashe) {
   }, 300 ))
 
 
-
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
+
 };
+
+
 
 
 

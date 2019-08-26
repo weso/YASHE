@@ -1,9 +1,5 @@
 "use strict";
 /**
- * When typing a query, this query is sometimes syntactically invalid, causing
- * the current tokens to be incorrect This causes problem for autocompletion.
- * http://bla might result in two tokens: http:// and bla. We'll want to combine
- * these
  *
  * @param yashe {doc}
  * @param token {object}

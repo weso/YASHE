@@ -1,7 +1,7 @@
 "use strict";
 var $ = require("jquery"),
   yutils = require("yasgui-utils"),
-  imgs = require("./imgsUtils.js");
+  imgs = require("./imgs.js");
 
 var checkSyntax = function(yashe, deepcheck) {
     yashe.queryValid = true;

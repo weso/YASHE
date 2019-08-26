@@ -61,24 +61,10 @@
 			<code>yashe.getValue() → query: String</code>
 			<p>Get query value from editor (<a href="http://codemirror.net/doc/manual.html#getValue" target="_blank">see also</a>)</p>
 		</div>
+		
 		<div class="doc">
-			<code>yashe.query(function|object)</code>
-			<p>Execute query. Pass a callback function, or a configuration object (see
-			the sparql settings in the <a href="#config">configuration object</a> for possible values) I.e., you can change the
-			query configuration by either changing the default settings, changing the
-			settings of this document, or by passing query settings to this function</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getQueryMode() → string: </code>
-			<p>Fetch the query mode: 'query' or 'update'</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getQueryType() → string: </code>
-			<p>Fetch the query type (e.g. SELECT, ASK, DESCRIBE, CONSTRUCT etc)</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getPrefixesFromQuery() → object: </code>
-			<p>Fetch defined prefixes from query string</p>
+			<code>yashe.getDefinedPrefixes() → object: </code>
+			<p>Fetch defined prefixes</p>
 		</div>
 		<div class="doc">
 			<code>yashe.addPrefixes(prefixes: object)</code>
@@ -103,10 +89,6 @@
 		<div class="doc">
 			<code>yashe.storeBulkCompletions(type: String)</code>
 			<p>Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the <a href="#autocompletions">autocompletion</a> settings</p>
-		</div>
-   		<div class="doc">
-			<code>yashe.setBackdrop(show: boolean)</code>
-			<p>Hide or show gray backdrop</p>
 		</div>
    		<div class="doc">
 			<code>yashe.collapsePrefixes(collapse: boolean)</code>

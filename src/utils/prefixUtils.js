@@ -6,7 +6,7 @@
  * @param prefix
  */
 var addPrefixes = function(yashe, prefixes) {
-  var existingPrefixes = yashe.getPrefixesFromQuery();
+  var existingPrefixes = yashe.getDefinedPrefixes();
   //for backwards compatability, we stil support prefixes value as string (e.g. 'rdf: <http://fbfgfgf>'
   if (typeof prefixes == "string") {
     addPrefixAsString(yashe, prefixes);
