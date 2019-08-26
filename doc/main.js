@@ -37,20 +37,20 @@ $(document).ready(function() {
 
 
     //get the ShEx examples
-    var rdfShape,wikiShape,japanShape
+    var rdfBookEx,wikiEx,japanEx
     var exSelector = document.getElementById('exSelector')
 
     //Parse Shapes
-    $.get('./doc/shapes/rdfBookShape.txt', function(data) {
-        rdfShape = data
+    $.get('./doc/examples/rdfBookEx.txt', function(data) {
+        rdfBookEx = data
     }, 'text');
 
-    $.get('./doc/shapes/wikidataShape.txt', function(data) {
-        wikiShape = data
+    $.get('./doc/examples/wikidataEx.txt', function(data) {
+        wikiEx = data
     }, 'text');
 
-    $.get('./doc/shapes/jps.txt', function(data) {
-        japanShape = data
+    $.get('./doc/examples/japanEx.txt', function(data) {
+        japanEx = data
     }, 'text');
 
 
@@ -60,15 +60,15 @@ $(document).ready(function() {
         switch(exSelector.value){
 
             case "rdf":
-                yashe.setValue(rdfShape)
+                yashe.setValue(rdfBookEx)
                 break
 
             case "wiki":
-                yashe.setValue(wikiShape)
+                yashe.setValue(wikiEx)
                 break
 
             case "japan":
-                yashe.setValue(japanShape)
+                yashe.setValue(japanEx)
                 break
 
         }
