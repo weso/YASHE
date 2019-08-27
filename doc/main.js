@@ -34,46 +34,41 @@ $(document).ready(function() {
         $("#cdnDownload").hide();
         });
     }
-
-
-    //get the ShEx examples
-    var rdfBookEx,wikiEx,japanEx
-    var exSelector = document.getElementById('exSelector')
-
-    //Parse Shapes
-    $.get('./doc/examples/rdfBookEx.txt', function(data) {
-        rdfBookEx = data
-    }, 'text');
-
-    $.get('./doc/examples/wikidataEx.txt', function(data) {
-        wikiEx = data
-    }, 'text');
-
-    $.get('./doc/examples/japanEx.txt', function(data) {
-        japanEx = data
-    }, 'text');
-
-
-    //Examples Listener
-    exSelector.addEventListener('change', function(e) {
-
-        switch(exSelector.value){
-
-            case "rdf":
-                yashe.setValue(rdfBookEx)
-                break
-
-            case "wiki":
-                yashe.setValue(wikiEx)
-                break
-
-            case "japan":
-                yashe.setValue(japanEx)
-                break
-
-        }
-        
-    })
+    var gistContainer = $("#gistContainer");
+    if (gistContainer.length > 0) {
+      $.get("https://api.github.com/users/mistermboy/gists", function(data) {
+        var processLabel = function(origLabel) {
+          var label = origLabel.replace("#YASHE", "YASHE");
+          var splitted = label.split(" ");
+          if (splitted.length > 0) {
+            if ((splitted[0].indexOf("YASHE") == 0 || splitted[0].indexOf("YASR") == 0) && splitted[0].slice(-1) == ":") {
+              //we want to change "#YASQE: some gist" into "some gist". So, remove the first item
+              return splitted.splice(1).join(" ");
+            } else {
+              return splitted.join(" ");
+            }
+          } else {
+            return label;
+          }
+        };
+        data.forEach(function(gist) {
+          if (gist.description.indexOf("#YASHE") >= 0) {
+            var gistDiv = $("<div>").addClass("gist").addClass("well").appendTo(gistContainer);
+            $("<h4>").text(processLabel(gist.description)).appendTo(gistDiv);
+            var description = $("<p>").appendTo(gistDiv);
+            $.get(gist.url, function(gistFile) {
+              description.text(gistFile.files["YASHE.md"].content);
+            });
+            var buttonContainer = $("<p>").appendTo(gistDiv);
+            $(
+              "<a style='margin-left: 4px;' target='_blank' class='btn btn-default btn-sm' href='#' role='button'>Code <img class='pull-right gistIcon' src='imgs/blacktocat_black.png'></a>"
+            )
+              .attr("href", gist["html_url"])
+              .appendTo(buttonContainer);
+          }
+        });
+      });
+    }
 
 
 });
