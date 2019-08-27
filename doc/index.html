@@ -116,16 +116,16 @@
      	Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
      	<h3 id="defaults">Defaults</h3>
 		<div class="doc">
-			<code>value: String (default: "SELECT * WHERE {\n  ?sub ?pred ?obj .\n} \nLIMIT 10")</code>
-			<p>Query string</p>
+			<code>value: PREFIX : <http://example.org/> PREFIX schema: <http://schema.org/> PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>:User IRI { schema:name          xsd:string  ;schema:birthDate     xsd:date?  ;schema:gender        [ schema:Male schema:Female ] ;schema:knows         @:User* }</code>
+			<p>Shape string</p>
 		</div>
 		<div class="doc">
-			<code>autocompleters: array (default: ["prefixes", "properties", "classes", "variables"])</code>
+			<code>autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])</code>
 			<p>The list of enabled autocompletion plugins (See <a href="#autocompletions">this section</a> on how to write your own)</p>
 		</div>
 		<div class="doc">
 			<code>syntaxErrorCheck: boolean (default: true)</code>
-			<p>Whether to validate the SPARQL syntax</p>
+			<p>Whether to validate the ShEx syntax</p>
 		</div>
 		<div class="doc">
 			<code>collapsePrefixesOnLoad: boolean (default: false)</code>

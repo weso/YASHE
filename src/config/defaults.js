@@ -30,7 +30,6 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   tabMode: "indent",
   lineNumbers: true,
   lineWrapping: true,
-  backdrop: true,
   foldGutter: {
     rangeFinder: new YASHE.fold.combine(YASHE.fold.brace, YASHE.fold.prefix)
   },

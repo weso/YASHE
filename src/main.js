@@ -215,6 +215,8 @@ var postProcessCmElement = function(yashe) {
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
 
+  if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+
 };
 
 
