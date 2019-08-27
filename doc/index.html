@@ -149,23 +149,10 @@
 			<li><code>Esc</code>: Leave full-screen</li>
 			</ul>
 		</div>
-		<div class="doc">
-			<code>createShareLink: function (default: YASHE.createShareLink)</code>
-			<p>Show a button with which users can create a link to this query. Set this value to null to disable this functionality.
-			By default, this feature is enabled, and only the query value is appended to the link.
-			This function should return an object which is parseable by <a href="http://api.jquery.com/jQuery.param/" target="_blank">jQuery.param</a></p>
-		</div>
-    <div class="doc">
-      <code>createShortLink: function(string:url, function:callback) (default: null)</code>
-      <p>Allow users to create a short-link, for the URL generated in the previous function. The callback takes as argument a possible error string, and the shortened URL</p>
-    </div>
-		<div class="doc">
-			<code>consumeShareLink: function (default: YASHE.consumeShareLink)</code>
-			<p>The callback for consuming the arguments of the current URL</p>
-		</div>
+		
 		<div class="doc">
 			<code>persistent: function|string</code>
-			<p>Change persistency settings for the YASHE query value. Setting the values
+			<p>Change persistency settings for the YASHE content value. Setting the values
 			to null, will disable persistancy: nothing is stored between browser
 			sessions. Setting the values to a string (or a function which returns a
 			string), will store the query in localstorage using the specified string.
@@ -173,81 +160,7 @@
 			function, to avoid collissions when using multiple YASHE instances on one
 			page</p>
 		</div>
-		<div id="sparql" class="doc">
-			<code>sparql: object</code>
-			<p>Settings for querying sparql endpoints</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>showQueryButton: boolean (default: false)</code>
-			<p>Show a query button. You don't like it? Then disable this setting, and create your button which calls the query() function of the yashe document</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>endpoint: String|function (default: "http://dbpedia.org/sparql")</code>
-			<p>Endpoint to query</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>requestMethod: String|function (default: "POST")</code>
-			<p>Request method via which to access the SPARQL endpoint</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderSelect: String|function (default: "application/sparql-results+json,*/*;q=0.9")</code>
-			<p>Accept header for regular <code>SELECT</code> queries</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderGraph: String|function (default: "text/turtle,*/*;q=0.9")</code>
-			<p>Accept header for queries returning a graph (e.g. <code>CONSTRUCT</code>)</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderUpdate: String|function (default: "text/plain,*/*;q=0.9")</code>
-			<p>Accept header for update queries</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>namedGraphs: array (default: [])</code>
-			<p>Named graphs to query.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>defaultGraphs: array (default: [])</code>
-			<p>Default graphs to query.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>args: array (default: [])</code>
-			<p>Additional request arguments. Add them in the form: {name: "name", value: "value"}</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>headers: array (default: {})</code>
-			<p>Additional request headers</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>getQueryForAjax: function(doc: yashe) → string (default: null)</code>
-			<p>Modify the query before it is send via ajax request.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>queryName: string | function(doc: yashe) → string</code>
-			<p>A SPARQL query string is usually send with <code>?query=</code> is the payload for <code>SELECT</code>
-      queries, and <code>?update=</code> for update queries. By default, YASHE changes this behaviour dynamically depending on the query type.
-    This setting enables you to change this behaviour, by e.g. always sending queries with a <code>?query=</code> in the payload, even for update queries.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>callbacks: object</code>
-			<p>Set of ajax callbacks</p>
-		</div>
-
-		<div class="doc" style="margin-left: 60px;">
-			<code>beforeSend: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>complete: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>error: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>success: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
+	
 		<h3 id="autocompletions">Writing an Autocompletion Plugin</h3>
 		To register an autocompletion, one needs to execute the <code>YASHE.registerAutocompleter</code> <a href="#registerAutocompleter">function</a>.
 		Below, we describe the autocompletion function in more detail, and the object it should return.
