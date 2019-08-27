@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YASHE</title>
   <link rel="icon"  type="image/png" href="doc/imgs/favicon.png">
+
   <link href="dist/yashe.min.css" rel="stylesheet" type="text/css" />
   <link href="doc/doc.min.css" rel="stylesheet" type="text/css" />
 
@@ -29,9 +30,10 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">About</a></li>
-            <li><a target="_blank" href="http://yashe.yasgui.org/">Original YASHE</a></li>
-            <li><a target="_blank" href="http://laurensrietveld.nl">The author of YASGUI</a></li>
-            <li><a target="_blank" href="https://github.com/mistermboy/">The autor of YASHE</a></li>
+            <li><a href="doc/index.html">Documentation</a></li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/pablo-menéndez-suárez-106262a7/">About me</a></li>
+            <li><a target="_blank" href="http://yasqe.yasgui.org/">Original YASQE</a></li>
+            <li><a target="_blank" href="http://laurensrietveld.nl">The author of YASQE</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -152,19 +154,13 @@
 	    
     <script src="dist/yashe.bundled.min.js"></script>
     <script src="doc/doc.min.js"></script>
+    <script src="doc/home.js"></script>
     <script type="text/javascript">
+
       var yashe = YASHE(document.getElementById('showcase'), {
-      
-        shex: {
-          showQueryButton: true,
-          storeShape:false,
-          callbacks:{
-            success: function(data){
-              console.log("success", data);
-            }
-          }
-        }
+        persistent:null
       });
+
 
     </script>
 

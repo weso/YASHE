@@ -21,8 +21,10 @@
           <ul class="nav navbar-nav">
             <li><a href="../">About</a></li>
             <li class="active"><a href="#l">Documentation</a></li>
-            <li><a target="_blank" href="http://laurensrietveld.nl">About me</a></li>
-          </ul>
+            <li><a target="_blank" href="https://www.linkedin.com/in/pablo-menéndez-suárez-106262a7/">About me</a></li>
+			<li><a target="_blank" href="http://yasqe.yasgui.org/">Original YASQE</a></li>
+            <li><a target="_blank" href="http://laurensrietveld.nl">The author of YASQE</a></li>
+		</ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -61,24 +63,10 @@
 			<code>yashe.getValue() → query: String</code>
 			<p>Get query value from editor (<a href="http://codemirror.net/doc/manual.html#getValue" target="_blank">see also</a>)</p>
 		</div>
+		
 		<div class="doc">
-			<code>yashe.query(function|object)</code>
-			<p>Execute query. Pass a callback function, or a configuration object (see
-			the sparql settings in the <a href="#config">configuration object</a> for possible values) I.e., you can change the
-			query configuration by either changing the default settings, changing the
-			settings of this document, or by passing query settings to this function</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getQueryMode() → string: </code>
-			<p>Fetch the query mode: 'query' or 'update'</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getQueryType() → string: </code>
-			<p>Fetch the query type (e.g. SELECT, ASK, DESCRIBE, CONSTRUCT etc)</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getPrefixesFromQuery() → object: </code>
-			<p>Fetch defined prefixes from query string</p>
+			<code>yashe.getDefinedPrefixes() → object: </code>
+			<p>Fetch defined prefixes</p>
 		</div>
 		<div class="doc">
 			<code>yashe.addPrefixes(prefixes: object)</code>
@@ -105,10 +93,6 @@
 			<p>Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the <a href="#autocompletions">autocompletion</a> settings</p>
 		</div>
    		<div class="doc">
-			<code>yashe.setBackdrop(show: boolean)</code>
-			<p>Hide or show gray backdrop</p>
-		</div>
-   		<div class="doc">
 			<code>yashe.collapsePrefixes(collapse: boolean)</code>
 			<p>Collapsing prefixes if there are any. Use false to expand them.</p>
 		</div>
@@ -119,77 +103,37 @@
    			<code>YASHE.registerAutocompleter(name: String, autocompleter: function)</code>
    			<p>Register an <a href="#autocompletions">autocompleter</a> in YASHE. This automatically enables the completer as well</p>
  		</div>
-   		<div class="doc">
-   			<code>YASHE.consumeShareLink(doc: yashe, urlArgs: object)</code>
-   			<p>Consume the share link, by parsing the document URL for possible yashe arguments, and setting the appropriate values in the YASHE doc</p>
- 		</div>
- 		<div class="doc">
- 			<code>YASHE.createShareLink(doc: yashe) → object: </code>
-			<p>Create a share link</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.determineId(doc: yashe)</code>
-			<p>Determine unique ID of the YASHE object. Useful when several objects are
-			loaded on the same page, and all have 'persistency' enabled. Currently, the
-			ID is determined by selecting the nearest parent in the DOM with an ID set</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.fetchFromLov(doc: yashe, partialToken: Object, type: "properties" | "classes", callback: Function)</code>
-			<p>Fetch property and class autocompletions the Linked Open Vocabulary services. Issues an async autocompletion call</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.fetchFromPrefixCc(doc: yashe)</code>
-			<p>Fetch prefixes from prefix.cc, and store in the YASHE object</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.getAcceptHeader(doc: yashe)</code>
-			<p>Get accept header for this particular query. Get JSON for regular queries, and text/plain for update queries</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.getAllVariableNames(doc: yashe, token: Object) → variableNames: Array</code>
-			<p>Fetch all the used variables names from this query</p>
-		</div>
+   
 		<div class="doc">
 			<code>YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object</code>
-			<p>When typing a query, this query is sometimes syntactically invalid, causing
+			<p>When typing a shape, this shape is sometimes syntactically invalid, causing
 			the current tokens to be incorrect This causes problem for autocompletion.
 			http://bla might result in two tokens: http:// and bla. We'll want to combine
 			these</p>
 		</div>
-		<div class="doc">
-			<code>YASHE.hideCompletionNotification(doc: yashe, autocompletionType: String)</code>
-			<p>Hide completion notification</p>
-		</div>
-		<div class="doc">
-			<code>YASHE.showCompletionNotification(doc: yashe, autocompletionType: String)</code>
-			<p>Show notification</p>
-		</div>
-
+		
 
      	<h2 id="config">Configuration</h2>
      	This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
      	Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
      	<h3 id="defaults">Defaults</h3>
 		<div class="doc">
-			<code>value: String (default: "SELECT * WHERE {\n  ?sub ?pred ?obj .\n} \nLIMIT 10")</code>
-			<p>Query string</p>
+			<code>value: PREFIX : <http://example.org/> PREFIX schema: <http://schema.org/> PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>:User IRI { schema:name          xsd:string  ;schema:birthDate     xsd:date?  ;schema:gender        [ schema:Male schema:Female ] ;schema:knows         @:User* }</code>
+			<p>Shape string</p>
 		</div>
 		<div class="doc">
-			<code>autocompleters: array (default: ["prefixes", "properties", "classes", "variables"])</code>
+			<code>autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])</code>
 			<p>The list of enabled autocompletion plugins (See <a href="#autocompletions">this section</a> on how to write your own)</p>
 		</div>
 		<div class="doc">
 			<code>syntaxErrorCheck: boolean (default: true)</code>
-			<p>Whether to validate the SPARQL syntax</p>
+			<p>Whether to validate the ShEx syntax</p>
 		</div>
 		<div class="doc">
 			<code>collapsePrefixesOnLoad: boolean (default: false)</code>
 			<p>Collapse prefixes on page load</p>
 		</div>
-	    <div class="doc">
-	      <code>backdrop: boolean|integer (default: false)</code>
-	      <p>Enable a gray backdrop on the YASHE instance when a query is being executed. Setting the value to an integer will influence the 'hide' and 'show' animation of the backdrop (set to zero to disable animation)</p>
-	    </div>
+	 
 		<div class="doc" id="keyboardShortcuts">
 			<code>extraKeys: object</code>
 			<p>Extra shortcut keys. Check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> manual on how to add your own</p>
@@ -199,34 +143,18 @@
 			<li><code>[Ctrl|Cmd]-Space</code>: Trigger Autocompletion</li>
 			<li><code>[Ctrl|Cmd]-D</code> and <code>[Ctrl|Cmd]-D</code>: Delete current/selected line(s)</li>
 			<li><code>[Ctrl|Cmd]-/</code>: Comment or uncomment current/selected line(s)</li>
-			<li><code>[Ctrl|Cmd]-Alt-Down</code>: Copy line down</li>
-			<li><code>[Ctrl|Cmd]-Alt-Up</code>: Copy line up</li>
+			<li><code>[Ctrl|Cmd]-Down</code>: Copy line down</li>
+			<li><code>[Ctrl|Cmd]-Up</code>: Copy line up</li>
 			<li><code>[Ctrl|Cmd]-Shift-F</code>: Auto-format/indent selected lines</li>
-			<li><code>[Ctrl|Cmd]-]</code>: Indent current/selected line(s) more</li>
-			<li><code>[Ctrl|Cmd]-[</code>: Indent current/selected line(s) less</li>
-			<li><code>[Ctrl|Cmd]-S</code>: Save current query in local storage</li>
-			<li><code>[Ctrl|Cmd]-Enter</code>: Execute Query</li>
+			<li><code>[Ctrl|Cmd]-S</code>: Save current content in local storage</li>
 			<li><code>F11</code>: Set query editor full-screen (or leave full-screen)</li>
 			<li><code>Esc</code>: Leave full-screen</li>
 			</ul>
 		</div>
-		<div class="doc">
-			<code>createShareLink: function (default: YASHE.createShareLink)</code>
-			<p>Show a button with which users can create a link to this query. Set this value to null to disable this functionality.
-			By default, this feature is enabled, and only the query value is appended to the link.
-			This function should return an object which is parseable by <a href="http://api.jquery.com/jQuery.param/" target="_blank">jQuery.param</a></p>
-		</div>
-    <div class="doc">
-      <code>createShortLink: function(string:url, function:callback) (default: null)</code>
-      <p>Allow users to create a short-link, for the URL generated in the previous function. The callback takes as argument a possible error string, and the shortened URL</p>
-    </div>
-		<div class="doc">
-			<code>consumeShareLink: function (default: YASHE.consumeShareLink)</code>
-			<p>The callback for consuming the arguments of the current URL</p>
-		</div>
+		
 		<div class="doc">
 			<code>persistent: function|string</code>
-			<p>Change persistency settings for the YASHE query value. Setting the values
+			<p>Change persistency settings for the YASHE content value. Setting the values
 			to null, will disable persistancy: nothing is stored between browser
 			sessions. Setting the values to a string (or a function which returns a
 			string), will store the query in localstorage using the specified string.
@@ -234,81 +162,7 @@
 			function, to avoid collissions when using multiple YASHE instances on one
 			page</p>
 		</div>
-		<div id="sparql" class="doc">
-			<code>sparql: object</code>
-			<p>Settings for querying sparql endpoints</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>showQueryButton: boolean (default: false)</code>
-			<p>Show a query button. You don't like it? Then disable this setting, and create your button which calls the query() function of the yashe document</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>endpoint: String|function (default: "http://dbpedia.org/sparql")</code>
-			<p>Endpoint to query</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>requestMethod: String|function (default: "POST")</code>
-			<p>Request method via which to access the SPARQL endpoint</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderSelect: String|function (default: "application/sparql-results+json,*/*;q=0.9")</code>
-			<p>Accept header for regular <code>SELECT</code> queries</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderGraph: String|function (default: "text/turtle,*/*;q=0.9")</code>
-			<p>Accept header for queries returning a graph (e.g. <code>CONSTRUCT</code>)</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>acceptHeaderUpdate: String|function (default: "text/plain,*/*;q=0.9")</code>
-			<p>Accept header for update queries</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>namedGraphs: array (default: [])</code>
-			<p>Named graphs to query.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>defaultGraphs: array (default: [])</code>
-			<p>Default graphs to query.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>args: array (default: [])</code>
-			<p>Additional request arguments. Add them in the form: {name: "name", value: "value"}</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>headers: array (default: {})</code>
-			<p>Additional request headers</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>getQueryForAjax: function(doc: yashe) → string (default: null)</code>
-			<p>Modify the query before it is send via ajax request.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-		<code>queryName: string | function(doc: yashe) → string</code>
-			<p>A SPARQL query string is usually send with <code>?query=</code> is the payload for <code>SELECT</code>
-      queries, and <code>?update=</code> for update queries. By default, YASHE changes this behaviour dynamically depending on the query type.
-    This setting enables you to change this behaviour, by e.g. always sending queries with a <code>?query=</code> in the payload, even for update queries.</p>
-		</div>
-		<div class="doc" style="margin-left: 30px;">
-			<code>callbacks: object</code>
-			<p>Set of ajax callbacks</p>
-		</div>
-
-		<div class="doc" style="margin-left: 60px;">
-			<code>beforeSend: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>complete: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>error: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
-		<div class="doc" style="margin-left: 60px;">
-			<code>success: function (default: null)</code>
-			<p>See <a href="https://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a> for more information</p>
-		</div>
+	
 		<h3 id="autocompletions">Writing an Autocompletion Plugin</h3>
 		To register an autocompletion, one needs to execute the <code>YASHE.registerAutocompleter</code> <a href="#registerAutocompleter">function</a>.
 		Below, we describe the autocompletion function in more detail, and the object it should return.

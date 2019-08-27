@@ -17,6 +17,7 @@ var $ = require("jquery"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
   buttonsUtils = require("./utils/buttonsUtils.js"),
+  prefixFold = require("./utils/prefixFold.js")
   Clipboard = require("clipboard");
 
 require("../lib/deparam.js");
@@ -24,7 +25,6 @@ require("codemirror/addon/fold/foldcode.js");
 require("codemirror/addon/fold/foldgutter.js");
 require("codemirror/addon/fold/xml-fold.js");
 require("codemirror/addon/fold/brace-fold.js");
-require("./prefixes/prefixFold.js");
 require("codemirror/addon/hint/show-hint.js");
 require("codemirror/addon/search/searchcursor.js");
 require("codemirror/addon/edit/matchbrackets.js");
@@ -102,7 +102,7 @@ var extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-      require("./prefixes/prefixFold.js").findFirstPrefixLine(yashe),
+      prefixFold.findFirstPrefixLine(yashe),
       root.fold.prefix,
       collapse ? "fold" : "unfold"
     );
@@ -166,7 +166,7 @@ var postProcessCmElement = function(yashe) {
 
   //Trigger of the button with id="copy"
   //Copies the contents of the editor in the clipboard
-  new Clipboard('#copy', {
+  new Clipboard('#copyBtn', {
     text: function(trigger) {
         return yashe.getValue();
     }
@@ -176,20 +176,21 @@ var postProcessCmElement = function(yashe) {
   /**
 	 * Set doc value if option storeShape is activated
 	 */
-  if(yashe.options.shex.storeShape){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
       if (valueFromStorage) yashe.setValue(valueFromStorage);
     }
-  }
+
 
   /**
 	 * Add event handlers
 	 */
   yashe.on("blur", function(yashe, eventInfo) {
-    root.storeQuery(yashe);
+    root.storeContent(yashe);
   });
+
+
   yashe.on("change", function(yashe, eventInfo) {
     checkSyntax(yashe);
   });
@@ -211,14 +212,18 @@ var postProcessCmElement = function(yashe) {
   }, 300 ))
 
 
-
   yashe.prevQueryValid = false;
   checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
+
+  if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+
 };
 
 
 
-root.storeQuery = function(yashe) {
+
+
+root.storeContent = function(yashe) {
   var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
   if (storageId) {
     yutils.storage.set(storageId, yashe.getValue(), "month", yashe.options.onQuotaExceeded);

@@ -1,18 +1,21 @@
 {
   "name": "yashe",
-  "version": "2.11.19",
-  "homepage": "http://yashe.yasgui.org",
+  "version": "1.1.2",
+  "homepage": "http://www.weso.es/YASHE/",
   "authors": [
-    "Laurens Rietveld <laurens.rietveld@gmail.com>"
+    "Pablo Menéndez <pabloyo97@hotmail.com>"
   ],
-  "description": "Yet Another SPARQL Query Editor",
+  "description": "Yet Another ShEx Editor",
   "main": "dist/yashe.bundled.min.js",
   "moduleType": [
     "globals"
   ],
   "keywords": [
-    "SPARQL",
-    "Linked Data"
+    "ShEx",
+    "Semantic Web",
+    "Editor",
+    "Linked Data",
+    "JavaScript"
   ],
   "license": "MIT",
   "ignore": [

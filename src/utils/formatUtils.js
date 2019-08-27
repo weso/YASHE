@@ -1,3 +1,5 @@
+var CodeMirror = require("codemirror")
+
 "use strict";
 var commentLines = function(yashe) {
     var startLine = yashe.getCursor(true).line;
