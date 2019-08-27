@@ -17,7 +17,7 @@ var $ = require("jquery"),
   tooltipUtils = require("./utils/tooltipUtils.js"),
   formatUtils = require('./utils/formatUtils.js'),
   buttonsUtils = require("./utils/buttonsUtils.js"),
-  prefixFold = require("./utils/prefixFold.js")
+  prefixFold = require("./utils/prefixFold.js"),
   Clipboard = require("clipboard");
 
 require("../lib/deparam.js");
