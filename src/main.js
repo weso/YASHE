@@ -166,7 +166,7 @@ var postProcessCmElement = function(yashe) {
 
   //Trigger of the button with id="copy"
   //Copies the contents of the editor in the clipboard
-  new Clipboard('#copy', {
+  new Clipboard('#copyBtn', {
     text: function(trigger) {
         return yashe.getValue();
     }
@@ -176,20 +176,21 @@ var postProcessCmElement = function(yashe) {
   /**
 	 * Set doc value if option storeShape is activated
 	 */
-  if(yashe.options.shex.storeShape){
     var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
     if (storageId) {
       var valueFromStorage = yutils.storage.get(storageId);
       if (valueFromStorage) yashe.setValue(valueFromStorage);
     }
-  }
+
 
   /**
 	 * Add event handlers
 	 */
   yashe.on("blur", function(yashe, eventInfo) {
-    root.storeQuery(yashe);
+    root.storeContent(yashe);
   });
+
+
   yashe.on("change", function(yashe, eventInfo) {
     checkSyntax(yashe);
   });
@@ -220,7 +221,7 @@ var postProcessCmElement = function(yashe) {
 
 
 
-root.storeQuery = function(yashe) {
+root.storeContent = function(yashe) {
   var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
   if (storageId) {
     yutils.storage.set(storageId, yashe.getValue(), "month", yashe.options.onQuotaExceeded);
