@@ -6,8 +6,30 @@
 ![ISUES](https://img.shields.io/github/issues/weso/YASHE?color=green)
 ![LICENSE](https://img.shields.io/github/license/weso/YASHE?color=blueviolet)
 
+# YASHE
 *YASHE* (Yet Another ShEx Editor) is a [ShEx](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). For more information about *YASHE*, its features, and a HOWTO
 for including it in your own web site, visit http://www.weso.es/YASHE/
+
+## Features
+
+* Completely client-side
+* ShEx syntax highlighting and error checking
+* Light and Dark modes
+* Extremely customizable: All functions and handlers from the CodeMirror library are accessible
+* Persistent values (optional): your query is stored for easier reuse between browser sessions
+* Prefix definition autocompletion (using prefix.cc)
+* Prefix and ShEx keywords autocompletion
+* Wikidata property and entity autocompletion (using the MediaWiki API)
+* Information tooltip when hovering over wikidata properties and entities (using the MediaWiki API)
+* Handy keyboard shortcuts
+* Integrated buttons that alows to:
+     * Upload ShEx files
+     * Download the editor content as a ShEx file
+     * Copy the editor content to the clipboard
+     * Delete all the editor content
+     * Change between light and dark mode
+     * FullScreen Mode (F11 shortcut too!)
+
 
 ## Download the latest release
 
