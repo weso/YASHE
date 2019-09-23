@@ -330,7 +330,6 @@ tm_keywords([
 'FRACTIONDIGITS',
 'CLOSED',
 'EXTRA'
-
 ]).
 
 % Other tens representing fixed, case sensitive, strings
