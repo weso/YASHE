@@ -311,7 +311,6 @@ tm_keywords([
 
 'BASE',
 'PREFIX',
-'IMPORT',
 'EXTERNAL',
 'OR',
 'AND',
