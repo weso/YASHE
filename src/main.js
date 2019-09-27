@@ -98,11 +98,13 @@ const extendCmInstance = function(yashe) {
 
 
   /**
-   *
+   * Returns the entire token
+
+   * @return {object} token
    *
   */
-  yashe.getCompleteToken = function(token, cur) {
-    return tokenUtils.getCompleteToken(yashe, token, cur);
+  yashe.getCompleteToken = function() {
+    return tokenUtils.getCompleteToken(yashe);
   };
   yashe.getPreviousNonWsToken = function(line, token) {
     return tokenUtils.getPreviousNonWsToken(yashe, line, token);
