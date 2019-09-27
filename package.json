@@ -19,6 +19,8 @@
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
     "browserify-transform-tools": "^1.6.0",
+    "eslint": "^6.4.0",
+    "eslint-config-google": "^0.14.0",
     "exorcist": "^0.4.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",

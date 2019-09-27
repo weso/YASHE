@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 //make sure any console statements
 window.console = window.console || {
   log: function() {}
@@ -7,30 +7,30 @@ window.console = window.console || {
 /**
  * Load libraries and utils
  */
-var $ = require("jquery"),
-  CodeMirror = require("codemirror"),
-  utils = require("./utils/baseUtils.js"),
-  yutils = require("yasgui-utils"),
-  prefixUtils = require("./utils/prefixUtils.js"),
-  tokenUtils = require("./utils/tokenUtils.js"),
-  syntaxUtils = require("./utils/syntaxUtils.js"),
-  tooltipUtils = require("./utils/tooltipUtils.js"),
+var $ = require('jquery'),
+  CodeMirror = require('codemirror'),
+  utils = require('./utils/baseUtils.js'),
+  yutils = require('yasgui-utils'),
+  prefixUtils = require('./utils/prefixUtils.js'),
+  tokenUtils = require('./utils/tokenUtils.js'),
+  syntaxUtils = require('./utils/syntaxUtils.js'),
+  tooltipUtils = require('./utils/tooltipUtils.js'),
   formatUtils = require('./utils/formatUtils.js'),
-  buttonsUtils = require("./utils/buttonsUtils.js"),
-  prefixFold = require("./utils/prefixFold.js"),
-  Clipboard = require("clipboard");
+  buttonsUtils = require('./utils/buttonsUtils.js'),
+  prefixFold = require('./utils/prefixFold.js'),
+  Clipboard = require('clipboard');
 
-require("../lib/deparam.js");
-require("codemirror/addon/fold/foldcode.js");
-require("codemirror/addon/fold/foldgutter.js");
-require("codemirror/addon/fold/xml-fold.js");
-require("codemirror/addon/fold/brace-fold.js");
-require("codemirror/addon/hint/show-hint.js");
-require("codemirror/addon/search/searchcursor.js");
-require("codemirror/addon/edit/matchbrackets.js");
-require("codemirror/addon/runmode/runmode.js");
-require("codemirror/addon/display/fullscreen.js");
-require("../lib/grammar/tokenizer.js");
+require('../lib/deparam.js');
+require('codemirror/addon/fold/foldcode.js');
+require('codemirror/addon/fold/foldgutter.js');
+require('codemirror/addon/fold/xml-fold.js');
+require('codemirror/addon/fold/brace-fold.js');
+require('codemirror/addon/hint/show-hint.js');
+require('codemirror/addon/search/searchcursor.js');
+require('codemirror/addon/edit/matchbrackets.js');
+require('codemirror/addon/runmode/runmode.js');
+require('codemirror/addon/display/fullscreen.js');
+require('../lib/grammar/tokenizer.js');
 
 /**
  * Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on configurability)
@@ -42,8 +42,8 @@ require("../lib/grammar/tokenizer.js");
  * @return {doc} YASHE document
  */
 var root = (module.exports = function(parent, config) {
-  var rootEl = $("<div>", {
-    class: "yashe"
+  var rootEl = $('<div>', {
+    class: 'yashe'
   }).appendTo($(parent));
   config = extendConfig(config);
   var yashe = extendCmInstance(CodeMirror(rootEl[0], config));
@@ -80,7 +80,7 @@ var extendCmInstance = function(yashe) {
 
 
   //instantiate autocompleters
-  yashe.autocompleters = require("./autocompleters/autocompleterBase.js")(root, yashe);
+  yashe.autocompleters = require('./autocompleters/autocompleterBase.js')(root, yashe);
   if (yashe.options.autocompleters) {
     yashe.options.autocompleters.forEach(function(name) {
       if (root.Autocompleters[name]) yashe.autocompleters.init(name, root.Autocompleters[name]);
@@ -104,7 +104,7 @@ var extendCmInstance = function(yashe) {
     yashe.foldCode(
       prefixFold.findFirstPrefixLine(yashe),
       root.fold.prefix,
-      collapse ? "fold" : "unfold"
+      collapse ? 'fold' : 'unfold'
     );
   };  
 
@@ -150,7 +150,7 @@ var addCompleterToSettings = function(settings, name) {
   settings.autocompleters.push(name);
 };
 var removeCompleterFromSettings = function(settings, name) {
-  if (typeof settings.autocompleters == "object") {
+  if (typeof settings.autocompleters == 'object') {
     var index = $.inArray(name, settings.autocompleters);
     if (index >= 0) {
       settings.autocompleters.splice(index, 1);
@@ -164,7 +164,7 @@ var postProcessCmElement = function(yashe) {
 
   root.drawButtons(yashe);
 
-  //Trigger of the button with id="copy"
+  //Trigger of the button with id='copy'
   //Copies the contents of the editor in the clipboard
   new Clipboard('#copyBtn', {
     text: function(trigger) {
@@ -186,19 +186,19 @@ var postProcessCmElement = function(yashe) {
   /**
 	 * Add event handlers
 	 */
-  yashe.on("blur", function(yashe, eventInfo) {
+  yashe.on('blur', function(yashe, eventInfo) {
     root.storeContent(yashe);
   });
 
 
-  yashe.on("change", function(yashe, eventInfo) {
+  yashe.on('change', function(yashe, eventInfo) {
     checkSyntax(yashe);
   });
-  yashe.on("changes", function() {
+  yashe.on('changes', function() {
     checkSyntax(yashe);
   });
 
-  yashe.on("scroll", function() {
+  yashe.on('scroll', function() {
     tooltipUtils.removeToolTip()
   });
 
@@ -226,7 +226,7 @@ var postProcessCmElement = function(yashe) {
 root.storeContent = function(yashe) {
   var storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
   if (storageId) {
-    yutils.storage.set(storageId, yashe.getValue(), "month", yashe.options.onQuotaExceeded);
+    yutils.storage.set(storageId, yashe.getValue(), 'month', yashe.options.onQuotaExceeded);
   }
 };
 
@@ -282,9 +282,9 @@ root.autoComplete = function(yashe) {
   yashe.autocompleters.autoComplete(false);
 };
 //include the autocompleters we provide out-of-the-box
-root.registerAutocompleter("prefixDefinition", require("./autocompleters/prefixDefinition.js"));
-root.registerAutocompleter("wikidata", require("./autocompleters/wikidata.js"));
-root.registerAutocompleter("prefixesAndKeywords", require("./autocompleters/prefixesAndKeywords.js"));
+root.registerAutocompleter('prefixDefinition', require('./autocompleters/prefixDefinition.js'));
+root.registerAutocompleter('wikidata', require('./autocompleters/wikidata.js'));
+root.registerAutocompleter('prefixesAndKeywords', require('./autocompleters/prefixesAndKeywords.js'));
 
 
  
@@ -301,8 +301,8 @@ root.fromTextArea = function(textAreaEl, config) {
   //add yashe div as parent (needed for styles to be manageable and scoped).
   //In this case, I -also- put it as parent el of the text area. This is wrapped in a div now
  
-  var rootEl = $("<div>", {
-    class: "yashe"
+  var rootEl = $('<div>', {
+    class: 'yashe'
   })
     .insertBefore($(textAreaEl))
     .append($(textAreaEl));
@@ -334,12 +334,12 @@ root.doAutoFormat = function(yashe) {
 };
 
 
-require("./config/defaults.js");
+require('./config/defaults.js');
 root.$ = $;
 root.version = {
   CodeMirror: CodeMirror.version,
-  YASHE: require("../package.json").version,
+  YASHE: require('../package.json').version,
   jquery: $.fn.jquery,
-  "yasgui-utils": yutils.version
+  'yasgui-utils': yutils.version
 };
 
