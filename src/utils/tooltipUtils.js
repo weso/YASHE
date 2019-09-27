@@ -65,7 +65,8 @@ if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  &
       //Gets the preference languaje from the navigator
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
-      var content = data.entities[possibleEntity]
+
+      var content = data.entities[possibleEntity.toUpperCase()]
       //Some properties and entities are only avalible in English
       //So if they do not exist we take it in English
       if(content.labels[userLang] && content.descriptions[userLang]){

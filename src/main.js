@@ -18,6 +18,7 @@ const tooltipUtils = require('./utils/tooltipUtils.js');
 const formatUtils = require('./utils/formatUtils.js');
 const buttonsUtils = require('./utils/buttonsUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
+const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
 
 require('../lib/deparam.js');
@@ -67,7 +68,7 @@ const root = (module.exports = function(parent, config) {
  *
  * @private
  * @param {object} config
- * @return {extendedConfig} YASHE config
+ * @return {object} YASHE config
  */
 const extendConfig = function(config) {
   const extendedConfig = $.extend(true, {}, root.defaults, config);
@@ -81,19 +82,25 @@ const extendConfig = function(config) {
  * object)
  *
  * @private
+ * @param {object} yashe
+ * @return {doc} YASHE document
  */
 const extendCmInstance = function(yashe) {
   // instantiate autocompleters
-  yashe.autocompleters = require('./autocompleters/autocompleterBase.js')(root, yashe);
+  yashe.autocompleters = autocompletersBase(root, yashe);
   if (yashe.options.autocompleters) {
     yashe.options.autocompleters.forEach(function(name) {
-      if (root.Autocompleters[name]) yashe.autocompleters.init(name, root.Autocompleters[name]);
+      if (root.Autocompleters[name]) {
+        yashe.autocompleters.init(name, root.Autocompleters[name]);
+      }
     });
   }
-  yashe.emit = function(event, data) {
-    root.signal(yashe, event, data);
-  };
-  yashe.lastQueryDuration = null;
+
+
+  /**
+   *
+   *
+  */
   yashe.getCompleteToken = function(token, cur) {
     return tokenUtils.getCompleteToken(yashe, token, cur);
   };
@@ -204,6 +211,9 @@ const postProcessCmElement = function(yashe) {
     tooltipUtils.removeToolTip();
   });
 
+  yashe.on('swapDoc', function() {
+    console.log('emitting')
+  });
 
   // Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover', debounce(function( e ) {
