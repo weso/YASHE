@@ -50,14 +50,14 @@ var triggerTooltip = function( e ) {
   } ) ).string;
 
 
+    
+var prefixName = token.split(':')[0]
+var wikiElement = token.split(':')[1]
+
 //Check wikidata prefixes
-var prefixName = token.split(':')[0],
-possibleEntity = token.split(':')[1]
+if( rdfUtils.isWikidataValidPrefix(prefixName) && wikiElement!== undefined  && wikiElement!== ''){
 
-
-if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
-
-  checkEntity(possibleEntity).done( function( data ) {
+  checkEntity(wikiElement).done( function( data ) {
 
     if(!data.error){
 
@@ -66,17 +66,21 @@ if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  &
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
 
-      var content = data.entities[possibleEntity.toUpperCase()]
+      var content = data.entities[wikiElement.toUpperCase()]
+
+      //Check if the property/entity exist
+      if(!content.labels)return;
+
       //Some properties and entities are only avalible in English
       //So if they do not exist we take it in English
       if(content.labels[userLang] && content.descriptions[userLang]){
          
-          entity = content.labels[userLang].value +' ('+possibleEntity+')'
+          entity = content.labels[userLang].value +' ('+wikiElement+')'
           description = content.descriptions[userLang].value
 
       }else{
 
-          entity = content.labels['en'].value +' ('+possibleEntity+')'
+          entity = content.labels['en'].value +' ('+wikiElement+')'
           description = content.descriptions['en'].value
 
       }
