@@ -105,7 +105,7 @@ const extendCmInstance = function(yashe) {
     return tokenUtils.getCompleteToken(yashe);
   };
 
-   /**
+  /**
    * Returns the previous token that is not a WS token
    * @param {onject} line
    * @param {onject} token
@@ -140,41 +140,76 @@ const extendCmInstance = function(yashe) {
 
 
   /**
-	 * Fetch defined prefixes
-	 * @method doc.getDefinedPrefixes
-	 * @return object
-	 */
+   * Fetch defined prefixes
+   * @method doc.getDefinedPrefixes
+   * @return {object} prefixes
+   */
   yashe.getDefinedPrefixes = function() {
     return prefixUtils.getDefinedPrefixes(yashe);
   };
 
+  /**
+	 * Add prefixes to the ShEx documment
+	 * @param {string|list} prefixes String if you want to add just one.
+   * List in other case
+	 */
   yashe.addPrefixes = function(prefixes) {
-    return prefixUtils.addPrefixes(yashe, prefixes);
+    prefixUtils.addPrefixes(yashe, prefixes);
   };
+
+  /**
+	 * Remove prefixes from the ShEx documment
+	 * @param {object|list}
+	 */
   yashe.removePrefixes = function(prefixes) {
-    return prefixUtils.removePrefixes(yashe, prefixes);
+    prefixUtils.removePrefixes(yashe, prefixes);
   };
 
 
+  /**
+	 * Allows to enable or disable Systax error checker
+	 * @param {object|list}
+	 */
   yashe.setCheckSyntaxErrors = function(isEnabled) {
     yashe.options.syntaxErrorCheck = isEnabled;
     checkSyntax(yashe);
   };
 
+  /**
+	 * Enables the autocompleter that you pass by param
+	 * @param {string} name The name of the autocompleter
+	 */
   yashe.enableCompleter = function(name) {
     addCompleterToSettings(yashe.options, name);
     if (root.Autocompleters[name]) yashe.autocompleters.init(name, root.Autocompleters[name]);
   };
+
+  /**
+	 * Disables the autocompleter that you pass by param
+	 * @param {string} name The name of the autocompleter
+	 */
   yashe.disableCompleter = function(name) {
     removeCompleterFromSettings(yashe.options, name);
   };
   return yashe;
 };
 
+/**
+ * Creates autocompleters list in the settigns if it does not exit
+ * Add the autocompleter that you pass by param to the atucompleters settigns.
+ * @param {obeject} settings YASHE settings
+ * @param {string} name Autocompleter name
+ */
 const addCompleterToSettings = function(settings, name) {
   if (!settings.autocompleters) settings.autocompleters = [];
   settings.autocompleters.push(name);
 };
+
+/**
+ * Remove the autocompleter that you pass by param from the atucompleters settigns.
+ * @param {obeject} settings YASHE settings
+ * @param {string} name Autocompleter name
+ */
 const removeCompleterFromSettings = function(settings, name) {
   if (typeof settings.autocompleters == 'object') {
     const index = $.inArray(name, settings.autocompleters);
@@ -184,6 +219,7 @@ const removeCompleterFromSettings = function(settings, name) {
     }
   }
 };
+
 
 const postProcessCmElement = function(yashe) {
   buttonsUtils.drawButtons(yashe);
@@ -226,9 +262,6 @@ const postProcessCmElement = function(yashe) {
     tooltipUtils.removeToolTip();
   });
 
-  yashe.on('swapDoc', function() {
-    console.log('emitting')
-  });
 
   // Wikidata Tooltip Listener
   root.on( yashe.getWrapperElement(), 'mouseover', debounce(function( e ) {
@@ -276,8 +309,6 @@ const debounce = function(func, wait, immediate) {
     return result;
   };
 };
-
-
 
 
 /**
