@@ -98,20 +98,37 @@ const extendCmInstance = function(yashe) {
 
 
   /**
-   * Returns the entire token
-
+   * Returns the entire token by the cursor
    * @return {object} token
-   *
   */
   yashe.getCompleteToken = function() {
     return tokenUtils.getCompleteToken(yashe);
   };
+
+   /**
+   * Returns the previous token that is not a WS token
+   * @param {onject} line
+   * @param {onject} token
+   * @return {object} token
+  */
   yashe.getPreviousNonWsToken = function(line, token) {
     return tokenUtils.getPreviousNonWsToken(yashe, line, token);
   };
+
+  /**
+   * Returns the next token that is not a WS token
+   * @param {onject} lineNumber
+   * @param {onject} charNumber
+   * @return {object} token
+  */
   yashe.getNextNonWsToken = function(lineNumber, charNumber) {
     return tokenUtils.getNextNonWsToken(yashe, lineNumber, charNumber);
   };
+
+  /**
+   * Colapse all prefixes of the ShEx documment
+   * @param {boolean} collapse
+  */
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
@@ -121,13 +138,9 @@ const extendCmInstance = function(yashe) {
     );
   };
 
-  yashe.drawButtons = function() {
-    return buttonsUtils.drawButtons(yashe);
-  };
 
   /**
 	 * Fetch defined prefixes
-	 *
 	 * @method doc.getDefinedPrefixes
 	 * @return object
 	 */
@@ -173,7 +186,7 @@ const removeCompleterFromSettings = function(settings, name) {
 };
 
 const postProcessCmElement = function(yashe) {
-  root.drawButtons(yashe);
+  buttonsUtils.drawButtons(yashe);
 
   // Trigger of the button with id='copy'
   // Copies the contents of the editor in the clipboard
@@ -264,12 +277,7 @@ const debounce = function(func, wait, immediate) {
   };
 };
 
-/**
- * Draw the editor buttons
- */
-root.drawButtons = function(yashe) {
-  buttonsUtils.drawButtons(yashe);
-};
+
 
 
 /**
