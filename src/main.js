@@ -149,45 +149,47 @@ const extendCmInstance = function(yashe) {
   };
 
   /**
-	 * Add prefixes to the ShEx documment
-	 * @param {string|list} prefixes String if you want to add just one.
+   * Add prefixes to the ShEx documment
+   * @param {string|list} prefixes String if you want to add just one
    * List in other case
-	 */
+   */
   yashe.addPrefixes = function(prefixes) {
     prefixUtils.addPrefixes(yashe, prefixes);
   };
 
   /**
-	 * Remove prefixes from the ShEx documment
-	 * @param {object|list}
-	 */
+   * Remove prefixes from the ShEx documment
+   * @param {list} prefixes
+   */
   yashe.removePrefixes = function(prefixes) {
     prefixUtils.removePrefixes(yashe, prefixes);
   };
 
 
   /**
-	 * Allows to enable or disable Systax error checker
-	 * @param {object|list}
-	 */
+   * Allows to enable or disable Systax error checker
+   * @param {boolean} isEnabled
+   */
   yashe.setCheckSyntaxErrors = function(isEnabled) {
     yashe.options.syntaxErrorCheck = isEnabled;
     checkSyntax(yashe);
   };
 
   /**
-	 * Enables the autocompleter that you pass by param
-	 * @param {string} name The name of the autocompleter
-	 */
+   * Enables the autocompleter that you pass by param
+   * @param {string} name The name of the autocompleter
+   */
   yashe.enableCompleter = function(name) {
     addCompleterToSettings(yashe.options, name);
-    if (root.Autocompleters[name]) yashe.autocompleters.init(name, root.Autocompleters[name]);
+    if (root.Autocompleters[name]) {
+      yashe.autocompleters.init(name, root.Autocompleters[name]);
+    }
   };
 
   /**
-	 * Disables the autocompleter that you pass by param
-	 * @param {string} name The name of the autocompleter
-	 */
+   * Disables the autocompleter that you pass by param
+   * @param {string} name The name of the autocompleter
+   */
   yashe.disableCompleter = function(name) {
     removeCompleterFromSettings(yashe.options, name);
   };
@@ -195,32 +197,37 @@ const extendCmInstance = function(yashe) {
 };
 
 /**
- * Creates autocompleters list in the settigns if it does not exit
- * Add the autocompleter that you pass by param to the atucompleters settigns.
- * @param {obeject} settings YASHE settings
- * @param {string} name Autocompleter name
- */
+   * Creates autocompleters list in the settigns if it does not exit
+   * Add the autocompleter that you pass by param to the atucompleters settigns.
+   * @param {object} settings YASHE settings
+   * @param {string} name Autocompleter name
+   */
 const addCompleterToSettings = function(settings, name) {
   if (!settings.autocompleters) settings.autocompleters = [];
   settings.autocompleters.push(name);
 };
 
 /**
- * Remove the autocompleter that you pass by param from the atucompleters settigns.
- * @param {obeject} settings YASHE settings
- * @param {string} name Autocompleter name
- */
+   * Remove the autocompleter that you pass by param from the
+   * autocompleters settigns.
+   * @param {object} settings YASHE settings
+   * @param {string} name Autocompleter name
+   */
 const removeCompleterFromSettings = function(settings, name) {
   if (typeof settings.autocompleters == 'object') {
     const index = $.inArray(name, settings.autocompleters);
     if (index >= 0) {
       settings.autocompleters.splice(index, 1);
-      removeCompleterFromSettings(settings, name); // just in case. suppose 1 completer is listed twice
+      // just in case. suppose 1 completer is listed twice
+      removeCompleterFromSettings(settings, name);
     }
   }
 };
 
-
+/**
+ * Add extra funcionalitys to YASHE
+ * @param {object} yashe
+ */
 const postProcessCmElement = function(yashe) {
   buttonsUtils.drawButtons(yashe);
 
@@ -234,8 +241,8 @@ const postProcessCmElement = function(yashe) {
 
 
   /**
-	 * Set doc value if option storeShape is activated
-	 */
+   * Set doc value if option storeShape is activated
+   */
   const storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
   if (storageId) {
     const valueFromStorage = yutils.storage.get(storageId);
@@ -243,56 +250,83 @@ const postProcessCmElement = function(yashe) {
   }
 
 
+  // --- Event handlers ----
+
   /**
-	 * Add event handlers
-	 */
-  yashe.on('blur', function(yashe, eventInfo) {
+   * Fires whenever the editor is unfocused.
+   * In this case, YASHE stores it content
+   */
+  yashe.on('blur', function(yashe) {
     root.storeContent(yashe);
   });
 
-
-  yashe.on('change', function(yashe, eventInfo) {
+  /**
+   * Fires every time the content of the editor is changed.
+   * In this case, YASHE checks the sintax
+   */
+  yashe.on('change', function(yashe) {
     checkSyntax(yashe);
   });
-  yashe.on('changes', function() {
-    checkSyntax(yashe);
-  });
 
+  /**
+   * Fires when the editor is scrolled.
+   * In this case, YASHE removes Wikidata Tooltip
+   */
   yashe.on('scroll', function() {
-    tooltipUtils.removeToolTip();
+    tooltipUtils.removeWikiToolTip();
   });
 
 
-  // Wikidata Tooltip Listener
+  /**
+   * Wikidata Tooltip Listener
+   */
   root.on( yashe.getWrapperElement(), 'mouseover', debounce(function( e ) {
-    tooltipUtils.removeToolTip();
+    tooltipUtils.removeWikiToolTip();
     tooltipUtils.triggerTooltip( e );
   }, 300 ));
 
 
-  yashe.prevQueryValid = false;
-  checkSyntax(yashe); // on first load, check as well (our stored or default query might be incorrect)
+  // on first load, check as well
+  // (our stored or default query might be incorrect)
+  checkSyntax(yashe);
 
   if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
 };
 
 
+/**
+ * Stores YASHE content
+ * @param {object} yashe
+ */
 root.storeContent = function(yashe) {
   const storageId = utils.getPersistencyId(yashe, yashe.options.persistent);
   if (storageId) {
-    yutils.storage.set(storageId, yashe.getValue(), 'month', yashe.options.onQuotaExceeded);
+    yutils.storage.set(storageId, yashe.getValue(),
+        'month', yashe.options.onQuotaExceeded);
   }
 };
 
-
-const checkSyntax = function(yashe, deepcheck) {
-  return syntaxUtils.checkSyntax(yashe, deepcheck);
+/**
+   * Checks YASHE content syntax
+   * @param {object} yashe
+   * @return {string} Check result
+   */
+const checkSyntax = function(yashe) {
+  return syntaxUtils.checkSyntax(yashe);
 };
 
 
 /**
- *
-      REMEMBRER: COMMENT THIS FUNCTION
+   * Returns a function, that, as long as it continues to be invoked, will not
+   * be triggered. The function will be called after it stops being called for
+   * N milliseconds. If `immediate` is passed, trigger the function on the
+   * leading edge, instead of the trailing.
+   *
+   * More info: https://davidwalsh.name/javascript-debounce-function
+   *
+ * @param {funciton} func Function to be executed
+ * @param {int} wait Time to wait
+ * @param {boolean} immediate
  */
 const debounce = function(func, wait, immediate) {
   let timeout; let result;

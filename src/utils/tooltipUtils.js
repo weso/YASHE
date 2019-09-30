@@ -120,7 +120,7 @@ var checkEntity = function (entity){
 }
 
 
-var removeToolTip = function() {
+var removeWikiToolTip = function() {
   $( '.wikibaseRDFtoolTip' ).remove();
 };
 
@@ -129,5 +129,5 @@ var removeToolTip = function() {
 module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
-  removeToolTip:removeToolTip
+  removeWikiToolTip:removeWikiToolTip
 };

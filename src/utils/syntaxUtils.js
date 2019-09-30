@@ -3,7 +3,7 @@ var $ = require("jquery"),
   yutils = require("yasgui-utils"),
   imgs = require("./imgs.js");
 
-var checkSyntax = function(yashe, deepcheck) {
+var checkSyntax = function(yashe) {
     yashe.queryValid = true;
   
     yashe.clearGutter("gutterErrorBar");
@@ -67,19 +67,6 @@ var checkSyntax = function(yashe, deepcheck) {
       }
     }
     yashe.prevQueryValid = yashe.queryValid;
-    if (deepcheck) {
-      if (state != null && state.stack != undefined) {
-        var stack = state.stack, len = state.stack.length;
-        // Because incremental parser doesn't receive end-of-input
-        // it can't clear stack, so we have to check that whatever
-        // is left on the stack is nillable
-        if (len > 1) yashe.queryValid = false;
-        else if (len == 1) {
-          if (stack[0] != "solutionModifier" && stack[0] != "?limitOffsetClauses" && stack[0] != "?offsetClause")
-            yashe.queryValid = false;
-        }
-      }
-    }
   };
 
   module.exports = {
