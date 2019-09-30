@@ -197,22 +197,22 @@ const extendCmInstance = function(yashe) {
 };
 
 /**
-   * Creates autocompleters list in the settigns if it does not exit
-   * Add the autocompleter that you pass by param to the atucompleters settigns.
-   * @param {object} settings YASHE settings
-   * @param {string} name Autocompleter name
-   */
+ * Creates autocompleters list in the settigns if it does not exit
+ * Add the autocompleter that you pass by param to the atucompleters settigns.
+ * @param {object} settings YASHE settings
+ * @param {string} name Autocompleter name
+ */
 const addCompleterToSettings = function(settings, name) {
   if (!settings.autocompleters) settings.autocompleters = [];
   settings.autocompleters.push(name);
 };
 
 /**
-   * Remove the autocompleter that you pass by param from the
-   * autocompleters settigns.
-   * @param {object} settings YASHE settings
-   * @param {string} name Autocompleter name
-   */
+ * Remove the autocompleter that you pass by param from the
+ * autocompleters settigns.
+ * @param {object} settings YASHE settings
+ * @param {string} name Autocompleter name
+ */
 const removeCompleterFromSettings = function(settings, name) {
   if (typeof settings.autocompleters == 'object') {
     const index = $.inArray(name, settings.autocompleters);
@@ -280,10 +280,11 @@ const postProcessCmElement = function(yashe) {
   /**
    * Wikidata Tooltip Listener
    */
-  root.on( yashe.getWrapperElement(), 'mouseover', tooltipUtils.debounce(function( e ) {
-    tooltipUtils.removeWikiToolTip();
-    tooltipUtils.triggerTooltip( e );
-  }, 300 ));
+  root.on( yashe.getWrapperElement(), 'mouseover',
+      tooltipUtils.debounce(function( e ) {
+        tooltipUtils.removeWikiToolTip();
+        tooltipUtils.triggerTooltip( e );
+      }, 300 ));
 
 
   // on first load, check as well
@@ -307,19 +308,17 @@ root.storeContent = function(yashe) {
 };
 
 /**
-   * Checks YASHE content syntax
-   * @param {object} yashe
-   * @return {string} Check result
-   */
+ * Checks YASHE content syntax
+ * @param {object} yashe
+ * @return {string} Check result
+ */
 const checkSyntax = function(yashe) {
   return syntaxUtils.checkSyntax(yashe);
 };
 
 
+// ---- Static Utils -----
 
-/**
- * Static Utils
- */
 // first take all codeMirror references and store them in the YASHE object
 $.extend(root, codeMirror);
 
@@ -331,32 +330,39 @@ root.registerAutocompleter = function(name, constructor) {
 };
 
 root.autoComplete = function(yashe) {
-  // this function gets called when pressing the keyboard shortcut. I.e., autoShow = false
+  // this function gets called when pressing the keyboard shortcut.
+  // I.e., autoShow = false
   yashe.autocompleters.autoComplete(false);
 };
+
 // include the autocompleters we provide out-of-the-box
-root.registerAutocompleter('prefixDefinition', require('./autocompleters/prefixDefinition.js'));
-root.registerAutocompleter('wikidata', require('./autocompleters/wikidata.js'));
-root.registerAutocompleter('prefixesAndKeywords', require('./autocompleters/prefixesAndKeywords.js'));
+root.registerAutocompleter('prefixDefinition',
+    require('./autocompleters/prefixDefinition.js'));
+
+root.registerAutocompleter('wikidata',
+    require('./autocompleters/wikidata.js'));
+
+root.registerAutocompleter('prefixesAndKeywords',
+    require('./autocompleters/prefixesAndKeywords.js'));
 
 
 /**
  * Initialize YASHE from an existing text area (see http://codemirror.net/doc/manual.html#fromTextArea for more info)
- *
+  *
  * @method YASHE.fromTextArea
- * @param textArea {DOM element}
- * @param config {object}
+ * @param {DOM-element} textAreaEl
+ * @param {object} config
  * @return {doc} YASHE document
  */
 root.fromTextArea = function(textAreaEl, config) {
   config = extendConfig(config);
   // add yashe div as parent (needed for styles to be manageable and scoped).
-  // In this case, I -also- put it as parent el of the text area. This is wrapped in a div now
+  // In this case, I -also- put it as parent el of the text area.
+  // This is wrapped in a div now
 
-  const rootEl = $('<div>', {
+  $('<div>', {
     class: 'yashe',
-  })
-      .insertBefore($(textAreaEl))
+  }).insertBefore($(textAreaEl))
       .append($(textAreaEl));
 
 
@@ -367,22 +373,38 @@ root.fromTextArea = function(textAreaEl, config) {
 };
 
 
-/** *
- * Format utils
+// ---- Format utils -----
+
+/**
+ * Comment or uncomment current/selected line(s)
+ * @param {object} yashe
  */
 root.commentLines = function(yashe) {
-  return formatUtils.commentLines(yashe);
+  formatUtils.commentLines(yashe);
 };
 
+/**
+ * Copy line up
+ * @param {object} yashe
+ */
 root.copyLineUp = function(yashe) {
-  return formatUtils.copyLineUp(yashe);
+  formatUtils.copyLineUp(yashe);
 };
 
+/**
+ * Copy line down
+ * @param {object} yashe
+ */
 root.copyLineDown = function(yashe) {
-  return formatUtils.copyLineDown(yashe);
+  formatUtils.copyLineDown(yashe);
 };
+
+/**
+ * Auto-format/indent selected lines
+ * @param {object} yashe
+ */
 root.doAutoFormat = function(yashe) {
-  return formatUtils.doAutoFormat(yashe);
+  formatUtils.doAutoFormat(yashe);
 };
 
 
