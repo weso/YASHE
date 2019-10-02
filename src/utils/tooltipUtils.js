@@ -40,7 +40,8 @@ var grammarTootlip = function(yashe, parent, html) {
  * 
  */
 
-var triggerTooltip = function( e ) {
+var triggerTooltip = function( yashe, e) {
+
   var posX = e.clientX,
   posY = e.clientY + $( window ).scrollTop()
 
@@ -55,7 +56,7 @@ var prefixName = token.split(':')[0]
 var wikiElement = token.split(':')[1]
 
 //Check wikidata prefixes
-if( rdfUtils.isWikidataValidPrefix(prefixName) && wikiElement!== undefined  && wikiElement!== ''){
+if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
 
   checkEntity(wikiElement).done( function( data ) {
 

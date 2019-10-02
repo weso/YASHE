@@ -37,11 +37,11 @@ var NAMESPACE_SHORTCUTS = {
         wdno: 'http://www.wikidata.org/prop/novalue/',
         wdata: 'http://www.wikidata.org/wiki/Special:EntityData/'
     }
+1
 
 
 
-
-var isWikidataValidPrefix = function(prefixName){
+var isWikidataValidPrefix = function(yashe,prefixName){
 
     var definedPrefixex = yashe.getDefinedPrefixes()
     var iriPrefix

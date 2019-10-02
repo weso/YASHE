@@ -4,6 +4,7 @@ window.console = window.console || {
   log: function() {},
 };
 
+
 /**
  * Load libraries and utils
  */
@@ -280,10 +281,11 @@ const postProcessCmElement = function(yashe) {
   /**
    * Wikidata Tooltip Listener
    */
+
   root.on( yashe.getWrapperElement(), 'mouseover',
       tooltipUtils.debounce(function( e ) {
         tooltipUtils.removeWikiToolTip();
-        tooltipUtils.triggerTooltip( e );
+        tooltipUtils.triggerTooltip(yashe, e);
       }, 300 ));
 
 

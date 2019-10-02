@@ -1,7 +1,7 @@
 {
   "name": "yashe",
-  "description": "Yet Another ShEx Query Editor",
-  "version": "1.1.4",
+  "description": "Yet Another ShEx Editor",
+  "version": "1.1.6",
   "main": "src/main.js",
   "license": "MIT",
   "author": "Pablo Menéndez",
@@ -52,7 +52,7 @@
   "bugs": "https://github.com/weso/YASHE/issues/",
   "keywords": [
     "JavaScript",
-    "SPARQL",
+    "ShEx",
     "Editor",
     "Semantic Web",
     "Linked Data"
