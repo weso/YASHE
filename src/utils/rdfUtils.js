@@ -62,7 +62,7 @@ var isWikidataValidPrefix = function(yashe,prefixName){
 }
 
 
-var isWikidataEntitiesPrefix = function(prefixName){
+var isWikidataEntitiesPrefix = function(yashe,prefixName){
 
     var definedPrefixex = yashe.getDefinedPrefixes()
     var iriPrefix
@@ -82,7 +82,7 @@ var isWikidataEntitiesPrefix = function(prefixName){
     return false
 }
 
-var isWikidataPropertiesPrefix = function(prefixName){
+var isWikidataPropertiesPrefix = function(yashe,prefixName){
 
     var definedPrefixex = yashe.getDefinedPrefixes()
     var iriPrefix

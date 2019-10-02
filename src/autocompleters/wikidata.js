@@ -26,7 +26,7 @@ module.exports = function(yashe, name) {
         query.search=possibleEntity
 
         //Add extra param if it is a property
-        if(rdfUtils.isWikidataPropertiesPrefix(prefix)){
+        if(rdfUtils.isWikidataPropertiesPrefix(yashe,prefix)){
           query.type='property'
         }else{
           delete query.type
@@ -100,8 +100,8 @@ module.exports.isValidCompletionPosition = function(yashe) {
 
 
   if(token.type == 'string-2' && 
-  (rdfUtils.isWikidataEntitiesPrefix(prefixName) 
-  || rdfUtils.isWikidataPropertiesPrefix(prefixName)) )return true
+  (rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
+  || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)) )return true
 
  
   return false;
