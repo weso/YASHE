@@ -1,21 +1,14 @@
 "use strict";
 /**
- *
  * @param yashe {doc}
- * @param token {object}
- * @param cursor {object}
  * @return token {object}
  * @method YASHE.getCompleteToken
  */
-var getCompleteToken = function(yashe, token, cur) {
-  if (!cur) {
-    cur = yashe.getCursor();
-  }
+var getCompleteToken = function(yashe) {
 
-  if (!token) {
-    token = yashe.getTokenAt(cur);
-  }
-
+  let cur = yashe.getCursor();
+  let token = yashe.getTokenAt(cur);
+  
   return token;
 
 };

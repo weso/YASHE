@@ -311,7 +311,6 @@ tm_keywords([
 
 'BASE',
 'PREFIX',
-'IMPORT',
 'EXTERNAL',
 'OR',
 'AND',
@@ -331,7 +330,6 @@ tm_keywords([
 'FRACTIONDIGITS',
 'CLOSED',
 'EXTRA'
-
 ]).
 
 % Other tens representing fixed, case sensitive, strings

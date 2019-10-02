@@ -40,7 +40,8 @@ var grammarTootlip = function(yashe, parent, html) {
  * 
  */
 
-var triggerTooltip = function( e ) {
+var triggerTooltip = function( yashe, e) {
+
   var posX = e.clientX,
   posY = e.clientY + $( window ).scrollTop()
 
@@ -50,14 +51,14 @@ var triggerTooltip = function( e ) {
   } ) ).string;
 
 
+    
+var prefixName = token.split(':')[0]
+var wikiElement = token.split(':')[1]
+
 //Check wikidata prefixes
-var prefixName = token.split(':')[0],
-possibleEntity = token.split(':')[1]
+if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
 
-
-if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  && possibleEntity!== ''){
-
-  checkEntity(possibleEntity).done( function( data ) {
+  checkEntity(wikiElement).done( function( data ) {
 
     if(!data.error){
 
@@ -65,17 +66,22 @@ if( rdfUtils.isWikidataValidPrefix(prefixName) && possibleEntity!== undefined  &
       //Gets the preference languaje from the navigator
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
-      var content = data.entities[possibleEntity]
+
+      var content = data.entities[wikiElement.toUpperCase()]
+
+      //Check if the property/entity exist
+      if(!content.labels)return;
+
       //Some properties and entities are only avalible in English
       //So if they do not exist we take it in English
       if(content.labels[userLang] && content.descriptions[userLang]){
          
-          entity = content.labels[userLang].value +' ('+possibleEntity+')'
+          entity = content.labels[userLang].value +' ('+wikiElement+')'
           description = content.descriptions[userLang].value
 
       }else{
 
-          entity = content.labels['en'].value +' ('+possibleEntity+')'
+          entity = content.labels['en'].value +' ('+wikiElement+')'
           description = content.descriptions['en'].value
 
       }
@@ -115,14 +121,45 @@ var checkEntity = function (entity){
 }
 
 
-var removeToolTip = function() {
+var removeWikiToolTip = function() {
   $( '.wikibaseRDFtoolTip' ).remove();
 };
 
+
+/**
+   * Returns a function, that, as long as it continues to be invoked, will not
+   * be triggered. The function will be called after it stops being called for
+   * N milliseconds. If `immediate` is passed, trigger the function on the
+   * leading edge, instead of the trailing.
+   *
+   * More info: https://davidwalsh.name/javascript-debounce-function
+   *
+ * @param {funciton} func Function to be executed
+ * @param {int} wait Time to wait
+ * @param {boolean} immediate
+ * @return {object} resutl
+ */
+const debounce = function(func, wait, immediate) {
+  let timeout; let result;
+  return function() {
+    const context = this; 
+    const args = arguments;
+    const later = function() {
+      timeout = null;
+      if (!immediate) result = func.apply(context, args);
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) result = func.apply(context, args);
+    return result;
+  };
+};
 
 
 module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
-  removeToolTip:removeToolTip
+  removeWikiToolTip:removeWikiToolTip,
+  debounce:debounce
 };
