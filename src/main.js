@@ -338,11 +338,11 @@ root.autoComplete = function(yashe) {
 };
 
 // include the autocompleters we provide out-of-the-box
-root.registerAutocompleter('prefixDefinition',
-    require('./autocompleters/prefixDefinition.js'));
-
 root.registerAutocompleter('wikidata',
     require('./autocompleters/wikidata.js'));
+
+root.registerAutocompleter('prefixDefinition',
+    require('./autocompleters/prefixDefinition.js'));
 
 root.registerAutocompleter('prefixesAndKeywords',
     require('./autocompleters/prefixesAndKeywords.js'));

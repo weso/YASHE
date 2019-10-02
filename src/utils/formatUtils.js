@@ -1,4 +1,5 @@
 var CodeMirror = require("codemirror")
+const $ = require('jquery')
 
 "use strict";
 var commentLines = function(yashe) {
