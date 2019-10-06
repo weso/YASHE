@@ -63,10 +63,11 @@ var checkSyntax = function(yashe) {
         yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
   
         yashe.queryValid = false;
-        break;
+        return false;
       }
     }
     yashe.prevQueryValid = yashe.queryValid;
+    return true;
   };
 
   module.exports = {
