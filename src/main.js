@@ -139,6 +139,15 @@ const extendCmInstance = function(yashe) {
     );
   };
 
+ /**
+  * Returns true if yashe has syntax errors. False otherwise
+  * @param {object} yashe
+  * @return {boolean} 
+  */
+  yashe.hasErrors = function(yashe) {
+    return !syntaxUtils.checkSyntax(yashe);
+  }
+  
 
   /**
    * Fetch defined prefixes
@@ -294,6 +303,7 @@ const postProcessCmElement = function(yashe) {
   checkSyntax(yashe);
 
   if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+
 };
 
 
