@@ -294,7 +294,25 @@ const postProcessCmElement = function(yashe) {
   checkSyntax(yashe);
 
   if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+
+
+
+  for (var l = 0; l < yashe.lineCount(); ++l) {
+    let lineTokens = getTokens(yashe.getLineTokens(l));
+    lineTokens.forEach(token =>{
+        console.log(token)
+    })
+  
+  }
+  
+
 };
+
+function getTokens(tokens){
+  return tokens.filter(function(obj){
+      return obj.type != 'ws';
+  })
+}
 
 
 /**
