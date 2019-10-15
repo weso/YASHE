@@ -168,9 +168,8 @@ elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
 
 
-
 %[40] OK
-unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)].
+unaryTripleExpr ==> [?(tripleExprLabel),or(tripleConstraint,bracketedTripleExpr)].
 unaryTripleExpr ==> [include].
 
 
@@ -350,7 +349,6 @@ tm_punct([
 '}'= '\\}',
 '|' = '\\|',
 ';'= ';',
-'$'= '\\$',
 '*'= '\\*',
 '+'= '\\+',
 '?' = '\\?',
@@ -364,5 +362,6 @@ tm_punct([
 '%'='%',
 '^^'= '\\^\\^',
 'a' = 'a',
-'start' = 'start'
+'start' = 'start',
+'$' = '\\$'
 ]).
