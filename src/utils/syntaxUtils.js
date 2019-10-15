@@ -26,10 +26,9 @@ var checkSyntax = function(yashe) {
         precise
       );
   
-      //console.log(token)
-  
       var state = token.state;
       yashe.queryType = state.queryType;
+  
   
       if (state.OK == false) {
         if (!yashe.options.syntaxErrorCheck) {
@@ -66,6 +65,8 @@ var checkSyntax = function(yashe) {
         return false;
       }
     }
+
+
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };
