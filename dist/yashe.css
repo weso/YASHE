@@ -21,6 +21,8 @@
   /* Used to force a border model for a node */
   /* See issue #2901 */
   /* Help users use markselection to safely style text background */ }
+  .yashe .cm-s-wiki .cm-shape {
+    color: #0F7A50; }
   .yashe .cm-s-wiki .cm-keyword {
     color: #f00; }
   .yashe .cm-s-wiki .cm-atom {
@@ -70,6 +72,8 @@
     background: #2B2B2B;
     color: #A9B7C6;
     border: 10px; }
+  .yashe .cm-s-dark .cm-shape {
+    color: #68BEEB; }
   .yashe .cm-s-dark .cm-keyword {
     color: #f00; }
   .yashe .cm-s-dark .cm-atom {
