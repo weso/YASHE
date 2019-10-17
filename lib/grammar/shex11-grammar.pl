@@ -228,6 +228,7 @@ datatype ==> [iri].
 
 %[56] OK
 shapeExprLabel ==> [or(iri,blankNode)].
+%shapeExprLabel ==> ['SHEX_LABEL'].
 
 %[42] OK
 tripleExprLabel ==> ['$',or(iri,blankNode)].
