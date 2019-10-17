@@ -242,7 +242,7 @@ numericLiteral ==>['DOUBLE'].
 rdfLiteral ==> [string,?(or('LANGTAG',['^^',datatype]))].
 
 %[134s] OK
-booleanLiteral ==> [or('true', 'false')].
+booleanLiteral ==> [or('TRUE', 'FALSE')].
 
 %[135s] OK
 string ==> ['STRING_LITERAL1'].
@@ -299,11 +299,7 @@ tm_regex([
 'PLX',
 'PERCENT',
 'HEX',
-'PN_LOCAL_ESC',
-'
-',
-'true',
-'false'
+'PN_LOCAL_ESC'
 ]).
 
 % Terminals where name of terminal is uppercased ten content
@@ -329,7 +325,9 @@ tm_keywords([
 'TOTALDIGITS',
 'FRACTIONDIGITS',
 'CLOSED',
-'EXTRA'
+'EXTRA',
+'TRUE',
+'FALSE'
 ]).
 
 % Other tens representing fixed, case sensitive, strings
