@@ -1,7 +1,7 @@
 {
   "name": "yashe",
   "description": "Yet Another ShEx Editor",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "main": "src/main.js",
   "license": "MIT",
   "author": "Pablo Menéndez",

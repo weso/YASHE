@@ -35,7 +35,7 @@ prefixDecl ==> ['PREFIX','PNAME_NS','IRI_REF'].
 notStartAction ==> [or(startt,shapeExprDecl)].
 
 %[6] OK
-startt ==> ['start','=',shapeExpression].
+startt ==> ['START','=',shapeExpression].
 
 %[7] OK
 startActions ==> [+(codeDecl)].
@@ -221,7 +221,7 @@ codeDecl ==> ['%',iri,or('CODE','%')].
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
 %[54] OK
-predicate ==> [or(iri,'a')].
+predicate ==> [or(iri,'A')].
 
 %[55] OK
 datatype ==> [iri].
@@ -327,7 +327,9 @@ tm_keywords([
 'CLOSED',
 'EXTRA',
 'TRUE',
-'FALSE'
+'FALSE',
+'START',
+'A'
 ]).
 
 % Other tens representing fixed, case sensitive, strings
@@ -360,7 +362,5 @@ tm_punct([
 '//'='\\/\\/',
 '%'='%',
 '^^'= '\\^\\^',
-'a' = 'a',
-'start' = 'start',
 '$' = '\\$'
 ]).
