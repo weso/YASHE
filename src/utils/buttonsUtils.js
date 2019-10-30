@@ -1,7 +1,8 @@
 var imgs = require("./imgs.js"),
     yutils = require("yasgui-utils"),
     utils = require("./baseUtils.js"),
-    $ = require("jquery")
+    $ = require("jquery"),
+    Codemirror = require('codemirror');
 
 var drawButtons = function(yashe){
 
@@ -17,7 +18,10 @@ var drawButtons = function(yashe){
     +'files selected" multiple /><label id="uploadBntLabel" for="file-1">'+imgs.upload+'</label>')
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
-    .on('change',utils.readFile)
+    .on('change',function(){
+                utils.readFile;
+                Codemirror.signal(yashe,'upload');
+                })
         );
     yashe.buttons.append(uploadButton);
   
@@ -52,6 +56,7 @@ var drawButtons = function(yashe){
               document.body.appendChild(downloadLink);
             }
             downloadLink.click();
+            Codemirror.signal(yashe,'download');
           })
       );
     yashe.buttons.append(downloadButton);
@@ -69,7 +74,9 @@ var drawButtons = function(yashe){
           .addClass("yashe_downloadBtn")
           .attr("id", "copyBtn")
           .attr("title", "Copy to the clipboard")
-        );
+          .click(function() { 
+              Codemirror.signal(yashe,'copy');
+          }))
     yashe.buttons.append(copyButton);
   
 
@@ -83,7 +90,10 @@ var drawButtons = function(yashe){
     .addClass("yashe_deletedBtn")
     .attr('id','deleteBtn')
     .attr("title", "Delete content")
-    .click(function() { yashe.setValue("")}))
+    .click(function() { 
+              yashe.setValue("")
+              Codemirror.signal(yashe,'delete');
+          }));
 
     yashe.buttons.append(deleteButton);
 
@@ -118,7 +128,7 @@ var drawButtons = function(yashe){
       $('#fullBtn').css('fill', color)
       $('#smallBtn').css('fill', color)
  
-
+      Codemirror.signal(yashe,'themeChange');
     }))
 
     yashe.buttons.append(themeButton);
@@ -137,6 +147,7 @@ var drawButtons = function(yashe){
           .attr("id", "fullBtn")
           .click(function() {
             yashe.setOption("fullScreen", true);
+            Codemirror.signal(yashe,'expandScreen');
           })
       )
       .append(
@@ -146,6 +157,7 @@ var drawButtons = function(yashe){
           .attr("id", "smallBtn")
           .click(function() {
             yashe.setOption("fullScreen", false);
+            Codemirror.signal(yashe,'colapseScreen');
           })
       );
     yashe.buttons.append(toggleFullscreen);
