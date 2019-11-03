@@ -52,7 +52,7 @@ var getString = function(yashe, item) {
   }
 };
 
-var readFile = function handleFileSelect(evt) {
+var readFile = function handleFileSelect(yashe,evt) {
   var file = event.target.files[0];
   var reader = new FileReader();
   reader.onload = function(event) {
