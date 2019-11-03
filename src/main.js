@@ -133,9 +133,7 @@ const extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-        prefixFold.findFirstPrefixLine(yashe),
-        root.fold.prefix,
-      collapse ? 'fold' : 'unfold'
+     
     );
   };
 
@@ -302,7 +300,9 @@ const postProcessCmElement = function(yashe) {
   // (our stored or default query might be incorrect)
   checkSyntax(yashe);
 
-  if (yashe.options.collapsePrefixesOnLoad) yashe.collapsePrefixes(true);
+  if (yashe.options.collapsePrefixesOnLoad){
+    yashe.collapsePrefixes(true);
+  } 
 
 };
 
