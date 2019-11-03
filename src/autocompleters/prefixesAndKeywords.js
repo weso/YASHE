@@ -81,6 +81,7 @@ var KEYWORDS = [
   'not"',
   'iri',
   'bnode',
+  'literal',
   'nonliteral',
   'length',
   'minlength',

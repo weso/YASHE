@@ -27,8 +27,6 @@ var checkSyntax = function(yashe) {
       );
   
       var state = token.state;
-      yashe.queryType = state.queryType;
-  
   
       if (state.OK == false) {
         if (!yashe.options.syntaxErrorCheck) {
