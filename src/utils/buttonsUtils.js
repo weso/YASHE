@@ -19,7 +19,7 @@ var drawButtons = function(yashe){
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload you ShEx file")
     .on('change',function(){
-                utils.readFile;
+                utils.readFile();
                 Codemirror.signal(yashe,'upload');
                 })
         );
