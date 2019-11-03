@@ -33,7 +33,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   foldGutter: {
     rangeFinder: new YASHE.fold.combine(YASHE.fold.brace, YASHE.fold.prefix)
   },
-  collapsePrefixesOnLoad: false,
+  collapsePrefixesOnLoad: true,
   gutters: ["gutterErrorBar", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
   matchBrackets: true,
   fixedGutter: true,
