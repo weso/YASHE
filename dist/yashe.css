@@ -188,8 +188,15 @@
   .yashe .cm-animate-fat-cursor {
     width: auto;
     border: 0;
+    -webkit-animation: blink 1.06s steps(1) infinite;
     animation: blink 1.06s steps(1) infinite;
     background-color: #7e7; }
+
+@-webkit-keyframes blink {
+  0% { }
+  50% {
+    background-color: transparent; }
+  100% { } }
 
 @keyframes blink {
   0% { }
@@ -377,6 +384,7 @@
     position: relative;
     overflow: visible;
     -webkit-tap-highlight-color: transparent;
+    -webkit-font-variant-ligatures: none;
     font-variant-ligatures: none; }
   .yashe .CodeMirror-wrap pre {
     word-wrap: break-word;
@@ -469,6 +477,10 @@
     content: "\25BE"; }
   .yashe .CodeMirror-foldgutter-folded:after {
     content: "\25B8"; }
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
   .yashe .yashe_btn {
     color: #333;
     border: 1px solid transparent;
@@ -538,9 +550,11 @@
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
         width: 600px;
         height: auto;
+        display: -webkit-box;
         display: flex; }
         .yashe .yashe_buttons div.yashe_sharePopup .inputWrapper {
-          flex-grow: 100; }
+          -webkit-box-flex: 100;
+                  flex-grow: 100; }
         .yashe .yashe_buttons div.yashe_sharePopup input {
           float: left;
           width: 100%;
@@ -571,15 +585,19 @@
     .yashe .fullscreenToggleBtns .yashe_smallscreenBtn {
       display: none; }
   .yashe .yashe_smallscreenBtn:hover {
-    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+    -webkit-filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7);
+            filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
   .yashe .yashe_smallscreenBtn:active {
     fill: #DA4567;
-    transform: translateY(4px); }
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px); }
   .yashe .yashe_fullscreenBtn:hover {
-    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+    -webkit-filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7);
+            filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
   .yashe .yashe_fullscreenBtn:active {
     fill: #DA4567;
-    transform: translateY(4px); }
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px); }
   .yashe .downloadBtns {
     display: inline-block;
     margin: 2px; }
@@ -588,10 +606,12 @@
       width: 20px;
       height: 20px; }
   .yashe .downloadBtns:hover {
-    filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
+    -webkit-filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7);
+            filter: invert(0.4) sepia(0.5) hue-rotate(313.2deg) saturate(16.2) brightness(1.7); }
   .yashe .downloadBtns:active {
     fill: #DA4567;
-    transform: translateY(4px); }
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px); }
   .yashe .inputfileBtn {
     width: 0.1px;
     height: 0.1px;

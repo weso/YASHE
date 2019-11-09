@@ -7,8 +7,10 @@
   "author": "Pablo Menéndez",
   "homepage": "http://www.weso.es/YASHE/",
   "scripts": {
+    "start": "gulp serve",
     "dev": "gulp serve",
     "build": "gulp",
+    "test": "jest",
     "patch": "gulp patch",
     "minor": "gulp minor",
     "major": "gulp major",
@@ -19,6 +21,7 @@
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
     "browserify-transform-tools": "^1.6.0",
+    "clipboard": "^2.0.4",
     "eslint": "^6.4.0",
     "eslint-config-google": "^0.14.0",
     "exorcist": "^0.4.0",
@@ -41,6 +44,7 @@
     "gulp-streamify": "1.0.2",
     "gulp-tag-version": "^1.3.0",
     "gulp-uglify": "^1.5.4",
+    "jest": "^24.9.0",
     "node-sass": "^3.8.0",
     "require-dir": "^0.3.2",
     "run-sequence": "^1.2.2",
@@ -69,7 +73,6 @@
     "url": "https://github.com/weso/YASHE.git"
   },
   "dependencies": {
-    "clipboard": "^2.0.4",
     "codemirror": "5.17.0",
     "file-reader": "^1.1.1",
     "jquery": "^2.2.4",
