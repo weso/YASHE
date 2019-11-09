@@ -142,7 +142,7 @@ const extendCmInstance = function(yashe) {
   * @param {object} yashe
   * @return {boolean} 
   */
-  yashe.hasErrors = function(yashe) {
+  yashe.hasErrors = function() {
     return !syntaxUtils.checkSyntax(yashe);
   }
   
