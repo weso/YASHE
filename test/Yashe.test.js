@@ -1,6 +1,6 @@
 const YASHE = require('../src/main.js');
 
-let yashe = YASHE(document.getElementById('showcase'), {
+let yashe = YASHE(null, {
         persistent:null
 });
 
@@ -35,6 +35,18 @@ test('Default CursorHeight', ()=>{
     let cursor = yashe.options.cursorHeight;
     expect(cursor==0.9).toBeTruthy();
 });
+
+
+test('disableCompleter', ()=>{
+    yashe.disableCompleter('wikidata')
+    expect(yashe.options.autocompleters.length==2).toBeTruthy();
+});
+
+test('enableCompleter', ()=>{
+    yashe.enableCompleter('wikidata')
+    expect(yashe.options.autocompleters.length==3).toBeTruthy();
+});
+
 
 
 
@@ -121,6 +133,7 @@ test('Default lineNumbers', ()=>{
     expect(lineNumbers).toBeTruthy();
 });
 
+//Others
 test('Default mode', ()=>{
     let mode = yashe.options.mode;
     expect(mode=='shex').toBeTruthy();
@@ -145,3 +158,22 @@ test('Default value', ()=>{
         "}"
     expect(value==expected).toBeTruthy();
 });
+
+
+///API
+test('hasErrors', ()=>{
+    expect(!yashe.hasErrors()).toBeTruthy();
+});
+
+test('getDefinedPrefixes', ()=>{
+    let keys = Object.keys(yashe.getDefinedPrefixes());
+    expect(keys.length==3).toBeTruthy();
+});
+
+test('setCheckSyntaxErrors', ()=>{
+    yashe.setCheckSyntaxErrors(false)
+    expect(!yashe.options.syntaxErrorCheck).toBeTruthy();
+    yashe.setCheckSyntaxErrors(true)
+    expect(yashe.options.syntaxErrorCheck).toBeTruthy();
+});
+

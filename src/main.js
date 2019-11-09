@@ -133,7 +133,9 @@ const extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-     
+     prefixFold.findFirstPrefixLine(yashe),
+      root.fold.prefix,
+      collapse ? "fold" : "unfold"
     );
   };
 
