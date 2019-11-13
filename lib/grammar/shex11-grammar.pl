@@ -265,7 +265,6 @@ blankNode ==> ['BLANK_NODE_LABEL'].
 % tens defined by regular expressions elsewhere
 % RDF_TYPE ten now is harcoded in the rules
 tm_regex([
-
 'CODE',
 'REPEAT_RANGE',
 'IRI_REF',
@@ -273,33 +272,16 @@ tm_regex([
 'PNAME_LN',
 'ATPNAME_NS',
 'ATPNAME_LN',
-'AT_IRI',
 'REGEXP',
 'BLANK_NODE_LABEL',
 'LANGTAG',
 'INTEGER',
 'DECIMAL',
 'DOUBLE',
-'EXPONENT',
 'STRING_LITERAL1',
 'STRING_LITERAL2',
 'STRING_LITERAL_LONG1',
-'STRING_LITERAL_LONG2',
-'LANG_STRING_LITERAL1',
-'LANG_STRING_LITERAL2',
-'LANG_STRING_LITERAL_LONG1',
-'LANG_STRING_LITERAL_LONG2',
-'UCHAR',
-'ECHAR',
-'PN_CHARS_BASE',
-'PN_CHARS_U',
-'PN_CHARS',
-'PN_PREFIX',
-'PN_LOCAL',
-'PLX',
-'PERCENT',
-'HEX',
-'PN_LOCAL_ESC'
+'STRING_LITERAL_LONG2'
 ]).
 
 % Terminals where name of terminal is uppercased ten content
