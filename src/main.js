@@ -275,7 +275,11 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-    checkSyntax(yashe);
+    //Needed. Without the timeout there is a bug 
+    //that forfces you to do a Space after type a token to fix it
+    setTimeout(() => {
+      checkSyntax(yashe);  
+    }, 10);
   });
 
   /**
