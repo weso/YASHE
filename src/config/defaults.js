@@ -38,6 +38,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   matchBrackets: true,
   fixedGutter: true,
   syntaxErrorCheck: true,
+  showTooltip:true,
   onQuotaExceeded: function(e) {
     //fail silently
     console.warn("Could not store in localstorage. Skipping..", e);
