@@ -1,5 +1,6 @@
 "use strict";
 var $ = require("jquery");
+var Codemirror = require('codemirror');
 
 var keyExists = function(objectToTest, key) {
   var exists = false;
@@ -71,7 +72,8 @@ var readFile = function handleFileSelect(yashe,evt) {
     yashe.setValue(event.target.result)
   };
 
-reader.readAsText(file);
+  reader.readAsText(file);
+  Codemirror.signal(yashe,'upload');
 }
 
 module.exports = {

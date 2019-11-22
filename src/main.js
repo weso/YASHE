@@ -270,6 +270,7 @@ const postProcessCmElement = function(yashe) {
     root.storeContent(yashe);
   });
 
+
   /**
    * Fires every time the content of the editor is changed.
    * In this case, YASHE checks the sintax
