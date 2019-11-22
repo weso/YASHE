@@ -53,7 +53,18 @@ var getString = function(yashe, item) {
 };
 
 var readFile = function handleFileSelect(yashe,evt) {
+  var files = event.target.files
+  //Only one file allowed
+  if(files.length>1){
+    return;
+  }
+
   var file = event.target.files[0];
+  //Only ShEx files allowed
+  if(!file.name.endsWith('.shex')){
+    return;
+  }
+  
   var reader = new FileReader();
   reader.onload = function(event) {
     // El texto del archivo se mostrará por consola aquí
