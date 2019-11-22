@@ -9,9 +9,6 @@ var checkSyntax = function(yashe) {
     yashe.clearGutter("gutterErrorBar");
   
     var state = null;
-    
-    console.log('')
-    console.log('')
     for (var l = 0; l < yashe.lineCount(); ++l) {
       var precise = false;
       if (!yashe.prevQueryValid) {
