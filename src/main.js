@@ -297,8 +297,10 @@ const postProcessCmElement = function(yashe) {
 
   root.on( yashe.getWrapperElement(), 'mouseover',
       tooltipUtils.debounce(function( e ) {
-        tooltipUtils.removeWikiToolTip();
-        tooltipUtils.triggerTooltip(yashe, e);
+        if(yashe.options.showTooltip){
+          tooltipUtils.removeWikiToolTip();
+          tooltipUtils.triggerTooltip(yashe, e);
+        }
       }, 300 ));
 
 
