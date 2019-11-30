@@ -5,7 +5,7 @@ var gulp = require("gulp"),
   embedlr = require("gulp-embedlr"),
   jsValidate = require("gulp-jsvalidate"),
   source = require("vinyl-source-stream"),
-  uglify = require("gulp-uglify"),
+  uglify = require("gulp-uglify-es").default,
   rename = require("gulp-rename"),
   streamify = require("gulp-streamify"),
   paths = require("./paths.js"),
@@ -16,7 +16,7 @@ var gulp = require("gulp"),
   sourcemaps = require("gulp-sourcemaps");
 
 gulp.task("browserify", function() {
-  return browserify({ entries: ["./src/browserifys/entry.js"], standalone: "YASHE", debug: true })
+  return browserify({ entries: ["./src/browserify/entry.js"], standalone: "YASHE", debug: true })
     .transform({ global: true }, optionalShim)
     .exclude("jquery")
     .exclude("codemirror")
