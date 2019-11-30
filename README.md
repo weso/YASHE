@@ -1,7 +1,6 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
 
 [![NPM](https://img.shields.io/npm/v/yashe)](https://www.npmjs.org/package/yashe)
-![BOWER](https://img.shields.io/bower/v/yashe?color=red)
 ![TOP](https://img.shields.io/github/languages/top/weso/YASHE?color=yellow)
 ![ISUES](https://img.shields.io/github/issues/weso/YASHE?color=green)
 ![LICENSE](https://img.shields.io/github/license/weso/YASHE?color=blueviolet)
