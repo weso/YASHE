@@ -4,12 +4,20 @@
   <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a>
   <img src="https://img.shields.io/bundlephobia/min/yashe" alt="size"/>
   <img src="https://img.shields.io/github/languages/top/weso/YASHE?color=yellow" alt="languaje"/>
-  <img src="https://img.shields.io/github/issues/weso/YASHE?color=green" alt="isues"/>
+  <img src="https://img.shields.io/github/issues-pr-closed/weso/YASHE" alt="PR"/>
+  <img src="https://img.shields.io/github/issues/weso/YASHE" alt="isues"/>
   <img src="https://img.shields.io/github/last-commit/weso/YASHE" alt="commits"/>
   <img src="https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F" alt="web"/>
-  <img src="https://img.shields.io/github/license/weso/YASHE?color=blueviolet" alt="license"/>
-  <a href="http://www.weso.es/"><img src="https://img.shields.io/badge/organization-WESO-red" alt="ORGANIZATION"/></a>
+  
 </p>
+
+<p align="center">
+  <a href="http://www.weso.es/"><img src="https://img.shields.io/badge/organization-WESO-red" alt="organization"/></a>
+  <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page"><img src="https://img.shields.io/badge/poweredBy-Wikidata-green" alt="poweredBy"/></a>
+  <img src="https://img.shields.io/github/license/weso/YASHE?color=blueviolet" alt="license"/>
+</p>
+
+
 
 
 # YASHE
