@@ -54,6 +54,7 @@ In addition, it offers a simple way of integrating into other projects
      * FullScreen Mode (F11 shortcut too!)
 
 
+
 ## Download the latest release :small_red_triangle_down:
 
 ### ![JsDelivr](./doc/imgs/JsDelivr_logo.png)
@@ -94,7 +95,6 @@ Check [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 [Here](https://gist.github.com/mistermboy/843d5633e5408d7d79a37b890da167f3) you can see a code example of the two diferent ways to initialize YASHE
 
 
-
 ## Developing YASHE :construction:
 
 Feel free to fork and develop this tool.  You can submit your
@@ -102,3 +102,10 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 
 * `npm install`
 * `npm run dev` for local development
+
+## Used By: :link:
+
+* [ShExAuthor](https://github.com/weso/shex-author): ShEx Graphic Assistant
+* [RDFShape](http://rdfshape.weso.es/): RDF service for conversion and validation using ShEX and SHACL
+* [WikiShape](http://wikishape.weso.es/): Shape Expressions playground customized for Wikidata
+
