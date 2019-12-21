@@ -1,9 +1,12 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a> 
+  <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a>
+  <img src="https://img.shields.io/bundlephobia/min/yashe" alt="size"/>
   <img src="https://img.shields.io/github/languages/top/weso/YASHE?color=yellow" alt="languaje"/>
   <img src="https://img.shields.io/github/issues/weso/YASHE?color=green" alt="isues"/>
+  <img src="https://img.shields.io/github/last-commit/weso/YASHE" alt="commits"/>
+  <img src="https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F" alt="web"/>
   <img src="https://img.shields.io/github/license/weso/YASHE?color=blueviolet" alt="license"/>
 </p>
 
