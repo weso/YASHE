@@ -53,21 +53,6 @@ In addition, it offers a simple way of integrating into other projects
      * Change between light and dark mode
      * FullScreen Mode
      
- * Shortcuts:
-  
-    Shortcut          | Action
-    -------------     | -------------
-    Ctrl/Cmd-Space    | Trigger Autocompletion
-    Ctrl/Cmd-D        | Delete current/selected line(s)
-    Ctrl/Cmd-Space    | Comment or uncomment current/selected line(s)
-    Ctrl/Cmd-Down     | Copy line down
-    Ctrl/Cmd-Up       | Copy line up
-    Ctrl/Cmd-Shift-F  | Auto-format/indent selected lines
-    Ctrl/Cmd-S        | Save current content in local storage
-    Ctrl/Cmd-Z        | Undo
-    Ctrl/Cmd-Y        | Redo
-    F11               | Set query editor full-screen (or leave full-screen)
-    Esc               | Leave full-screen
 
 ## Download the latest release :small_red_triangle_down:
 
