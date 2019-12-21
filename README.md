@@ -1,13 +1,16 @@
-![YASHE](./doc/imgs/yashe_logo.png)
-
 [![NPM](https://img.shields.io/npm/v/yashe)](https://www.npmjs.org/package/yashe)
 ![TOP](https://img.shields.io/github/languages/top/weso/YASHE?color=yellow)
 ![ISUES](https://img.shields.io/github/issues/weso/YASHE?color=green)
 ![LICENSE](https://img.shields.io/github/license/weso/YASHE?color=blueviolet)
 
+![YASHE](./doc/imgs/yashe_logo.png)
+
+
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [ShEx](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). For more information about *YASHE*, its features, and a HOWTO
 for including it in your own web site, visit http://www.weso.es/YASHE/
+
+![](./doc/imgs/yasheGIF.gif)
 
 ## Features
 
