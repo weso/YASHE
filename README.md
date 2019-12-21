@@ -14,7 +14,7 @@
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="Sublime's custom image"/>
 </p>
 
-## Features
+## Features :clipboard:
 
 * Completely client-side
 * ShEx syntax highlighting and error checking
@@ -35,7 +35,7 @@
      * FullScreen Mode (F11 shortcut too!)
 
 
-## Download the latest release
+## Download the latest release :small_red_triangle_down:
 
 ### ![JsDelivr](./doc/imgs/JsDelivr_logo.png)
 The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
@@ -56,7 +56,7 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
 
 
-## Use YASHE on your own project
+## Use YASHE on your own project  :round_pushpin:
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
 
 `YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
@@ -70,7 +70,7 @@ Initialize YASQE from an existing text area (see CodeMirror for more info)
 
 [Here](https://gist.github.com/mistermboy/843d5633e5408d7d79a37b890da167f3) you can see a code example of the two diferent ways to initialize YASHE
 
-## Developing YASHE
+## Developing YASHE :construction:
 
 Feel free to fork and develop this tool.  You can submit your
 contributions as Github pull requests.  To develop *YASHE* locally:
