@@ -63,12 +63,18 @@ You can initialize YASHE via its constructor, or via the command fromTextArea. B
 
 Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
 
+Check [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
+
 `YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
 
 Initialize YASQE from an existing text area (see CodeMirror for more info)
 
+Check [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
+
 
 [Here](https://gist.github.com/mistermboy/843d5633e5408d7d79a37b890da167f3) you can see a code example of the two diferent ways to initialize YASHE
+
+
 
 ## Developing YASHE :construction:
 
