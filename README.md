@@ -8,6 +8,7 @@
   <img src="https://img.shields.io/github/last-commit/weso/YASHE" alt="commits"/>
   <img src="https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F" alt="web"/>
   <img src="https://img.shields.io/github/license/weso/YASHE?color=blueviolet" alt="license"/>
+  <a href="http://www.weso.es/"><img src="https://img.shields.io/badge/organization-WESO-red" alt="ORGANIZATION"/></a>
 </p>
 
 
