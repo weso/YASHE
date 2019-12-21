@@ -1,9 +1,11 @@
-[![NPM](https://img.shields.io/npm/v/yashe)](https://www.npmjs.org/package/yashe)
-![TOP](https://img.shields.io/github/languages/top/weso/YASHE?color=yellow)
-![ISUES](https://img.shields.io/github/issues/weso/YASHE?color=green)
-![LICENSE](https://img.shields.io/github/license/weso/YASHE?color=blueviolet)
-
 ![YASHE](./doc/imgs/yashe_logo.png)
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a> 
+  <img src="https://img.shields.io/github/languages/top/weso/YASHE?color=yellow" alt="languaje"/>
+  <img src="https://img.shields.io/github/issues/weso/YASHE?color=green" alt="isues"/>
+  <img src="https://img.shields.io/github/license/weso/YASHE?color=blueviolet" alt="license"/>
+</p>
 
 
 # YASHE
@@ -11,7 +13,7 @@
 
 <br>
 <p align="center">
-  <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="Sublime's custom image"/>
+  <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
 ## Features :clipboard:
