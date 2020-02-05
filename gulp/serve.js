@@ -6,9 +6,7 @@ var gulp = require("gulp"),
 gulp.task("watch", function() {
   gulp.watch(["./src/**/*.js", "./lib/*.js", "./lib/grammar/*.js"], gulp.series("browserifyForDebug"));
   gulp.watch("./src/**/*.scss", gulp.series("makeCss"));
-  gulp.watch("./*.html", function(files) {
-    gulp.src(files.path).pipe(connect.reload());
-  });
+  gulp.watch("./*.html", gulp.series("browserifyForDebug"));
 });
 
 gulp.task("connect", function() {
