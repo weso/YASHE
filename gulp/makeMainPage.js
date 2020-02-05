@@ -27,4 +27,4 @@ gulp.task("makeMainPageCss", function() {
     .pipe(gulp.dest("doc"));
 });
 
-gulp.task("makeMainPage", ["makeMainPageJs", "makeMainPageCss"]);
+gulp.task("makeMainPage", gulp.series("makeMainPageJs", "makeMainPageCss"));
