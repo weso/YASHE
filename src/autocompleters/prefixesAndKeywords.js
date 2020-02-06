@@ -12,7 +12,6 @@ module.exports = function(yashe, name) {
     },
     get: function(token) {
       
-  
      var trie = new Trie()
      var prefixes = module.exports.PREFIXES
      for(var prefix in prefixes){
@@ -75,6 +74,7 @@ module.exports.PREFIXES = []
 var KEYWORDS = [
   'base',
   'prefix',
+  'import',
   'external',
   'or',
   'and',
