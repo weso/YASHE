@@ -23,13 +23,16 @@ stephen.cresswell@tso.co.uk
 shexDoC  ==> [*(directive),?([or(notStartAction,startActions),*(statement)]), $ ].
 
 %[2] OK
-directive ==> [or(baseDecl,prefixDecl)].
+directive ==> [or(baseDecl,prefixDecl,importDecl)].
 
 %[3] OK
 baseDecl ==> ['BASE','IRI_REF'].
 
 %[4] OK
 prefixDecl ==> ['PREFIX','PNAME_NS','IRI_REF'].
+
+%[4 1/2]
+importDecl ==>['IMPORT','IRI_REF'].
 
 %[5] OK
 notStartAction ==> [or(startt,shapeExprDecl)].
@@ -289,6 +292,7 @@ tm_keywords([
 
 'BASE',
 'PREFIX',
+'IMPORT',
 'EXTERNAL',
 'OR',
 'AND',
