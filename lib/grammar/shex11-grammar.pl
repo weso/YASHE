@@ -242,7 +242,7 @@ numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
 %[129s] OK
-rdfLiteral ==> [string,?(or('LANGTAG',['^^',datatype]))].
+rdfLiteral ==> [string,?(or('LANGTAG',['^','^',datatype]))].
 
 %[134s] OK
 booleanLiteral ==> [or('TRUE', 'FALSE')].
@@ -347,6 +347,5 @@ tm_punct([
 '&'='&',
 '//'='\\/\\/',
 '%'='%',
-'^^'= '\\^\\^',
 '$' = '\\$'
 ]).
