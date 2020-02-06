@@ -22,7 +22,7 @@ module.exports = function(yashe, name) {
      }
 
 
-     var completions = trie.autoComplete(token)
+     var completions = trie.autoComplete(token.toLowerCase())
      var final = []
      var list={}
      for(var c in completions){
