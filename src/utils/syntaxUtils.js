@@ -9,7 +9,10 @@ var checkSyntax = function(yashe) {
     yashe.clearGutter("gutterErrorBar");
   
     var state = null;
+    let openTokensCounter = 0;
+    let closeTokensCounter = 0;
     for (var l = 0; l < yashe.lineCount(); ++l) {
+
       var precise = false;
       if (!yashe.prevQueryValid) {
         // we don't want cached information in this case, otherwise the
@@ -26,8 +29,8 @@ var checkSyntax = function(yashe) {
         precise
       );
   
-      //console.log(token)  
-      //console.log(token.string + '   '  + token.state.OK)
+      
+  
 
       var state = token.state;
   
@@ -65,7 +68,38 @@ var checkSyntax = function(yashe) {
         yashe.queryValid = false;
         return false;
       }
+
+      //This is only necessary to verify the if the last '}' is missing  (See #104)
+      let lineTokens = yashe.getLineTokens(l)
+      for(let t in lineTokens){
+        if(lineTokens[t].string=='{'){
+          openTokensCounter++;
+        }
+        if(lineTokens[t].string=='}'){
+          closeTokensCounter++;
+        }
+      }
+
     }
+
+  
+    // Is last '}' missing?  (See #104)
+    if(openTokensCounter != closeTokensCounter){
+      
+      var warningEl = yutils.svg.getElement(imgs.warning);
+      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+        return "This line is invalid. Expected: '}'";
+      });   
+      warningEl.style.marginTop = "2px";
+      warningEl.style.marginLeft = "2px";
+      warningEl.className = "parseErrorIcon";
+      yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
+      
+     
+      yashe.queryValid = false;
+      return false;
+    }
+
 
 
     yashe.prevQueryValid = yashe.queryValid;

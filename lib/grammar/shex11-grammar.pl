@@ -23,13 +23,16 @@ stephen.cresswell@tso.co.uk
 shexDoC  ==> [*(directive),?([or(notStartAction,startActions),*(statement)]), $ ].
 
 %[2] OK
-directive ==> [or(baseDecl,prefixDecl)].
+directive ==> [or(baseDecl,prefixDecl,importDecl)].
 
 %[3] OK
 baseDecl ==> ['BASE','IRI_REF'].
 
 %[4] OK
 prefixDecl ==> ['PREFIX','PNAME_NS','IRI_REF'].
+
+%[4 1/2]
+importDecl ==>['IMPORT','IRI_REF'].
 
 %[5] OK
 notStartAction ==> [or(startt,shapeExprDecl)].
@@ -169,7 +172,7 @@ elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
 
 %[40] OK
-unaryTripleExpr ==> [?(tripleExprLabel),or(tripleConstraint,bracketedTripleExpr)].
+unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)].
 unaryTripleExpr ==> [include].
 
 
@@ -228,10 +231,9 @@ datatype ==> [iri].
 
 %[56] OK
 shapeExprLabel ==> [or(iri,blankNode)].
-%shapeExprLabel ==> ['SHEX_LABEL'].
 
 %[42] OK
-tripleExprLabel ==> ['$',or(iri,blankNode)].
+tripleExprLabel ==> [or(iri,blankNode)].
 
 %[16t] OK
 numericLiteral ==>['INTEGER'].
@@ -239,7 +241,7 @@ numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
 %[129s] OK
-rdfLiteral ==> [string,?(or('LANGTAG',['^^',datatype]))].
+rdfLiteral ==> [string,?(or('LANGTAG',['^','^',datatype]))].
 
 %[134s] OK
 booleanLiteral ==> [or('TRUE', 'FALSE')].
@@ -289,6 +291,7 @@ tm_keywords([
 
 'BASE',
 'PREFIX',
+'IMPORT',
 'EXTERNAL',
 'OR',
 'AND',
@@ -340,9 +343,8 @@ tm_punct([
 ']'= '\\]',
 '-'= '-',
 '~'='\\~',
-'&'='&',
+'&'='\\&',
 '//'='\\/\\/',
 '%'='%',
-'^^'= '\\^\\^',
 '$' = '\\$'
 ]).

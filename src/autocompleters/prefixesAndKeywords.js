@@ -12,7 +12,6 @@ module.exports = function(yashe, name) {
     },
     get: function(token) {
       
-  
      var trie = new Trie()
      var prefixes = module.exports.PREFIXES
      for(var prefix in prefixes){
@@ -23,7 +22,7 @@ module.exports = function(yashe, name) {
      }
 
 
-     var completions = trie.autoComplete(token)
+     var completions = trie.autoComplete(token.toLowerCase())
      var final = []
      var list={}
      for(var c in completions){
@@ -75,6 +74,7 @@ module.exports.PREFIXES = []
 var KEYWORDS = [
   'base',
   'prefix',
+  'import',
   'external',
   'or',
   'and',
