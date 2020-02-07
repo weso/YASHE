@@ -31,7 +31,6 @@ var checkSyntax = function(yashe) {
   
       
   
-
       var state = token.state;
   
       if (state.OK == false) {
@@ -95,11 +94,23 @@ var checkSyntax = function(yashe) {
       warningEl.className = "parseErrorIcon";
       yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
       
-     
       yashe.queryValid = false;
       return false;
     }
-
+    /*
+    console.log(nonWSGlobalTokens[lastToken-1].string)
+    if(nonWSGlobalTokens[lastToken-1].string!='}'){
+      console.log('entra')
+        var warningEl = yutils.svg.getElement(imgs.warning);
+        
+        warningEl.style.marginTop = "2px";
+        warningEl.style.marginLeft = "2px";
+        warningEl.className = "parseErrorIcon";
+        yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
+        yashe.queryValid = false;
+        return false;
+    }
+    */
 
 
     yashe.prevQueryValid = yashe.queryValid;
