@@ -172,7 +172,7 @@ elementGroup ==>[unaryTripleExpr,singleElementGroup].
 
 
 %[40] OK
-unaryTripleExpr ==> [?(tripleExprLabel),or(tripleConstraint,bracketedTripleExpr)].
+unaryTripleExpr ==> [?(['$',tripleExprLabel]),or(tripleConstraint,bracketedTripleExpr)].
 unaryTripleExpr ==> [include].
 
 
@@ -231,10 +231,9 @@ datatype ==> [iri].
 
 %[56] OK
 shapeExprLabel ==> [or(iri,blankNode)].
-%shapeExprLabel ==> ['SHEX_LABEL'].
 
 %[42] OK
-tripleExprLabel ==> ['$',or(iri,blankNode)].
+tripleExprLabel ==> [or(iri,blankNode)].
 
 %[16t] OK
 numericLiteral ==>['INTEGER'].
@@ -344,7 +343,7 @@ tm_punct([
 ']'= '\\]',
 '-'= '-',
 '~'='\\~',
-'&'='&',
+'&'='\\&',
 '//'='\\/\\/',
 '%'='%',
 '$' = '\\$'
