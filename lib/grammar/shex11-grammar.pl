@@ -199,7 +199,14 @@ valueSet ==> ['[',*(valueSetValue),']'].
 
 %[47] OK
 valueSetValue ==> [iriRange].
-valueSetValue ==> [literal].
+valueSetValue ==> [literalRange].
+valueSetValue ==> [languajeRange].
+
+languajeRange ==>['LANGTAG',?(['~',*(languajeExclusion)])].
+languajeRange ==>['@','~',*(languajeExclusion)].
+
+languajeExclusion ==> ['-','LANGTAG',?('~')].
+
 
 %[48] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
@@ -241,7 +248,7 @@ numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
 %[129s] OK
-rdfLiteral ==> [string,?(or('LANGTAG',['^','^',datatype]))].
+rdfLiteral ==> [string,?(['^','^',datatype])].
 
 %[134s] OK
 booleanLiteral ==> [or('TRUE', 'FALSE')].
