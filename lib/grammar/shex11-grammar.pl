@@ -202,11 +202,19 @@ valueSetValue ==> [iriRange].
 valueSetValue ==> [literalRange].
 valueSetValue ==> [languajeRange].
 
+
+%%%%%%%%% Until grammar isues are fixed %%%%%%%%%%%%%
+
+literalRange ==> [literal,?(['~',*(literalExclusion)])].
+
 languajeRange ==>['LANGTAG',?(['~',*(languajeExclusion)])].
 languajeRange ==>['@','~',*(languajeExclusion)].
 
 languajeExclusion ==> ['-','LANGTAG',?('~')].
+literalExclusion == ['-',literal,?('~')].
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 %[48] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
