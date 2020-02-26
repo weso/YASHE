@@ -211,7 +211,7 @@ languajeRange ==>['LANGTAG',?(['~',*(languajeExclusion)])].
 languajeRange ==>['@','~',*(languajeExclusion)].
 
 languajeExclusion ==> ['-','LANGTAG',?('~')].
-literalExclusion == ['-',literal,?('~')].
+literalExclusion ==> ['-',literal,?('~')].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -239,7 +239,7 @@ codeDecl ==> ['%',iri,or('CODE','%')].
 literal ==> [or(rdfLiteral,numericLiteral,booleanLiteral)].
 
 %[54] OK
-predicate ==> [or(iri,'A')].
+predicate ==> [or(iri,'A_TOKEN')].
 
 %[55] OK
 datatype ==> [iri].
@@ -298,7 +298,8 @@ tm_regex([
 'STRING_LITERAL1',
 'STRING_LITERAL2',
 'STRING_LITERAL_LONG1',
-'STRING_LITERAL_LONG2'
+'STRING_LITERAL_LONG2',
+'A_TOKEN'
 ]).
 
 % Terminals where name of terminal is uppercased ten content
@@ -328,8 +329,7 @@ tm_keywords([
 'EXTRA',
 'TRUE',
 'FALSE',
-'START',
-'A'
+'START'
 ]).
 
 % Other tens representing fixed, case sensitive, strings
