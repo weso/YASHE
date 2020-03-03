@@ -1,0 +1,14 @@
+# Example 84  IF-THEN-ELSE pattern example
+# https://book.validatingrdf.com/bookHtml010.html#sec108
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Product (
+  NOT  { a [ schema:Vehicle ] } OR
+       { schema:vehicleEngine . ;
+        schema:fuelType .
+       }
+ ) AND ({ a [schema:Vehicle] } OR
+        { schema:category xsd:string } )

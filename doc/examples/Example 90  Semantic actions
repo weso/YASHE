@@ -1,0 +1,12 @@
+# Example 90  Semantic actions
+# https://book.validatingrdf.com/bookHtml010.html#sec116
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX js: <http://shex.io/extensions/javascript>
+
+:Event {
+ schema:startDate xsd:dateTime  %js:{ let start = o %} ;
+ schema:endDate   xsd:dateTime  %js:{ let end = o %} ;
+}

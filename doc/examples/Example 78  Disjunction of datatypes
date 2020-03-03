@@ -1,0 +1,12 @@
+# Example 78  Disjunction of datatypes
+# https://book.validatingrdf.com/bookHtml010.html#sec103
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Product {
+ rdfs:label         xsd:string OR rdf:langString;
+ schema:releaseDate xsd:date OR xsd:gYear OR
+                    [ "unknown-past" "unknown-future" ]
+}

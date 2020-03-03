@@ -1,0 +1,18 @@
+# Example 74  Reusing constraints
+# https://book.validatingrdf.com/bookHtml010.html#sec102
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:CompanyConstraints IRI /^http:\/\/example.org\/id[0-9]+/ @:CompanyShape
+
+:User {
+ schema:name        xsd:string;
+ schema:worksFor    @:CompanyConstraints;
+ schema:affiliation @:CompanyConstraints
+}
+
+:CompanyShape {
+  schema:founder xsd:string;
+}

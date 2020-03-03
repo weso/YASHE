@@ -1,0 +1,16 @@
+# Example 85  Barber’s paradox
+# https://book.validatingrdf.com/bookHtml010.html#sec109
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Barber {               # Violates the negation requirement
+ :shaves     @:Person
+} AND NOT {
+ :shaves     @:Barber
+}
+
+:Person {
+ schema:name xsd:string
+}

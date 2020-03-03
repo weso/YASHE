@@ -1,0 +1,27 @@
+# Example 92  Import example
+# https://book.validatingrdf.com/bookHtml010.html#sec118
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+
+:Person {
+   $:name ( schema:name .
+          | schema:givenName . ; schema:familyName .
+          ) ;
+   schema:email .
+}
+
+
+import <http://example.org/Person.shex>
+
+:Employee {
+    &:name ;
+    schema:worksFor <CompanyShape>
+}
+
+:Company {
+    schema:employee @:Employee ;
+    schema:founder  @:Person ;
+}

@@ -1,0 +1,12 @@
+# Example 83  IF-THEN pattern example
+# https://book.validatingrdf.com/bookHtml010.html#sec107
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Product { schema:productID . } AND
+ NOT { a [ schema:Vehicle ] }
+ OR { schema:vehicleEngine . ;
+      schema:fuelType .
+ }

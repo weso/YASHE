@@ -1,0 +1,11 @@
+# Example 76  Disjunction
+# https://book.validatingrdf.com/bookHtml010.html#sec103
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:User { schema:name xsd:string }
+   OR { schema:givenName xsd:string ;
+        schema:familyName xsd:string
+      }
