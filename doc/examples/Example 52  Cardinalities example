@@ -1,0 +1,17 @@
+# Example 52  Cardinalities example
+# https://book.validatingrdf.com/bookHtml010.html#sec86
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:User {
+  schema:name xsd:string ;
+  schema:worksFor IRI ? ;
+  schema:follows  IRI *
+}
+
+:Company {
+  schema:founder  IRI ?;
+  schema:employee IRI {1,100}
+}

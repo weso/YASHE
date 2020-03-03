@@ -1,0 +1,16 @@
+# Example 60  Repeated properties
+# https://book.validatingrdf.com/bookHtml010.html#sec90
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:User {
+ schema:name   xsd:string;
+ schema:parent {
+   schema:gender [schema:Male ]
+ } ;
+ schema:parent {
+   schema:gender [schema:Female ]
+ } ;
+}

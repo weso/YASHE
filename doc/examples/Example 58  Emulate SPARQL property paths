@@ -1,0 +1,10 @@
+# Example 58 Emulate SPARQL property paths
+# https://book.validatingrdf.com/bookHtml010.html#sec88
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Grandson {
+  :parent { :parent . + }+ ;
+}

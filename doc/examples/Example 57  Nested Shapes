@@ -1,0 +1,22 @@
+# Example 57 Nested Shapes
+# https://book.validatingrdf.com/bookHtml010.html#sec88
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:User {
+  schema:name     xsd:string ;
+  schema:worksFor @_:1
+}
+
+_:1 { a [ :Company ] }
+
+
+
+:User {
+  schema:name     xsd:string ;
+  schema:worksFor {
+    a [ :Company]
+  }
+}
