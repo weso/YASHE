@@ -1,0 +1,14 @@
+# Example 41 Language-tagged values
+# https://book.validatingrdf.com/bookHtml010.html#sec75
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:FrenchProduct {
+ schema:label [ @fr ]
+}
+
+:SpanishProduct {
+ schema:label [ @es @es-AR @es-ES ]
+}

@@ -1,0 +1,6 @@
+# Example 46 Heterogeneous value sets
+# https://book.validatingrdf.com/bookHtml010.html#sec78
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>

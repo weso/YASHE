@@ -1,5 +1,5 @@
-# Example 40 Value set single value
-# https://book.validatingrdf.com/bookHtml010.html#sec73
+# Example 40 Unit value sets
+# https://book.validatingrdf.com/bookHtml010.html#sec74
 
 PREFIX :       <http://example.org/>
 PREFIX schema: <http://schema.org/>
