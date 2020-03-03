@@ -89,6 +89,9 @@ $(document).ready(function() {
           });
       }});
 
+      exSelector.append(
+                    $( '<option>' ).text( 'example' ).attr( 'value', 'example'));
+
     //Selector Listener
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
