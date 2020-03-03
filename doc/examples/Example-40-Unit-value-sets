@@ -1,0 +1,14 @@
+# Example 40 Unit value sets
+# https://book.validatingrdf.com/bookHtml010.html#sec74
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Spanish {
+ schema:country [ :Spain ]
+}
+
+:User {
+ a [ schema:Person ]
+}
