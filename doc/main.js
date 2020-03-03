@@ -93,7 +93,6 @@ $(document).ready(function() {
       
       */
 
-
       $.ajax({
         dataType: "json",
         url: url,
@@ -107,21 +106,6 @@ $(document).ready(function() {
         }
       });
        
-        /*
-        data.split('\n').forEach(function(element){
-          if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
-              exSelector.append(
-              $( '<option>' ).text( element ).attr( 'value', element));
-            }
-          });
-          
-        
-        }, 'text');
-        */
-
-      exSelector.append(
-                    $( '<option>' ).text( 'example' ).attr( 'value', 'example'));
-
     //Selector Listener
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
