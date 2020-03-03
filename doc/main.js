@@ -74,6 +74,7 @@ $(document).ready(function() {
 
     var exSelector = $('#exSelector');
      //Get all the examples
+     /*
     $.get('./doc/examples/', function(data) {
         data.split('\n').forEach(function(element){
           if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
@@ -83,6 +84,13 @@ $(document).ready(function() {
           });
         
         }, 'text');
+        */
+   
+
+        exSelector.append(
+              $( '<option>' ).text( 'Example 26 Simple ShEx Schema' ).attr( 'value', 'Example 26 Simple ShEx Schema'));
+   
+
    
 
     //Selector Listener
