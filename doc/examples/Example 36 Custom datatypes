@@ -1,0 +1,12 @@
+# Example 36  Custom datatypes
+# https://book.validatingrdf.com/bookHtml010.html#sec71
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Picture {
+ schema:name    xsd:string ;
+ schema:width   cdt:distance ;
+ schema:height  cdt:distance
+}

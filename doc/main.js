@@ -71,4 +71,13 @@ $(document).ready(function() {
     }
 
 
+    //Examples Listener
+    var exSelector = document.getElementById('exSelector')
+    exSelector.addEventListener('change', function(e) {
+        $.get('./doc/examples/'+exSelector.value, function(data) {
+                    yashe.setValue(data);
+        }, 'text');
+
+    })
+
 });

@@ -1,0 +1,16 @@
+# Example 33  Node constraint as top-level shape combined with complex shape
+# https://book.validatingrdf.com/bookHtml010.html#sec69
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+
+:User IRI AND {
+ schema:name xsd:string
+}
+
+
+:User IRI {
+ schema:name xsd:string
+}
