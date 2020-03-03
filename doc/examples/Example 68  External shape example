@@ -1,0 +1,11 @@
+# Example 68  External shape example
+# https://book.validatingrdf.com/bookHtml010.html#sec97
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Product {
+ schema:productId xsd:string ;
+ schema:category EXTERNAL // :service <http://categories.org/> 
+}
