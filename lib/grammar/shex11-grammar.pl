@@ -206,22 +206,24 @@ valueSetValue ==> [languajeRange].
 %%%%%%%%% Until grammar isues are fixed %%%%%%%%%%%%%
 
 literalRange ==> [literal,?(['~',*(literalExclusion)])].
+literalExclusion ==> ['-',literal,?('~')].
 
 languajeRange ==>['LANGTAG',?(['~',*(languajeExclusion)])].
 languajeRange ==>['@','~',*(languajeExclusion)].
 
 languajeExclusion ==> ['-','LANGTAG',?('~')].
-literalExclusion ==> ['-',literal,?('~')].
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 %[48] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
-iriRange ==> ['.',+(exclusion)].
+
+%iriRange ==> ['.',+(exclusion)].
 
 %[49] OK
-exclusion ==>['-',iri,?('~')].
+exclusion ==>['-',or(iri,literal,'LANGTAG'),?('~')].
 
 %[50] OK
 include ==> ['&',tripleExprLabel].
@@ -356,7 +358,7 @@ tm_punct([
 '^'= '\\^',
 '['= '\\[',
 ']'= '\\]',
-'-'= '-',
+'-'= '\\-',
 '~'='\\~',
 '&'='\\&',
 '//'='\\/\\/',
