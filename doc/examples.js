@@ -3,15 +3,15 @@ var rdfBookEx,wikiEx,japanEx
 var exSelector = document.getElementById('exSelector')
 
 //Parse Shapes
-$.get('./doc/examples/rdfBookEx.txt', function(data) {
+$.get('./doc/examples/rdfBookEx', function(data) {
     rdfBookEx = data
 }, 'text');
 
-$.get('./doc/examples/wikidataEx.txt', function(data) {
+$.get('./doc/examples/wikidataEx', function(data) {
     wikiEx = data
 }, 'text');
 
-$.get('./doc/examples/japanEx.txt', function(data) {
+$.get('./doc/examples/japanEx', function(data) {
     japanEx = data
 }, 'text');
 
