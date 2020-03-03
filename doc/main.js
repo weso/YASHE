@@ -76,7 +76,7 @@ $(document).ready(function() {
      //Get all the examples
     $.get('./doc/examples/', function(data) {
         data.split('\n').forEach(function(element){
-          if(element!='wiki' && element!='rdf' && element!='japan'){
+          if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
               exSelector.append(
               $( '<option>' ).text( element ).attr( 'value', element));
             }

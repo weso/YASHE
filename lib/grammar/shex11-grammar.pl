@@ -218,8 +218,7 @@ languajeExclusion ==> ['-','LANGTAG',?('~')].
 
 %[48] OK
 iriRange ==> [iri,?(['~',*(exclusion)])].
-
-%iriRange ==> ['.',+(exclusion)].
+iriRange ==> ['.',+(exclusion)].
 
 %[49] OK
 exclusion ==>['-',or(iri,literal,'LANGTAG'),?('~')].
