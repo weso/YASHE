@@ -1,0 +1,16 @@
+# Example 62  EXTRA properties with several types
+# https://book.validatingrdf.com/bookHtml010.html#sec92
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Company1 {
+ a [ schema:Organization ] ;
+ a [ org:Organization ]
+}
+
+:Company2 EXTRA a {                # Allows extra values of rdf:type
+ a [ schema:Organization ] ;
+ a [ org:Organization ]
+}s

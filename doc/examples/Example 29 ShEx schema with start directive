@@ -1,0 +1,11 @@
+# Example 29  ShEx schema with start directive
+# https://book.validatingrdf.com/bookHtml010.html#sec68
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+start = @<Patient>
+<Patient> {
+  #...
+}

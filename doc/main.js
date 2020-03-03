@@ -70,5 +70,28 @@ $(document).ready(function() {
       });
     }
 
+   
+
+    var exSelector = $('#exSelector');
+     //Get all the examples
+    $.get('./doc/examples/', function(data) {
+        data.split('\n').forEach(function(element){
+          if(element!='wiki' && element!='rdf' && element!='japan'){
+              exSelector.append(
+              $( '<option>' ).text( element ).attr( 'value', element));
+            }
+          });
+        
+        }, 'text');
+   
+
+    //Selector Listener
+    exSelector.change(function(e) {
+        var selected =  $('#exSelector option:selected').val();
+        $.get('./doc/examples/'+selected, function(data) {
+                    yashe.setValue(data);
+        }, 'text');
+
+    })
 
 });

@@ -1,0 +1,13 @@
+# Example 70  Equivalent triple expression
+# https://book.validatingrdf.com/bookHtml010.html#sec98
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Employee {
+  ( schema:name .
+  | schema:givenName . ;
+    schema:familyName .) ;
+  :employeeId .
+}

@@ -1,0 +1,10 @@
+# Example 50 Single Triple Constraint
+# https://book.validatingrdf.com/bookHtml010.html#sec83
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Product {
+ schema:productId xsd:string {1,2}
+}

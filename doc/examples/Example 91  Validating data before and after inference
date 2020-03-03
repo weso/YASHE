@@ -1,0 +1,24 @@
+# Example 91  Validating data before and after inference
+# https://book.validatingrdf.com/bookHtml010.html#sec117
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+
+:TeacherBefore EXTRA a {
+ a           [:Teacher]? ;
+ schema:name xsd:string ;
+ :teaches    @:Course*
+}
+
+:TeacherAfter EXTRA a {
+ a           [:Teacher];
+ a           [:Person];
+ schema:name xsd:string ;
+ :teaches    { a [:Course] } AND @:Course
+}
+
+:Course {
+ a [:Course]?
+}

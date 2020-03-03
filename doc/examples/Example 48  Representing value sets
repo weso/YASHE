@@ -1,0 +1,16 @@
+#Example 48  Representing value sets
+# https://book.validatingrdf.com/bookHtml010.html#sec80
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:User {
+ schema:gender [ schema:Male schema:Female ]
+}
+
+:User {
+ schema:gender [ schema:Male ]
+} OR {
+ schema:gender [ schema:Female ]
+}

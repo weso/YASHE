@@ -1,0 +1,11 @@
+# Example 43  String and IRI ranges example
+# https://book.validatingrdf.com/bookHtml010.html#sec76
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:SpanishW3CPeople {
+  schema:telephone [ "+34"~ ] ;
+  schema:url       [ <http://www.W3C.es/Personal>~ ]
+}

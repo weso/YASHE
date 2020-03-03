@@ -282,7 +282,6 @@ const postProcessCmElement = function(yashe) {
 
   //Needed
   //Without this, there is a bug 
-  //that forfces you to do a Space after type a token to fix it (#96)
   yashe.on('changes', function(yashe) {
     checkSyntax(yashe);  
   });

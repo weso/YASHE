@@ -1,0 +1,16 @@
+# Example 71  Shape with annotations
+# https://book.validatingrdf.com/bookHtml010.html#sec99
+
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+:Person {
+ schema:name      xsd:string
+  // rdfs:label    "Name" 
+  // rdfs:comment  "Name of person" ;
+
+ schema:birthDate xsd:date
+   // rdfs:label    "birthDate" 
+   // rdfs:comment  "Birth of date" ;
+}
