@@ -73,6 +73,7 @@ $(document).ready(function() {
     //Add all the examples to the selector   
     var dir = "./doc/examples/";
     var exSelector = $('#exSelector');
+    /*
     $.ajax({
         url: dir,
         success: function (data) {
@@ -88,6 +89,17 @@ $(document).ready(function() {
               }
           });
       }});
+      */
+
+      $.get('./doc/examples/', function(data) {
+        data.split('\n').forEach(function(element){
+          if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
+              exSelector.append(
+              $( '<option>' ).text( element ).attr( 'value', element));
+            }
+          });
+        
+        }, 'text');
 
       exSelector.append(
                     $( '<option>' ).text( 'example' ).attr( 'value', 'example'));
