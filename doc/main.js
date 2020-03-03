@@ -71,7 +71,7 @@ $(document).ready(function() {
     }
 
     //Add all the examples to the selector   
-    var dir = "doc/examples/";
+    var dir = "./doc/examples/";
     var exSelector = $('#exSelector');
     $.ajax({
         url: dir,
