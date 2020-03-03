@@ -71,8 +71,9 @@ $(document).ready(function() {
     }
 
     //Add all the examples to the selector   
-    var dir = "./doc/examples/";
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples";
     var exSelector = $('#exSelector');
+    
     /*
     $.ajax({
         url: dir,
@@ -89,17 +90,34 @@ $(document).ready(function() {
               }
           });
       }});
+      
       */
 
-      $.get('./doc/examples/', function(data) {
+
+      $.ajax({
+        dataType: "json",
+        url: url,
+        success: function (data) {
+          data.forEach(function(element){
+            if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
+                  exSelector.append(
+                    $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
+                }
+          })
+        }
+      });
+       
+        /*
         data.split('\n').forEach(function(element){
           if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
               exSelector.append(
               $( '<option>' ).text( element ).attr( 'value', element));
             }
           });
+          
         
         }, 'text');
+        */
 
       exSelector.append(
                     $( '<option>' ).text( 'example' ).attr( 'value', 'example'));
