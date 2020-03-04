@@ -116,22 +116,28 @@ yashe.getValue() → query: String
 //Fetch defined prefixes
 yashe.getDefinedPrefixes() → object:
 
-//Add prefixes to the query. The prefixes are defined as {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+//Add prefixes to the query. The prefixes are defined as 
+//{"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
 yashe.addPrefixes(prefixes: object)
 
-//Remove prefixes from query. The prefixes are defined as {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+//Remove prefixes from query. The prefixes are defined as 
+//{"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
 yashe.removePrefixes(prefixes: object)
 
-//Set size. Use null value to leave width or height unchanged. To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
+//Set size. Use null value to leave width or height unchanged. 
+//To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
 yashe.setSize(width: Number|string, height: Number|string)
 
-//Enable an autocompleter with this name. Only makes sense if you've programatically disabled this completer before, as a plugin is automatically enabled when registering it (see this function)
+//Enable an autocompleter with this name. Only makes sense if you've programatically 
+//disabled this completer before, as a plugin is automatically enabled when registering it 
+//(see this function)
 yashe.enableCompleter(completerName: String)
 
 //Disable an autocompleter with this name.
 yashe.disableCompleter(completerName: String)
 
-//Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the //autocompletion settings
+//Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
+//The argument should be a key from the //autocompletion settings
 yashe.storeBulkCompletions(type: String)
 
 //Collapsing prefixes if there are any. Use false to expand them.
