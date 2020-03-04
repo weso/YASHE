@@ -37,13 +37,12 @@ In addition, it offers a simple way of integrating into other projects
 ### NPM
 YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
 ```
-npm i yashe
-
+$ npm i yashe
 ```
 ### JsDelivr
 The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
 
-```
+```html
 <link href='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
 <script src='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.bundled.min.js'></script>
 ```
@@ -56,7 +55,7 @@ You can initialize YASHE via its constructor, or via the command fromTextArea. B
 
 `YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
 
-```
+```js
 var yashe = YASHE(document.getElementById('domId'), {
   //Options
 });
