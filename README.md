@@ -31,6 +31,22 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
+## Documentation
+
+* [Features](#features-clipboard)
+* [Install](#install-floppy_disk)
+  - [NPM](#NPM)
+  - [JsDelivr](#JsDelivr)
+  - [Github](#Github)
+* [Configuration](#Configuration)
+  - [Defaults](#Defaults)
+  - [Shortcuts](#shortcuts-provided-by-yashe)
+* [API](#API)
+* [Statics](#Statics)
+* [Developing YASHE](#developing-yashe-construction)
+* [Used By](#used-by-link)
+* [Forked By](#forked-by-link)
+
 ## Features :clipboard:
 
 * Completely client-side
@@ -50,7 +66,116 @@ In addition, it offers a simple way of integrating into other projects
      * Delete all the editor content
      * Change between light and dark mode
      * FullScreen Mode
- * Shortcuts:
+
+## Install :floppy_disk:
+
+### NPM
+YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
+```
+$ npm i yashe
+```
+### JsDelivr
+The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
+
+```html
+<link href='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
+<script src='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.bundled.min.js'></script>
+```
+
+### Github
+Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YASHE [.css](./dist/yashe.min.css) and [.js](./dist/yashe.bundled.min.js) files (find them in the dist directory).  
+
+## Usage
+You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
+Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. 
+YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . 
+[Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
+
+```js
+var yashe = YASHE(document.getElementById('domId'), {
+  //Options
+});
+```
+
+``
+
+
+Initialize YASQE from an existing text area (see CodeMirror for more info)
+YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe
+[Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
+
+```js
+var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
+  //Options
+});
+```
+## Configuration
+This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
+
+```js
+var yashe = YASHE(document.getElementById('domId'), {
+  value:'Starting value of the editor',
+  mode:'shex',
+  theme:'wiki',
+  lineNumbers: true,
+  lineWrapping: true,
+  firstLineNumber:1,
+  cursorHeight:15,
+  readOnly:false,
+  showCursorWhenSelecting:fasle,
+  tabMode: 'indent',
+  collapsePrefixesOnLoad: false,
+  matchBrackets: true,
+  fixedGutter: true,
+  syntaxErrorCheck: true,
+  showTooltip:true,
+  persistent:null,
+  extraKeys: {
+    "Ctrl-Space": YASHE.autoComplete,
+    "Cmd-Space": YASHE.autoComplete,
+    "Ctrl-D": YASHE.deleteLine,
+    "Cmd-K": YASHE.deleteLine,
+    "Ctrl-/": YASHE.commentLines,
+    "Cmd-/": YASHE.commentLines,
+    "Ctrl-Down": YASHE.copyLineDown,
+    "Ctrl-Up": YASHE.copyLineUp,
+    "Cmd-Down": YASHE.copyLineDown,
+    "Cmd-Up": YASHE.copyLineUp,
+    "Shift-Ctrl-F": YASHE.doAutoFormat,
+    "Shift-Cmd-F": YASHE.doAutoFormat,
+    "Ctrl-S": YASHE.storeContent,
+    "Cmd-S": YASHE.storeConten,
+    "Ctrl-Enter": YASHE.executeQuery,
+    "Cmd-Enter": YASHE.executeQuery,
+    }
+});
+```
+
+### Defaults
+
+```
+value: string
+```
+Default Shape
+```
+autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
+```
+The list of enabled autocompletion plugins
+```
+syntaxErrorCheck: boolean (default: true)
+```
+Whether to validate the ShEx syntax
+```
+collapsePrefixesOnLoad: boolean (default: false)
+```
+Collapse prefixes on page load
+```
+extraKeys: object
+```
+Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
+Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
+
+### Shortcuts provided by YASHE:
  
   Shortcut          | Action
   -------------     | -------------
@@ -67,48 +192,70 @@ In addition, it offers a simple way of integrating into other projects
   Esc               | Leave full-screen
 
 
-## Download the latest release :small_red_triangle_down:
-
-### ![JsDelivr](./doc/imgs/JsDelivr_logo.png)
-The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
-
-#### CSS
-     <link href='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
-  
-#### JS 
-     <script src='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.bundled.min.js'></script>
+```
+persistent: function|string
+```
+Change persistency settings for the YASHE content value. Setting the values to null, will disable persistancy: nothing is stored between browser sessions. Setting the values to a string (or a function which returns a string), will store the query in localstorage using the specified string. By default, the ID is dynamically generated using the YASHE.determineId function, to avoid collissions when using multiple YASHE instances on one page
 
 
 
-### ![Github](./doc/imgs/github_logo.png)
-Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YASHE [.css](./dist/yashe.min.css) and [.js](./dist/yashe.bundled.min.js) files (find them in the dist directory).  
+## API
+API methods accessible via the yashe instance:
 
+```js
+//Set query value in editor (see also)
+yashe.setValue(query: String)
 
-### ![NPM](./doc/imgs/npm_logo.png)
-YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
+// Get query value from editor (see also)
+yashe.getValue() → query: String
 
+// Fetch defined prefixes
+yashe.getDefinedPrefixes() → object:
 
-## Use YASHE on your own project  :round_pushpin:
-You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
+// Add prefixes to the query. The prefixes are defined as 
+// {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.addPrefixes(prefixes: object)
 
-`YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
+// Remove prefixes from query. The prefixes are defined as 
+// {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.removePrefixes(prefixes: object)
 
-Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
+// Set size. Use null value to leave width or height unchanged. 
+// To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
+yashe.setSize(width: Number|string, height: Number|string)
 
-Check [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
+// Enable an autocompleter with this name. Only makes sense if you've programatically 
+// disabled this completer before, as a plugin is automatically enabled when registering it 
+// (see this function)
+yashe.enableCompleter(completerName: String)
 
-`YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
+// Disable an autocompleter with this name.
+yashe.disableCompleter(completerName: String)
 
-Initialize YASQE from an existing text area (see CodeMirror for more info)
+// Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
+// The argument should be a key from the //autocompletion settings
+yashe.storeBulkCompletions(type: String)
 
-Check [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
+// Collapsing prefixes if there are any. Use false to expand them.
+yashe.collapsePrefixes(collapse: boolean)
 
+```
 
-[Here](https://gist.github.com/mistermboy/843d5633e5408d7d79a37b890da167f3) you can see a code example of the two diferent ways to initialize YASHE
+## Statics
+Static functions YASHE
+```js
+// Register an autocompleter in YASHE. This automatically enables the completer as well
+YASHE.registerAutocompleter(name: String, autocompleter: function)
 
+// When typing a shape, this shape is sometimes syntactically invalid, 
+// causing the current tokens to be incorrect.
+// This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
+// We'll want to combine these
+YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) //→ token: Object
+
+```
 
 ## Developing YASHE :construction:
-
 Feel free to fork and develop this tool.  You can submit your
 contributions as Github pull requests.  To develop *YASHE* locally:
 
@@ -120,4 +267,7 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 * [ShExAuthor](https://github.com/weso/shex-author): ShEx Graphic Assistant
 * [RDFShape](http://rdfshape.weso.es/): RDF service for conversion and validation using ShEX and SHACL
 * [WikiShape](http://wikishape.weso.es/): Shape Expressions playground customized for Wikidata
+* [ShExML](http://shexml.herminiogarcia.com/) Playground to convert ShExML to RDF and RML offering diferent syntaxes
 
+## Forked By: :link:
+* [ShExML Editor](http://shexml.herminiogarcia.com/) ShExML is a language based on ShEx to map and merge heterogeneous data sources. It is designed with usability in mind trying to make the script creation easier to the user
