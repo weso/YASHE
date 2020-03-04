@@ -1,0 +1,465 @@
+# City (E100)
+# https://www.wikidata.org/wiki/EntitySchema:E100
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX wdata: <http://www.wikidata.org/wiki/Special:EntityData/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdno: <http://www.wikidata.org/prop/novalue/>
+PREFIX wdref: <http://www.wikidata.org/reference/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wdv: <http://www.wikidata.org/value/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX wdtn: <http://www.wikidata.org/prop/direct-normalized/>
+PREFIX pqv: <http://www.wikidata.org/prop/qualifier/value/>
+PREFIX prv: <http://www.wikidata.org/prop/reference/value/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX psv: <http://www.wikidata.org/prop/statement/value/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX prn: <http://www.wikidata.org/prop/reference/value-normalized/>
+PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+# Result for pattern { wdt:~ __;} and query SELECT DISTINCT ?x WHERE {?x wdt:P31 wd:Q515. } LIMIT 10
+<city> EXTRA wdt:P31 {
+    # country; frequency: [10/10]
+    wdt:P17 [ <http://www.wikidata.org/entity>~ ] ;
+    # image; frequency: [10/10]
+    wdt:P18 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] + ;
+    # instance of; frequency: [10/10]
+    wdt:P31 [ wd:P31 ] + ;
+    # VIAF ID; frequency: [10/10]
+    wdt:P214 xsd:string ;
+    # GND ID; frequency: [10/10]
+    wdt:P227 xsd:string ;
+    # Library of Congress authority ID; frequency: [10/10]
+    wdt:P244 xsd:string ;
+    # Commons category; frequency: [10/10]
+    wdt:P373 xsd:string ;
+    # coordinate location; frequency: [10/10]
+    wdt:P625 geo:wktLiteral ;
+    # Freebase ID; frequency: [10/10]
+    wdt:P646 xsd:string ;
+    # topic's main category; frequency: [10/10]
+    wdt:P910 [ <http://www.wikidata.org/entity>~ ] ;
+    # Commons gallery; frequency: [10/10]
+    wdt:P935 xsd:string ;
+    # MusicBrainz area ID; frequency: [10/10]
+    wdt:P982 xsd:string ;
+    # category for people born here; frequency: [10/10]
+    wdt:P1464 [ <http://www.wikidata.org/entity>~ ] ;
+    # GeoNames ID; frequency: [10/10]
+    wdt:P1566 xsd:string + ;
+    # category of associated people; frequency: [10/10]
+    wdt:P1792 [ <http://www.wikidata.org/entity>~ ] ;
+    # area; frequency: [10/10]
+    wdt:P2046 xsd:decimal ;
+    # Quora topic ID; frequency: [10/10]
+    wdt:P3417 xsd:string ;
+    # located in the administrative territorial entity; frequency: [9/10]
+    wdt:P131 [ <http://www.wikidata.org/entity>~ ] * ;
+    # twinned administrative body; frequency: [9/10]
+    wdt:P190 [ <http://www.wikidata.org/entity>~ ] * ;
+    # postal code; frequency: [9/10]
+    wdt:P281 xsd:string * ;
+    # located in time zone; frequency: [9/10]
+    wdt:P421 [ <http://www.wikidata.org/entity>~ ] * ;
+    # official website; frequency: [9/10]
+    wdt:P856 IRI ? ;
+    # page banner; frequency: [9/10]
+    wdt:P948 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # DMOZ ID; frequency: [9/10]
+    wdt:P998 xsd:string ? ;
+    # population; frequency: [9/10]
+    wdt:P1082 xsd:decimal ? ;
+    # US National Archives Identifier; frequency: [9/10]
+    wdt:P1225 xsd:string * ;
+    # Encyclopædia Britannica Online ID; frequency: [9/10]
+    wdt:P1417 xsd:string * ;
+    # category for people who died here; frequency: [9/10]
+    wdt:P1465 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Facebook Places ID; frequency: [9/10]
+    wdt:P1997 xsd:string ? ;
+    # BabelNet ID; frequency: [9/10]
+    wdt:P2581 xsd:string ? ;
+    # Commons maps category; frequency: [9/10]
+    wdt:P3722 xsd:string ? ;
+    # Brockhaus Enzyklopädie online ID; frequency: [9/10]
+    wdt:P5019 xsd:string ? ;
+    # archINFORM location ID; frequency: [9/10]
+    wdt:P5573 xsd:string ? ;
+    # shares border with; frequency: [8/10]
+    wdt:P47 [ <http://www.wikidata.org/entity>~ ] * ;
+    # OSM relation ID; frequency: [8/10]
+    wdt:P402 xsd:string ? ;
+    # capital of; frequency: [8/10]
+    wdt:P1376 [ <http://www.wikidata.org/entity>~ ] * ;
+    # elevation above sea level; frequency: [8/10]
+    wdt:P2044 xsd:decimal * ;
+    # Great Russian Encyclopedia Online ID; frequency: [8/10]
+    wdt:P2924 xsd:string ? ;
+    # head of government; frequency: [7/10]
+    wdt:P6 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # coat of arms image; frequency: [7/10]
+    wdt:P94 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # NLI (Israel) ID; frequency: [7/10]
+    wdt:P949 xsd:string ? ;
+    # native label; frequency: [7/10]
+    wdt:P1705 rdf:langString * ;
+    # category of people buried here; frequency: [7/10]
+    wdt:P1791 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Encyclopædia Universalis ID; frequency: [7/10]
+    wdt:P3219 xsd:string ? ;
+    # BnF ID; frequency: [7/10]
+    wdt:P268 xsd:string ? ;
+    # licence plate code; frequency: [7/10]
+    wdt:P395 xsd:string ? ;
+    # local dialing code; frequency: [7/10]
+    wdt:P473 xsd:string ? ;
+    # official name; frequency: [7/10]
+    wdt:P1448 rdf:langString * ;
+    # flag image; frequency: [7/10]
+    wdt:P41 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # continent; frequency: [5/10]
+    wdt:P30 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # located in or next to body of water; frequency: [5/10]
+    wdt:P206 [ <http://www.wikidata.org/entity>~ ] * ;
+    # NKCR AUT ID; frequency: [5/10]
+    wdt:P691 xsd:string ? ;
+    # described by source; frequency: [5/10]
+    wdt:P1343 [ <http://www.wikidata.org/entity>~ ] * ;
+    # pronunciation audio; frequency: [5/10]
+    wdt:P443 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] * ;
+    # EMLO location ID; frequency: [5/10]
+    wdt:P4672 xsd:string ? ;
+    # locator map image; frequency: [5/10]
+    wdt:P242 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] * ;
+    # YSO ID; frequency: [5/10]
+    wdt:P2347 xsd:string * ;
+    # category for films shot at this location; frequency: [4/10]
+    wdt:P1740 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # TGN ID; frequency: [4/10]
+    wdt:P1667 xsd:string ? ;
+    # inception; frequency: [4/10]
+    wdt:P571 xsd:dateTime ? ;
+    # topic's main Wikimedia portal; frequency: [4/10]
+    wdt:P1151 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # UK Parliament thesaurus ID; frequency: [4/10]
+    wdt:P4527 xsd:string ? ;
+    # flag; frequency: [4/10]
+    wdt:P163 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # contains administrative territorial entity; frequency: [3/10]
+    wdt:P150 [ <http://www.wikidata.org/entity>~ ] * ;
+    # TERYT municipality code; frequency: [3/10]
+    wdt:P1653 xsd:string ? ;
+    # history of topic; frequency: [3/10]
+    wdt:P2184 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # NE.se ID; frequency: [3/10]
+    wdt:P3222 xsd:string ? ;
+    # Uppsala University Alvin ID; frequency: [3/10]
+    wdt:P6821 xsd:string ? ;
+    # member of; frequency: [3/10]
+    wdt:P463 [ <http://www.wikidata.org/entity>~ ] * ;
+    # IPA transcription; frequency: [3/10]
+    wdt:P898 xsd:string ? ;
+    # demonym; frequency: [3/10]
+    wdt:P1549 rdf:langString * ;
+    # coat of arms; frequency: [3/10]
+    wdt:P237 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Comic Vine ID; frequency: [3/10]
+    wdt:P5905 xsd:string ? ;
+    # Klexikon article ID; frequency: [3/10]
+    wdt:P6573 xsd:string ? ;
+    # ISO 3166-2 code; frequency: [2/10]
+    wdt:P300 xsd:string ? ;
+    # FIPS 10-4 (countries and regions); frequency: [2/10]
+    wdt:P901 xsd:string ? ;
+    # time of earliest written record; frequency: [2/10]
+    wdt:P1249 xsd:dateTime ? ;
+    # language used; frequency: [2/10]
+    wdt:P2936 [ <http://www.wikidata.org/entity>~ ] * ;
+    # ISNI; frequency: [2/10]
+    wdt:P213 xsd:string ? ;
+    # Dewey Decimal Classification; frequency: [2/10]
+    wdt:P1036 xsd:string ? ;
+    # coordinates of northernmost point; frequency: [2/10]
+    wdt:P1332 geo:wktLiteral ? ;
+    # coordinates of southernmost point; frequency: [2/10]
+    wdt:P1333 geo:wktLiteral ? ;
+    # coordinates of easternmost point; frequency: [2/10]
+    wdt:P1334 geo:wktLiteral ? ;
+    # coordinates of westernmost point; frequency: [2/10]
+    wdt:P1335 geo:wktLiteral ? ;
+    # award received; frequency: [2/10]
+    wdt:P166 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # office held by head of government; frequency: [2/10]
+    wdt:P1313 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # FAST ID; frequency: [2/10]
+    wdt:P2163 xsd:string ? ;
+    # subreddit; frequency: [2/10]
+    wdt:P3984 xsd:string ? ;
+    # legislative body; frequency: [2/10]
+    wdt:P194 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # SUDOC authorities ID; frequency: [2/10]
+    wdt:P269 xsd:string ? ;
+    # NDL Auth ID; frequency: [2/10]
+    wdt:P349 xsd:string ? ;
+    # connects with; frequency: [2/10]
+    wdt:P2789 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # seal image; frequency: [1/10]
+    wdt:P158 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # enclave within; frequency: [1/10]
+    wdt:P501 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # topic's main template; frequency: [1/10]
+    wdt:P1424 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Global Anabaptist Mennonite Encyclopedia Online ID; frequency: [1/10]
+    wdt:P1842 xsd:string ? ;
+    # Nomisma ID; frequency: [1/10]
+    wdt:P2950 xsd:string ? ;
+    # ISTAT ID; frequency: [1/10]
+    wdt:P635 xsd:string ? ;
+    # Italian cadastre code; frequency: [1/10]
+    wdt:P806 xsd:string ? ;
+    # replaces; frequency: [1/10]
+    wdt:P1365 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Digital Atlas of the Roman Empire ID; frequency: [1/10]
+    wdt:P1936 xsd:string ? ;
+    # UN/LOCODE; frequency: [1/10]
+    wdt:P1937 xsd:string ? ;
+    # tourist office; frequency: [1/10]
+    wdt:P2872 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # IndicePA ID; frequency: [1/10]
+    wdt:P6832 xsd:string ? ;
+    # country calling code; frequency: [1/10]
+    wdt:P474 xsd:string ? ;
+    # MeSH Descriptor ID; frequency: [1/10]
+    wdt:P486 xsd:string ? ;
+    # Unicode character; frequency: [1/10]
+    wdt:P487 xsd:string ? ;
+    # diplomatic relation; frequency: [1/10]
+    wdt:P530 [ <http://www.wikidata.org/entity>~ ] * ;
+    # highest point; frequency: [1/10]
+    wdt:P610 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # HDS ID; frequency: [1/10]
+    wdt:P902 xsd:string ? ;
+    # IOC country code; frequency: [1/10]
+    wdt:P984 xsd:string ? ;
+    # Human Development Index; frequency: [1/10]
+    wdt:P1081 xsd:decimal ? ;
+    # unemployment rate; frequency: [1/10]
+    wdt:P1198 xsd:decimal * ;
+    # inflation rate; frequency: [1/10]
+    wdt:P1279 xsd:decimal ? ;
+    # Gran Enciclopèdia Catalana ID; frequency: [1/10]
+    wdt:P1296 xsd:string * ;
+    # central bank; frequency: [1/10]
+    wdt:P1304 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # NLA Persistent Identifier; frequency: [1/10]
+    wdt:P1315 xsd:string ? ;
+    # participant of; frequency: [1/10]
+    wdt:P1344 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # motto text; frequency: [1/10]
+    wdt:P1451 rdf:langString * ;
+    # has quality; frequency: [1/10]
+    wdt:P1552 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # lowest point; frequency: [1/10]
+    wdt:P1589 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # BBC Things ID; frequency: [1/10]
+    wdt:P1617 xsd:string ? ;
+    # driving side; frequency: [1/10]
+    wdt:P1622 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # short name; frequency: [1/10]
+    wdt:P1813 rdf:langString ? ;
+    # office held by head of state; frequency: [1/10]
+    wdt:P1906 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # NALT ID; frequency: [1/10]
+    wdt:P2004 xsd:string ? ;
+    # nominal GDP; frequency: [1/10]
+    wdt:P2131 xsd:decimal ? ;
+    # nominal GDP per capita; frequency: [1/10]
+    wdt:P2132 xsd:decimal ? ;
+    # total reserves; frequency: [1/10]
+    wdt:P2134 xsd:decimal ? ;
+    # real gross domestic product growth rate; frequency: [1/10]
+    wdt:P2219 xsd:decimal * ;
+    # official symbol; frequency: [1/10]
+    wdt:P2238 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # life expectancy; frequency: [1/10]
+    wdt:P2250 xsd:decimal ? ;
+    # mobile country code; frequency: [1/10]
+    wdt:P2258 xsd:string ? ;
+    # PPP GDP per capita; frequency: [1/10]
+    wdt:P2299 xsd:decimal ? ;
+    # geography of topic; frequency: [1/10]
+    wdt:P2633 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # emergency phone number; frequency: [1/10]
+    wdt:P2852 [ <http://www.wikidata.org/entity>~ ] * ;
+    # electrical plug type; frequency: [1/10]
+    wdt:P2853 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # mains voltage; frequency: [1/10]
+    wdt:P2884 xsd:decimal ? ;
+    # water as percent of area; frequency: [1/10]
+    wdt:P2927 xsd:decimal ? ;
+    # permanent duplicated item; frequency: [1/10]
+    wdt:P2959 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # maritime identification digits; frequency: [1/10]
+    wdt:P2979 xsd:string * ;
+    # age of majority; frequency: [1/10]
+    wdt:P2997 xsd:decimal ? ;
+    # marriageable age; frequency: [1/10]
+    wdt:P3000 xsd:decimal ? ;
+    # ITU letter code; frequency: [1/10]
+    wdt:P3024 xsd:string ? ;
+    # GS1 country code; frequency: [1/10]
+    wdt:P3067 xsd:string ? ;
+    # WIPO ST.3; frequency: [1/10]
+    wdt:P3068 xsd:string ? ;
+    # Statoids ID; frequency: [1/10]
+    wdt:P3175 xsd:string ? ;
+    # NYT topic ID; frequency: [1/10]
+    wdt:P3221 xsd:string ? ;
+    # compulsory education (minimum age); frequency: [1/10]
+    wdt:P3270 xsd:decimal ? ;
+    # compulsory education (maximum age); frequency: [1/10]
+    wdt:P3271 xsd:decimal ? ;
+    # INSEE countries and foreign territories code; frequency: [1/10]
+    wdt:P3422 xsd:string ? ;
+    # median income; frequency: [1/10]
+    wdt:P3529 xsd:decimal ? ;
+    # Le Monde diplomatique subject ID; frequency: [1/10]
+    wdt:P3612 xsd:string ? ;
+    # ITU/ISO/IEC object identifier; frequency: [1/10]
+    wdt:P3743 xsd:string ? ;
+    # suicide rate; frequency: [1/10]
+    wdt:P3864 xsd:decimal ? ;
+    # geoshape; frequency: [1/10]
+    wdt:P3896 [ <http://commons.wikimedia.org/data/main>~ ] ? ;
+    # STW Thesaurus for Economics ID; frequency: [1/10]
+    wdt:P3911 xsd:string ? ;
+    # UNESCO Thesaurus ID; frequency: [1/10]
+    wdt:P3916 xsd:string ? ;
+    # GDP (PPP); frequency: [1/10]
+    wdt:P4010 xsd:decimal ? ;
+    # GACS ID; frequency: [1/10]
+    wdt:P4427 xsd:string ? ;
+    # LoC and MARC vocabularies ID; frequency: [1/10]
+    wdt:P4801 xsd:string ? ;
+    # Wolfram Language entity code; frequency: [1/10]
+    wdt:P4839 xsd:string ? ;
+    # total fertility rate; frequency: [1/10]
+    wdt:P4841 xsd:decimal ? ;
+    # on focus list of Wikimedia project; frequency: [1/10]
+    wdt:P5008 [ <http://www.wikidata.org/entity>~ ] * ;
+    # Wikimedia outline; frequency: [1/10]
+    wdt:P5125 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # CIVICUS Monitor country entry; frequency: [1/10]
+    wdt:P5180 xsd:string ? ;
+    # head of state; frequency: [1/10]
+    wdt:P35 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # capital; frequency: [1/10]
+    wdt:P36 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # official language; frequency: [1/10]
+    wdt:P37 [ <http://www.wikidata.org/entity>~ ] * ;
+    # currency; frequency: [1/10]
+    wdt:P38 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # top-level Internet domain; frequency: [1/10]
+    wdt:P78 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # anthem; frequency: [1/10]
+    wdt:P85 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # basic form of government; frequency: [1/10]
+    wdt:P122 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # ethnic group; frequency: [1/10]
+    wdt:P172 [ <http://www.wikidata.org/entity>~ ] * ;
+    # executive body; frequency: [1/10]
+    wdt:P208 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # ISO 3166-1 alpha-2 code; frequency: [1/10]
+    wdt:P297 xsd:string ? ;
+    # ISO 3166-1 alpha-3 code; frequency: [1/10]
+    wdt:P298 xsd:string ? ;
+    # ISO 3166-1 numeric code; frequency: [1/10]
+    wdt:P299 xsd:string ? ;
+    # part of; frequency: [1/10]
+    wdt:P361 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Libraries Australia ID; frequency: [1/10]
+    wdt:P409 xsd:string ? ;
+    # Giant Bomb ID; frequency: [1/10]
+    wdt:P5247 xsd:string ? ;
+    # IAB code; frequency: [1/10]
+    wdt:P5250 xsd:string ? ;
+    # Google News topics ID; frequency: [1/10]
+    wdt:P5337 xsd:string ? ;
+    # Le Monde ID; frequency: [1/10]
+    wdt:P5558 xsd:string ? ;
+    # Invasive Species Compendium Datasheet ID; frequency: [1/10]
+    wdt:P5698 xsd:string ? ;
+    # literacy rate; frequency: [1/10]
+    wdt:P6897 xsd:decimal ? ;
+    # heritage designation; frequency: [1/10]
+    wdt:P1435 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Slovene Cultural Heritage Register ID; frequency: [1/10]
+    wdt:P1587 xsd:string ? ;
+    # writing system; frequency: [1/10]
+    wdt:P282 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # Theatricalia theatre ID; frequency: [1/10]
+    wdt:P2468 xsd:string ? ;
+    # OpenDomesday settlement ID; frequency: [1/10]
+    wdt:P3118 xsd:string ? ;
+    # TOID; frequency: [1/10]
+    wdt:P3120 xsd:string ? ;
+    # Zhihu topic ID; frequency: [1/10]
+    wdt:P3553 xsd:string ? ;
+    # Vision of Britain unit ID; frequency: [1/10]
+    wdt:P3615 xsd:string ? ;
+    # Vision of Britain place ID; frequency: [1/10]
+    wdt:P3616 xsd:string ? ;
+    # KEPN ID; frequency: [1/10]
+    wdt:P3639 xsd:string ? ;
+    # Store norske leksikon ID; frequency: [1/10]
+    wdt:P4342 xsd:string ? ;
+    # NUTS code; frequency: [1/10]
+    wdt:P605 xsd:string ? ;
+    # significant event; frequency: [1/10]
+    wdt:P793 [ <http://www.wikidata.org/entity>~ ] ? ;
+    # SELIBR ID; frequency: [1/10]
+    wdt:P906 xsd:string ? ;
+    # BAV ID; frequency: [1/10]
+    wdt:P1017 xsd:string ? ;
+    # NUKAT (WarsawU) authorities ID; frequency: [1/10]
+    wdt:P1207 xsd:string ? ;
+    # HelveticArchives ID; frequency: [1/10]
+    wdt:P1255 xsd:string ? ;
+    # detail map; frequency: [1/10]
+    wdt:P1621 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # Canadiana Authorities ID; frequency: [1/10]
+    wdt:P1670 xsd:string ? ;
+    # NLP ID; frequency: [1/10]
+    wdt:P1695 xsd:string ? ;
+    # collage image; frequency: [1/10]
+    wdt:P2716 [ <http://commons.wikimedia.org/wiki/Special:FilePath>~ ] ? ;
+    # JewishGen Locality ID; frequency: [1/10]
+    wdt:P3198 xsd:string ? ;
+    # Cultureel Woordenboek identifier; frequency: [1/10]
+    wdt:P3569 xsd:string ? ;
+    # PACTOLS thesaurus ID; frequency: [1/10]
+    wdt:P4212 xsd:string ? ;
+    # National Library of Brazil ID; frequency: [1/10]
+    wdt:P4619 xsd:string ? ;
+    # Dizionario di Storia Treccani ID; frequency: [1/10]
+    wdt:P6404 xsd:string ? ;
+    # Image Archive, Herder Institute; frequency: [1/10]
+    wdt:P6482 xsd:string ? ;
+    # located on terrain feature; frequency: [1/10]
+    wdt:P706 [ <http://www.wikidata.org/entity>~ ] ?
+}

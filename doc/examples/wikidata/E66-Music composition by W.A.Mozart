@@ -1,0 +1,71 @@
+# Music composition by W.A.Mozart (E66)
+# https://www.wikidata.org/wiki/EntitySchema:E66
+
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# QUERY MAP: SELECT ?composition WHERE {?composition p:P528/pq:P972 wd:Q162478 .}  
+
+start=@<composition_mozart>
+
+<composition_mozart> EXTRA p:P31 {
+	# instance of
+	p:P31 { ps:P31  [wd:Q207628]} ;
+
+	# publication data or inception date 
+	(  p:P577 { ps:P577 xsd:dateTime } ; p:P571 { ps:P571 xsd:dateTime } ?
+	 | p:P571 { ps:P571 xsd:dateTime } ) ;
+
+	# composer
+	p:P86 { ps:P86 [wd:Q254]} ;
+
+	# catalog
+	p:P528 {
+		ps:P528 xsd:string ;
+		pq:P972 [
+		        wd:Q162478 # Köchel catalogue
+		        wd:Q22338962 # Köchel catalogue (1st edition)
+		        wd:Q22340538 # Köchel catalogue (6th edition)
+		        ];
+	}+ ;
+
+	# instrumentation
+	p:P870 . * ;
+	
+	## Identifiers
+
+	#MusicBrainz work ID
+	wdt:P435  xsd:string * ;
+
+	#BnF ID
+	wdt:P268  . * ;
+
+	# GND ID
+	wdt:P227  . * ;
+
+	# IMSLP ID
+	wdt:P839  . * ;
+
+	# National Library of Israel ID
+	wdt:P949  . * ;
+
+	# National Library of Ireland authority ID
+	wdt:P1946  . * ;
+
+	# Library of Congress authority ID
+	wdt:P244  . * ;
+
+	# Libraries Australia ID
+	wdt:P409  . * ;
+
+	# CANTIC-ID
+	wdt:P1273  . * ;
+
+	# BNE ID
+	wdt:P950  . * ;
+
+}
