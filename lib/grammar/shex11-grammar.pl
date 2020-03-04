@@ -227,7 +227,7 @@ exclusion ==>['-',or(iri,literal,'LANGTAG'),?('~')].
 include ==> ['&',tripleExprLabel].
 
 %[51] OK
-annotation ==>['//',predicate,or(iri,literal)].
+annotation ==>['DOUBLE_SLASH',predicate,or(iri,literal)].
 
 %[52] OK
 semanticActions ==> [*(codeDecl)].
@@ -299,7 +299,8 @@ tm_regex([
 'STRING_LITERAL2',
 'STRING_LITERAL_LONG1',
 'STRING_LITERAL_LONG2',
-'A_TOKEN'
+'A_TOKEN',
+'DOUBLE_SLASH'
 ]).
 
 % Terminals where name of terminal is uppercased ten content
@@ -359,7 +360,6 @@ tm_punct([
 '-'= '\\-',
 '~'='\\~',
 '&'='\\&',
-'//'='\\/\\/',
 '%'='%',
 '$' = '\\$'
 ]).
