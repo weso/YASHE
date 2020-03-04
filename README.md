@@ -34,7 +34,7 @@ In addition, it offers a simple way of integrating into other projects
 ## Documentation
 
 * [Features](#Features)
-* [Install](#Features)
+* [Install](#Install)
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
