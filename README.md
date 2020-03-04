@@ -33,7 +33,7 @@ In addition, it offers a simple way of integrating into other projects
 
 ## Documentation
 
-* [Features](features-clipboard)
+* [Features](#features-clipboard)
 * [Install](#install-floppy_disk)
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
@@ -44,8 +44,8 @@ In addition, it offers a simple way of integrating into other projects
 * [API](#API)
 * [Statics](#Statics)
 * [Developing YASHE](#developing-yashe-construction)
-* [Used By](#used-by)
-* [Forked By](#forked-by)
+* [Used By](#used-by-link)
+* [Forked By](#forked-by-link)
 
 ## Features :clipboard:
 
