@@ -53,31 +53,38 @@
         This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. 
         It has features like: syntax highlighting, visual aid elements (tooltips) and autocomplete mechanisms. In addition, it offers a simple way of integrating into other projects.
       
-        <div class="sdf row">
-          <div class="col-md-5">
-            <select  id="exSelector" class="form-control">
-              <option value="" disabled selected>Examples</option>
-              <option value="rdf">RDF Book</option>
-              <option value="wiki">Wikidata</option>
-              <option value="japan">Japan Sarch Metadata</option>
-            </select>
-          </div>
-          <div class="col-md-7">
+        <div class="selectors">
             <select id="rdfBookSelector" class="exSelector form-control">
               <option value="" disabled selected>Validating RDF Data Book Examples</option>
             </select>
-          </div>
+        
+            <select id="wikiSelector" class="wikiSelector form-control">
+              <option value="" disabled selected>Wikidata Examples</option>
+            </select>
+
+            <select  id="exSelector" class="form-control">
+              <option value="" disabled selected>Others</option>
+              <option value="japan">Japan Sarch Metadata</option>
+            </select>
         </div>
+
+
       
         
         <style>
 
-      
+            .selectors{
+              display:grid;
+              grid-template-columns: 40% auto auto;
+              margin-top: 10px;
+            }
 
             .exSelector{
-              margin-left:-30px
+              margin-left:-0px
 
             }
+
+           
 
 
         </style>

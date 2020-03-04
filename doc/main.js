@@ -94,13 +94,31 @@ $(document).ready(function() {
 
     });
 
-    //Examples Selector Listener
+
+
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/wikidata";
+    var wikiSelector = $('#wikiSelector');
+    $.ajax({
+      dataType: "json",
+      url: url,
+      success: function (data) {
+        data.forEach(function(element){
+          console.log(element)
+                wikiSelector.append(
+                  $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
+        })
+      }
+    });
+
+
+    //Others Examples Selector Listener
     var exSelector = $('#exSelector');
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
         setExample(selected);
         $('#rdfBookSelector').val('');
     });
+
 
 
     function setExample(selected){
