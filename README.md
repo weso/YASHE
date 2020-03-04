@@ -18,6 +18,8 @@
 </p>
 
 
+
+
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
@@ -134,7 +136,18 @@ yashe.collapsePrefixes(collapse: boolean)
 
 ```
 
+## Statics
+Static functions YASHE
+```js
+// Register an autocompleter in YASHE. This automatically enables the completer as well
+YASHE.registerAutocompleter(name: String, autocompleter: function)
 
+// When typing a shape, this shape is sometimes syntactically invalid, causing the current tokens to be incorrect 
+// This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
+// We'll want to combine these
+YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object
+
+```
 
 
 ## Shortcuts:
