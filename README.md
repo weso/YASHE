@@ -31,6 +31,25 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
+## Features :clipboard:
+
+* Completely client-side
+* ShEx syntax highlighting and error checking
+* Light and Dark modes
+* Extremely customizable: All functions and handlers from the CodeMirror library are accessible
+* Persistent values (optional): your query is stored for easier reuse between browser sessions
+* Prefix definition autocompletion (using prefix.cc)
+* Prefix and ShEx keywords autocompletion
+* Wikidata property and entity autocompletion (using the MediaWiki API)
+* Information tooltip when hovering over wikidata properties and entities (using the MediaWiki API)
+* Handy keyboard shortcuts
+* Integrated buttons that alows to:
+     * Upload ShEx files
+     * Download the editor content as a ShEx file
+     * Copy the editor content to the clipboard
+     * Delete all the editor content
+     * Change between light and dark mode
+     * FullScreen Mode
 
 ## Install :floppy_disk:
 
@@ -52,7 +71,7 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 
 ## Usage
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
-
+Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings 
 
 ```js
 var yashe = YASHE(document.getElementById('domId'), {
@@ -62,43 +81,68 @@ var yashe = YASHE(document.getElementById('domId'), {
 
 `YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
 
-Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
 
 [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
-`YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
+Initialize YASQE from an existing text area (see CodeMirror for more info)
 
 ```js
 var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
 ```
-Initialize YASQE from an existing text area (see CodeMirror for more info)
+`YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
+
 
 [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 
 
+## API
+API methods accessible via the yashe instance:
 
-## Features :clipboard:
+*Set query value in editor (see also)
+```js
+yashe.setValue(query: String)
+```
 
-* Completely client-side
-* ShEx syntax highlighting and error checking
-* Light and Dark modes
-* Extremely customizable: All functions and handlers from the CodeMirror library are accessible
-* Persistent values (optional): your query is stored for easier reuse between browser sessions
-* Prefix definition autocompletion (using prefix.cc)
-* Prefix and ShEx keywords autocompletion
-* Wikidata property and entity autocompletion (using the MediaWiki API)
-* Information tooltip when hovering over wikidata properties and entities (using the MediaWiki API)
-* Handy keyboard shortcuts
-* Integrated buttons that alows to:
-     * Upload ShEx files
-     * Download the editor content as a ShEx file
-     * Copy the editor content to the clipboard
-     * Delete all the editor content
-     * Change between light and dark mode
-     * FullScreen Mode
- * Shortcuts:
+
+```js
+//Set query value in editor (see also)
+yashe.setValue(query: String)
+
+//Get query value from editor (see also)
+yashe.getValue() → query: String
+
+//Fetch defined prefixes
+yashe.getDefinedPrefixes() → object:
+
+//Add prefixes to the query. The prefixes are defined as {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.addPrefixes(prefixes: object)
+
+//Remove prefixes from query. The prefixes are defined as {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.removePrefixes(prefixes: object)
+
+//Set size. Use null value to leave width or height unchanged. To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
+yashe.setSize(width: Number|string, height: Number|string)
+
+//Enable an autocompleter with this name. Only makes sense if you've programatically disabled this completer before, as a plugin is automatically enabled when registering it (see this function)
+yashe.enableCompleter(completerName: String)
+
+//Disable an autocompleter with this name.
+yashe.disableCompleter(completerName: String)
+
+//Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the //autocompletion settings
+yashe.storeBulkCompletions(type: String)
+
+//Collapsing prefixes if there are any. Use false to expand them.
+yashe.collapsePrefixes(collapse: boolean)
+
+```
+
+
+
+
+## Shortcuts:
  
   Shortcut          | Action
   -------------     | -------------
