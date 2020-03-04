@@ -20,7 +20,7 @@
 
 
 
-# YASHE
+# YASHE :small_red_triangle_down:
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
 autocomplete mechanisms. 
@@ -66,7 +66,7 @@ var yashe = YASHE(document.getElementById('domId'), {
 
 Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
 
-Check [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
+[Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
 
 `YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
@@ -78,12 +78,7 @@ var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
 ```
 Initialize YASQE from an existing text area (see CodeMirror for more info)
 
-Check [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
-
-
-
-## Download the latest release :small_red_triangle_down:
-
+[Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 
 
 
@@ -124,7 +119,6 @@ Check [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 
 
 ## Developing YASHE :construction:
-
 Feel free to fork and develop this tool.  You can submit your
 contributions as Github pull requests.  To develop *YASHE* locally:
 
@@ -136,4 +130,7 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 * [ShExAuthor](https://github.com/weso/shex-author): ShEx Graphic Assistant
 * [RDFShape](http://rdfshape.weso.es/): RDF service for conversion and validation using ShEX and SHACL
 * [WikiShape](http://wikishape.weso.es/): Shape Expressions playground customized for Wikidata
+* [ShExML](http://shexml.herminiogarcia.com/) Playground to convert ShExML to RDF and RML offering diferent syntaxes
 
+## Forked By: :link:
+* [ShExML Editor](http://shexml.herminiogarcia.com/) ShExML is a language based on ShEx to map and merge heterogeneous data sources. It is designed with usability in mind trying to make the script creation easier to the user
