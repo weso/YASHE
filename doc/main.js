@@ -119,9 +119,9 @@ $(document).ready(function() {
 
 
     //Others Examples Selector Listener
-    var exSelector = $('#exSelector');
-    exSelector.change(function(e) {
-        var selected =  $('#exSelector option:selected').val();
+    var othersSelector = $('#othersSelector');
+    othersSelector.change(function(e) {
+        var selected =  $('#othersSelector option:selected').val();
         setExample('others',selected);
         $('#rdfBookSelector').val('');
         $('#wikiSelector').val('');
