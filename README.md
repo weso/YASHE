@@ -20,7 +20,7 @@
 
 
 
-# YASHE :small_red_triangle_down:
+# YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
 autocomplete mechanisms. 
@@ -32,7 +32,7 @@ In addition, it offers a simple way of integrating into other projects
 </p>
 
 
-## Install
+## Install :floppy_disk:
 
 ### NPM
 YASHE is registered as a node package as well, so you'll be able to use the node package manager to keep your version of YASHE up to date. ([YASHE NPM Package](https://www.npmjs.com/package/yashe))
@@ -43,12 +43,10 @@ npm i yashe
 ### JsDelivr
 The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include YASHE in your website.
 
-#### CSS
-     <link href='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
-  
-#### JS 
-     <script src='https://cdn.jsdelivr.net/npm/yashe@1.1.1/dist/yashe.bundled.min.js'></script>
-     
+```
+<link href='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.min.css' rel='stylesheet' type='text/css'/>
+<script src='https://cdn.jsdelivr.net/npm/yashe/dist/yashe.bundled.min.js'></script>
+```
 
 ### Github
 Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YASHE [.css](./dist/yashe.min.css) and [.js](./dist/yashe.bundled.min.js) files (find them in the dist directory).  
