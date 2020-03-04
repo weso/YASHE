@@ -53,7 +53,6 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 ## Usage
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
 
-`YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
 
 ```js
 var yashe = YASHE(document.getElementById('domId'), {
@@ -61,14 +60,15 @@ var yashe = YASHE(document.getElementById('domId'), {
 });
 ```
 
+`YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
+
 Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings (see the YASHE.defaults object below, as well as the regular CodeMirror documentation, for more information on      configurability)
 
 [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
-
 `YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
 
-```
+```js
 var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
