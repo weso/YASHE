@@ -33,19 +33,19 @@ In addition, it offers a simple way of integrating into other projects
 
 ## Documentation
 
-* [Features](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#features-clipboard)
-* [Install](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#install-floppy_disk)
+* [Features](features-clipboard)
+* [Install](#install-floppy_disk)
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
 * [Configuration](#Configuration)
   - [Defaults](#Defaults)
-  - [Shortcuts](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#shortcuts-provided-by-yashe)
+  - [Shortcuts](#shortcuts-provided-by-yashe)
 * [API](#API)
 * [Statics](#Statics)
-* [Developing YASHE](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#shortcuts-provided-by-yashe)
-* [Used By](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#shortcuts-provided-by-yashe)
-* [Forked By](https://github.com/mistermboy/YASHE/blob/gh-pages/README.md#shortcuts-provided-by-yashe)
+* [Developing YASHE](#developing-yashe-construction)
+* [Used By](#used-by)
+* [Forked By](#forked-by)
 
 ## Features :clipboard:
 
