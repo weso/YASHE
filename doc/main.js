@@ -70,8 +70,8 @@ $(document).ready(function() {
       });
     }
 
-    //Add all the examples to the selector   
-    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples";
+    //Add all the RDF Book examples to the selector   
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/validatingRdfData";
     var rdfBookSelector = $('#rdfBookSelector');
     $.ajax({
       dataType: "json",
@@ -89,13 +89,13 @@ $(document).ready(function() {
     //RDF BOOK Selector Listener
     rdfBookSelector.change(function(e) {
         var selected =  $('#rdfBookSelector option:selected').val();
-        setExample(selected);
-        $('#exSelector').val('');
-
+        setExample('validatingRdfData',selected);
+        $('#othersSelector').val('');
+        $('#wikiSelector').val('');
     });
 
 
-
+    //Add all the Wikidata examples to the selector  
     var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/wikidata";
     var wikiSelector = $('#wikiSelector');
     $.ajax({
@@ -103,11 +103,18 @@ $(document).ready(function() {
       url: url,
       success: function (data) {
         data.forEach(function(element){
-          console.log(element)
-                wikiSelector.append(
-                  $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
+            wikiSelector.append(
+              $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
         })
       }
+    });
+
+     //Wikidata Selector Listener
+    wikiSelector.change(function(e) {
+        var selected =  $('#wikiSelector option:selected').val();
+        setExample('wikidata',selected);
+        $('#othersSelector').val('');
+        $('#rdfBookSelector').val('');
     });
 
 
@@ -115,14 +122,15 @@ $(document).ready(function() {
     var exSelector = $('#exSelector');
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
-        setExample(selected);
+        setExample('others',selected);
         $('#rdfBookSelector').val('');
+        $('#wikiSelector').val('');
     });
 
 
 
-    function setExample(selected){
-      $.get('./doc/examples/'+selected, function(data) {
+    function setExample(folder,selected){
+      $.get('./doc/examples/'+folder+'/'+selected, function(data) {
             yashe.setValue(data);
         }, 'text');
     }
