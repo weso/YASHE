@@ -18,8 +18,6 @@
 </p>
 
 
-
-
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
@@ -71,7 +69,9 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 
 ## Usage
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
-Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
+Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. 
+YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . 
+[Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
 ```js
 var yashe = YASHE(document.getElementById('domId'), {
@@ -94,12 +94,6 @@ var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
 
 ## API
 API methods accessible via the yashe instance:
-
-*Set query value in editor (see also)
-```js
-yashe.setValue(query: String)
-```
-
 
 ```js
 //Set query value in editor (see also)
