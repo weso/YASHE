@@ -52,14 +52,35 @@
         YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yasqe.yasgui.org/'>YASQE</a> (which is based on SPARQL)
         This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. 
         It has features like: syntax highlighting, visual aid elements (tooltips) and autocomplete mechanisms. In addition, it offers a simple way of integrating into other projects.
-       
+      
+        <div class="sdf row">
+          <div class="col-md-5">
+            <select  id="exSelector" class="form-control">
+              <option value="" disabled selected>Examples</option>
+              <option value="rdf">RDF Book</option>
+              <option value="wiki">Wikidata</option>
+              <option value="japan">Japan Sarch Metadata</option>
+            </select>
+          </div>
+          <div class="col-md-7">
+            <select id="rdfBookSelector" class="exSelector form-control">
+              <option value="" disabled selected>Validating RDF Data Book Examples</option>
+            </select>
+          </div>
+        </div>
+      
+        
+        <style>
 
-        <select id="exSelector" class="form-control">
-          <option value="" disabled selected>Select an example</option>
-          <option value="rdf">RDF Book</option>
-          <option value="wiki">Wikidata</option>
-          <option value="japan">Japan Sarch Metadata</option>
-        </select>
+      
+
+            .exSelector{
+              margin-left:-30px
+
+            }
+
+
+        </style>
 
         <div id="showcase"></div>
 

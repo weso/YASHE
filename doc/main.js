@@ -72,47 +72,40 @@ $(document).ready(function() {
 
     //Add all the examples to the selector   
     var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples";
-    var exSelector = $('#exSelector');
-    
-    /*
+    var rdfBookSelector = $('#rdfBookSelector');
     $.ajax({
-        url: dir,
-        success: function (data) {
-          $(data).find("a").attr("href", function (i, path) {
-              var element;
-              var relativeRoute = path.split('/doc/examples/');
-              if(relativeRoute.length>1){
-                element=relativeRoute[1].replace(/-/g,' ');
-                if(element != 'wiki' && element != 'rdf' && element != 'japan'){
-                  exSelector.append(
-                    $( '<option>' ).text( element ).attr( 'value', relativeRoute[1]));
-                }
+      dataType: "json",
+      url: url,
+      success: function (data) {
+        data.forEach(function(element){
+          if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
+                rdfBookSelector.append(
+                  $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
               }
-          });
-      }});
-      
-      */
-
-      $.ajax({
-        dataType: "json",
-        url: url,
-        success: function (data) {
-          data.forEach(function(element){
-            if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
-                  exSelector.append(
-                    $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
-                }
-          })
-        }
-      });
+        })
+      }
+    });
        
-    //Selector Listener
+    //RDF BOOK Selector Listener
+    rdfBookSelector.change(function(e) {
+        var selected =  $('#rdfBookSelector option:selected').val();
+        setExample(selected);
+        $('#exSelector').val('');
+
+    });
+
+    //Examples Selector Listener
+    var exSelector = $('#exSelector');
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
-        $.get('./doc/examples/'+selected, function(data) {
-                    yashe.setValue(data);
+        setExample(selected);
+        $('#rdfBookSelector').val('');
+    });
+
+
+    function setExample(selected){
+      $.get('./doc/examples/'+selected, function(data) {
+            yashe.setValue(data);
         }, 'text');
-
-    })
-
+    }
 });
