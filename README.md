@@ -101,37 +101,37 @@ API methods accessible via the yashe instance:
 //Set query value in editor (see also)
 yashe.setValue(query: String)
 
-//Get query value from editor (see also)
+// Get query value from editor (see also)
 yashe.getValue() → query: String
 
-//Fetch defined prefixes
+// Fetch defined prefixes
 yashe.getDefinedPrefixes() → object:
 
-//Add prefixes to the query. The prefixes are defined as 
-//{"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+// Add prefixes to the query. The prefixes are defined as 
+// {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
 yashe.addPrefixes(prefixes: object)
 
-//Remove prefixes from query. The prefixes are defined as 
-//{"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+// Remove prefixes from query. The prefixes are defined as 
+// {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
 yashe.removePrefixes(prefixes: object)
 
-//Set size. Use null value to leave width or height unchanged. 
-//To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
+// Set size. Use null value to leave width or height unchanged. 
+// To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
 yashe.setSize(width: Number|string, height: Number|string)
 
-//Enable an autocompleter with this name. Only makes sense if you've programatically 
-//disabled this completer before, as a plugin is automatically enabled when registering it 
-//(see this function)
+// Enable an autocompleter with this name. Only makes sense if you've programatically 
+// disabled this completer before, as a plugin is automatically enabled when registering it 
+// (see this function)
 yashe.enableCompleter(completerName: String)
 
-//Disable an autocompleter with this name.
+// Disable an autocompleter with this name.
 yashe.disableCompleter(completerName: String)
 
-//Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
-//The argument should be a key from the //autocompletion settings
+// Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
+// The argument should be a key from the //autocompletion settings
 yashe.storeBulkCompletions(type: String)
 
-//Collapsing prefixes if there are any. Use false to expand them.
+// Collapsing prefixes if there are any. Use false to expand them.
 yashe.collapsePrefixes(collapse: boolean)
 
 ```
@@ -142,15 +142,40 @@ Static functions YASHE
 // Register an autocompleter in YASHE. This automatically enables the completer as well
 YASHE.registerAutocompleter(name: String, autocompleter: function)
 
-// When typing a shape, this shape is sometimes syntactically invalid, causing the current tokens to be incorrect 
+// When typing a shape, this shape is sometimes syntactically invalid, 
+// causing the current tokens to be incorrect.
 // This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
 // We'll want to combine these
 YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object
 
 ```
 
+## Configuration
+This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
-## Shortcuts:
+### Defaults
+Default Shape
+```
+value: string
+```
+The list of enabled autocompletion plugins
+```
+autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
+```
+Whether to validate the ShEx syntax
+```
+syntaxErrorCheck: boolean (default: true)
+```
+Collapse prefixes on page load
+```
+collapsePrefixesOnLoad: boolean (default: false)
+```
+Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
+Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
+```
+extraKeys: object
+```
+The list of shortcuts provided by YASHE:
  
   Shortcut          | Action
   -------------     | -------------
