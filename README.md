@@ -153,6 +153,43 @@ YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Obj
 ## Configuration
 This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
+```js
+var yashe = YASHE(document.getElementById('domId'), {
+  value:'Starting value of the editor',
+  mode:'shex',
+  theme:'wiki',
+  lineNumbers: true,
+  lineWrapping: true,
+  firstLineNumber:1,
+  cursorHeight:15,
+  readOnly:false,
+  showCursorWhenSelecting:fasle,
+  tabMode: 'indent',
+  collapsePrefixesOnLoad: false,
+  matchBrackets: true,
+  fixedGutter: true,
+  syntaxErrorCheck: true,
+  showTooltip:true,
+  extraKeys: {
+    "Ctrl-Space": YASHE.autoComplete,
+    "Cmd-Space": YASHE.autoComplete,
+    "Ctrl-D": YASHE.deleteLine,
+    "Cmd-K": YASHE.deleteLine,
+    "Ctrl-/": YASHE.commentLines,
+    "Cmd-/": YASHE.commentLines,
+    "Ctrl-Down": YASHE.copyLineDown,
+    "Ctrl-Up": YASHE.copyLineUp,
+    "Cmd-Down": YASHE.copyLineDown,
+    "Cmd-Up": YASHE.copyLineUp,
+    "Shift-Ctrl-F": YASHE.doAutoFormat,
+    "Shift-Cmd-F": YASHE.doAutoFormat,
+    "Ctrl-S": YASHE.storeContent,
+    "Cmd-S": YASHE.storeConten,
+    "Ctrl-Enter": YASHE.executeQuery,
+    "Cmd-Enter": YASHE.executeQuery,
+});
+```
+
 ### Defaults
 
 ```
