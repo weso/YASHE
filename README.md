@@ -155,17 +155,17 @@ This configuration object is accessible/changeable via YASHE.defaults and yashe.
 
 ### Defaults
 
-
-* value: string
-
+```
+value: string
+```
 Default Shape
-
-* autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
-
+```
+autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
+```
 The list of enabled autocompletion plugins
-
-* syntaxErrorCheck: boolean (default: true)
-
+```
+syntaxErrorCheck: boolean (default: true)
+```
 Whether to validate the ShEx syntax
 ```
 collapsePrefixesOnLoad: boolean (default: false)
