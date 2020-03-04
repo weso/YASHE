@@ -93,63 +93,6 @@ var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
 ```
-
-## API
-API methods accessible via the yashe instance:
-
-```js
-//Set query value in editor (see also)
-yashe.setValue(query: String)
-
-// Get query value from editor (see also)
-yashe.getValue() → query: String
-
-// Fetch defined prefixes
-yashe.getDefinedPrefixes() → object:
-
-// Add prefixes to the query. The prefixes are defined as 
-// {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
-yashe.addPrefixes(prefixes: object)
-
-// Remove prefixes from query. The prefixes are defined as 
-// {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
-yashe.removePrefixes(prefixes: object)
-
-// Set size. Use null value to leave width or height unchanged. 
-// To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
-yashe.setSize(width: Number|string, height: Number|string)
-
-// Enable an autocompleter with this name. Only makes sense if you've programatically 
-// disabled this completer before, as a plugin is automatically enabled when registering it 
-// (see this function)
-yashe.enableCompleter(completerName: String)
-
-// Disable an autocompleter with this name.
-yashe.disableCompleter(completerName: String)
-
-// Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
-// The argument should be a key from the //autocompletion settings
-yashe.storeBulkCompletions(type: String)
-
-// Collapsing prefixes if there are any. Use false to expand them.
-yashe.collapsePrefixes(collapse: boolean)
-
-```
-
-## Statics
-Static functions YASHE
-```js
-// Register an autocompleter in YASHE. This automatically enables the completer as well
-YASHE.registerAutocompleter(name: String, autocompleter: function)
-
-// When typing a shape, this shape is sometimes syntactically invalid, 
-// causing the current tokens to be incorrect.
-// This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
-// We'll want to combine these
-YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object
-
-```
-
 ## Configuration
 This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
@@ -237,6 +180,64 @@ The list of shortcuts provided by YASHE:
 persistent: function|string
 ```
 Change persistency settings for the YASHE content value. Setting the values to null, will disable persistancy: nothing is stored between browser sessions. Setting the values to a string (or a function which returns a string), will store the query in localstorage using the specified string. By default, the ID is dynamically generated using the YASHE.determineId function, to avoid collissions when using multiple YASHE instances on one page
+
+
+
+## API
+API methods accessible via the yashe instance:
+
+```js
+//Set query value in editor (see also)
+yashe.setValue(query: String)
+
+// Get query value from editor (see also)
+yashe.getValue() → query: String
+
+// Fetch defined prefixes
+yashe.getDefinedPrefixes() → object:
+
+// Add prefixes to the query. The prefixes are defined as 
+// {"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.addPrefixes(prefixes: object)
+
+// Remove prefixes from query. The prefixes are defined as 
+// {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+yashe.removePrefixes(prefixes: object)
+
+// Set size. Use null value to leave width or height unchanged. 
+// To resize the editor to fit its content, see //http://codemirror.net/demo/resize.html
+yashe.setSize(width: Number|string, height: Number|string)
+
+// Enable an autocompleter with this name. Only makes sense if you've programatically 
+// disabled this completer before, as a plugin is automatically enabled when registering it 
+// (see this function)
+yashe.enableCompleter(completerName: String)
+
+// Disable an autocompleter with this name.
+yashe.disableCompleter(completerName: String)
+
+// Store bulk completions in memory as trie, and in localstorage as well (if enabled). 
+// The argument should be a key from the //autocompletion settings
+yashe.storeBulkCompletions(type: String)
+
+// Collapsing prefixes if there are any. Use false to expand them.
+yashe.collapsePrefixes(collapse: boolean)
+
+```
+
+## Statics
+Static functions YASHE
+```js
+// Register an autocompleter in YASHE. This automatically enables the completer as well
+YASHE.registerAutocompleter(name: String, autocompleter: function)
+
+// When typing a shape, this shape is sometimes syntactically invalid, 
+// causing the current tokens to be incorrect.
+// This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
+// We'll want to combine these
+YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object
+
+```
 
 ## Developing YASHE :construction:
 Feel free to fork and develop this tool.  You can submit your
