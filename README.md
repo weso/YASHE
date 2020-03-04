@@ -154,27 +154,29 @@ YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Obj
 This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
 ### Defaults
+
+
+* value: string
+
 Default Shape
-```
-value: string
-```
+
+* autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
+
 The list of enabled autocompletion plugins
-```
-autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
-```
+
+* syntaxErrorCheck: boolean (default: true)
+
 Whether to validate the ShEx syntax
-```
-syntaxErrorCheck: boolean (default: true)
-```
-Collapse prefixes on page load
 ```
 collapsePrefixesOnLoad: boolean (default: false)
 ```
-Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
-Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
+Collapse prefixes on page load
 ```
 extraKeys: object
 ```
+Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
+Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
+
 The list of shortcuts provided by YASHE:
  
   Shortcut          | Action
@@ -191,6 +193,11 @@ The list of shortcuts provided by YASHE:
   F11               | Set query editor full-screen (or leave full-screen)
   Esc               | Leave full-screen
 
+
+```
+persistent: function|string
+```
+Change persistency settings for the YASHE content value. Setting the values to null, will disable persistancy: nothing is stored between browser sessions. Setting the values to a string (or a function which returns a string), will store the query in localstorage using the specified string. By default, the ID is dynamically generated using the YASHE.determineId function, to avoid collissions when using multiple YASHE instances on one page
 
 ## Developing YASHE :construction:
 Feel free to fork and develop this tool.  You can submit your
