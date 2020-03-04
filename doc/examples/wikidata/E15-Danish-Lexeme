@@ -1,0 +1,69 @@
+# Danish Lexeme (E15)
+# https://www.wikidata.org/wiki/EntitySchema:E15
+
+
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdno: <http://www.wikidata.org/prop/novalue/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Danish lexeme
+
+# SELECT ?lexeme { ?lexeme dct:language wd:Q9035 }
+
+START = @<danish-lexeme>
+
+<danish-lexeme> {
+
+  dct:language [ wd:Q9035 ]
+    // rdf:label "language"
+    // rdf:comment "The language of lexeme must be Danish." ;
+
+  wikibase:lemma [ @da ]
+    // rdf:label "lemma"
+    // rdf:comment "The lemma must be Danish." ;
+
+  # Lexical category should be noun, verb, adjective, adverb, 
+  wikibase:lexicalCategory [
+        wd:Q1084 wd:Q24905 wd:Q34698 wd:Q380057
+        wd:Q4833830  # preposition 
+        wd:Q36224  # pronoun
+        wd:Q36484  # conjunction
+        wd:Q103184  # article
+        wd:Q62155  # affix
+        wd:Q63116  # numeral
+    ] ;
+
+  p:P5912 @<#oqaasileriffik-statement>
+    // rdf:label "Oqaasileriffik statement"
+    // rdf:comment "Danish lexeme must have one Oqaasileriffik statement" ;
+
+  p:P6140 @<#dannet-statement> ;
+}
+AND (
+  # If the lexeme is a compound then it must have a 'combines' proper
+  # with at least two parts
+  NOT { wdt:P31 wd:Q245423 } 
+  OR { wdt:P5238 IRI {2,} }
+  )
+
+
+
+<#dannet-statement> EXTRA rdf:type {
+  a [ wdno:P6140 ] | ps:P6140 /^[0-9]{8}(-[1-9][0-9]*)?$/
+    // rdf:label "DanNet identifier"
+    // rdf:comment "DanNet identifier should either be novalue or a 8 digit string with possible suffix" ;
+}
+
+
+<#oqaasileriffik-statement> EXTRA a {
+  a [ wdno:P5912 ] | ps:P5912 /[1-9][0-9]*/
+    // rdf:label "Oqaasileriffik ID"
+    // rdf:comment "Must have novalue or one identifier for Oqaasileriffik online dictionary" ;
+
+}

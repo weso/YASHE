@@ -70,49 +70,68 @@ $(document).ready(function() {
       });
     }
 
-    //Add all the examples to the selector   
-    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples";
-    var exSelector = $('#exSelector');
-    
-    /*
+    //Add all the RDF Book examples to the selector   
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/validatingRdfData";
+    var rdfBookSelector = $('#rdfBookSelector');
     $.ajax({
-        url: dir,
-        success: function (data) {
-          $(data).find("a").attr("href", function (i, path) {
-              var element;
-              var relativeRoute = path.split('/doc/examples/');
-              if(relativeRoute.length>1){
-                element=relativeRoute[1].replace(/-/g,' ');
-                if(element != 'wiki' && element != 'rdf' && element != 'japan'){
-                  exSelector.append(
-                    $( '<option>' ).text( element ).attr( 'value', relativeRoute[1]));
-                }
+      dataType: "json",
+      url: url,
+      success: function (data) {
+        data.forEach(function(element){
+          if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
+                rdfBookSelector.append(
+                  $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
               }
-          });
-      }});
-      
-      */
-
-      $.ajax({
-        dataType: "json",
-        url: url,
-        success: function (data) {
-          data.forEach(function(element){
-            if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
-                  exSelector.append(
-                    $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
-                }
-          })
-        }
-      });
+        })
+      }
+    });
        
-    //Selector Listener
-    exSelector.change(function(e) {
-        var selected =  $('#exSelector option:selected').val();
-        $.get('./doc/examples/'+selected, function(data) {
-                    yashe.setValue(data);
+    //RDF BOOK Selector Listener
+    rdfBookSelector.change(function(e) {
+        var selected =  $('#rdfBookSelector option:selected').val();
+        setExample('validatingRdfData',selected);
+        $('#othersSelector').val('');
+        $('#wikiSelector').val('');
+    });
+
+
+    //Add all the Wikidata examples to the selector  
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/wikidata";
+    var wikiSelector = $('#wikiSelector');
+    $.ajax({
+      dataType: "json",
+      url: url,
+      success: function (data) {
+        data.forEach(function(element){
+            wikiSelector.append(
+              $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
+        })
+      }
+    });
+
+     //Wikidata Selector Listener
+    wikiSelector.change(function(e) {
+        var selected =  $('#wikiSelector option:selected').val();
+        setExample('wikidata',selected);
+        $('#othersSelector').val('');
+        $('#rdfBookSelector').val('');
+    });
+
+
+    //Others Examples Selector Listener
+    var othersSelector = $('#othersSelector');
+    othersSelector.change(function(e) {
+        var selected =  $('#othersSelector option:selected').val();
+        setExample('others',selected);
+        $('#rdfBookSelector').val('');
+        $('#wikiSelector').val('');
+    });
+
+
+
+    function setExample(folder,selected){
+      $.get('./doc/examples/'+folder+'/'+selected, function(data) {
+            yashe.setValue(data);
         }, 'text');
-
-    })
-
+    }
 });

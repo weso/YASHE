@@ -26,6 +26,11 @@
 
 }
 
+.selectors{
+	display:grid;
+	grid-template-columns: 40% auto auto;
+	margin-top: 10px;
+  }
 
 
 .gistIcon {

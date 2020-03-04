@@ -1,0 +1,72 @@
+# Edition of a written work (E36)
+# https://www.wikidata.org/wiki/EntitySchema:E36
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+start = @<edition_of_a_written_work>
+
+<edition_of_a_written_work> {
+  # instance of version, edition, or translation
+  wdt:P31 wd:Q3331189 ;
+  # edition or translation of
+  wdt:P629 @<written_work> ;
+  # publisher
+  wdt:P123 IRI ;
+  # author of foreword
+  wdt:P2679 @<author>+ ;
+  # author of afterword
+  wdt:P2680 @<author>+ ;
+  # ISBN-13
+  wdt:P212 LITERAL ;
+  # ISBN-10
+  wdt:P957 LITERAL ;
+  # language
+  wdt:P407 @<language>+ ;
+  # publication date
+  wdt:P577 xsd:datetime ;
+  # translator
+  wdt:P655 @<author>+ ;
+  # title
+  wdt:P1476 LITERAL ;
+  # subtitle
+  wdt:P1680 LITERAL ;
+  # number of pages
+  wdt:P1104 xsd:integer* ;
+  # number of volumes
+  wdt:P2635 xsd:integer* ;
+}
+
+<written_work> {
+  # author
+  wdt:P50 @<author>+ ;
+  # serie
+  wdt:P179 @<written_work>* ;
+  # genre
+  wdt:P136 IRI* ;
+  # based_on
+  wdt:P144 IRI* ;
+  # series
+  wdt:P179 IRI* ;
+  # main_subject
+  wdt:P921 IRI* ;
+  # inspired_by
+  wdt:P941 IRI* ;
+}
+
+<author> {
+  wdt:P31 wd:Q5 ;
+  # movement
+  wdt:P135 IRI* ;
+  # language
+  wdt:P1412 @<language>+ ;
+}
+
+<publisher> {
+  wdt:P31 wd:Q2085381 ;
+}
+
+<language> {
+  wdt:P31 wd:Q34770 ;
+}
