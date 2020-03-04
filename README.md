@@ -71,7 +71,7 @@ Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YAS
 
 ## Usage
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
-Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings 
+Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . [Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
 ```js
 var yashe = YASHE(document.getElementById('domId'), {
@@ -79,23 +79,18 @@ var yashe = YASHE(document.getElementById('domId'), {
 });
 ```
 
-`YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe`
+``
 
-
-[Codepen Example](https://codepen.io/mistermboy/pen/XWJpqdY)
 
 Initialize YASQE from an existing text area (see CodeMirror for more info)
+YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe
+[Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 
 ```js
 var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
 ```
-`YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe`
-
-
-[Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
-
 
 ## API
 API methods accessible via the yashe instance:
