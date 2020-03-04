@@ -170,6 +170,7 @@ var yashe = YASHE(document.getElementById('domId'), {
   fixedGutter: true,
   syntaxErrorCheck: true,
   showTooltip:true,
+  persistent:null,
   extraKeys: {
     "Ctrl-Space": YASHE.autoComplete,
     "Cmd-Space": YASHE.autoComplete,
@@ -187,6 +188,7 @@ var yashe = YASHE(document.getElementById('domId'), {
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
+    }
 });
 ```
 
