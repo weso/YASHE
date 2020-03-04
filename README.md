@@ -4,9 +4,6 @@
   <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a>
   <img src="https://img.shields.io/bundlephobia/min/yashe" alt="size"/>
   <img src="https://img.shields.io/github/languages/top/weso/YASHE?color=yellow" alt="languaje"/>
-  <a href="https://github.com/weso/YASHE/pulls"><img src="https://img.shields.io/github/issues-pr-closed/weso/YASHE" alt="PR"/></a>
-  <a href="https://github.com/weso/YASHE/issues"><img src="https://img.shields.io/github/issues/weso/YASHE?color=success" alt="isues"/></a>
-  <a href="https://github.com/weso/YASHE/commits/gh-pages"><img src="https://img.shields.io/github/last-commit/weso/YASHE" alt="commits"/></a>
   <a href="http://www.weso.es/YASHE/"><img src="https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F" alt="web"/></a>
   
   

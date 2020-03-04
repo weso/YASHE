@@ -70,21 +70,42 @@ $(document).ready(function() {
       });
     }
 
-   
-
+    //Add all the examples to the selector   
+    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples";
     var exSelector = $('#exSelector');
-     //Get all the examples
-    $.get('./doc/examples/', function(data) {
-        data.split('\n').forEach(function(element){
-          if(element!='wiki' && element!='rdf' && element!='japan' && element!=''){
-              exSelector.append(
-              $( '<option>' ).text( element ).attr( 'value', element));
-            }
+    
+    /*
+    $.ajax({
+        url: dir,
+        success: function (data) {
+          $(data).find("a").attr("href", function (i, path) {
+              var element;
+              var relativeRoute = path.split('/doc/examples/');
+              if(relativeRoute.length>1){
+                element=relativeRoute[1].replace(/-/g,' ');
+                if(element != 'wiki' && element != 'rdf' && element != 'japan'){
+                  exSelector.append(
+                    $( '<option>' ).text( element ).attr( 'value', relativeRoute[1]));
+                }
+              }
           });
-        
-        }, 'text');
-   
+      }});
+      
+      */
 
+      $.ajax({
+        dataType: "json",
+        url: url,
+        success: function (data) {
+          data.forEach(function(element){
+            if(element.name != 'wiki' && element.name != 'rdf' && element.name != 'japan'){
+                  exSelector.append(
+                    $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
+                }
+          })
+        }
+      });
+       
     //Selector Listener
     exSelector.change(function(e) {
         var selected =  $('#exSelector option:selected').val();
