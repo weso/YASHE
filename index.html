@@ -38,10 +38,9 @@
       </div>
     </div>
 
-    <div class="container" role="main" >
+    <div class="container logoCont" role="main" >
       <img src="doc/imgs/yashe_logo.png"></img>
       </div>
-
 
      <div class="container" role="main">
 
@@ -63,7 +62,7 @@
             </select>
 
             <select  id="othersSelector" class="form-control">
-              <option value="" disabled selected>Others</option>
+              <option value="" disabled selected>Other Examples</option>
               <option value="japan">Japan Sarch Metadata</option>
             </select>
         </div>
@@ -187,6 +186,8 @@
       var yashe = YASHE(document.getElementById('showcase'), {
         persistent:null
       });
+
+      yashe.setSize(1135,400)
 
     </script>
 
