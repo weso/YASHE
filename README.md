@@ -31,6 +31,22 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
+## Documentation
+
+* [Features](#Features)
+* [Install](#Features)
+  - [NPM](#NPM)
+  - [JsDelivr](#JsDelivr)
+  - [Github](#Github)
+* [Configuration](#Configuration)
+  - [Defaults](#Defaults)
+  - [Shortcuts](#Shortcuts provided by YASHE)
+* [API](#API)
+* [Statics](#Statics)
+* [Developing YASHE](#Developing YASHE)
+* [Used By](#Used By)
+* [Forked By](#Forked By)
+
 ## Features :clipboard:
 
 * Completely client-side
@@ -159,7 +175,7 @@ extraKeys: object
 Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
 Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
 
-The list of shortcuts provided by YASHE:
+### Shortcuts provided by YASHE:
  
   Shortcut          | Action
   -------------     | -------------
@@ -235,7 +251,7 @@ YASHE.registerAutocompleter(name: String, autocompleter: function)
 // causing the current tokens to be incorrect.
 // This causes problem for autocompletion. http://bla might result in two tokens: http:// and bla. 
 // We'll want to combine these
-YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) → token: Object
+YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) //→ token: Object
 
 ```
 
