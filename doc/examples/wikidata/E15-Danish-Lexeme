@@ -1,7 +1,6 @@
 # Danish Lexeme (E15)
 # https://www.wikidata.org/wiki/EntitySchema:E15
 
-
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
