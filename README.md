@@ -31,7 +31,7 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
-## Documentation
+## Table of Contents
 
 * [Features](#features-clipboard)
 * [Install](#install-floppy_disk)
