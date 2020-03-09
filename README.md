@@ -164,14 +164,14 @@ var yashe = YASHE(document.getElementById('domId'), {
   matchBrackets: true,
   fixedGutter: true,
   syntaxErrorCheck: true,
-  showTooltip:true,
-  showUploadButton:true,
-  showDownloadButton:true,
-  showCopyButton:true,
-  showDeleteButton:true,
-  showThemeButton:true,
-  showFullScreenButton:true,
-  persistent:null,
+  showTooltip: true,
+  showUploadButton: true,
+  showDownloadButton: true,
+  showCopyButton: true,
+  showDeleteButton: true,
+  showThemeButton: true,
+  showFullScreenButton: true,
+  persistent: null,
   extraKeys: {
     "Ctrl-Space": YASHE.autoComplete,
     "Cmd-Space": YASHE.autoComplete,
@@ -193,31 +193,8 @@ var yashe = YASHE(document.getElementById('domId'), {
 });
 ```
 
-### Defaults
 
-```
-value: string
-```
-Default Shape
-```
-autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
-```
-The list of enabled autocompletion plugins
-```
-syntaxErrorCheck: boolean (default: true)
-```
-Whether to validate the ShEx syntax
-```
-collapsePrefixesOnLoad: boolean (default: false)
-```
-Collapse prefixes on page load
-```
-extraKeys: object
-```
-Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
-Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
-
-### Shortcuts provided by YASHE:
+## Shortcuts provided by YASHE:
  
   Shortcut          | Action
   -------------     | -------------
