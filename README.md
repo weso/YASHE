@@ -151,11 +151,12 @@ This configuration object is accessible/changeable via YASHE.defaults and yashe.
 var yashe = YASHE(document.getElementById('domId'), {
   value:'Starting value of the editor',
   mode:'shex',
-  theme:'wiki',
+  theme:'wiki', //dark
   lineNumbers: true,
   lineWrapping: true,
-  firstLineNumber:1,
+  fontSize: 14, 
   cursorHeight:15,
+  firstLineNumber:1,
   readOnly:false,
   showCursorWhenSelecting:fasle,
   tabMode: 'indent',
@@ -164,6 +165,12 @@ var yashe = YASHE(document.getElementById('domId'), {
   fixedGutter: true,
   syntaxErrorCheck: true,
   showTooltip:true,
+  showUploadButton:true,
+  showDownloadButton:true,
+  showCopyButton:true,
+  showDeleteButton:true,
+  showThemeButton:true,
+  showFullScreenButton:true,
   persistent:null,
   extraKeys: {
     "Ctrl-Space": YASHE.autoComplete,
