@@ -41,8 +41,7 @@ In addition, it offers a simple way of integrating into other projects
 * [Getting Started](#Getting-started)
   - [React.js](#Reactjs)
 * [Configuration](#Configuration)
-  - [Defaults](#Defaults)
-  - [Shortcuts](#shortcuts-provided-by-yashe)
+* [Shortcuts](#shortcuts-provided-by-yashe)
 * [API](#API)
 * [Statics](#Statics)
 * [Developing YASHE](#developing-yashe-construction)
@@ -209,13 +208,6 @@ var yashe = YASHE(document.getElementById('domId'), {
   Ctrl/Cmd-Y        | Redo
   F11               | Set query editor full-screen (or leave full-screen)
   Esc               | Leave full-screen
-
-
-```
-persistent: function|string
-```
-Change persistency settings for the YASHE content value. Setting the values to null, will disable persistancy: nothing is stored between browser sessions. Setting the values to a string (or a function which returns a string), will store the query in localstorage using the specified string. By default, the ID is dynamically generated using the YASHE.determineId function, to avoid collissions when using multiple YASHE instances on one page
-
 
 
 ## API
