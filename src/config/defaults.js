@@ -30,6 +30,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   },
   theme:"wiki",
   tabMode: "indent",
+  fontSize: 14, 
   lineNumbers: true,
   lineWrapping: true,
   foldGutter: {

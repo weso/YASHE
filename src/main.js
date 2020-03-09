@@ -133,8 +133,8 @@ const extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-     prefixFold.findFirstPrefixLine(yashe),
-      root.fold.prefix,
+      prefixFold.findFirstPrefixLine(yashe),
+      console.log(root.fold.prefix),
       collapse ? "fold" : "unfold"
     );
   };
@@ -240,7 +240,7 @@ const removeCompleterFromSettings = function(settings, name) {
  */
 const postProcessCmElement = function(yashe) {
   buttonsUtils.drawButtons(yashe);
-
+  setFontSize(yashe);
   // Trigger of the button with id='copy'
   // Copies the contents of the editor in the clipboard
   new Clipboard('#copyBtn', {
@@ -310,12 +310,19 @@ const postProcessCmElement = function(yashe) {
   // on first load, check as well
   // (our stored or default query might be incorrect)
   checkSyntax(yashe);
+  yashe.collapsePrefixes(yashe.options.collapsePrefixesOnLoad);
 
-  if (yashe.options.collapsePrefixesOnLoad){
-    yashe.collapsePrefixes(true);
-  } 
 
 };
+
+
+/**
+ * Set font size of the editor
+ * @param {object} yashe
+ */
+const setFontSize = function(yashe){
+  $('.CodeMirror').css('font-size',yashe.options.fontSize)
+}
 
 
 /**
