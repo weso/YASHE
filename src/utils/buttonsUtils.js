@@ -152,27 +152,27 @@ var drawButtons = function(yashe){
   
 
     //Draw buttons
-    if(yashe.options.uploadButton){
+    if(yashe.options.showUploadButton){
       yashe.buttons.append(uploadButton);
     }
 
-    if(yashe.options.downloadButton){
+    if(yashe.options.showDownloadButton){
       yashe.buttons.append(downloadButton);
     }
 
-    if(yashe.options.copyButton){
+    if(yashe.options.showCopyButton){
       yashe.buttons.append(copyButton);
     }
 
-    if(yashe.options.deleteButton){
+    if(yashe.options.showDeleteButton){
       yashe.buttons.append(deleteButton);
     }
 
-    if(yashe.options.themeButton){
+    if(yashe.options.showThemeButton){
       yashe.buttons.append(themeButton);
     }
 
-    if(yashe.options.fullScreenBtn){
+    if(yashe.options.showFullScreenButton){
       yashe.buttons.append(toggleFullscreen);
     }
     
