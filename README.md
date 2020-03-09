@@ -38,6 +38,8 @@ In addition, it offers a simple way of integrating into other projects
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
+* [Getting Started](#Getting-started)
+  - [React.js](#Reactjs)
 * [Configuration](#Configuration)
   - [Defaults](#Defaults)
   - [Shortcuts](#shortcuts-provided-by-yashe)
@@ -85,7 +87,7 @@ The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include 
 ### Github
 Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YASHE [.css](./dist/yashe.min.css) and [.js](./dist/yashe.bundled.min.js) files (find them in the dist directory).  
 
-## Get Started
+## Getting Started
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
 Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. 
 YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . 
@@ -109,6 +111,39 @@ var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
 ```
+### React.js
+This is a basic example about how to use YASHE in React.js using hooks:
+```js
+import React, {useState,useEffect,useRef} from 'react';
+import YASHE from 'yashe';
+
+function Editor() {
+
+  const [yashe,setYashe] = useState(null);
+  const divRef = useRef(null);
+
+    useEffect(() => {
+    
+        if (!yashe) {
+            const options = {
+                persistent:false,
+                lineNumbers: true,
+            }
+            
+            const y = YASHE(divRef.current,options);
+        
+            y.refresh();
+            setYashe(y);           
+          }
+      }, [yashe]
+    );
+    return  (<div ref={divRef}/>);
+}
+
+export default Editor;
+```
+
+
 ## Configuration
 This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
