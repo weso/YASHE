@@ -39,6 +39,7 @@ In addition, it offers a simple way of integrating into other projects
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
 * [Getting Started](#Getting-started)
+  -[React.js](#React.js)
 * [Configuration](#Configuration)
   - [Defaults](#Defaults)
   - [Shortcuts](#shortcuts-provided-by-yashe)
@@ -110,6 +111,39 @@ var yashe = YASHE.fromTextArea(document.getElementById('texAreaId'), {
   //Options
 });
 ```
+### React.js
+This is a basic example about how to use YASHE in React.js using hooks:
+```js
+import React, {useState,useEffect,useRef} from 'react';
+import YASHE from 'yashe';
+
+function Editor() {
+
+  const [yashe,setYashe] = useState(null);
+  const divRef = useRef(null);
+
+    useEffect(() => {
+    
+        if (!yashe) {
+            const options = {
+                persistent:false,
+                lineNumbers: true,
+            }
+            
+            const y = YASHE(divRef.current,options);
+        
+            y.refresh();
+            setYashe(y);           
+          }
+      }, [yashe]
+    );
+    return  (<div ref={divRef}/>);
+}
+
+export default Editor;
+```
+
+
 ## Configuration
 This configuration object is accessible/changeable via YASHE.defaults and yashe.options, and you can pass these along when initializing YASHE as well. Other than the configuration we describe here, check the CodeMirror documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
 
