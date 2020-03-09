@@ -168,7 +168,7 @@ const styles ={
   },
   description:{
     'display': 'inline-block',
-    'line-height': '20px',
+    'line-height': '23px',
     'text-align': 'left',
     'margin-top': '3px',
   }   
