@@ -182,7 +182,8 @@ const themeStyles ={
     'border-radius': '8px',
     'border': '1px solid #B8F5F3',
     'background':'white',
-    'color':'#222'
+    'color':'#222',
+    'z-index':'1200'
   },
   dark:{
     'display': 'inline-block',
@@ -191,7 +192,8 @@ const themeStyles ={
     'border-radius': '10px',
     'border': '1px solid #70dbe9',
     'background':'#222',
-    'color':'white'
+    'color':'white',
+    'z-index':'1200'
   }
 }
 
