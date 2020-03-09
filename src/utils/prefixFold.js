@@ -31,7 +31,7 @@ function findFirstPrefix(cm, line, ch, lineText) {
     if (!/^(comment|string)/.test(tokenType)) return found + 1;
     if (!/(comment)/.test(tokenType)) break;
     
-    //Could not find a prefix, no use looping any further.
+    //Could not find a prefix, no use looping any further. Probably invalid query
     if (at === pass) break;
   }
 }
@@ -69,7 +69,7 @@ CodeMirror.registerHelper("fold", "prefix", function(cm, start) {
   }
   var getLastPrefixPos = function(line, ch) {
     var prefixKeywordToken = cm.getTokenAt(CodeMirror.Pos(line, ch + 1));
-    if (!prefixKeywordToken || prefixKeywordToken.type != "directive") return -1;
+    if (!prefixKeywordToken || prefixKeywordToken.type != "keyword") return -1;
     var prefixShortname = tokenUtils.getNextNonWsToken(cm, line, prefixKeywordToken.end + 1);
     if (!prefixShortname || prefixShortname.type != "string-2") return -1; //missing prefix keyword shortname
     var prefixUri = tokenUtils.getNextNonWsToken(cm, line, prefixShortname.end + 1);
