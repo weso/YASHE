@@ -90,7 +90,7 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
       //Jquery in 2020 coooool
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' )
         .css( 'position', 'absolute' )
-        .css( 'z-index', '100' )
+        .css( 'z-index', '1200' )
         .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
@@ -164,11 +164,11 @@ const debounce = function(func, wait, immediate) {
 const styles ={
   title:{
     'text-align': 'left',
-    'font-size':18,
+    'font-size':17,
   },
   description:{
     'display': 'inline-block',
-    'line-height': '18px',
+    'line-height': '20px',
     'text-align': 'left',
     'margin-top': '3px',
   }   
