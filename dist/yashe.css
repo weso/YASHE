@@ -692,6 +692,29 @@
     width: 18px;
     height: 18px;
     vertical-align: middle; }
+  .yashe .wikidataTooltip {
+    z-index: 100 !important;
+    display: inline !important;
+    max-width: 200px !important;
+    background-color: red !important; }
+  .yashe .tooltipCont {
+    display: inline-block !important;
+    color: red !important;
+    z-index: 1000 !important; }
+  .yashe .wikidata_tooltip {
+    display: inline-block;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #70dbe9; }
+  .yashe .title {
+    text-align: left;
+    padding: 5px; }
+  .yashe .content {
+    line-height: 20px;
+    text-align: left;
+    margin-top: 5px;
+    padding: 5px; }
 
 .CodeMirror-hints {
   position: absolute;
