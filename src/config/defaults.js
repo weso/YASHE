@@ -47,7 +47,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   copyButton:true,
   deleteButton:true,
   themeButton:true,
-  toggleFullscreen:true,
+  fullScreenBtn:true,
   onQuotaExceeded: function(e) {
     //fail silently
     console.warn("Could not store in localstorage. Skipping..", e);

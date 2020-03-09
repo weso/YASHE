@@ -172,7 +172,7 @@ var drawButtons = function(yashe){
       yashe.buttons.append(themeButton);
     }
 
-    if(yashe.options.toggleFullscreen){
+    if(yashe.options.fullScreenBtn){
       yashe.buttons.append(toggleFullscreen);
     }
     
