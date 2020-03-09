@@ -102,7 +102,7 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
             $('<div>').html(entity).css(styles.title))
           .append(
             $('<div>').html(description).css(styles.description)))
-        .appendTo('body')
+        .appendTo('body').fadeIn( 'slow' );
     }
       
     })  
