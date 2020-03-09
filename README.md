@@ -38,6 +38,7 @@ In addition, it offers a simple way of integrating into other projects
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
+* [Getting Started](#Getting-started)
 * [Configuration](#Configuration)
   - [Defaults](#Defaults)
   - [Shortcuts](#shortcuts-provided-by-yashe)
@@ -85,7 +86,7 @@ The YASHE files are hosted via JsDelivr. This CDN is the easiest way to include 
 ### Github
 Visit the [GitHub repository](https://github.com/weso/YASHE) to download the YASHE [.css](./dist/yashe.min.css) and [.js](./dist/yashe.bundled.min.js) files (find them in the dist directory).  
 
-## Get Started
+## Getting Started
 You can initialize YASHE via its constructor, or via the command fromTextArea. Both return in instance of YASHE, from now on referred to as yashe (lowercase). Both function take as argument a config object (that can be null).
 Main YASHE constructor. Pass a DOM element as argument to append the editor to, and (optionally) pass along config            settings. 
 YASHE(parent: DOM-Element, settings: Object) → YASHE instance: yashe . 
