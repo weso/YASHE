@@ -10,7 +10,7 @@ var drawButtons = function(yashe){
  
 
     /**
-     * draw upload button
+     * upload button
      */
     var uploadButton = $("<div>", {
       class: "downloadBtns"
@@ -19,11 +19,9 @@ var drawButtons = function(yashe){
     .addClass("yashe_uploadBtn")
     .attr("title", "Upload your ShEx file")
     .on('change',()=>{utils.readFile(yashe)}));
-    yashe.buttons.append(uploadButton);
-  
-  
+   
     /**
-     * draw download button
+     * download button
      */
   
     var downloadButton = $("<div>", {
@@ -55,11 +53,9 @@ var drawButtons = function(yashe){
             Codemirror.signal(yashe,'download');
           })
       );
-    yashe.buttons.append(downloadButton);
-  
-  
+    
     /**
-     * draw copy button
+     * copy button
      */
   
     var copyButton = $("<div>", {
@@ -73,12 +69,10 @@ var drawButtons = function(yashe){
           .click(function() { 
               Codemirror.signal(yashe,'copy');
           }))
-    yashe.buttons.append(copyButton);
-  
 
    
     /**
-     * draw delete button
+     * delete button
      */
     var deleteButton = $("<div>", {
       class: "downloadBtns"
@@ -90,8 +84,6 @@ var drawButtons = function(yashe){
               yashe.setValue("")
               Codemirror.signal(yashe,'delete');
           }));
-
-    yashe.buttons.append(deleteButton);
 
 
     /**
@@ -127,11 +119,11 @@ var drawButtons = function(yashe){
       Codemirror.signal(yashe,'themeChange');
     }))
 
-    yashe.buttons.append(themeButton);
+
 
 
     /**
-       * draw fullscreen button   
+       * fullscreen button   
     */
     var toggleFullscreen = $("<div>", {
       class: "fullscreenToggleBtns"
@@ -156,8 +148,34 @@ var drawButtons = function(yashe){
             Codemirror.signal(yashe,'colapseScreen');
           })
       );
-    yashe.buttons.append(toggleFullscreen);
+ 
   
+
+    //Draw buttons
+    if(yashe.options.uploadButton){
+      yashe.buttons.append(uploadButton);
+    }
+
+    if(yashe.options.downloadButton){
+      yashe.buttons.append(downloadButton);
+    }
+
+    if(yashe.options.copyButton){
+      yashe.buttons.append(copyButton);
+    }
+
+    if(yashe.options.deleteButton){
+      yashe.buttons.append(deleteButton);
+    }
+
+    if(yashe.options.themeButton){
+      yashe.buttons.append(themeButton);
+    }
+
+    if(yashe.options.toggleFullscreen){
+      yashe.buttons.append(toggleFullscreen);
+    }
+    
 
   }
 

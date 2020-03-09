@@ -276,7 +276,6 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-
     checkSyntax(yashe);  
   });
 
@@ -298,15 +297,14 @@ const postProcessCmElement = function(yashe) {
   /**
    * Wikidata Tooltip Listener
    */
-
   root.on( yashe.getWrapperElement(), 'mouseover',
-
       tooltipUtils.debounce(function( e ) {
         if(yashe.options.showTooltip){
           tooltipUtils.removeWikiToolTip();
           tooltipUtils.triggerTooltip(yashe, e);
         }
-      }, 300 ));
+      }, 300)
+  );
 
 
   // on first load, check as well
