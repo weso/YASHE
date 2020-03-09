@@ -39,7 +39,7 @@ In addition, it offers a simple way of integrating into other projects
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
 * [Getting Started](#Getting-started)
-  - [React.js](#React.js)
+  - [React.js](#Reactjs)
 * [Configuration](#Configuration)
   - [Defaults](#Defaults)
   - [Shortcuts](#shortcuts-provided-by-yashe)
