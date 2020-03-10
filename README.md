@@ -72,9 +72,7 @@ In addition, it offers a simple way of integrating into other projects
      * Change between light and dark mode
      * FullScreen Mode
 
-  <p align="center">
-    <img src="https://github.com/mistermboy/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
-  </p>
+
 
 ## Install :floppy_disk:
 
