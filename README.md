@@ -200,7 +200,7 @@ var yashe = YASHE(document.getElementById('domId'), {
 });
 ```
 ## Events
-Here are some events provided by YASHE (check the codemirror documentation for more info https://codemirror.net/doc/manual.html#events):
+Here are some events provided by YASHE (check the [Codemirror Documentation](https://codemirror.net/doc/manual.html#events) for more info ):
 
   Event             | Objects              | Action
   ----------------  | ---------------------| ------------------------ 
@@ -263,14 +263,104 @@ Codemirror.signal(yashe,'myOwnEvent'args...);
 
 
 ## API
-API methods accessible via the yashe instance:
+API methods accessible via the yashe instance ( check the [Codemirror Manual](https://codemirror.net/doc/manual.html#api) for more info:
 
 ```js
-//Set query value in editor (see also)
+// Get query value from editor
+yashe.getValue() → query: String
+
+//Set query value in editor
 yashe.setValue(query: String)
 
-// Get query value from editor (see also)
-yashe.getValue() → query: String
+// Get the content of line n.
+yashe.getLine(n: integer) → string
+
+// Get the number of lines in the editor.
+yashe.lineCount() → integer
+
+// Get the number of first line in the editor. 
+yashe.firstLine() → integer
+
+// Get the number of last line in the editor. 
+yashe.lastLine() → integer
+
+// Get the currently selected code. 
+// Optionally pass a line separator to put between the lines in the output. 
+// When multiple selections are present, they are concatenated with instances 
+// of lineSep in between.
+yashe.getSelection(?lineSep: string) → string
+
+
+// Replace the selection(s) with the given string. By default, the new selection 
+// ends up after the inserted text. The optional select argument can be used to 
+// change this—passing "around" will cause the new text to be selected, passing 
+// "start" will collapse the selection to the start of the inserted text.
+yashe.replaceSelection(replacement: string, ?select: string)
+
+// Retrieve one end of the primary selection. start is an optional string indicating 
+// which end of the selection to return. It may be "from", "to", "head" (the side of 
+// the selection that moves when you press shift+arrow), or "anchor" (the fixed side 
+// of the selection). Omitting the argument is the same as passing "head". A {line, ch} 
+// object will be returned.
+yashe.getCursor(?start: string) → {line, ch}
+
+// Return true if any text is selected
+yashe.somethingSelected() → boolean
+
+// Set the cursor position. You can either pass a single {line, ch} object, or the line 
+// and the character as two separate parameters. Will replace all selections with a single, 
+// empty selection at the given position
+yashe.setCursor(pos: {line, ch}|number, ?ch: number, ?options: object)
+
+// Tells you whether the editor currently has focus.
+yashe.hasFocus() → boolean
+
+// Returns the start and end of the 'word' (the stretch of letters, whitespace, or 
+// punctuation) at the given position.
+yashe.findWordAt(pos: {line, ch}) → {anchor: {line, ch}, head: {line, ch}}
+
+
+// Retrieves the current value of the given option for this editor instance.
+yashe.getOption(option: string) → any
+
+// Change the configuration of the editor. option should the name of an option, 
+// and value should be a valid value for that option.
+yashe.setOption(option: string, value: any)
+
+// Retrieve the currently active document from an editor.
+yashe.getDoc() → Doc
+
+// Retrieve the editor associated with a document. May return null.
+yashe.getEditor() → CodeMirror
+
+// Undo one edit (if any undo events are stored).
+yashe.undo()
+
+// Redo one undone edit.
+yashe.redo()
+
+// Programmatically set the size of the editor (overriding the applicable CSS rules). 
+// width and height can be either numbers (interpreted as pixels) or CSS units (e.g "100%"). 
+// You can pass null for either of them to indicate that that dimension should not be changed.
+yashe.setSize(width: number|string, height: number|string)
+
+// Scroll the editor to a given (pixel) position. Both arguments may be left as null 
+// or undefined to have no effect.
+yashe.scrollTo(x: number, y: number)
+
+// If your code does something to change the size of the editor element (window resizes 
+// are already listened for), or unhides it, you should probably follow up by calling 
+// this method to ensure CodeMirror is still looking as intended.
+yashe.refresh()
+
+//Retrieves information about the token the current mode found before the given 
+// position (a {line, ch} object). The returned object has the following properties:
+// start -> The character (on the given line) at which the token starts
+// end -> The character at which the token ends.
+// string->The token's string.
+// type -> The token type the mode assigned to the token, such as "keyword" or "comment" (may also be null).
+// state -> The mode's state at the end of this token.
+yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object
 
 // Fetch defined prefixes
 yashe.getDefinedPrefixes() → object:
