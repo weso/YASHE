@@ -65,6 +65,11 @@ $(document).ready(function() {
             )
               .attr("href", gist["html_url"])
               .appendTo(buttonContainer);
+          $(
+              "<a style='margin-left: 4px;' target='_blank' class='btn btn-default btn-sm' href='#' role='button'>CodePen Example <img class='pull-right gistIcon' src='imgs/codepen.png'></a>"
+            )
+              .attr("href", 'https://codepen.io/mistermboy/pen/XWJpqdY')
+              .appendTo(buttonContainer);
           }
         });
       });

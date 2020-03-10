@@ -31,6 +31,7 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
+
 ## Table of Contents
 
 * [Features](#features-clipboard)
@@ -41,8 +42,10 @@ In addition, it offers a simple way of integrating into other projects
 * [Getting Started](#Getting-started)
   - [React.js](#Reactjs)
 * [Configuration](#Configuration)
-  - [Defaults](#Defaults)
-  - [Shortcuts](#shortcuts-provided-by-yashe)
+* [Events](#Events)
+    - [Event Handlers](#event-handlers)
+    - [Fire your own events](#fire-your-own-events)
+* [Shortcuts](#shortcuts-provided-by-yashe)
 * [API](#API)
 * [Statics](#Statics)
 * [Developing YASHE](#developing-yashe-construction)
@@ -68,6 +71,10 @@ In addition, it offers a simple way of integrating into other projects
      * Delete all the editor content
      * Change between light and dark mode
      * FullScreen Mode
+
+<p align="center">
+  <img src="https://github.com/mistermboy/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
+</p>
 
 ## Install :floppy_disk:
 
@@ -151,11 +158,12 @@ This configuration object is accessible/changeable via YASHE.defaults and yashe.
 var yashe = YASHE(document.getElementById('domId'), {
   value:'Starting value of the editor',
   mode:'shex',
-  theme:'wiki',
+  theme:'wiki', //dark
   lineNumbers: true,
   lineWrapping: true,
-  firstLineNumber:1,
+  fontSize: 14, 
   cursorHeight:15,
+  firstLineNumber:1,
   readOnly:false,
   showCursorWhenSelecting:fasle,
   tabMode: 'indent',
@@ -163,8 +171,14 @@ var yashe = YASHE(document.getElementById('domId'), {
   matchBrackets: true,
   fixedGutter: true,
   syntaxErrorCheck: true,
-  showTooltip:true,
-  persistent:null,
+  showTooltip: true,
+  showUploadButton: true,
+  showDownloadButton: true,
+  showCopyButton: true,
+  showDeleteButton: true,
+  showThemeButton: true,
+  showFullScreenButton: true,
+  persistent: null,
   extraKeys: {
     "Ctrl-Space": YASHE.autoComplete,
     "Cmd-Space": YASHE.autoComplete,
@@ -185,38 +199,58 @@ var yashe = YASHE(document.getElementById('domId'), {
     }
 });
 ```
+## Events
+Here are some events provided by YASHE (check the [Codemirror Documentation](https://codemirror.net/doc/manual.html#events) for more info ):
 
-### Defaults
+  Event             | Objects              | Action
+  ----------------  | ---------------------| ------------------------ 
+  change          |  yashe: CodeMirror,    changeObj: object | Fires every time the content of the editor is changed
+  cursorActivity    |  yashe: CodeMirror  | Will be fired when the cursor or selection moves, or any change is made to the editor content. 
+  keyHandled        |  yashe: CodeMirror,name: string,event: Event | Fired after a key is handled through a key map
+  focus          |  yashe: CodeMirror, event: Event | Fires whenever the editor is focused
+  blur           |  yashe: CodeMirror, event: Event | Fires whenever the editor is unfocused
+  scroll         |  yashe: CodeMirror | Fires whenever the editor is scrolled
+  refresh        |  yashe: CodeMirror | Fires when the editor is refreshed or resized
+  optionChange   |  yashe: CodeMirror, option: string | Dispatched every time an option is changed with setOption
+  upload         |  yashe: CodeMirror        | Fires after uploading a file by the upload button
+  download       |  yashe: CodeMirror        | Fires after downloading a file by the download button
+  copy           |  yashe: CodeMirror        | Fires after copying the editor content using the copy button 
+  delete         |  yashe: CodeMirror        | Fires after deleting the editor content by the delete buttton
+  expandScreen   |  yashe: CodeMirror        | Fires after expanding screen
+  collapseScreen |  yashe: CodeMirror        | Fires after collapsing screen
+  
+  
+### Event Handlers
+`cm.on(type: string, func: (...args))`
 
-```
-value: string
-```
-Default Shape
-```
-autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])
-```
-The list of enabled autocompletion plugins
-```
-syntaxErrorCheck: boolean (default: true)
-```
-Whether to validate the ShEx syntax
-```
-collapsePrefixesOnLoad: boolean (default: false)
-```
-Collapse prefixes on page load
-```
-extraKeys: object
-```
-Extra shortcut keys. Check the [CodeMirror manual](https://codemirror.net/) on how to add your own
-Note: To avoid colissions with other browser shortcuts, these shortcuts only work when the YASHE editor is selected (has 'focus').
+Register an event handler for the given event type (a string) on the editor instance. There is also a CodeMirror.on(object, type, func) version that allows registering of events on any object.
 
-### Shortcuts provided by YASHE:
+```js
+yashe.on('blur', function(yashe) {
+ console.log('The editor has been unfocused!');
+});
+```
+
+`cm.off(type: string, func: (...args))`
+
+Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.
+
+```js
+yashe.off('blur');
+```
+### Fire your own events
+`CodeMirror.signal(target, name, args...)`
+```js
+Codemirror.signal(yashe,'myOwnEvent'args...);
+```
+
+## Shortcuts provided by YASHE:
  
   Shortcut          | Action
   -------------     | -------------
   Ctrl/Cmd-Space    | Trigger Autocompletion
   Ctrl/Cmd-D        | Delete current/selected line(s)
-  Ctrl/Cmd-Space    | Comment or uncomment current/selected line(s)
+  Ctrl/Cmd-/        | Comment or uncomment current/selected line(s)
   Ctrl/Cmd-Down     | Copy line down
   Ctrl/Cmd-Up       | Copy line up
   Ctrl/Cmd-Shift-F  | Auto-format/indent selected lines
@@ -227,22 +261,106 @@ Note: To avoid colissions with other browser shortcuts, these shortcuts only wor
   Esc               | Leave full-screen
 
 
-```
-persistent: function|string
-```
-Change persistency settings for the YASHE content value. Setting the values to null, will disable persistancy: nothing is stored between browser sessions. Setting the values to a string (or a function which returns a string), will store the query in localstorage using the specified string. By default, the ID is dynamically generated using the YASHE.determineId function, to avoid collissions when using multiple YASHE instances on one page
-
-
-
 ## API
-API methods accessible via the yashe instance:
+API methods accessible via the yashe instance ( check the [Codemirror Manual](https://codemirror.net/doc/manual.html#api) for more info:
 
 ```js
-//Set query value in editor (see also)
+// Get query value from editor
+yashe.getValue() → query: String
+
+//Set query value in editor
 yashe.setValue(query: String)
 
-// Get query value from editor (see also)
-yashe.getValue() → query: String
+// Get the content of line n.
+yashe.getLine(n: integer) → string
+
+// Get the number of lines in the editor.
+yashe.lineCount() → integer
+
+// Get the number of first line in the editor. 
+yashe.firstLine() → integer
+
+// Get the number of last line in the editor. 
+yashe.lastLine() → integer
+
+// Get the currently selected code. 
+// Optionally pass a line separator to put between the lines in the output. 
+// When multiple selections are present, they are concatenated with instances 
+// of lineSep in between.
+yashe.getSelection(?lineSep: string) → string
+
+
+// Replace the selection(s) with the given string. By default, the new selection 
+// ends up after the inserted text. The optional select argument can be used to 
+// change this—passing "around" will cause the new text to be selected, passing 
+// "start" will collapse the selection to the start of the inserted text.
+yashe.replaceSelection(replacement: string, ?select: string)
+
+// Retrieve one end of the primary selection. start is an optional string indicating 
+// which end of the selection to return. It may be "from", "to", "head" (the side of 
+// the selection that moves when you press shift+arrow), or "anchor" (the fixed side 
+// of the selection). Omitting the argument is the same as passing "head". A {line, ch} 
+// object will be returned.
+yashe.getCursor(?start: string) → {line, ch}
+
+// Return true if any text is selected
+yashe.somethingSelected() → boolean
+
+// Set the cursor position. You can either pass a single {line, ch} object, or the line 
+// and the character as two separate parameters. Will replace all selections with a single, 
+// empty selection at the given position
+yashe.setCursor(pos: {line, ch}|number, ?ch: number, ?options: object)
+
+// Tells you whether the editor currently has focus.
+yashe.hasFocus() → boolean
+
+// Returns the start and end of the 'word' (the stretch of letters, whitespace, or 
+// punctuation) at the given position.
+yashe.findWordAt(pos: {line, ch}) → {anchor: {line, ch}, head: {line, ch}}
+
+
+// Retrieves the current value of the given option for this editor instance.
+yashe.getOption(option: string) → any
+
+// Change the configuration of the editor. option should the name of an option, 
+// and value should be a valid value for that option.
+yashe.setOption(option: string, value: any)
+
+// Retrieve the currently active document from an editor.
+yashe.getDoc() → Doc
+
+// Retrieve the editor associated with a document. May return null.
+yashe.getEditor() → CodeMirror
+
+// Undo one edit (if any undo events are stored).
+yashe.undo()
+
+// Redo one undone edit.
+yashe.redo()
+
+// Programmatically set the size of the editor (overriding the applicable CSS rules). 
+// width and height can be either numbers (interpreted as pixels) or CSS units (e.g "100%"). 
+// You can pass null for either of them to indicate that that dimension should not be changed.
+yashe.setSize(width: number|string, height: number|string)
+
+// Scroll the editor to a given (pixel) position. Both arguments may be left as null 
+// or undefined to have no effect.
+yashe.scrollTo(x: number, y: number)
+
+// If your code does something to change the size of the editor element (window resizes 
+// are already listened for), or unhides it, you should probably follow up by calling 
+// this method to ensure CodeMirror is still looking as intended.
+yashe.refresh()
+
+//Retrieves information about the token the current mode found before the given 
+// position (a {line, ch} object). The returned object has the following properties:
+// start -> The character (on the given line) at which the token starts
+// end -> The character at which the token ends.
+// string->The token's string.
+// type -> The token type the mode assigned to the token, such as "keyword" or 
+//         "comment" (may also be null).
+// state -> The mode's state at the end of this token.
+yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object
 
 // Fetch defined prefixes
 yashe.getDefinedPrefixes() → object:

@@ -4,7 +4,7 @@
  * keys). Either change the default options by setting YASHE.defaults, or by
  * passing your own options as second argument to the YASHE constructor
  */
-var $ = require("jquery"), YASHE = require("../main.js");
+var $ = require("jquery"), YASHE = require("../main.js"), CodeMirror = require('codemirror');
 
 YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   mode: "shex",
@@ -30,6 +30,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   },
   theme:"wiki",
   tabMode: "indent",
+  fontSize: 14, 
   lineNumbers: true,
   lineWrapping: true,
   foldGutter: {
@@ -40,7 +41,13 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   matchBrackets: true,
   fixedGutter: true,
   syntaxErrorCheck: true,
-  showTooltip:true,
+  showTooltip: true,
+  showUploadButton: true,
+  showDownloadButton: true,
+  showCopyButton: true,
+  showDeleteButton: true,
+  showThemeButton: true,
+  showFullScreenButton: true,
   onQuotaExceeded: function(e) {
     //fail silently
     console.warn("Could not store in localstorage. Skipping..", e);
@@ -70,9 +77,17 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     "Cmd-Enter": YASHE.executeQuery,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
+      if(yashe.getOption("fullScreen")){
+        CodeMirror.signal(yashe,'expandScreen');
+      }else{
+        CodeMirror.signal(yashe,'collapseScreen');
+      }
     },
     Esc: function(yashe) {
-      if (yashe.getOption("fullScreen")) yashe.setOption("fullScreen", false);
+      if (yashe.getOption("fullScreen")){
+        yashe.setOption("fullScreen", false);
+        CodeMirror.signal(yashe,'collapseScreen');
+      } 
     }
   },
   cursorHeight: 0.9,

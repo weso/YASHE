@@ -86,27 +86,28 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
 
       }
 
-
-
-      if(yashe.getOption('theme') != 'dark')
-        theme = {'background':'#fff','color':'#000','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
-      else
-        theme = {'background':'#000','color':'#fff','border-style':'solid','border-width':'1px','border-color':'#70dbe9','border-radius':'10px','padding':'1px','line-height':'15px','text-align':'center'}
-
-
-      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' ).css( 'position', 'absolute' ).css( 'z-index', '100' )
-      .css( 'max-width', '200px' ).css( { 
+      theme = yashe.getOption('theme');
+      //Jquery in 2020 coooool
+      $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' )
+        .css( 'position', 'absolute' )
+        .css( 'z-index', '1200' )
+        .css( 'max-width', '200px' ).css( { 
         top: posY + 2,
         left: posX + 2
-      } ).addClass( 'wikibaseRDFtoolTip' )
-      .html("<div class='wikidata_tooltip'>"+entity+" <br><br>"+description+"</div>")
-      .css(theme).css('z-index', 1200)
-      .appendTo('body')
+        } )
+        .addClass('wikidataTooltip')
+        .append(
+          $('<div class="wikidata_tooltip">').css(themeStyles[theme])
+          .append(
+            $('<div>').html(entity).css(styles.title))
+          .append(
+            $('<div>').html(description).css(styles.description)))
+        .appendTo('body').fadeIn( 'slow' );
     }
-  })
+      
+    })  
 
-  };  
-
+  }
 }
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
@@ -122,7 +123,7 @@ var checkEntity = function (entity){
 
 
 var removeWikiToolTip = function() {
-  $( '.wikibaseRDFtoolTip' ).remove();
+  $( '.wikidataTooltip' ).remove();
 };
 
 
@@ -155,6 +156,47 @@ const debounce = function(func, wait, immediate) {
     return result;
   };
 };
+
+
+
+
+//I'm not able to make this works in the scss...
+const styles ={
+  title:{
+    'text-align': 'left',
+    'font-size':17,
+  },
+  description:{
+    'display': 'inline-block',
+    'line-height': '23px',
+    'text-align': 'left',
+    'margin-top': '3px',
+  }   
+}
+
+const themeStyles ={
+  wiki:{
+    'display': 'inline-block',
+    'justify-content': 'center',
+    'padding': '10px',
+    'border-radius': '8px',
+    'border': '1px solid #B8F5F3',
+    'background':'white',
+    'color':'#222',
+    'z-index':'1200'
+  },
+  dark:{
+    'display': 'inline-block',
+    'justify-content': 'center',
+    'padding': '5px',
+    'border-radius': '10px',
+    'border': '1px solid #70dbe9',
+    'background':'#222',
+    'color':'white',
+    'z-index':'1200'
+  }
+}
+
 
 
 module.exports = {

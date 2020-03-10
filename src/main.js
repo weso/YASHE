@@ -133,7 +133,7 @@ const extendCmInstance = function(yashe) {
   yashe.collapsePrefixes = function(collapse) {
     if (collapse === undefined) collapse = true;
     yashe.foldCode(
-     prefixFold.findFirstPrefixLine(yashe),
+      prefixFold.findFirstPrefixLine(yashe),
       root.fold.prefix,
       collapse ? "fold" : "unfold"
     );
@@ -240,7 +240,7 @@ const removeCompleterFromSettings = function(settings, name) {
  */
 const postProcessCmElement = function(yashe) {
   buttonsUtils.drawButtons(yashe);
-
+  setFontSize(yashe);
   // Trigger of the button with id='copy'
   // Copies the contents of the editor in the clipboard
   new Clipboard('#copyBtn', {
@@ -270,13 +270,11 @@ const postProcessCmElement = function(yashe) {
     root.storeContent(yashe);
   });
 
-
   /**
    * Fires every time the content of the editor is changed.
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-
     checkSyntax(yashe);  
   });
 
@@ -298,25 +296,32 @@ const postProcessCmElement = function(yashe) {
   /**
    * Wikidata Tooltip Listener
    */
-
   root.on( yashe.getWrapperElement(), 'mouseover',
       tooltipUtils.debounce(function( e ) {
         if(yashe.options.showTooltip){
           tooltipUtils.removeWikiToolTip();
           tooltipUtils.triggerTooltip(yashe, e);
         }
-      }, 300 ));
+      }, 300)
+  );
 
 
   // on first load, check as well
   // (our stored or default query might be incorrect)
   checkSyntax(yashe);
+  yashe.collapsePrefixes(yashe.options.collapsePrefixesOnLoad);
 
-  if (yashe.options.collapsePrefixesOnLoad){
-    yashe.collapsePrefixes(true);
-  } 
 
 };
+
+
+/**
+ * Set font size of the editor
+ * @param {object} yashe
+ */
+const setFontSize = function(yashe){
+  $('.CodeMirror').css('font-size',yashe.options.fontSize)
+}
 
 
 /**
