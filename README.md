@@ -41,6 +41,7 @@ In addition, it offers a simple way of integrating into other projects
 * [Getting Started](#Getting-started)
   - [React.js](#Reactjs)
 * [Configuration](#Configuration)
+* [Events](#Events)
 * [Shortcuts](#shortcuts-provided-by-yashe)
 * [API](#API)
 * [Statics](#Statics)
@@ -214,7 +215,7 @@ Here are some events provided by YASHE (check the codemirror documentation for m
   
   
 ### Event Handlers
-#### cm.on(type: string, func: (...args))
+`cm.on(type: string, func: (...args))`
 Register an event handler for the given event type (a string) on the editor instance. There is also a CodeMirror.on(object, type, func) version that allows registering of events on any object.
 
 ```js
@@ -223,14 +224,14 @@ yashe.on('blur', function(yashe) {
 });
 ```
 
-#### cm.off(type: string, func: (...args))**
+`cm.off(type: string, func: (...args))`
 Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.
 
 ```js
 yashe.off('blur');
 ```
 ### Fire you own events
-#### CodeMirror.signal(target, name, args...)**
+`CodeMirror.signal(target, name, args...)`
 ```js
 Codemirror.signal(yashe,'myOwnEvent'args...);
 ```
