@@ -228,6 +228,7 @@ yashe.on('blur', function(yashe) {
 ```
 
 `cm.off(type: string, func: (...args))`
+
 Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.
 
 ```js
