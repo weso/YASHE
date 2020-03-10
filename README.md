@@ -358,7 +358,8 @@ yashe.refresh()
 // start -> The character (on the given line) at which the token starts
 // end -> The character at which the token ends.
 // string->The token's string.
-// type -> The token type the mode assigned to the token, such as "keyword" or "comment" (may also be null).
+// type -> The token type the mode assigned to the token, such as "keyword" or 
+//         "comment" (may also be null).
 // state -> The mode's state at the end of this token.
 yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object
 
