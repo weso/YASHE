@@ -161,7 +161,7 @@
     /* The little square between H and V scrollbars */ }
   .yashe .CodeMirror-gutters {
     border-right: 1px solid #ddd;
-    background-color: white;
+    background-color: #f8f8f8;
     white-space: nowrap; }
   .yashe .CodeMirror-linenumber {
     padding: 0 3px 0 5px;
