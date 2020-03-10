@@ -218,6 +218,7 @@ Here are some events provided by YASHE (check the codemirror documentation for m
   
 ### Event Handlers
 `cm.on(type: string, func: (...args))`
+
 Register an event handler for the given event type (a string) on the editor instance. There is also a CodeMirror.on(object, type, func) version that allows registering of events on any object.
 
 ```js
@@ -232,7 +233,7 @@ Remove an event handler on the editor instance. An equivalent CodeMirror.off(obj
 ```js
 yashe.off('blur');
 ```
-### Fire you own events
+### Fire your own events
 `CodeMirror.signal(target, name, args...)`
 ```js
 Codemirror.signal(yashe,'myOwnEvent'args...);
