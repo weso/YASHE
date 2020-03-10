@@ -35,7 +35,6 @@ In addition, it offers a simple way of integrating into other projects
 ## Table of Contents
 
 * [Features](#features-clipboard)
-* [Wikidata](#Wikidata)
 * [Install](#install-floppy_disk)
   - [NPM](#NPM)
   - [JsDelivr](#JsDelivr)
@@ -72,12 +71,10 @@ In addition, it offers a simple way of integrating into other projects
      * Delete all the editor content
      * Change between light and dark mode
      * FullScreen Mode
-     
-## Wikidata (Autocompleters and tooltips)
-YASHE uses [Mediawiki API](https://www.mediawiki.org/wiki/API:Main_page) to provide de user with a mechanism of entity and property autocompletion and tooltips.
-<p align="center">
-  <img src="https://github.com/mistermboy/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
-</p>
+
+  <p align="center">
+    <img src="https://github.com/mistermboy/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
+  </p>
 
 ## Install :floppy_disk:
 
