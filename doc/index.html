@@ -51,7 +51,9 @@
      	<h3 id="gists">Examples</h3>
      	<div id="gistContainer">
 
-     	</div>
+		 </div>
+		 
+		
      	<h2 id="api">API</h2>
      	API methods accessible via the <code>yashe</code> instance
 		<div class="doc">
@@ -186,6 +188,134 @@
 			<p>Collapsing prefixes if there are any. Use false to expand them.</p>
 		</div>
 
+		<h2 id="config">Configuration</h2>
+		This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
+		Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
+		<h3 id="defaults">Defaults</h3> 
+		<div class="doc" >
+		   <code>
+		   var yashe = YASHE(document.getElementById('domId'), {<br>
+			   value:'Starting value of the editor',<br>
+			   mode:'shex',<br>
+			   theme:'wiki', //dark <br>
+			   lineNumbers: true,<br>
+			   lineWrapping: true,<br>
+			   fontSize: 14,<br> 
+			   cursorHeight:15,<br>
+			   firstLineNumber:1,<br>
+			   readOnly:false,<br>
+			   showCursorWhenSelecting:fasle,<br>
+			   tabMode: 'indent',<br>
+			   collapsePrefixesOnLoad: false,<br>
+			   matchBrackets: true,<br>
+			   fixedGutter: true,<br>
+			   syntaxErrorCheck: true,<br>
+			   showTooltip: true,<br>
+			   showUploadButton: true,<br>
+			   showDownloadButton: true,<br>
+			   showCopyButton: true,<br>
+			   showDeleteButton: true,<br>
+			   showThemeButton: true,<br>
+			   showFullScreenButton: true,<br>
+			   persistent: null,<br>
+			   extraKeys: {<br>
+				 "Ctrl-Space": YASHE.autoComplete,<br>
+				 "Cmd-Space": YASHE.autoComplete,<br>
+				 "Ctrl-D": YASHE.deleteLine,<br>
+				 "Cmd-K": YASHE.deleteLine,<br>
+				 "Ctrl-/": YASHE.commentLines,<br>
+				 "Cmd-/": YASHE.commentLines,<br>
+				 "Ctrl-Down": YASHE.copyLineDown,<br>
+				 "Ctrl-Up": YASHE.copyLineUp,<br>
+				 "Cmd-Down": YASHE.copyLineDown,<br>
+				 "Cmd-Up": YASHE.copyLineUp,<br>
+				 "Shift-Ctrl-F": YASHE.doAutoFormat,<br>
+				 "Shift-Cmd-F": YASHE.doAutoFormat,<br>
+				 "Ctrl-S": YASHE.storeContent,<br>
+				 "Cmd-S": YASHE.storeConten,<br>
+				 "Ctrl-Enter": YASHE.executeQuery,<br>
+				 "Cmd-Enter": YASHE.executeQuery,<br>
+				 }
+			 });
+	   </code>
+
+	   </div>
+
+	   <h2 id="events">Events</h2>
+	   <div class="doc">
+		   <code>"change" (instance: CodeMirror, changeObj: object)</code>
+		   <p>Fires every time the content of the editor is changed</p>
+	   </div>
+	   <div class="doc">
+		   <code>"cursorActivity" (instance: CodeMirror)</code>
+		   <p>Will be fired when the cursor or selection moves, or any change is made to the editor content</p>
+	   </div>
+	   <div class="doc">
+		   <code>"keyHandled" (instance: CodeMirror, name: string, event: Event)</code>
+		   <p>Fired after a key is handled through a key map. name is the name of the handled key (for example "Ctrl-X" or "'q'"), and event is the DOM keydown or keypress event</p>
+	   </div>
+	   <div class="doc">
+		   <code>"focus" (instance: CodeMirror, event: Event)</code>
+		   <p>Fires whenever the editor is focused</p>
+	   </div>
+	   <div class="doc">
+			<code>"blur" (instance: CodeMirror, event: Event)
+			</code>
+			<p>Fires whenever the editor is unfocused</p>
+		</div>
+		<div class="doc">
+			<code>"scroll" (instance: CodeMirror)</code>
+			<p>Fires when the editor is scrolled</p>
+		</div>
+		<div class="doc">
+			<code>refresh</code>
+			<p>Fires when the editor is refreshed or resized. Mostly useful to invalidate cached values that depend on the editor or character size</p>
+		</div>
+		<div class="doc">
+			<code>"optionChange" (instance: CodeMirror, option: string)</code>
+			<p>Dispatched every time an option is changed with setOption</p>
+		</div>
+		<div class="doc">
+			<code>"upload"(instance: CodeMirror) </code>
+			<p>Fires after uploading a file by the upload button</p>
+		</div>
+		<div class="doc">
+			<code>"download"(instance: CodeMirror) </code>
+			<p>Fires after downloading a file by the upload button</p>
+		</div>
+		<div class="doc">
+			<code>"copy"(instance: CodeMirror) </code>
+			<p>Fires after downloading a file by the download button</p>
+		</div>
+		<div class="doc">
+			<code>"delete"(instance: CodeMirror) </code>
+			<p>Fires after deleting the editor content by the delete buttton			</p>
+		</div>
+		<div class="doc">
+			<code>"expandScreen"(instance: CodeMirror) </code>
+			<p>Fires after expanding screen</p>
+		</div>
+		<div class="doc">
+			<code>"collapseScreen"(instance: CodeMirror) </code>
+			<p>Fires after collapsing screen</p>
+		</div>
+
+		<h3 id="event-handlers">Event Handlers</h3> 
+		<code>cm.on(type: string, func: (...args))</code>
+		<p>Register an event handler for the given event type (a string) on the editor instance. There is also a CodeMirror.on(object, type, func) version that allows registering of events on any object</p>
+		<code>yashe.on('blur', function(yashe) {<br>
+			console.log('The editor has been unfocused!');<br>
+		   });<br>
+		</code>
+		<br>
+		<code>cm.off(type: string, func: (...args))</code>
+		<p>Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.</p>
+		<code>yashe.off('blur');<br>
+		</code>
+		<h3 id="fire-events">Fire your own events</h3> 
+		<p>CodeMirror.signal(target, name, args...)</p>
+		<code>Codemirror.signal(yashe,'myOwnEvent'args...);</code>
+
 		<h2 id="statics">Statics</h2>
      	Static functions YASHE
    		<div class="doc" id="registerAutocompleter">
@@ -202,58 +332,7 @@
 		</div>
 		
 
-     	<h2 id="config">Configuration</h2>
-     	This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
-     	Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
-		 <h3 id="defaults">Defaults</h3> 
-		 <div class="doc" >
-			<code>
-			var yashe = YASHE(document.getElementById('domId'), {<br>
-				value:'Starting value of the editor',<br>
-				mode:'shex',<br>
-				theme:'wiki', //dark <br>
-				lineNumbers: true,<br>
-				lineWrapping: true,<br>
-				fontSize: 14,<br> 
-				cursorHeight:15,<br>
-				firstLineNumber:1,<br>
-				readOnly:false,<br>
-				showCursorWhenSelecting:fasle,<br>
-				tabMode: 'indent',<br>
-				collapsePrefixesOnLoad: false,<br>
-				matchBrackets: true,<br>
-				fixedGutter: true,<br>
-				syntaxErrorCheck: true,<br>
-				showTooltip: true,<br>
-				showUploadButton: true,<br>
-				showDownloadButton: true,<br>
-				showCopyButton: true,<br>
-				showDeleteButton: true,<br>
-				showThemeButton: true,<br>
-				showFullScreenButton: true,<br>
-				persistent: null,<br>
-				extraKeys: {<br>
-				  "Ctrl-Space": YASHE.autoComplete,<br>
-				  "Cmd-Space": YASHE.autoComplete,<br>
-				  "Ctrl-D": YASHE.deleteLine,<br>
-				  "Cmd-K": YASHE.deleteLine,<br>
-				  "Ctrl-/": YASHE.commentLines,<br>
-				  "Cmd-/": YASHE.commentLines,<br>
-				  "Ctrl-Down": YASHE.copyLineDown,<br>
-				  "Ctrl-Up": YASHE.copyLineUp,<br>
-				  "Cmd-Down": YASHE.copyLineDown,<br>
-				  "Cmd-Up": YASHE.copyLineUp,<br>
-				  "Shift-Ctrl-F": YASHE.doAutoFormat,<br>
-				  "Shift-Cmd-F": YASHE.doAutoFormat,<br>
-				  "Ctrl-S": YASHE.storeContent,<br>
-				  "Cmd-S": YASHE.storeConten,<br>
-				  "Ctrl-Enter": YASHE.executeQuery,<br>
-				  "Cmd-Enter": YASHE.executeQuery,<br>
-				  }
-			  });
-		</code>
-
-		</div>
+     	
 	
 		<h3 id="autocompletions">Writing an Autocompletion Plugin</h3>
 		To register an autocompletion, one needs to execute the <code>YASHE.registerAutocompleter</code> <a href="#registerAutocompleter">function</a>.
