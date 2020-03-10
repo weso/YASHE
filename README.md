@@ -32,7 +32,7 @@ In addition, it offers a simple way of integrating into other projects
 </p>
 
 <p align="center">
-  <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
+  <img src="https://github.com/mistermboy/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
 </p>
 
 ## Table of Contents
