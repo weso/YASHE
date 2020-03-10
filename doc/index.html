@@ -62,7 +62,97 @@
 			<code>yashe.getValue() → query: String</code>
 			<p>Get query value from editor (<a href="http://codemirror.net/doc/manual.html#getValue" target="_blank">see also</a>)</p>
 		</div>
-		
+
+		<div class="doc">
+			<code>yashe.getLine(n: integer) → string</code>
+			<p>Get the content of line n</p>
+		</div>
+		<div class="doc">
+			<code>yashe.lineCount() → integer</code>
+			<p>Get the number of lines in the editor</p>
+		</div>
+		<div class="doc">
+			<code>yashe.firstLine() → integer</code>
+			<p>Get the number of first line in the editor</p>
+		</div>
+		<div class="doc">
+			<code>yashe.lastLine() → integer</code>
+			<p>Get the number of last line in the editor</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getSelection(?lineSep: string) → string</code>
+			<p>Get the currently selected code. Optionally pass a line separator to put between the lines in the output. When multiple selections are present, they are concatenated with instances of lineSep in between.</p>
+		</div>
+		<div class="doc">
+			<code>yashe.replaceSelection(replacement: string, ?select: string)</code>
+			<p>Replace the selection(s) with the given string. By default, the new selection ends up after the inserted text. The optional select argument can be used to change this—passing "around" will cause the new text to be selected, passing "start" will collapse the selection to the start of the inserted text.</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getCursor(?start: string) → {line, ch}</code>
+			<p>Retrieve one end of the primary selection. start is an optional string indicating which end of the selection to return. It may be "from", "to", "head" (the side of the selection that moves when you press shift+arrow), or "anchor" (the fixed side of the selection). Omitting the argument is the same as passing "head". A {line, ch} object will be returned.</p>
+		</div>
+		<div class="doc">
+			<code>yashe.somethingSelected() → boolean</code>
+			<p>Return true if any text is selected</p>
+		</div>
+		<div class="doc">
+			<code>yashe.setCursor(pos: {line, ch}|number, ?ch: number, ?options: object)</code>
+			<p>Set the cursor position. You can either pass a single {line, ch} object, or the line and the character as two separate parameters. Will replace all selections with a single, empty selection at the given position</p>
+		</div>
+		<div class="doc">
+			<code>yashe.hasFocus() → boolean</code>
+			<p>Tells you whether the editor currently has focus</p>
+		</div>
+		<div class="doc">
+			<code>yashe.findWordAt(pos: {line, ch}) → {anchor: {line, ch}, head: {line, ch}}</code>
+			<p>Returns the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getOption(option: string) → any</code>
+			<p>Retrieves the current value of the given option for this editor instance</p>
+		</div>
+		<div class="doc">
+			<code>yashe.setOption(option: string, value: any)</code>
+			<p>Change the configuration of the editor. option should the name of an option, and value should be a valid value for that option</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getDoc() → Doc</code>
+			<p>Retrieve the currently active document from an editor</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getEditor() → CodeMirror</code>
+			<p>Retrieve the editor associated with a document. May return null</p>
+		</div>
+		<div class="doc">
+			<code>yashe.undo()</code>
+			<p>Undo one edit (if any undo events are stored)</p>
+		</div>
+		<div class="doc">
+			<code>yashe.redo()</code>
+			<p>Redo one undone edit</p>
+		</div>
+		<div class="doc">
+			<code>yashe.setSize(width: number|string, height: number|string)</code>
+			<p>Programmatically set the size of the editor (overriding the applicable CSS rules). width and height can be either numbers (interpreted as pixels) or CSS units ("100%", for example). You can pass null for either of them to indicate that that dimension should not be changed</p>
+		</div>
+		<div class="doc">
+			<code>yashe.scrollTo(x: number, y: number)</code>
+			<p>Scroll the editor to a given (pixel) position. Both arguments may be left as null or undefined to have no effect</p>
+		</div>
+		<div class="doc">
+			<code>yashe.refresh()</code>
+			<p>If your code does something to change the size of the editor element (window resizes are already listened for), or unhides it, you should probably follow up by calling this method to ensure CodeMirror is still looking as intended</p>
+		</div>
+		<div class="doc">
+			<code>yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object</code>
+			<p>Retrieves information about the token the current mode found before the given position (a {line, ch} object). The returned object has the following properties:</p>
+			<p>start -> The character (on the given line) at which the token starts</p>
+			<p>end -> The character at which the token ends</p>
+			<p>string->The token's string</p>
+			<p>type -> The token type the mode assigned to the token, such as "keyword" or "comment" (may also be null) </p>
+			<p>state -> The mode's state at the end of this token</p>
+		</div>
+				
 		<div class="doc">
 			<code>yashe.getDefinedPrefixes() → object: </code>
 			<p>Fetch defined prefixes</p>
@@ -115,51 +205,54 @@
      	<h2 id="config">Configuration</h2>
      	This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
      	Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
-     	<h3 id="defaults">Defaults</h3>
-		<div class="doc">
-			<code>value: PREFIX : <http://example.org/> PREFIX schema: <http://schema.org/> PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>:User IRI { schema:name          xsd:string  ;schema:birthDate     xsd:date?  ;schema:gender        [ schema:Male schema:Female ] ;schema:knows         @:User* }</code>
-			<p>Shape string</p>
-		</div>
-		<div class="doc">
-			<code>autocompleters: array (default: ["prefixDefinition", "wikidata", "prefixesAndKeywords"])</code>
-			<p>The list of enabled autocompletion plugins (See <a href="#autocompletions">this section</a> on how to write your own)</p>
-		</div>
-		<div class="doc">
-			<code>syntaxErrorCheck: boolean (default: true)</code>
-			<p>Whether to validate the ShEx syntax</p>
-		</div>
-		<div class="doc">
-			<code>collapsePrefixesOnLoad: boolean (default: false)</code>
-			<p>Collapse prefixes on page load</p>
-		</div>
-	 
-		<div class="doc" id="keyboardShortcuts">
-			<code>extraKeys: object</code>
-			<p>Extra shortcut keys. Check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> manual on how to add your own</p>
+		 <h3 id="defaults">Defaults</h3> 
+		 <div class="doc" >
+			<code>
+			var yashe = YASHE(document.getElementById('domId'), {<br>
+				value:'Starting value of the editor',<br>
+				mode:'shex',<br>
+				theme:'wiki', //dark <br>
+				lineNumbers: true,<br>
+				lineWrapping: true,<br>
+				fontSize: 14,<br> 
+				cursorHeight:15,<br>
+				firstLineNumber:1,<br>
+				readOnly:false,<br>
+				showCursorWhenSelecting:fasle,<br>
+				tabMode: 'indent',<br>
+				collapsePrefixesOnLoad: false,<br>
+				matchBrackets: true,<br>
+				fixedGutter: true,<br>
+				syntaxErrorCheck: true,<br>
+				showTooltip: true,<br>
+				showUploadButton: true,<br>
+				showDownloadButton: true,<br>
+				showCopyButton: true,<br>
+				showDeleteButton: true,<br>
+				showThemeButton: true,<br>
+				showFullScreenButton: true,<br>
+				persistent: null,<br>
+				extraKeys: {<br>
+				  "Ctrl-Space": YASHE.autoComplete,<br>
+				  "Cmd-Space": YASHE.autoComplete,<br>
+				  "Ctrl-D": YASHE.deleteLine,<br>
+				  "Cmd-K": YASHE.deleteLine,<br>
+				  "Ctrl-/": YASHE.commentLines,<br>
+				  "Cmd-/": YASHE.commentLines,<br>
+				  "Ctrl-Down": YASHE.copyLineDown,<br>
+				  "Ctrl-Up": YASHE.copyLineUp,<br>
+				  "Cmd-Down": YASHE.copyLineDown,<br>
+				  "Cmd-Up": YASHE.copyLineUp,<br>
+				  "Shift-Ctrl-F": YASHE.doAutoFormat,<br>
+				  "Shift-Cmd-F": YASHE.doAutoFormat,<br>
+				  "Ctrl-S": YASHE.storeContent,<br>
+				  "Cmd-S": YASHE.storeConten,<br>
+				  "Ctrl-Enter": YASHE.executeQuery,<br>
+				  "Cmd-Enter": YASHE.executeQuery,<br>
+				  }
+			  });
+		</code>
 
-			<p>Note: To avoid colissions with other browser shortcuts, these shortcuts <i>only</i> work when the YASHE editor is selected (has 'focus').<br>The list of shortcuts provided by YASHE:</p>
-			<ul>
-			<li><code>[Ctrl|Cmd]-Space</code>: Trigger Autocompletion</li>
-			<li><code>[Ctrl|Cmd]-D</code>: Delete current/selected line(s)</li>
-			<li><code>[Ctrl|Cmd]-/</code>: Comment or uncomment current/selected line(s)</li>
-			<li><code>[Ctrl|Cmd]-Down</code>: Copy line down</li>
-			<li><code>[Ctrl|Cmd]-Up</code>: Copy line up</li>
-			<li><code>[Ctrl|Cmd]-Shift-F</code>: Auto-format/indent selected lines</li>
-			<li><code>[Ctrl|Cmd]-S</code>: Save current content in local storage</li>
-			<li><code>F11</code>: Set query editor full-screen (or leave full-screen)</li>
-			<li><code>Esc</code>: Leave full-screen</li>
-			</ul>
-		</div>
-		
-		<div class="doc">
-			<code>persistent: function|string</code>
-			<p>Change persistency settings for the YASHE content value. Setting the values
-			to null, will disable persistancy: nothing is stored between browser
-			sessions. Setting the values to a string (or a function which returns a
-			string), will store the query in localstorage using the specified string.
-			By default, the ID is dynamically generated using the <code>YASHE.determineId</code>
-			function, to avoid collissions when using multiple YASHE instances on one
-			page</p>
 		</div>
 	
 		<h3 id="autocompletions">Writing an Autocompletion Plugin</h3>
