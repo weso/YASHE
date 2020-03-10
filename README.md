@@ -42,6 +42,8 @@ In addition, it offers a simple way of integrating into other projects
   - [React.js](#Reactjs)
 * [Configuration](#Configuration)
 * [Events](#Events)
+    - [Event Handlers](#event-handlers)
+    - [Fire your own events](#fire-your-own-events)
 * [Shortcuts](#shortcuts-provided-by-yashe)
 * [API](#API)
 * [Statics](#Statics)
