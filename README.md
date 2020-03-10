@@ -191,7 +191,49 @@ var yashe = YASHE(document.getElementById('domId'), {
     }
 });
 ```
+## Events
+Here are some events provided by YASHE (check the codemirror documentation for more info https://codemirror.net/doc/manual.html#events):
 
+  Event             | Objects              | Action
+  ----------------  | ---------------------| ------------------------ 
+  change          |  yashe: CodeMirror,    changeObj: object | Fires every time the content of the editor is changed
+  cursorActivity    |  yashe: CodeMirror  | Will be fired when the cursor or selection moves, or any change is made to the editor content. 
+  keyHandled        |  yashe: CodeMirror,name: string,event: Event | Fired after a key is handled through a key map
+  focus          |  yashe: CodeMirror, event: Event | Fires whenever the editor is focused
+  blur           |  yashe: CodeMirror, event: Event | Fires whenever the editor is unfocused
+  scroll         |  yashe: CodeMirror | Fires whenever the editor is scrolled
+  refresh        |  yashe: CodeMirror | Fires when the editor is refreshed or resized
+  optionChange   |  yashe: CodeMirror, option: string | Dispatched every time an option is changed with setOption
+  optionChange   |  yashe: CodeMirror, option: string | Dispatched every time an option is changed with setOption
+  upload         |  yashe: CodeMirror        | Fires after uploading a file by the upload button
+  download       |  yashe: CodeMirror        | Fires after downloading a file by the download button
+  copy           |  yashe: CodeMirror        | Fires after copying the editor content using the copy button 
+  delete         |  yashe: CodeMirror        | Fires after deleting the editor content by the delete buttton
+  expandScreen   |  yashe: CodeMirror        | Fires after expanding screen
+  collapseScreen |  yashe: CodeMirror        | Fires after collapsing screen
+  
+  
+### Event Handlers
+#### cm.on(type: string, func: (...args))
+Register an event handler for the given event type (a string) on the editor instance. There is also a CodeMirror.on(object, type, func) version that allows registering of events on any object.
+
+```js
+yashe.on('blur', function(yashe) {
+ console.log('The editor has been unfocused!');
+});
+```
+
+#### cm.off(type: string, func: (...args))**
+Remove an event handler on the editor instance. An equivalent CodeMirror.off(object, type, func) also exists.
+
+```js
+yashe.off('blur');
+```
+### Fire you own events
+#### CodeMirror.signal(target, name, args...)**
+```js
+Codemirror.signal(yashe,'myOwnEvent'args...);
+```
 
 ## Shortcuts provided by YASHE:
  
