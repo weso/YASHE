@@ -251,7 +251,7 @@ Codemirror.signal(yashe,'myOwnEvent'args...);
   -------------     | -------------
   Ctrl/Cmd-Space    | Trigger Autocompletion
   Ctrl/Cmd-D        | Delete current/selected line(s)
-  Ctrl/Cmd-Space    | Comment or uncomment current/selected line(s)
+  Ctrl/Cmd-/        | Comment or uncomment current/selected line(s)
   Ctrl/Cmd-Down     | Copy line down
   Ctrl/Cmd-Up       | Copy line up
   Ctrl/Cmd-Shift-F  | Auto-format/indent selected lines
