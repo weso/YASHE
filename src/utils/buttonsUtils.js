@@ -145,7 +145,7 @@ var drawButtons = function(yashe){
           .attr("id", "smallBtn")
           .click(function() {
             yashe.setOption("fullScreen", false);
-            Codemirror.signal(yashe,'colapseScreen');
+            Codemirror.signal(yashe,'collapseScreen');
           })
       );
  

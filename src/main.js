@@ -270,7 +270,13 @@ const postProcessCmElement = function(yashe) {
     root.storeContent(yashe);
   });
 
+  yashe.on('expandScreen', function(yashe) {
+    console.log('expandScreen')
+  });
 
+  yashe.on('collapseScreen', function(yashe) {
+    console.log('collapseScreen')
+  });
   /**
    * Fires every time the content of the editor is changed.
    * In this case, YASHE checks the sintax
