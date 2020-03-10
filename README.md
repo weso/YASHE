@@ -31,6 +31,10 @@ In addition, it offers a simple way of integrating into other projects
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
 
+<p align="center">
+  <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/wikiGIF.gif" alt="YASHE GIF"/>
+</p>
+
 ## Table of Contents
 
 * [Features](#features-clipboard)
