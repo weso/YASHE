@@ -212,7 +212,6 @@ Here are some events provided by YASHE (check the [Codemirror Documentation](htt
   scroll         |  yashe: CodeMirror | Fires whenever the editor is scrolled
   refresh        |  yashe: CodeMirror | Fires when the editor is refreshed or resized
   optionChange   |  yashe: CodeMirror, option: string | Dispatched every time an option is changed with setOption
-  optionChange   |  yashe: CodeMirror, option: string | Dispatched every time an option is changed with setOption
   upload         |  yashe: CodeMirror        | Fires after uploading a file by the upload button
   download       |  yashe: CodeMirror        | Fires after downloading a file by the download button
   copy           |  yashe: CodeMirror        | Fires after copying the editor content using the copy button 
