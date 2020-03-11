@@ -1,8 +1,14 @@
 const YASHE = require('../src/main.js');
+var $ = jQuery = require("jquery");
 
 let yashe = YASHE(null, {
-        persistent:null
+    persistent:null
 });
+
+
+
+
+
 
 //Autocompleters
 test('Default autocompleters', ()=>{
@@ -146,16 +152,19 @@ test('Default theme', ()=>{
 
 test('Default value', ()=>{
     let value = yashe.options.value;
-    let expected = "PREFIX :       <http://example.org/>\n"+
-         "PREFIX schema: <http://schema.org/>\n"+
-         "PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>\n\n"+
-  
-         ":User IRI {\n"+ 
-         "  schema:name          xsd:string  ;\n"+
-         "  schema:birthDate     xsd:date?  ;\n"+
-         "  schema:gender        [ schema:Male schema:Female ] ;\n"+
-         "  schema:knows         @:User* \n"+
-        "}"
+    let expected = "# Example 26  Simple ShEx Schema\n"+
+          "# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample\n\n"+
+          "PREFIX :       <http://example.org/>\n"+
+          "PREFIX schema: <http://schema.org/>\n"+
+          "PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>\n\n"+
+    
+          ":User IRI {\n"+ 
+          "  schema:name          xsd:string  ;\n"+
+          "  schema:birthDate     xsd:date?  ;\n"+
+          "  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;\n"+
+          "  schema:knows         IRI @:User* \n"+
+          "}";
+
     expect(value==expected).toBeTruthy();
 });
 
@@ -176,4 +185,5 @@ test('setCheckSyntaxErrors', ()=>{
     yashe.setCheckSyntaxErrors(true)
     expect(yashe.options.syntaxErrorCheck).toBeTruthy();
 });
+
 

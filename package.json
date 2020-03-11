@@ -1,7 +1,7 @@
 {
   "name": "yashe",
   "description": "Yet Another ShEx Editor",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "main": "src/main.js",
   "license": "MIT",
   "author": "Pablo Menéndez",
@@ -72,6 +72,7 @@
     "url": "https://github.com/weso/YASHE.git"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "codemirror": "5.17.0",
     "file-reader": "^1.1.1",
     "gulp-uglify": "^3.0.2",
