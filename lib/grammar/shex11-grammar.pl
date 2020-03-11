@@ -62,10 +62,10 @@ shapeOr ==> [shapeAnd,*(['OR',shapeAnd])].
 inlineShapeOr ==> [inlineShapeAnd,*(['OR',inlineShapeAnd])].
 
 %[14] OK
-shapeAnd ==> [shapeNot,*(['AND',shapeNot])].
+shapeAnd ==> [shapeNot,*(['AND_TOKEN',shapeNot])].
 
 %[15] OK
-inlineShapeAnd ==> [inlineShapeNot,*(['AND',inlineShapeNot])].
+inlineShapeAnd ==> [inlineShapeNot,*(['AND_TOKEN',inlineShapeNot])].
 
 %[16] OK
 shapeNot ==> [?('NOT'),shapeAtom].
@@ -300,6 +300,7 @@ tm_regex([
 'STRING_LITERAL_LONG1',
 'STRING_LITERAL_LONG2',
 'A_TOKEN',
+'AND_TOKEN',
 'DOUBLE_SLASH'
 ]).
 
@@ -311,7 +312,6 @@ tm_keywords([
 'IMPORT',
 'EXTERNAL',
 'OR',
-'AND',
 'NOT',
 'LITERAL',
 'NONLITERAL',
