@@ -171,6 +171,7 @@ const styles ={
     'line-height': '23px',
     'text-align': 'left',
     'margin-top': '3px',
+    'font-size':14,
   }   
 }
 
