@@ -72,6 +72,7 @@
     "url": "https://github.com/weso/YASHE.git"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "codemirror": "5.17.0",
     "file-reader": "^1.1.1",
     "gulp-uglify": "^3.0.2",
