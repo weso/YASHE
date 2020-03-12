@@ -53,141 +53,7 @@
 
 		 </div>
 		 
-		
-     	<h2 id="api">API</h2>
-     	API methods accessible via the <code>yashe</code> instance
-		<div class="doc">
-			<code>yashe.setValue(query: String)</code>
-			<p>Set query value in editor (<a href="http://codemirror.net/doc/manual.html#setValue" target="_blank">see also</a>)</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getValue() → query: String</code>
-			<p>Get query value from editor (<a href="http://codemirror.net/doc/manual.html#getValue" target="_blank">see also</a>)</p>
-		</div>
-
-		<div class="doc">
-			<code>yashe.getLine(n: integer) → string</code>
-			<p>Get the content of line n</p>
-		</div>
-		<div class="doc">
-			<code>yashe.lineCount() → integer</code>
-			<p>Get the number of lines in the editor</p>
-		</div>
-		<div class="doc">
-			<code>yashe.firstLine() → integer</code>
-			<p>Get the number of first line in the editor</p>
-		</div>
-		<div class="doc">
-			<code>yashe.lastLine() → integer</code>
-			<p>Get the number of last line in the editor</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getSelection(?lineSep: string) → string</code>
-			<p>Get the currently selected code. Optionally pass a line separator to put between the lines in the output. When multiple selections are present, they are concatenated with instances of lineSep in between.</p>
-		</div>
-		<div class="doc">
-			<code>yashe.replaceSelection(replacement: string, ?select: string)</code>
-			<p>Replace the selection(s) with the given string. By default, the new selection ends up after the inserted text. The optional select argument can be used to change this—passing "around" will cause the new text to be selected, passing "start" will collapse the selection to the start of the inserted text.</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getCursor(?start: string) → {line, ch}</code>
-			<p>Retrieve one end of the primary selection. start is an optional string indicating which end of the selection to return. It may be "from", "to", "head" (the side of the selection that moves when you press shift+arrow), or "anchor" (the fixed side of the selection). Omitting the argument is the same as passing "head". A {line, ch} object will be returned.</p>
-		</div>
-		<div class="doc">
-			<code>yashe.somethingSelected() → boolean</code>
-			<p>Return true if any text is selected</p>
-		</div>
-		<div class="doc">
-			<code>yashe.setCursor(pos: {line, ch}|number, ?ch: number, ?options: object)</code>
-			<p>Set the cursor position. You can either pass a single {line, ch} object, or the line and the character as two separate parameters. Will replace all selections with a single, empty selection at the given position</p>
-		</div>
-		<div class="doc">
-			<code>yashe.hasFocus() → boolean</code>
-			<p>Tells you whether the editor currently has focus</p>
-		</div>
-		<div class="doc">
-			<code>yashe.findWordAt(pos: {line, ch}) → {anchor: {line, ch}, head: {line, ch}}</code>
-			<p>Returns the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getOption(option: string) → any</code>
-			<p>Retrieves the current value of the given option for this editor instance</p>
-		</div>
-		<div class="doc">
-			<code>yashe.setOption(option: string, value: any)</code>
-			<p>Change the configuration of the editor. option should the name of an option, and value should be a valid value for that option</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getDoc() → Doc</code>
-			<p>Retrieve the currently active document from an editor</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getEditor() → CodeMirror</code>
-			<p>Retrieve the editor associated with a document. May return null</p>
-		</div>
-		<div class="doc">
-			<code>yashe.undo()</code>
-			<p>Undo one edit (if any undo events are stored)</p>
-		</div>
-		<div class="doc">
-			<code>yashe.redo()</code>
-			<p>Redo one undone edit</p>
-		</div>
-		<div class="doc">
-			<code>yashe.setSize(width: number|string, height: number|string)</code>
-			<p>Programmatically set the size of the editor (overriding the applicable CSS rules). width and height can be either numbers (interpreted as pixels) or CSS units ("100%", for example). You can pass null for either of them to indicate that that dimension should not be changed</p>
-		</div>
-		<div class="doc">
-			<code>yashe.scrollTo(x: number, y: number)</code>
-			<p>Scroll the editor to a given (pixel) position. Both arguments may be left as null or undefined to have no effect</p>
-		</div>
-		<div class="doc">
-			<code>yashe.refresh()</code>
-			<p>If your code does something to change the size of the editor element (window resizes are already listened for), or unhides it, you should probably follow up by calling this method to ensure CodeMirror is still looking as intended</p>
-		</div>
-		<div class="doc">
-			<code>yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object</code>
-			<p>Retrieves information about the token the current mode found before the given position (a {line, ch} object). The returned object has the following properties:</p>
-			<p>start -> The character (on the given line) at which the token starts</p>
-			<p>end -> The character at which the token ends</p>
-			<p>string->The token's string</p>
-			<p>type -> The token type the mode assigned to the token, such as "keyword" or "comment" (may also be null) </p>
-			<p>state -> The mode's state at the end of this token</p>
-		</div>
-				
-		<div class="doc">
-			<code>yashe.getDefinedPrefixes() → object: </code>
-			<p>Fetch defined prefixes</p>
-		</div>
-		<div class="doc">
-			<code>yashe.addPrefixes(prefixes: object)</code>
-			<p>Add prefixes to the query. The prefixes are defined as <code>{"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}</code></p>
-		</div>
-		<div class="doc">
-			<code>yashe.removePrefixes(prefixes: object)</code>
-			<p>Remove prefixes from query. The prefixes are defined as <code>{"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}</code></p>
-		</div>
-		<div class="doc">
-			<code>yashe.setSize(width: Number|string, height: Number|string)</code>
-			<p>Set size. Use null value to leave width or height unchanged. To resize the editor to fit its content, see http://codemirror.net/demo/resize.html</p>
-		</div>
-		<div class="doc">
-			<code>yashe.enableCompleter(completerName: String)</code>
-			<p>Enable an autocompleter with this name. Only makes sense if you've programatically disabled this completer before, as a plugin is automatically enabled when registering it (see <a href="#registerAutocompleter">this function</a>)</p>
-		</div>
-		<div class="doc">
-			<code>yashe.disableCompleter(completerName: String)</code>
-			<p>Disable an autocompleter with this name. </p>
-		</div>
-		<div class="doc">
-			<code>yashe.storeBulkCompletions(type: String)</code>
-			<p>Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the <a href="#autocompletions">autocompletion</a> settings</p>
-		</div>
-   		<div class="doc">
-			<code>yashe.collapsePrefixes(collapse: boolean)</code>
-			<p>Collapsing prefixes if there are any. Use false to expand them.</p>
-		</div>
-
+	
 		<h2 id="config">Configuration</h2>
 		This configuration object is accessible/changeable via <code>YASHE.defaults</code> and <code>yashe.options</code>, and you can pass these along when initializing YASHE as well.
 		Other than the configuration we describe here, check the <a href="http://codemirror.net" target="_blank">CodeMirror</a> documentation for even more options you can set, such as disabling line numbers, or changing keyboard shortcut keys.
@@ -288,8 +154,12 @@
 			<p>Fires after downloading a file by the download button</p>
 		</div>
 		<div class="doc">
+			<code>"changeTheme"(instance: CodeMirror) </code>
+			<p>Fires after changing the editor theme using the change theme button</p>
+		</div>
+		<div class="doc">
 			<code>"delete"(instance: CodeMirror) </code>
-			<p>Fires after deleting the editor content by the delete buttton			</p>
+			<p>Fires after deleting the editor content by the delete buttton</p>
 		</div>
 		<div class="doc">
 			<code>"expandScreen"(instance: CodeMirror) </code>
@@ -315,6 +185,140 @@
 		<h3 id="fire-events">Fire your own events</h3> 
 		<p>CodeMirror.signal(target, name, args...)</p>
 		<code>Codemirror.signal(yashe,'myOwnEvent'args...);</code>
+
+		<h2 id="api">API</h2>
+		API methods accessible via the <code>yashe</code> instance
+	   <div class="doc">
+		   <code>yashe.setValue(query: String)</code>
+		   <p>Set query value in editor (<a href="http://codemirror.net/doc/manual.html#setValue" target="_blank">see also</a>)</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getValue() → query: String</code>
+		   <p>Get query value from editor (<a href="http://codemirror.net/doc/manual.html#getValue" target="_blank">see also</a>)</p>
+	   </div>
+
+	   <div class="doc">
+		   <code>yashe.getLine(n: integer) → string</code>
+		   <p>Get the content of line n</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.lineCount() → integer</code>
+		   <p>Get the number of lines in the editor</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.firstLine() → integer</code>
+		   <p>Get the number of first line in the editor</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.lastLine() → integer</code>
+		   <p>Get the number of last line in the editor</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getSelection(?lineSep: string) → string</code>
+		   <p>Get the currently selected code. Optionally pass a line separator to put between the lines in the output. When multiple selections are present, they are concatenated with instances of lineSep in between.</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.replaceSelection(replacement: string, ?select: string)</code>
+		   <p>Replace the selection(s) with the given string. By default, the new selection ends up after the inserted text. The optional select argument can be used to change this—passing "around" will cause the new text to be selected, passing "start" will collapse the selection to the start of the inserted text.</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getCursor(?start: string) → {line, ch}</code>
+		   <p>Retrieve one end of the primary selection. start is an optional string indicating which end of the selection to return. It may be "from", "to", "head" (the side of the selection that moves when you press shift+arrow), or "anchor" (the fixed side of the selection). Omitting the argument is the same as passing "head". A {line, ch} object will be returned.</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.somethingSelected() → boolean</code>
+		   <p>Return true if any text is selected</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.setCursor(pos: {line, ch}|number, ?ch: number, ?options: object)</code>
+		   <p>Set the cursor position. You can either pass a single {line, ch} object, or the line and the character as two separate parameters. Will replace all selections with a single, empty selection at the given position</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.hasFocus() → boolean</code>
+		   <p>Tells you whether the editor currently has focus</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.findWordAt(pos: {line, ch}) → {anchor: {line, ch}, head: {line, ch}}</code>
+		   <p>Returns the start and end of the 'word' (the stretch of letters, whitespace, or punctuation) at the given position</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getOption(option: string) → any</code>
+		   <p>Retrieves the current value of the given option for this editor instance</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.setOption(option: string, value: any)</code>
+		   <p>Change the configuration of the editor. option should the name of an option, and value should be a valid value for that option</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getDoc() → Doc</code>
+		   <p>Retrieve the currently active document from an editor</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getEditor() → CodeMirror</code>
+		   <p>Retrieve the editor associated with a document. May return null</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.undo()</code>
+		   <p>Undo one edit (if any undo events are stored)</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.redo()</code>
+		   <p>Redo one undone edit</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.setSize(width: number|string, height: number|string)</code>
+		   <p>Programmatically set the size of the editor (overriding the applicable CSS rules). width and height can be either numbers (interpreted as pixels) or CSS units ("100%", for example). You can pass null for either of them to indicate that that dimension should not be changed</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.scrollTo(x: number, y: number)</code>
+		   <p>Scroll the editor to a given (pixel) position. Both arguments may be left as null or undefined to have no effect</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.refresh()</code>
+		   <p>If your code does something to change the size of the editor element (window resizes are already listened for), or unhides it, you should probably follow up by calling this method to ensure CodeMirror is still looking as intended</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.getTokenAt(pos: {line, ch}, ?precise: boolean) → object</code>
+		   <p>Retrieves information about the token the current mode found before the given position (a {line, ch} object). The returned object has the following properties:</p>
+		   <p>start -> The character (on the given line) at which the token starts</p>
+		   <p>end -> The character at which the token ends</p>
+		   <p>string->The token's string</p>
+		   <p>type -> The token type the mode assigned to the token, such as "keyword" or "comment" (may also be null) </p>
+		   <p>state -> The mode's state at the end of this token</p>
+	   </div>
+			   
+	   <div class="doc">
+		   <code>yashe.getDefinedPrefixes() → object: </code>
+		   <p>Fetch defined prefixes</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.addPrefixes(prefixes: object)</code>
+		   <p>Add prefixes to the query. The prefixes are defined as <code>{"rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}</code></p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.removePrefixes(prefixes: object)</code>
+		   <p>Remove prefixes from query. The prefixes are defined as <code>{"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}</code></p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.setSize(width: Number|string, height: Number|string)</code>
+		   <p>Set size. Use null value to leave width or height unchanged. To resize the editor to fit its content, see http://codemirror.net/demo/resize.html</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.enableCompleter(completerName: String)</code>
+		   <p>Enable an autocompleter with this name. Only makes sense if you've programatically disabled this completer before, as a plugin is automatically enabled when registering it (see <a href="#registerAutocompleter">this function</a>)</p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.disableCompleter(completerName: String)</code>
+		   <p>Disable an autocompleter with this name. </p>
+	   </div>
+	   <div class="doc">
+		   <code>yashe.storeBulkCompletions(type: String)</code>
+		   <p>Store bulk completions in memory as trie, and in localstorage as well (if enabled). The argument should be a key from the <a href="#autocompletions">autocompletion</a> settings</p>
+	   </div>
+		  <div class="doc">
+		   <code>yashe.collapsePrefixes(collapse: boolean)</code>
+		   <p>Collapsing prefixes if there are any. Use false to expand them.</p>
+	   </div>
 
 		<h2 id="statics">Statics</h2>
      	Static functions YASHE
@@ -449,10 +453,16 @@
 				<ul class="nav">
 					<li><a href="#gists">Examples</a>
 				</ul>
+			</li>			
+			<li><a href="#config">Configuration</a></li>
+			<li><a href="#events">Events</a>
+				<ul class="nav">
+					<li><a href="#event-handlers">Event Handlers</a></li>
+					<li><a href="#fire-events">Fire Events</a></li>
+				</ul>
 			</li>
 			<li><a href="#api">API</a></li>
 			<li><a href="#statics">Statics</a></li>
-			<li><a href="#config">Configuration</a></li>
 			<li><a href="#autocompletions">Writing an Autocompletion Plugin</a></li>
 		</ul>
 	</div>
