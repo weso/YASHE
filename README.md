@@ -215,6 +215,7 @@ Here are some events provided by YASHE (check the [Codemirror Documentation](htt
   upload         |  yashe: CodeMirror        | Fires after uploading a file by the upload button
   download       |  yashe: CodeMirror        | Fires after downloading a file by the download button
   copy           |  yashe: CodeMirror        | Fires after copying the editor content using the copy button 
+  themeChange    |  yashe: CodeMirror        | Fires after changing the editor theme using the change theme button 
   delete         |  yashe: CodeMirror        | Fires after deleting the editor content by the delete buttton
   expandScreen   |  yashe: CodeMirror        | Fires after expanding screen
   collapseScreen |  yashe: CodeMirror        | Fires after collapsing screen
