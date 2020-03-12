@@ -95,7 +95,7 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
         top: posY + 2,
         left: posX + 2
         } )
-        .addClass('wikidataTooltip')
+        .addClass('wikidataTooltip').css('height','auto')
         .append(
           $('<div class="wikidata_tooltip">').css(themeStyles[theme])
           .append(
@@ -165,6 +165,7 @@ const styles ={
   title:{
     'text-align': 'left',
     'font-size':17,
+    'font-family': 'Arial, Helvetica, sans-serif'
   },
   description:{
     'display': 'inline-block',
@@ -172,6 +173,7 @@ const styles ={
     'text-align': 'left',
     'margin-top': '3px',
     'font-size':14,
+    'font-family': 'Arial, Helvetica, sans-serif'
   }   
 }
 
