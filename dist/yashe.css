@@ -10,6 +10,10 @@
   /* Can style cursor different in overwrite (non-insert) mode */
   /* DEFAULT THEME */
   /* Default styles for common addons */
+  /*
+div.CodeMirror span.CodeMirror-matchingbracket {color: rgb(199, 64, 64);}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
+*/
   /* STOP */
   /* The rest of this file contains styles related to the mechanics of
    the editor. You probably shouldn't touch them. */
@@ -45,6 +49,8 @@
   .yashe .cm-s-wiki .cm-string {
     color: #b98003; }
   .yashe .cm-s-wiki .cm-string-2 {
+    color: #05a; }
+  .yashe .cm-s-wiki .cm-constraint {
     color: #05a; }
   .yashe .cm-s-wiki .cm-meta {
     color: #555; }
@@ -278,10 +284,6 @@
     color: #f00; }
   .yashe .CodeMirror-composing {
     border-bottom: 2px solid; }
-  .yashe div.CodeMirror span.CodeMirror-matchingbracket {
-    color: #0f0; }
-  .yashe div.CodeMirror span.CodeMirror-nonmatchingbracket {
-    color: #f22; }
   .yashe .CodeMirror-matchingtag {
     background: rgba(255, 150, 0, 0.3); }
   .yashe .CodeMirror-activeline-background {
