@@ -99,9 +99,12 @@ module.exports.isValidCompletionPosition = function(yashe) {
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
 
-  if(token.type == 'string-2' && 
-  (rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
-  || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)) )return true
+  if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint'){
+    if(rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
+      || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)){
+        return true
+    }
+  }
 
  
   return false;
