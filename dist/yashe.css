@@ -52,6 +52,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #05a; }
   .yashe .cm-s-wiki .cm-constraint {
     color: #05a; }
+  .yashe .cm-s-wiki .cm-constraintKeyword {
+    color: #f00; }
   .yashe .cm-s-wiki .cm-facet {
     color: #f00; }
   .yashe .cm-s-wiki .cm-meta {
