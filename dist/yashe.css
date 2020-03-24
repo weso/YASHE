@@ -109,6 +109,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #b98003; }
   .yashe .cm-s-dark .cm-string-2 {
     color: #7DB647; }
+  .yashe .cm-s-dark .cm-constraint {
+    color: #7DB647; }
+  .yashe .cm-s-dark .cm-constraintKeyword {
+    color: #f00; }
   .yashe .cm-s-dark .cm-meta {
     color: #555; }
   .yashe .cm-s-dark .cm-qualifier {
@@ -131,6 +135,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #B271FF; }
   .yashe .cm-s-dark .cm-at {
     color: #68BEEB; }
+  .yashe .cm-s-dark .cm-prefixDelc {
+    color: #f8c4ffc0; }
   .yashe .cm-s-dark .CodeMirror-cursor {
     border-left: 1px solid #A9B7C6; }
   .yashe .cm-s-dark .CodeMirror-activeline-background {
