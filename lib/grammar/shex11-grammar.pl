@@ -100,8 +100,8 @@ inlineShapeOrRef ==> ['@',shapeExprLabel].
 
 
 %[22] OK
-nodeConstraint ==> ['LITERAL',*(stringFacet)].
-nodeConstraint ==> [nonLiteralKind,*(xsFacet)].
+nodeConstraint ==> ['LITERAL',*(xsFacet)].
+nodeConstraint ==> [nonLiteralKind,*(stringFacet)].
 nodeConstraint ==> [datatype,*(xsFacet)].
 nodeConstraint ==> [valueSet,*(xsFacet)].
 nodeConstraint ==> [+(xsFacet)].

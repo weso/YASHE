@@ -445,10 +445,3 @@ root.version = {
   'jquery': $.fn.jquery,
   'yasgui-utils': yutils.version,
 };
-
-
-      var axios = require('axios')
-      axios.get('../doc/examples/validatingRdfData/Example-26-Simple-ShEx-Schema')
-          .then(resp => {
-          console.log(resp.data)
-        });

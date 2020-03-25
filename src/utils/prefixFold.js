@@ -71,9 +71,9 @@ CodeMirror.registerHelper("fold", "prefix", function(cm, start) {
     var prefixKeywordToken = cm.getTokenAt(CodeMirror.Pos(line, ch + 1));
     if (!prefixKeywordToken || prefixKeywordToken.type != "keyword") return -1;
     var prefixShortname = tokenUtils.getNextNonWsToken(cm, line, prefixKeywordToken.end + 1);
-    if (!prefixShortname || prefixShortname.type != "string-2") return -1; //missing prefix keyword shortname
+    if (!prefixShortname || prefixShortname.type != "prefixDelc") return -1; //missing prefix keyword shortname
     var prefixUri = tokenUtils.getNextNonWsToken(cm, line, prefixShortname.end + 1);
-    if (!prefixUri || prefixUri.type != "variable-3") return -1; //missing prefix uri
+    if (!prefixUri || prefixUri.type != "prefixDelc") return -1; //missing prefix uri
     return prefixUri.end;
   };
 
