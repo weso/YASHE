@@ -52,6 +52,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #05a; }
   .yashe .cm-s-wiki .cm-constraint {
     color: #05a; }
+  .yashe .cm-s-wiki .cm-valueSet {
+    color: #05a; }
   .yashe .cm-s-wiki .cm-constraintKeyword {
     color: #f00; }
   .yashe .cm-s-wiki .cm-facet {
@@ -110,6 +112,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   .yashe .cm-s-dark .cm-string-2 {
     color: #7DB647; }
   .yashe .cm-s-dark .cm-constraint {
+    color: #7DB647; }
+  .yashe .cm-s-dark .cm-valueSet {
     color: #7DB647; }
   .yashe .cm-s-dark .cm-constraintKeyword {
     color: #f00; }

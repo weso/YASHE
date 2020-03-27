@@ -73,6 +73,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bloodhound-js": "^1.2.3",
+    "bootstrap": "^4.4.1",
     "codemirror": "5.17.0",
     "file-reader": "^1.1.1",
     "gulp-uglify": "^3.0.2",
@@ -80,6 +82,7 @@
     "jquery": "^2.2.4",
     "prettier": "^1.4.4",
     "read-file": "^0.2.0",
+    "typeahead.js-bootstrap4-css": "^1.0.0",
     "yasgui-utils": "^1.6.7"
   },
   "optionalShim": {
