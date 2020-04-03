@@ -3,9 +3,13 @@ var $ = require("jquery"),
   yutils = require("yasgui-utils"),
   imgs = require("./imgs.js");
 
+
+
 var checkSyntax = function(yashe) {
+
+    let shapes = [];
+    let shapeRefs = [];
     yashe.queryValid = true;
-  
     yashe.clearGutter("gutterErrorBar");
   
     var state = null;
@@ -70,6 +74,7 @@ var checkSyntax = function(yashe) {
 
       //This is only necessary to verify the if the last '}' is missing  (See #104)
       let lineTokens = yashe.getLineTokens(l)
+      //console.log(lineTokens)
       for(let t in lineTokens){
         if(lineTokens[t].string=='{'){
           openTokensCounter++;
@@ -77,9 +82,43 @@ var checkSyntax = function(yashe) {
         if(lineTokens[t].string=='}'){
           closeTokensCounter++;
         }
+
+        if(lineTokens[t].type=='shape'){
+          shapes.push(lineTokens[t].string)
+        }
+
+        if(lineTokens[t].type=='ATPNAME_LN'){
+          shapeRefs.push({
+              ref:lineTokens[t].string.slice(1,lineTokens[t].string.length),
+              line:l });
+        }
+      
       }
 
+     
     }
+
+    for(let r in shapeRefs){
+      let err=true;
+      for(let s in shapes){
+        if(shapes[s]==shapeRefs[r].ref)err=false;
+      }
+      if(err){
+        var warningEl = yutils.svg.getElement(imgs.warning);
+        require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+          return "Shape '" + shapeRefs[r].ref + "' is not defined";;
+        });   
+        warningEl.style.marginTop = "2px";
+        warningEl.style.marginLeft = "2px";
+        warningEl.className = "parseErrorIcon";
+        yashe.setGutterMarker(shapeRefs[r].line, "gutterErrorBar", warningEl);
+        
+        yashe.queryValid = false;
+        return false;
+      } 
+    }
+
+
 
   
     // Is last '}' missing?  (See #104)
