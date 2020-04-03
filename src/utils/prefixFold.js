@@ -37,8 +37,10 @@ function findFirstPrefix(cm, line, ch, lineText) {
 }
 
 CodeMirror.registerHelper("fold", "prefix", function(cm, start) {
-  var line = start.line, lineText = cm.getLine(line);
-
+  if(!start){
+    start = {line: 0, ch: 0}
+  }
+  var line = start.line,lineText = cm.getLine(line);
   var startCh, tokenType;
 
   function hasPreviousPrefix() {

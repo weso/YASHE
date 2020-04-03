@@ -447,9 +447,9 @@ root.version = {
 };
 
 
-/*
 
-var settings = {
+
+/* var settings = {
   "async": true,
   "crossDomain": true,
   "url": "https://www.mediawiki.org/w/api.php?action=query&meta=tokens&format=json",
@@ -460,9 +460,6 @@ var settings = {
 $.ajax(settings).done(function (response) {
   console.log(response);
 });
-
-
-
 
 
 var Bloodhound = require('bloodhound-js');
@@ -499,5 +496,5 @@ typeahead.addEventListener("keyup",function(e){
 
 
 })
-*/
 
+ */
