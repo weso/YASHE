@@ -87,7 +87,7 @@ var checkSyntax = function(yashe) {
           shapes.push(lineTokens[t].string)
         }
 
-        if(lineTokens[t].type=='ATPNAME_LN'){
+        if(lineTokens[t].type=='shapeRef'){
           shapeRefs.push({
               ref:lineTokens[t].string.slice(1,lineTokens[t].string.length),
               line:l });
