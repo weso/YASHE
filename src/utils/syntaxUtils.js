@@ -7,6 +7,7 @@ var $ = require("jquery"),
 
 var checkSyntax = function(yashe) {
 
+    let prefixes = [];
     let shapes = [];
     let shapeRefs = [];
     yashe.queryValid = true;
@@ -83,6 +84,11 @@ var checkSyntax = function(yashe) {
           closeTokensCounter++;
         }
 
+
+        if(lineTokens[t].type=='prefixDelcAlias'){
+          prefixes.push(lineTokens[t].string)
+        }
+
         if(lineTokens[t].type=='shape'){
           shapes.push(lineTokens[t].string)
         }
@@ -92,11 +98,19 @@ var checkSyntax = function(yashe) {
               ref:lineTokens[t].string.slice(1,lineTokens[t].string.length),
               line:l });
         }
+
+        if(lineTokens[t].string=='@'){
+          shapeRefs.push({
+              ref:'@:',
+              line:l });
+        }
       
       }
 
      
     }
+
+    console.log(prefixes)
 
     //Check ShapeRefs are defined
     for(let r in shapeRefs){
