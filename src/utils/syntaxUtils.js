@@ -98,63 +98,39 @@ var checkSyntax = function(yashe) {
      
     }
 
+    //Check ShapeRefs are defined
     for(let r in shapeRefs){
       let err=true;
       for(let s in shapes){
         if(shapes[s]==shapeRefs[r].ref)err=false;
       }
       if(err){
-        var warningEl = yutils.svg.getElement(imgs.warning);
-        require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
-          return "Shape '" + shapeRefs[r].ref + "' is not defined";;
-        });   
-        warningEl.style.marginTop = "2px";
-        warningEl.style.marginLeft = "2px";
-        warningEl.className = "parseErrorIcon";
-        yashe.setGutterMarker(shapeRefs[r].line, "gutterErrorBar", warningEl);
-        
-        yashe.queryValid = false;
-        return false;
+        setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined");
       } 
     }
-
-
-
   
     // Is last '}' missing?  (See #104)
     if(openTokensCounter != closeTokensCounter){
-      
-      var warningEl = yutils.svg.getElement(imgs.warning);
-      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
-        return "This line is invalid. Expected: '}'";
-      });   
-      warningEl.style.marginTop = "2px";
-      warningEl.style.marginLeft = "2px";
-      warningEl.className = "parseErrorIcon";
-      yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
-      
+      setError(l,"This line is invalid. Expected: '}'");
       yashe.queryValid = false;
       return false;
     }
-    /*
-    console.log(nonWSGlobalTokens[lastToken-1].string)
-    if(nonWSGlobalTokens[lastToken-1].string!='}'){
-      console.log('entra')
-        var warningEl = yutils.svg.getElement(imgs.warning);
-        
-        warningEl.style.marginTop = "2px";
-        warningEl.style.marginLeft = "2px";
-        warningEl.className = "parseErrorIcon";
-        yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
-        yashe.queryValid = false;
-        return false;
-    }
-    */
-
 
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };
+
+
+  var setError= function(line,errMsg) {
+     var warningEl = yutils.svg.getElement(imgs.warning);
+      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+        return errMsg;
+      });   
+      warningEl.style.marginTop = "2px";
+      warningEl.style.marginLeft = "2px";
+      warningEl.className = "parseErrorIcon";
+      yashe.setGutterMarker(line, "gutterErrorBar", warningEl);
+  }
 
   module.exports = {
     checkSyntax:checkSyntax
