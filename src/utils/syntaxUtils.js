@@ -7,7 +7,8 @@ var $ = require("jquery"),
 
 var checkSyntax = function(yashe) {
 
-    let prefixes = [];
+    let defPrefixes = [];
+    let prefixes = []
     let shapes = [];
     let shapeRefs = [];
     yashe.queryValid = true;
@@ -75,31 +76,39 @@ var checkSyntax = function(yashe) {
 
       //This is only necessary to verify the if the last '}' is missing  (See #104)
       let lineTokens = yashe.getLineTokens(l)
-      //console.log(lineTokens)
       for(let t in lineTokens){
-        if(lineTokens[t].string=='{'){
+        let token = lineTokens[t];
+        if(token.string=='{'){
           openTokensCounter++;
         }
-        if(lineTokens[t].string=='}'){
+        if(token.string=='}'){
           closeTokensCounter++;
         }
 
-
-        if(lineTokens[t].type=='prefixDelcAlias'){
-          prefixes.push(lineTokens[t].string)
-        }
-
-        if(lineTokens[t].type=='shape'){
-          shapes.push(lineTokens[t].string)
-        }
-
-        if(lineTokens[t].type=='shapeRef'){
-          shapeRefs.push({
-              ref:lineTokens[t].string.slice(1,lineTokens[t].string.length),
+        if(token.type=='string-2' || 
+           token.type=='constraint' ||
+           token.type=='valueSet' ){
+          prefixes.push({
+              alias:token.string.split(":")[0]+':',
               line:l });
         }
 
-        if(lineTokens[t].string=='@'){
+
+        if(token.type=='prefixDelcAlias'){
+          defPrefixes.push(token.string);
+        }
+
+        if(token.type=='shape'){
+          shapes.push(token.string)
+        }
+
+        if(token.type=='shapeRef'){
+          shapeRefs.push({
+              ref:token.string.slice(1,token.string.length),
+              line:l });
+        }
+
+        if(token.string=='@'){
           shapeRefs.push({
               ref:'@:',
               line:l });
@@ -110,7 +119,18 @@ var checkSyntax = function(yashe) {
      
     }
 
-    console.log(prefixes)
+
+    for(let p in prefixes){
+      let err=true;
+      for(let d in defPrefixes){
+        if(defPrefixes[d]==prefixes[p].alias)err=false;
+      }
+      if(err){
+        setError(prefixes[p].line,"Prefix '" + prefixes[p].alias + "' is not defined");
+        yashe.queryValid = false;
+        return false;
+      } 
+    }
 
     //Check ShapeRefs are defined
     for(let r in shapeRefs){
@@ -120,6 +140,8 @@ var checkSyntax = function(yashe) {
       }
       if(err){
         setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined");
+        yashe.queryValid = false;
+        return false;
       } 
     }
   
