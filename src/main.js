@@ -275,6 +275,11 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
+    console.log(yashe.getTokenAt(
+    { line: yashe.lastLine(), ch: yashe.getLine(yashe.lastLine()).length },
+    true
+  ).state.shapes)
+
     checkSyntax(yashe);  
   });
 
