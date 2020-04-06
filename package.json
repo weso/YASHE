@@ -10,7 +10,7 @@
     "start": "gulp serve",
     "dev": "gulp serve",
     "build": "gulp",
-    "test": "jest",
+    "test": "$(npm bin)/cypress run",
     "patch": "gulp patch",
     "minor": "gulp minor",
     "major": "gulp major",
