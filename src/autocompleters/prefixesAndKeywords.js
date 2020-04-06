@@ -53,7 +53,7 @@ module.exports = function(yashe, name) {
 };
 
 module.exports.isValidCompletionPosition = function(yashe) {
-  module.exports.PREFIXES = yashe.getDefinedPrefixes()
+  module.exports.PREFIXES = yashe.getDefinedPrefixes();
 
   return true
 };

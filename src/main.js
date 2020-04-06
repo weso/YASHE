@@ -281,8 +281,7 @@ const postProcessCmElement = function(yashe) {
   //Needed
   //Without this, there is a bug 
   yashe.on('changes', function(yashe) {
-    checkSyntax(yashe);  
-    console.log(yashe)
+    checkSyntax(yashe);
   });
 
   /**

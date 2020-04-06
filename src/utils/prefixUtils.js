@@ -62,10 +62,12 @@ var getDefinedPrefixes = function(yashe) {
   //Use precise here. We want to be sure we use the most up to date state. If we're
   //not, we might get outdated prefixes from the current query (creating loops such
   //as https://github.com/OpenTriply/YASGUI/issues/84)
-  return yashe.getTokenAt(
+ return yashe.getTokenAt(
     { line: yashe.lastLine(), ch: yashe.getLine(yashe.lastLine()).length },
     true
-  ).state.prefixes;
+  ).state.prefixes; 
+
+  //return yashe.definedPrefixes;
 };
 
 var setDefinedPrefixes = function(yashe,newPrefixes){

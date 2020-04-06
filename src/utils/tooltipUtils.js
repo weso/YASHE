@@ -59,10 +59,13 @@ var wikiElement = token.split(':')[1]
 if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
 
   checkEntity(wikiElement).done( function( data ) {
-
+    console.log(data)
     if(!data.error){
 
-      var userLang,entity,description,theme
+      var userLang;
+      var entity = '';
+      var description=''
+      var theme;
       //Gets the preference languaje from the navigator
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
@@ -81,8 +84,16 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
 
       }else{
 
-          entity = content.labels['en'].value +' ('+wikiElement+')'
-          description = content.descriptions['en'].value
+          let lb = content.labels['en'];
+          let desc = content.descriptions['en'];
+          if(lb){
+            entity = lb.value +' ('+wikiElement+')';
+          }
+          if(desc){
+             description = desc.value
+          }
+          
+         
 
       }
 
@@ -112,10 +123,18 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
 var checkEntity = function (entity){
+/*   let endpoint = 'https://www.wikidata.org/w/';//default
+  let customEndpoint = document.getElementById("endPoint").textContent;;
+  console.log(customEndpoint)
+  if(customEndpoint.lenth>0){
+    endpoint= $('#endPoint').val();
+  }
+
+  console.log(endPoint) */
   return $.get(
     {
   
-      url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
+      url: $('#endPoint').val()+'api.php?action=wbgetentities&format=json&ids='+entity,
       dataType: 'jsonp',
   
     })

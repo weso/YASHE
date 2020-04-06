@@ -70,13 +70,38 @@ var checkSyntax = function(yashe) {
         return false;
       }
 
+      let lineTokens = yashe.getLineTokens(l);
+      for(let t in lineTokens){
+        let token = lineTokens[t];
+        //This is only necessary to verify the if the last '}' is missing  (See #104)
+        if(token.string=='{'){
+          openTokensCounter++;
+        }
+        if(token.string=='}'){
+          closedTokensCounter++;
+        }
+      }
+    
       updateShapesAndPrefixes(yashe,l);
+    }
+
+    //Is last '}' missing?  (See #104)
+    if(openTokensCounter != closedTokensCounter){
+      var warningEl = yutils.svg.getElement(imgs.warning);
+      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+        return errMsg;
+      });   
+      warningEl.style.marginTop = "2px";
+      warningEl.style.marginLeft = "2px";
+      warningEl.className = "parseErrorIcon";
+      yashe.setGutterMarker(l, "gutterErrorBar", "This line is invalid. Expected: '}'");
+      
+      yashe.queryValid = false;
+      return false;
     }
 
     
     
-
-    if(!checkLastKey(yashe))return false;
     if(!checkPrefixes(yashe))return false;
     if(!checkShapes(yashe))return false;
   
@@ -85,8 +110,6 @@ var checkSyntax = function(yashe) {
   };
 
   var resetValues = function(yashe){
-    yashe.openTokensCounter = [];
-    yashe.closedTokensCounter = [];
     yashe.defPrefixes = [];
     yashe.usedPrefixes = [];
     yashe.defShapes = [];
@@ -100,13 +123,7 @@ var checkSyntax = function(yashe) {
     //Get all the defined shapes and all the used shapes
     for(let t in lineTokens){
       let token = lineTokens[t];
-      //This is only necessary to verify the if the last '}' is missing  (See #104)
-      if(token.string=='{'){
-        yashe.openTokensCounter++;
-      }
-      if(token.string=='}'){
-        yashe.closedTokensCounter++;
-      }
+  
 
       if(token.type=='string-2' || 
         token.type=='constraint'){
@@ -149,19 +166,7 @@ var checkSyntax = function(yashe) {
 
   }
 
-  /**
-  * Is last '}' missing?  (See #104)
-   */
-  var checkLastKey = function(yashe){
-    let openTokensCounter = yashe.openTokensCounter;
-    let closedTokensCounter = yashe.closedTokensCounter;
-    if(yashe.openTokensCounter != yashe.closedTokensCounter){
-      setError(l,"This line is invalid. Expected: '}'");
-      yashe.queryValid = false;
-      return false;
-    }
-    return true;
-  }
+  
 
 /**
   * Check if the ShapeRefs are defined
@@ -175,7 +180,7 @@ var checkSyntax = function(yashe) {
         if(defShapes[s]==shapeRefs[r].ref)err=false;
       }
       if(err){
-        setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined");
+        setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined",yashe);
         yashe.queryValid = false;
         return false;
       } 
@@ -195,7 +200,7 @@ var checkSyntax = function(yashe) {
         if(defPrefixes[d]==usedPrefixes[p].alias)err=false;
       }
       if(err){
-        setError(usedPrefixes[p].line,"Prefix '" + usedPrefixes[p].alias + "' is not defined");
+        setError(usedPrefixes[p].line,"Prefix '" + usedPrefixes[p].alias + "' is not defined",yashe);
         yashe.queryValid = false;
         return false;
       } 
@@ -203,7 +208,7 @@ var checkSyntax = function(yashe) {
     return true;
   }
 
-  var setError= function(line,errMsg) {
+  var setError= function(line,errMsg,yashe) {
      var warningEl = yutils.svg.getElement(imgs.warning);
       require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
         return errMsg;
