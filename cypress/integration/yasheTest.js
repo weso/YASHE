@@ -3,7 +3,7 @@ const prefixesColor = 'rgb(109, 15, 122)';
 
 describe('YASHE initialization',function() {
     it('Check YASHE exists',function() {
-        cy.visit('http://www.weso.es/YASHE/')
+        cy.visit('http://localhost:4000/')
         expect(cy.get('.yashe')).to.exist  
     })
 })
@@ -72,7 +72,7 @@ describe('Prefixes',function() {
         cy.get('.yashe_tooltip').should('not.exist');
         cy.get('.parseErrorIcon').click();
         cy.get('.yashe_tooltip').should('exist');
-        cy.get('.yashe_tooltip').should('have.text','prefix');
+        cy.get('.yashe_tooltip').should('have.text',"Prefix 'wd' is not defined");
     })
 
    
