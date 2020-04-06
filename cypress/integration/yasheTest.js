@@ -45,7 +45,6 @@ describe('Prefixes',function() {
         cy.get('.cm-prefixDelcAlias').should('have.css', 'color', prefixesColor);
     })
 
-
     it('Check Prefixes autocompleter trigger works',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
         clearYashe();
@@ -61,9 +60,22 @@ describe('Prefixes',function() {
         });
     })
 
+    it('Check Prefix not defined error',function() {
+        clearYashe();
+        cy.get('.parseErrorIcon').should('not.exist');
+        
+        cy.get('.CodeMirror textarea')
+        .type('wd:', { force: true })
+
+        cy.get('.parseErrorIcon').should('exist');
+        
+        cy.get('.yashe_tooltip').should('not.exist');
+        cy.get('.parseErrorIcon').click();
+        cy.get('.yashe_tooltip').should('exist');
+        cy.get('.yashe_tooltip').should('have.text','prefix');
+    })
+
    
-
-
 })
 
 
@@ -73,32 +85,3 @@ function clearYashe(){
     });
 }
 
-/* describe('My First Test',function() {
-    it('Get prefixes hints',function() {
-       // cy.visit('http://www.weso.es/YASHE/')
-         cy.window().then(win => {
-            win.yashe.setValue("");
-            console.log(win.yashe.getDefinedPrefixes());
-        })
-
-        cy.get('.CodeMirror textarea')
-        // we use `force: true` below because the textarea is hidden
-        // and by default Cypress won't interact with hidden elements
-        .type('PREFIX : <https://wwww.example.org> \n PREFIX wd', { force: true })
-
-        expect(cy.get('.CodeMirror-hints')).to.exist  
-    
-        cy.window().then(win => {
-            console.log(win.yashe.getDefinedPrefixes());
-        })
- 
-    })
-    
-})
- */
-
-
-/*
-
- cy.visit('http://www.weso.es/YASHE')
-        cy.get('.yashe').click()*/

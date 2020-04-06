@@ -76,6 +76,7 @@
     "axios": "^0.19.2",
     "bloodhound-js": "^1.2.3",
     "bootstrap": "^4.4.1",
+    "codemirror": "^5.52.2",
     "file-reader": "^1.1.1",
     "gulp-uglify": "^3.0.2",
     "gulp-uglify-es": "^2.0.0",
