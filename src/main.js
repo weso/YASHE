@@ -275,13 +275,14 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-    checkSyntax(yashe);  
+    checkSyntax(yashe);
   });
 
   //Needed
   //Without this, there is a bug 
   yashe.on('changes', function(yashe) {
     checkSyntax(yashe);  
+    console.log(yashe)
   });
 
   /**

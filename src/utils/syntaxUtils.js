@@ -4,19 +4,15 @@ var $ = require("jquery"),
   imgs = require("./imgs.js");
 
 
-
 var checkSyntax = function(yashe) {
-
-    let defPrefixes = [];
-    let prefixes = []
-    let shapes = [];
-    let shapeRefs = [];
     yashe.queryValid = true;
     yashe.clearGutter("gutterErrorBar");
-  
+
+    resetValues(yashe);
+    
     var state = null;
     let openTokensCounter = 0;
-    let closeTokensCounter = 0;
+    let closedTokensCounter = 0;
     for (var l = 0; l < yashe.lineCount(); ++l) {
 
       var precise = false;
@@ -74,79 +70,109 @@ var checkSyntax = function(yashe) {
         return false;
       }
 
+      updateShapesAndPrefixes(yashe,l);
+    }
+
+    
+    
+
+    if(!checkLastKey(yashe))return false;
+    if(!checkPrefixes(yashe))return false;
+    if(!checkShapes(yashe))return false;
+  
+    yashe.prevQueryValid = yashe.queryValid;
+    return true;
+  };
+
+  var resetValues = function(yashe){
+    yashe.openTokensCounter = [];
+    yashe.closedTokensCounter = [];
+    yashe.defPrefixes = [];
+    yashe.usedPrefixes = [];
+    yashe.defShapes = [];
+    yashe.shapeRefs = [];
+  }
+
+
+  var updateShapesAndPrefixes = function(yashe,l) {
+    let lineTokens = yashe.getLineTokens(l);
+    //Get all the defined prefixes and all the used prefixes
+    //Get all the defined shapes and all the used shapes
+    for(let t in lineTokens){
+      let token = lineTokens[t];
       //This is only necessary to verify the if the last '}' is missing  (See #104)
-      let lineTokens = yashe.getLineTokens(l);
-
-      //Get all the defined prefixes and all the used prefixes
-      //Get all the defined shapes and all the used shapes
-      for(let t in lineTokens){
-        let token = lineTokens[t];
-        if(token.string=='{'){
-          openTokensCounter++;
-        }
-        if(token.string=='}'){
-          closeTokensCounter++;
-        }
-
-        if(token.type=='string-2' || 
-           token.type=='constraint'){
-          prefixes.push({
-              alias:token.string.split(":")[0]+':',
-              line:l });
-        }
-
-        if(token.type=='valueSet'){
-          if(token.string.includes(":")){
-               prefixes.push({
-                  alias:token.string.split(":")[0]+':',
-                  line:l });
-          }  
-        }
-
-
-        if(token.type=='prefixDelcAlias'){
-          defPrefixes.push(token.string);
-        }
-
-        if(token.type=='shape'){
-          shapes.push(token.string)
-        }
-
-        if(token.type=='shapeRef'){
-          shapeRefs.push({
-              ref:token.string.slice(1,token.string.length),
-              line:l });
-        }
-
-        //Necesary when the ShapeRef is "@:"
-        if(token.string=='@'){
-          shapeRefs.push({
-              ref:'@:',
-              line:l });
-        }
-      
+      if(token.string=='{'){
+        yashe.openTokensCounter++;
       }
-     
+      if(token.string=='}'){
+        yashe.closedTokensCounter++;
+      }
+
+      if(token.type=='string-2' || 
+        token.type=='constraint'){
+        yashe.usedPrefixes.push({
+            alias:token.string.split(":")[0]+':',
+            line:l });
+      }
+
+      if(token.type=='valueSet'){
+        if(token.string.includes(":")){
+            yashe.usedPrefixes.push({
+                alias:token.string.split(":")[0]+':',
+                line:l });
+        }  
+      }
+
+
+      if(token.type=='prefixDelcAlias'){
+        yashe.defPrefixes.push(token.string);
+      }
+
+      if(token.type=='shape'){
+        yashe.defShapes.push(token.string)
+      }
+
+      if(token.type=='shapeRef'){
+        yashe.shapeRefs.push({
+            ref:token.string.slice(1,token.string.length),
+            line:l });
+      }
+
+      //Necesary when the ShapeRef is "@:"
+      if(token.string=='@'){
+        yashe.shapeRefs.push({
+            ref:'@:',
+            line:l });
+      }
+    
     }
 
-    //Check if the Prefixes are defined
-    for(let p in prefixes){
-      let err=true;
-      for(let d in defPrefixes){
-        if(defPrefixes[d]==prefixes[p].alias)err=false;
-      }
-      if(err){
-        setError(prefixes[p].line,"Prefix '" + prefixes[p].alias + "' is not defined");
-        yashe.queryValid = false;
-        return false;
-      } 
-    }
+  }
 
-    //Check if the ShapeRefs are defined
+  /**
+  * Is last '}' missing?  (See #104)
+   */
+  var checkLastKey = function(yashe){
+    let openTokensCounter = yashe.openTokensCounter;
+    let closedTokensCounter = yashe.closedTokensCounter;
+    if(yashe.openTokensCounter != yashe.closedTokensCounter){
+      setError(l,"This line is invalid. Expected: '}'");
+      yashe.queryValid = false;
+      return false;
+    }
+    return true;
+  }
+
+/**
+  * Check if the ShapeRefs are defined
+ */
+  var checkShapes = function(yashe){
+    let defShapes = yashe.defShapes;
+    let shapeRefs = yashe.shapeRefs;
     for(let r in shapeRefs){
       let err=true;
-      for(let s in shapes){
-        if(shapes[s]==shapeRefs[r].ref)err=false;
+      for(let s in defShapes){
+        if(defShapes[s]==shapeRefs[r].ref)err=false;
       }
       if(err){
         setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined");
@@ -154,18 +180,28 @@ var checkSyntax = function(yashe) {
         return false;
       } 
     }
-  
-    // Is last '}' missing?  (See #104)
-    if(openTokensCounter != closeTokensCounter){
-      setError(l,"This line is invalid. Expected: '}'");
-      yashe.queryValid = false;
-      return false;
-    }
-
-    yashe.prevQueryValid = yashe.queryValid;
     return true;
-  };
+  }
 
+/**
+  * Check if the Prefixes are defined
+ */
+  var checkPrefixes = function(yashe){
+    let defPrefixes = yashe.defPrefixes;
+    let usedPrefixes = yashe.usedPrefixes;
+    for(let p in usedPrefixes){
+      let err=true;
+      for(let d in defPrefixes){
+        if(defPrefixes[d]==usedPrefixes[p].alias)err=false;
+      }
+      if(err){
+        setError(usedPrefixes[p].line,"Prefix '" + usedPrefixes[p].alias + "' is not defined");
+        yashe.queryValid = false;
+        return false;
+      } 
+    }
+    return true;
+  }
 
   var setError= function(line,errMsg) {
      var warningEl = yutils.svg.getElement(imgs.warning);
