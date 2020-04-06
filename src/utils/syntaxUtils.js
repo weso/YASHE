@@ -3,9 +3,15 @@ var $ = require("jquery"),
   yutils = require("yasgui-utils"),
   imgs = require("./imgs.js");
 
+
+
 var checkSyntax = function(yashe) {
+
+    let defPrefixes = [];
+    let prefixes = []
+    let shapes = [];
+    let shapeRefs = [];
     yashe.queryValid = true;
-  
     yashe.clearGutter("gutterErrorBar");
   
     var state = null;
@@ -69,53 +75,108 @@ var checkSyntax = function(yashe) {
       }
 
       //This is only necessary to verify the if the last '}' is missing  (See #104)
-      let lineTokens = yashe.getLineTokens(l)
+      let lineTokens = yashe.getLineTokens(l);
+
+      //Get all the defined prefixes and all the used prefixes
+      //Get all the defined shapes and all the used shapes
       for(let t in lineTokens){
-        if(lineTokens[t].string=='{'){
+        let token = lineTokens[t];
+        if(token.string=='{'){
           openTokensCounter++;
         }
-        if(lineTokens[t].string=='}'){
+        if(token.string=='}'){
           closeTokensCounter++;
         }
-      }
 
+        if(token.type=='string-2' || 
+           token.type=='constraint'){
+          prefixes.push({
+              alias:token.string.split(":")[0]+':',
+              line:l });
+        }
+
+        if(token.type=='valueSet'){
+          if(token.string.includes(":")){
+               prefixes.push({
+                  alias:token.string.split(":")[0]+':',
+                  line:l });
+          }  
+        }
+
+
+        if(token.type=='prefixDelcAlias'){
+          defPrefixes.push(token.string);
+        }
+
+        if(token.type=='shape'){
+          shapes.push(token.string)
+        }
+
+        if(token.type=='shapeRef'){
+          shapeRefs.push({
+              ref:token.string.slice(1,token.string.length),
+              line:l });
+        }
+
+        //Necesary when the ShapeRef is "@:"
+        if(token.string=='@'){
+          shapeRefs.push({
+              ref:'@:',
+              line:l });
+        }
+      
+      }
+     
     }
 
+    //Check if the Prefixes are defined
+    for(let p in prefixes){
+      let err=true;
+      for(let d in defPrefixes){
+        if(defPrefixes[d]==prefixes[p].alias)err=false;
+      }
+      if(err){
+        setError(prefixes[p].line,"Prefix '" + prefixes[p].alias + "' is not defined");
+        yashe.queryValid = false;
+        return false;
+      } 
+    }
+
+    //Check if the ShapeRefs are defined
+    for(let r in shapeRefs){
+      let err=true;
+      for(let s in shapes){
+        if(shapes[s]==shapeRefs[r].ref)err=false;
+      }
+      if(err){
+        setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined");
+        yashe.queryValid = false;
+        return false;
+      } 
+    }
   
     // Is last '}' missing?  (See #104)
     if(openTokensCounter != closeTokensCounter){
-      
-      var warningEl = yutils.svg.getElement(imgs.warning);
-      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
-        return "This line is invalid. Expected: '}'";
-      });   
-      warningEl.style.marginTop = "2px";
-      warningEl.style.marginLeft = "2px";
-      warningEl.className = "parseErrorIcon";
-      yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
-      
+      setError(l,"This line is invalid. Expected: '}'");
       yashe.queryValid = false;
       return false;
     }
-    /*
-    console.log(nonWSGlobalTokens[lastToken-1].string)
-    if(nonWSGlobalTokens[lastToken-1].string!='}'){
-      console.log('entra')
-        var warningEl = yutils.svg.getElement(imgs.warning);
-        
-        warningEl.style.marginTop = "2px";
-        warningEl.style.marginLeft = "2px";
-        warningEl.className = "parseErrorIcon";
-        yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
-        yashe.queryValid = false;
-        return false;
-    }
-    */
-
 
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };
+
+
+  var setError= function(line,errMsg) {
+     var warningEl = yutils.svg.getElement(imgs.warning);
+      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+        return errMsg;
+      });   
+      warningEl.style.marginTop = "2px";
+      warningEl.style.marginLeft = "2px";
+      warningEl.className = "parseErrorIcon";
+      yashe.setGutterMarker(line, "gutterErrorBar", warningEl);
+  }
 
   module.exports = {
     checkSyntax:checkSyntax

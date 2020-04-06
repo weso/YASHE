@@ -58,6 +58,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #f00; }
   .yashe .cm-s-wiki .cm-facet {
     color: #f00; }
+  .yashe .cm-s-wiki .cm-shapeRef {
+    color: #0F7A50; }
   .yashe .cm-s-wiki .cm-meta {
     color: #555; }
   .yashe .cm-s-wiki .cm-qualifier {
@@ -80,7 +82,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #f00; }
   .yashe .cm-s-wiki .cm-at {
     color: #0F7A50; }
-  .yashe .cm-s-wiki .cm-prefixDelc {
+  .yashe .cm-s-wiki .cm-prefixDelcAlias {
+    color: #6d0f7a; }
+  .yashe .cm-s-wiki .cm-prefixDelcIRI {
     color: #6d0f7a; }
   .yashe .cm-s-dark.CodeMirror {
     background: #2B2B2B;
@@ -117,6 +121,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #7DB647; }
   .yashe .cm-s-dark .cm-constraintKeyword {
     color: #f00; }
+  .yashe .cm-s-dark .cm-facet {
+    color: #f00; }
+  .yashe .cm-s-dark .cm-shapeRef {
+    color: #68BEEB; }
   .yashe .cm-s-dark .cm-meta {
     color: #555; }
   .yashe .cm-s-dark .cm-qualifier {
@@ -139,7 +147,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #B271FF; }
   .yashe .cm-s-dark .cm-at {
     color: #68BEEB; }
-  .yashe .cm-s-dark .cm-prefixDelc {
+  .yashe .cm-s-dark .cm-prefixDelcAlias {
+    color: #f8c4ffc0; }
+  .yashe .cm-s-dark .cm-prefixDelcIRI {
     color: #f8c4ffc0; }
   .yashe .cm-s-dark .CodeMirror-cursor {
     border-left: 1px solid #A9B7C6; }
