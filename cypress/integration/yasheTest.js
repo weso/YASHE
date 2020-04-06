@@ -10,10 +10,7 @@ describe('YASHE initialization',function() {
 
 describe('Prefixes',function() {
     it('Type a prefix and check the defined prefixes of yashe',function() {
-        cy.window().then(win => {
-            win.yashe.setValue("");       
-        });
-
+        clearYashe()
         cy.get('.CodeMirror textarea')
         // we use `force: true` below because the textarea is hidden
         // and by default Cypress won't interact with hidden elements
@@ -28,9 +25,7 @@ describe('Prefixes',function() {
 
     it('Check the prefixes classes exist after typing a prefix',function() {
 
-        cy.window().then(win => {
-            win.yashe.setValue("");       
-        });
+        clearYashe()
 
         cy.get('.cm-keyword').should('not.exist');
         cy.get('.cm-prefixDelcIRI').should('not.exist');
@@ -51,16 +46,32 @@ describe('Prefixes',function() {
     })
 
 
-    it('Check the prefixes autocompleter',function() {
+    it('Check Prefixes autocompleter trigger works',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
+        clearYashe();
         cy.get('.CodeMirror textarea')
-        .type('\nPREFIX wd', { force: true })
+        .type('PREFIX wd', { force: true })
         cy.get('.CodeMirror-hints').should('exist');
     })
+
+    it('Select a prefix option from the prefix autocompleter hints',function() {
+        cy.get('.CodeMirror-hints').children().first().click();
+         cy.window().then(win => {
+            expect(win.yashe.getValue()).to.equals('PREFIX wd: <http://www.wikidata.org/entity/>');         
+        });
+    })
+
+   
 
 
 })
 
+
+function clearYashe(){
+    cy.window().then(win => {
+        win.yashe.setValue("");       
+    });
+}
 
 /* describe('My First Test',function() {
     it('Get prefixes hints',function() {
