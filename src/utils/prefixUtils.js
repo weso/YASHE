@@ -68,6 +68,13 @@ var getDefinedPrefixes = function(yashe) {
   ).state.prefixes;
 };
 
+var setDefinedPrefixes = function(yashe,newPrefixes){
+  yashe.getTokenAt(
+    { line: yashe.lastLine(), ch: yashe.getLine(yashe.lastLine()).length },
+    true
+  ).state.prefixes = newPrefixes;
+}
+
 /**
  * Get the used indentation for a certain line
  *
@@ -94,5 +101,6 @@ var getIndentFromLine = function(yashe, line, charNumber) {
 module.exports = {
   addPrefixes: addPrefixes,
   getDefinedPrefixes: getDefinedPrefixes,
+  setDefinedPrefixes:setDefinedPrefixes,
   removePrefixes: removePrefixes
 };

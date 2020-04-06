@@ -75,7 +75,10 @@ var checkSyntax = function(yashe) {
       }
 
       //This is only necessary to verify the if the last '}' is missing  (See #104)
-      let lineTokens = yashe.getLineTokens(l)
+      let lineTokens = yashe.getLineTokens(l);
+
+      //Get all the defined prefixes and all the used prefixes
+      //Get all the defined shapes and all the used shapes
       for(let t in lineTokens){
         let token = lineTokens[t];
         if(token.string=='{'){
@@ -86,11 +89,18 @@ var checkSyntax = function(yashe) {
         }
 
         if(token.type=='string-2' || 
-           token.type=='constraint' ||
-           token.type=='valueSet' ){
+           token.type=='constraint'){
           prefixes.push({
               alias:token.string.split(":")[0]+':',
               line:l });
+        }
+
+        if(token.type=='valueSet'){
+          if(token.string.includes(":")){
+               prefixes.push({
+                  alias:token.string.split(":")[0]+':',
+                  line:l });
+          }  
         }
 
 
@@ -108,6 +118,7 @@ var checkSyntax = function(yashe) {
               line:l });
         }
 
+        //Necesary when the ShapeRef is "@:"
         if(token.string=='@'){
           shapeRefs.push({
               ref:'@:',
@@ -115,11 +126,10 @@ var checkSyntax = function(yashe) {
         }
       
       }
-
      
     }
 
-
+    //Check if the Prefixes are defined
     for(let p in prefixes){
       let err=true;
       for(let d in defPrefixes){
@@ -132,7 +142,7 @@ var checkSyntax = function(yashe) {
       } 
     }
 
-    //Check ShapeRefs are defined
+    //Check if the ShapeRefs are defined
     for(let r in shapeRefs){
       let err=true;
       for(let s in shapes){
