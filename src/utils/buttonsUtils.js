@@ -153,25 +153,30 @@ var drawButtons = function(yashe){
       /**
      * delete button
      */
-    var endPointButton = $("<div>", {
+    var endpointButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.endpoint))
-    .addClass("yashe_deletedBtn")
+    .addClass("yashe_endpointdBtn")
     .attr('id','endpointBtn')
-    .attr("title", "Select Endpoint")
+    .attr("title", "Endpoint")
     .click(function() { 
-          if($('.endPointInput').length>0){
-            $('.endPointInput').remove();
+          if($('.endpointInput').length>0){
+            $('.endpointInput').remove();
           }else{
              $('.yashe_buttons').
-              prepend( $( '<input class="endPointInput" type="text" id="endPoint" name="fname">' ))
+              prepend( 
+                $( '<input class="endpointInput" type="text" id="endPoint" name="fname">')
+                .val(yashe.options.endpoint)
+                .change(function(){
+                   yashe.setOption('endpoint',$('.endpointInput').val())
+                }))
           }
          
     }));
 
 
   
-    yashe.buttons.append(endPointButton);
+    yashe.buttons.append(endpointButton);
 
     //Draw buttons
     if(yashe.options.showUploadButton){
