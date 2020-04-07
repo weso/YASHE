@@ -146,7 +146,10 @@ var checkSyntax = function(yashe) {
       }
 
       if(token.type=='shape'){
-        yashe.defShapes.push(token.string)
+        yashe.defShapes.push(token.string);
+        yashe.usedPrefixes.push({
+            alias:token.string.split(":")[0]+':',
+            line:l });
       }
 
       if(token.type=='shapeRef'){
@@ -194,6 +197,8 @@ var checkSyntax = function(yashe) {
   var checkPrefixes = function(yashe){
     let defPrefixes = yashe.defPrefixes;
     let usedPrefixes = yashe.usedPrefixes;
+
+    console.log(usedPrefixes)
     for(let p in usedPrefixes){
       let err=true;
       for(let d in defPrefixes){
