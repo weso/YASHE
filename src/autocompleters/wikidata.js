@@ -27,57 +27,22 @@ module.exports = function(yashe, name) {
 
         //Add extra param if it is a property
         if(rdfUtils.isWikidataPropertiesPrefix(yashe,prefix)){
-          query.type='property'
+          query.type='property';
         }else{
-          delete query.type
+          delete query.type;
         }
 
         let endpoint = rdfUtils.getEndPoint(yashe,prefix);
-        console.log(endpoint)
         if(endpoint!=null){
           API_ENDPOINT = endpoint;
         }
 
-        $.get(
-            {
-          
-              url: API_ENDPOINT + 'api.php/?' + $.param(query),
-              dataType: 'jsonp',
-          
-            }).done( function( data ) {
-
-              var list =[]
-              
-              //This condition is for an empty search
-              if(data.error){
-                list = [ {
-                  text: '',
-                  displayText: 'Type to search for an entity'
-                } ];
-                callback(list)
-    
-              }else{
-
-                var entities = []
-                var label,id,description,entities
-                for(var entity in data.search){
-
-                    label = data.search[entity].label
-                    id = data.search[entity].id
-                    description = data.search[entity].description
-
-                    list =  {
-                      text: id,
-                      displayText: label + " (" + id + ") \n " + description
-                    } ;
-
-                    entities.push(list)
-                   
-                }
-                entities.sort()
-                callback(entities)
-              }
-            })
+        getEntities(API_ENDPOINT,query)
+          .done((data)=>setHints(data,callback))
+          .fail(
+              ()=>getEntities(API_ENDPOINT.replace('/w/','/wiki/'),query)
+              .done((data)=>setHints(data,callback))
+          )
             
         
     },
@@ -86,6 +51,52 @@ module.exports = function(yashe, name) {
     autoShow: false
   };
 };
+
+
+var getEntities = function(endpoint,query){
+  return $.get(
+              {
+          
+              url: endpoint + 'api.php?' + $.param(query),
+              dataType: 'jsonp',
+          
+              });
+}
+
+var setHints = function( data,callback ) {
+
+  var list =[]
+  
+  //This condition is for an empty search
+  if(data.error){
+    list = [ {
+      text: '',
+      displayText: 'Type to search for an entity'
+    } ];
+    callback(list)
+
+  }else{
+
+    var entities = []
+    var label,id,description,entities
+    for(var entity in data.search){
+
+        label = data.search[entity].label
+        id = data.search[entity].id
+        description = data.search[entity].description
+
+        list =  {
+          text: id,
+          displayText: label + " (" + id + ") \n " + description
+        } ;
+
+        entities.push(list)
+        
+    }
+    entities.sort()
+    callback(entities)
+  }
+}
 
 module.exports.isValidCompletionPosition = function(yashe) {
 
