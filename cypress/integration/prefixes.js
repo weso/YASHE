@@ -43,9 +43,9 @@ describe('Prefixes',function() {
         cy.get('.cm-keyword').should('have.css', 'color', keywordColor);
         cy.get('.cm-prefixDelcIRI').should('have.css', 'color', prefixesColor);
         cy.get('.cm-prefixDelcAlias').should('have.css', 'color', prefixesColor);
-    })
+    }) 
 
-    it('Check Prefixes autocompleter trigger works',function() {
+    it('Check prefixes autocompleter trigger works',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
         clearYashe();
         cy.get('.CodeMirror textarea')
@@ -58,6 +58,20 @@ describe('Prefixes',function() {
          cy.window().then(win => {
             expect(win.yashe.getValue()).to.equals('PREFIX wd: <http://www.wikidata.org/entity/>');         
         });
+        cy.get('.CodeMirror-hints').should('not.exist');
+    })
+
+    it('Check defined prefix autocompleter works',function() {
+        cy.get('.CodeMirror-hints').should('not.exist');
+        cy.get('.CodeMirror textarea')
+        .type('\nw{ctrl}{ }',{ force: true })
+        cy.get('.CodeMirror-hints').should('exist');
+        cy.get('.CodeMirror-hints').children().first().click();
+        cy.window().then(win => {
+            expect(win.yashe.getValue()).to.equals('PREFIX wd: <http://www.wikidata.org/entity/>\nwd:');         
+        });
+        cy.get('.CodeMirror-hints').should('not.exist');
+
     })
 
     it('Check Prefix not defined error',function() {
@@ -73,7 +87,7 @@ describe('Prefixes',function() {
         cy.get('.parseErrorIcon').click();
         cy.get('.yashe_tooltip').should('exist');
         cy.get('.yashe_tooltip').should('have.text',"Prefix 'wd' is not defined");
-    })
+    })  
 
    
 })
