@@ -51,28 +51,22 @@ var triggerTooltip = function( yashe, e) {
   } ) ).string;
 
 
-  
-var prefixName = token.split(':')[0]
-var wikiElement = token.split(':')[1]
+  var prefixName = token.split(':')[0]
+  var wikiElement = token.split(':')[1]
 
-var definedPrefixex = yashe.getDefinedPrefixes();
-var endpoint = yashe.options.endpoint;
-    
-Object.keys(definedPrefixex).map(p =>{
-  if(p==prefixName){
-    endpoint = definedPrefixex[p].split('/wiki/')[0]+'/w/'; 
+  if(wikiElement!== undefined  && wikiElement!== ''){
+    let endpoint = rdfUtils.getEndPoint(yashe,prefixName);
+    if(endpoint!=null){
+      checkEntity(wikiElement,endpoint)
+          .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+      .fail(
+        ()=>{
+         
+          checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
+            .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+        });  
+    }
   }
-})
-
-//Check wikidata prefixes
-//if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
-
-  checkEntity(wikiElement,endpoint)
-      .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
-  .fail(
-    ()=>{checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
-      .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
-    }); 
 
 }
 
@@ -110,8 +104,6 @@ var loadTooltip = function(data,wikiElement,posX,posY){
              description = desc.value
           }
           
-         
-
       }
 
       theme = yashe.getOption('theme');
