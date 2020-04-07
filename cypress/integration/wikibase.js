@@ -29,7 +29,31 @@ describe('Wikibase',function() {
         cy.window().then(win => {
             expect(win.yashe.getValue()).to.equals("PREFIX wd: <http://www.wikidata.org/entity/> \nwd:Q1");       
         });
-    }) 
+    })
+
+    it('Check wikibase property autocompleter works with the wikidata instance',function() {
+        clearYashe();
+        
+        cy.get('.CodeMirror-hints').should('not.exist');
+        //Activate the autcompleter
+        cy.get('.CodeMirror textarea')
+        // we use `force: true` below because the textarea is hidden
+        // and by default Cypress won't interact with hidden elements
+        .type('PREFIX p: <http://www.wikidata.org/prop/> \np:{ctrl}{ }', { force: true });
+        cy.get('.CodeMirror-hints').should('exist');
+        cy.get('.CodeMirror-hints').should('have.text',"Type to search for an entity");
+
+        //Type some entity to search and click the first one
+        cy.get('.CodeMirror textarea')
+        .type('instance', { force: true });
+       
+        cy.wait(500)
+        cy.get('.CodeMirror-hints').children().first().click();
+        
+        cy.window().then(win => {
+            expect(win.yashe.getValue()).to.equals("PREFIX p: <http://www.wikidata.org/prop/> \np:P31");       
+        });
+    })  
 
     it('Check wikibase entity autocompleter works with another wikibase instance',function() {
         clearYashe();
@@ -50,6 +74,32 @@ describe('Wikibase',function() {
         
         cy.window().then(win => {
             expect(win.yashe.getValue()).to.equals("PREFIX labra: <https://cursoslabra.wiki.opencura.com/wiki/Item:> \nlabra:Q1");       
+        });
+    })
+
+
+    it('Check wikibase entity autocompleter works with another wikibase instance (special case)',function() {
+        // I've found that at least one wikibase instance (https://wiki.eagle-network.eu/wiki/Main_Page)
+        // have one small diference in the API call 
+        
+        clearYashe();
+        
+        cy.get('.CodeMirror-hints').should('not.exist');
+        //Activate the autcompleter
+        cy.get('.CodeMirror textarea')
+        .type('PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:> \neagle:{ctrl}{ }', { force: true });
+        cy.get('.CodeMirror-hints').should('exist');
+        cy.get('.CodeMirror-hints').should('have.text',"Type to search for an entity");
+
+        //Type some entity to search and click the first one
+        cy.get('.CodeMirror textarea')
+        .type('UB', { force: true });
+       
+        cy.wait(500)
+        cy.get('.CodeMirror-hints').children().first().click();
+        
+        cy.window().then(win => {
+            expect(win.yashe.getValue()).to.equals("PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:> \neagle:Q4993");       
         });
     }) 
 
