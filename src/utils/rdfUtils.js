@@ -48,7 +48,7 @@ var getEndPoint = function(yashe,prefixName){
     let endpoint = null;
     Object.keys(definedPrefixex).map(p =>{
       if(p==prefixName){
-        if(definedPrefixex[p].includes('/wiki/Item:')){
+        if(definedPrefixex[p].includes('/wiki/')){
            endpoint = definedPrefixex[p].replace('http://','https://').split('/wiki/')[0]+'/w/';
         }else{
           Object.keys(ENTITY_TYPES).map(pref=>{

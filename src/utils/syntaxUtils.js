@@ -146,7 +146,10 @@ var checkSyntax = function(yashe) {
       }
 
       if(token.type=='shape'){
-        yashe.defShapes.push(token.string)
+        yashe.defShapes.push(token.string);
+        yashe.usedPrefixes.push({
+            alias:token.string.split(":")[0]+':',
+            line:l });
       }
 
       if(token.type=='shapeRef'){

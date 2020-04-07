@@ -61,7 +61,6 @@ var triggerTooltip = function( yashe, e) {
           .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
       .fail(
         ()=>{
-         
           checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
             .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
         });  
