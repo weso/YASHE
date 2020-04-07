@@ -51,16 +51,33 @@ var triggerTooltip = function( yashe, e) {
   } ) ).string;
 
 
-    
+  
 var prefixName = token.split(':')[0]
 var wikiElement = token.split(':')[1]
 
-//Check wikidata prefixes
-if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
+var definedPrefixex = yashe.getDefinedPrefixes();
+var endpoint = yashe.options.endpoint;
+    
+Object.keys(definedPrefixex).map(p =>{
+  if(p==prefixName){
+    endpoint = definedPrefixex[p].split('/wiki/')[0]+'/w/'; 
+  }
+})
 
-  checkEntity(wikiElement).done( function( data ) {
-    console.log(data)
-    if(!data.error){
+//Check wikidata prefixes
+//if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
+
+  checkEntity(wikiElement,endpoint)
+      .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+  .fail(
+    ()=>{checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
+      .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+    }); 
+
+}
+
+var loadTooltip = function(data,wikiElement,posX,posY){
+  if(!data.error){
 
       var userLang;
       var entity = '';
@@ -115,29 +132,25 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
             $('<div>').html(description).css(styles.description)))
         .appendTo('body').fadeIn( 'slow' );
     }
-      
-    })  
-
-  }
 }
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
-var checkEntity = function (entity){
+var checkEntity = function (entity,endPoint){
 /*   let endpoint = 'https://www.wikidata.org/w/';//default
   let customEndpoint = document.getElementById("endPoint").textContent;;
   console.log(customEndpoint)
   if(customEndpoint.lenth>0){
     endpoint= $('#endPoint').val();
   }
-
   console.log(endPoint) */
   return $.get(
     {
   
-      url: $('#endPoint').val()+'api.php?action=wbgetentities&format=json&ids='+entity,
+      url: endPoint+'api.php?action=wbgetentities&format=json&ids='+entity,
       dataType: 'jsonp',
   
     })
+     
 }
 
 
