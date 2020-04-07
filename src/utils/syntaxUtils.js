@@ -86,11 +86,11 @@ var checkSyntax = function(yashe) {
     }
 
     //Is last '}' missing?  (See #104)
-    /* if(openTokensCounter != closedTokensCounter){
-      setError(l,"This line is invalid. Expected: '}'",yashe)
+    if(openTokensCounter != closedTokensCounter){
+      setError(yashe.lastLine(),"This line is invalid. Expected: '}'",yashe)
       yashe.queryValid = false;
       return false;
-    } */
+    }
 
     
     
