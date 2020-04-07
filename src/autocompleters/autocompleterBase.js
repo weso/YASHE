@@ -185,7 +185,7 @@ module.exports = function(YASHE, yashe) {
     var hintList = [];
     var startChar;
     //For the wikidata completer we recive the {text, displayText} object
-    if(completer.name == 'wikidata' || completer.name == 'prefixesAndKeywords'){
+    if(completer.name == 'wikibase' || completer.name == 'prefixesAndKeywords'){
 
       for (var i = 0; i < suggestions.length; i++) {
         hintList.push({
@@ -196,7 +196,7 @@ module.exports = function(YASHE, yashe) {
         
       }
 
-      if(completer.name == 'wikidata'){
+      if(completer.name == 'wikibase'){
         //Do not replace the prefix 
         var prefix = token.string.split(':')[0]
         startChar = token.start + prefix.length + 1
