@@ -197,8 +197,6 @@ var checkSyntax = function(yashe) {
   var checkPrefixes = function(yashe){
     let defPrefixes = yashe.defPrefixes;
     let usedPrefixes = yashe.usedPrefixes;
-
-    console.log(usedPrefixes)
     for(let p in usedPrefixes){
       let err=true;
       for(let d in defPrefixes){
