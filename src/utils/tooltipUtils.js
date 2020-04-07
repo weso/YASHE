@@ -50,6 +50,7 @@ var triggerTooltip = function( yashe, e) {
     top: posY
   } ) ).string;
 
+  
 
   var prefixName = token.split(':')[0]
   var wikiElement = token.split(':')[1]
