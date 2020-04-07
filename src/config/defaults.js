@@ -27,7 +27,6 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     showToken: /\w/
   },
   theme:"wiki",
-  endpoint:'https://www.wikidata.org/w/',
   tabMode: "indent",
   fontSize: 14, 
   lineNumbers: true,

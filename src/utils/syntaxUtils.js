@@ -133,7 +133,7 @@ var checkSyntax = function(yashe) {
       }
 
       if(token.type=='valueSet'){
-        if(token.string.includes(":")){
+        if(token.string.includes("") && !token.string.startsWith("<")){
             yashe.usedPrefixes.push({
                 alias:token.string.split(":")[0]+':',
                 line:l });

@@ -128,13 +128,6 @@ var loadTooltip = function(data,wikiElement,posX,posY){
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
 var checkEntity = function (entity,endPoint){
-/*   let endpoint = 'https://www.wikidata.org/w/';//default
-  let customEndpoint = document.getElementById("endPoint").textContent;;
-  console.log(customEndpoint)
-  if(customEndpoint.lenth>0){
-    endpoint= $('#endPoint').val();
-  }
-  console.log(endPoint) */
   return $.get(
     {
   
