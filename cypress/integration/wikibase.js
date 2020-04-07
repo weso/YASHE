@@ -7,7 +7,7 @@ describe('YASHE initialization',function() {
 
 describe('Wikibase',function() {
     
-    it('Check wikibase entity autocompleter works with the wikidata instance',function() {
+    it('Entity autocompleter works with the wikidata instance',function() {
         clearYashe();
         
         cy.get('.CodeMirror-hints').should('not.exist');
@@ -31,7 +31,7 @@ describe('Wikibase',function() {
         });
     })
 
-    it('Check wikibase property autocompleter works with the wikidata instance',function() {
+    it('Property autocompleter works with the wikidata instance',function() {
         clearYashe();
         
         cy.get('.CodeMirror-hints').should('not.exist');
@@ -55,7 +55,7 @@ describe('Wikibase',function() {
         });
     })  
 
-    it('Check wikibase entity autocompleter works with another wikibase instance',function() {
+    it('Entity autocompleter works with another wikibase instance',function() {
         clearYashe();
         
         cy.get('.CodeMirror-hints').should('not.exist');
@@ -78,7 +78,7 @@ describe('Wikibase',function() {
     })
 
 
-    it('Check wikibase entity autocompleter works with another wikibase instance (special case)',function() {
+    it('Entity autocompleter works with another wikibase instance (special case)',function() {
         // I've found that at least one wikibase instance (https://wiki.eagle-network.eu/wiki/Main_Page)
         // have one small diference in the API call 
         

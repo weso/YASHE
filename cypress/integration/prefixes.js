@@ -9,6 +9,7 @@ describe('YASHE initialization',function() {
 })
 
 describe('Prefixes',function() {
+    
     it('Type a prefix and check the defined prefixes of yashe',function() {
         clearYashe()
         cy.get('.CodeMirror textarea')
@@ -23,7 +24,7 @@ describe('Prefixes',function() {
       
     }) 
 
-    it('Check the prefixes classes exist after typing a prefix',function() {
+    it('Prefixes classes exist after typing a prefix',function() {
 
         clearYashe()
 
@@ -39,13 +40,13 @@ describe('Prefixes',function() {
         cy.get('.cm-prefixDelcAlias').should('exist');
     })
 
-    it('Check the prefixes colors are OK',function() {
+    it('Prefixes colors are OK',function() {
         cy.get('.cm-keyword').should('have.css', 'color', keywordColor);
         cy.get('.cm-prefixDelcIRI').should('have.css', 'color', prefixesColor);
         cy.get('.cm-prefixDelcAlias').should('have.css', 'color', prefixesColor);
     }) 
 
-    it('Check prefixes autocompleter trigger works',function() {
+    it('Prefixes autocompleter trigger works',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
         clearYashe();
         cy.get('.CodeMirror textarea')
@@ -61,7 +62,7 @@ describe('Prefixes',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
     })
 
-    it('Check defined prefix autocompleter works',function() {
+    it('Defined prefix autocompleter works',function() {
         cy.get('.CodeMirror-hints').should('not.exist');
         cy.get('.CodeMirror textarea')
         .type('\nw{ctrl}{ }',{ force: true })
@@ -74,7 +75,7 @@ describe('Prefixes',function() {
 
     })
 
-    it('Check Prefix not defined error',function() {
+    it('Prefix not defined error',function() {
         clearYashe();
         cy.get('.parseErrorIcon').should('not.exist');
         

@@ -150,10 +150,8 @@ var drawButtons = function(yashe){
       );
 
 
-      /**
-     * delete button
-     */
-    var endpointButton = $("<div>", {
+
+   /*  var endpointButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.endpoint))
     .addClass("yashe_endpointdBtn")
@@ -176,7 +174,7 @@ var drawButtons = function(yashe){
 
 
   
-    yashe.buttons.append(endpointButton);
+    yashe.buttons.append(endpointButton); */
 
     //Draw buttons
     if(yashe.options.showUploadButton){

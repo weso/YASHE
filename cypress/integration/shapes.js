@@ -17,7 +17,7 @@ describe('Shapes',function() {
         .type('PREFIX : <https://wwww.example.org>\n\n:User', { force: true });
     })
 
-    it('Check the Shape class exist after typing a Shape',function() {
+    it('Shape class exist after typing a Shape',function() {
         clearYashe()
         cy.get('.cm-shape').should('not.exist');
 
@@ -28,7 +28,7 @@ describe('Shapes',function() {
     
     })
 
-    it('Check the shape color is OK',function() {
+    it('Shape color is OK',function() {
         cy.get('.cm-shape').should('have.css', 'color', shapeColor);
     })
 })
