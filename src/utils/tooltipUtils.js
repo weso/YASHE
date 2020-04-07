@@ -51,18 +51,32 @@ var triggerTooltip = function( yashe, e) {
   } ) ).string;
 
 
-    
-var prefixName = token.split(':')[0]
-var wikiElement = token.split(':')[1]
+  var prefixName = token.split(':')[0]
+  var wikiElement = token.split(':')[1]
 
-//Check wikidata prefixes
-if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined  && wikiElement!== ''){
+  if(wikiElement!== undefined  && wikiElement!== ''){
+    let endpoint = rdfUtils.getEndPoint(yashe,prefixName);
+    if(endpoint!=null){
+      checkEntity(wikiElement,endpoint)
+          .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+      .fail(
+        ()=>{
+         
+          checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
+            .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+        });  
+    }
+  }
 
-  checkEntity(wikiElement).done( function( data ) {
+}
 
-    if(!data.error){
+var loadTooltip = function(data,wikiElement,posX,posY){
+  if(!data.error){
 
-      var userLang,entity,description,theme
+      var userLang;
+      var entity = '';
+      var description=''
+      var theme;
       //Gets the preference languaje from the navigator
       userLang = (navigator.language || navigator.userLanguage).split("-")[0]
 
@@ -81,9 +95,15 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
 
       }else{
 
-          entity = content.labels['en'].value +' ('+wikiElement+')'
-          description = content.descriptions['en'].value
-
+          let lb = content.labels['en'];
+          let desc = content.descriptions['en'];
+          if(lb){
+            entity = lb.value +' ('+wikiElement+')';
+          }
+          if(desc){
+             description = desc.value
+          }
+          
       }
 
       theme = yashe.getOption('theme');
@@ -104,21 +124,18 @@ if( rdfUtils.isWikidataValidPrefix(yashe,prefixName) && wikiElement!== undefined
             $('<div>').html(description).css(styles.description)))
         .appendTo('body').fadeIn( 'slow' );
     }
-      
-    })  
-
-  }
 }
 
 //  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
-var checkEntity = function (entity){
+var checkEntity = function (entity,endPoint){
   return $.get(
     {
   
-      url: 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='+entity,
+      url: endPoint+'api.php?action=wbgetentities&format=json&ids='+entity,
       dataType: 'jsonp',
   
     })
+     
 }
 
 

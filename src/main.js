@@ -275,13 +275,13 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-    checkSyntax(yashe);  
+    checkSyntax(yashe);
   });
 
   //Needed
   //Without this, there is a bug 
   yashe.on('changes', function(yashe) {
-    checkSyntax(yashe);  
+    checkSyntax(yashe);
   });
 
   /**
@@ -365,8 +365,8 @@ root.autoComplete = function(yashe) {
 };
 
 // include the autocompleters we provide out-of-the-box
-root.registerAutocompleter('wikidata',
-    require('./autocompleters/wikidata.js'));
+root.registerAutocompleter('wikibase',
+    require('./autocompleters/wikibase.js'));
 
 root.registerAutocompleter('prefixDefinition',
     require('./autocompleters/prefixDefinition.js'));

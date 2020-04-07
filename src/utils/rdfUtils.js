@@ -1,4 +1,4 @@
-var ENTITY_TYPES = {
+const ENTITY_TYPES = {
     'http://www.wikidata.org/prop/direct/': 'property',
     'http://www.wikidata.org/prop/direct-normalized/': 'property',
     'http://www.wikidata.org/prop/': 'property',
@@ -16,7 +16,7 @@ var ENTITY_TYPES = {
     'http://www.wikidata.org/entity/': 'item'
 };
 
-var NAMESPACE_SHORTCUTS = {
+const NAMESPACE_SHORTCUTS = {
         wikibase: 'http://wikiba.se/ontology#',
         wd: 'http://www.wikidata.org/entity/',
         wdt: 'http://www.wikidata.org/prop/direct/',
@@ -37,28 +37,30 @@ var NAMESPACE_SHORTCUTS = {
         wdno: 'http://www.wikidata.org/prop/novalue/',
         wdata: 'http://www.wikidata.org/wiki/Special:EntityData/'
     }
-1
+
+const WIKIDATA_ENDPOINT= 'https://www.wikidata.org/w/'
 
 
 
-var isWikidataValidPrefix = function(yashe,prefixName){
+var getEndPoint = function(yashe,prefixName){
 
-    var definedPrefixex = yashe.getDefinedPrefixes()
-    var iriPrefix
-    
-    //Gets de IRI of the prefix from the defined
-    for (const prop in definedPrefixex) {
-      if(prop === prefixName)
-        iriPrefix = definedPrefixex[prop]
-    }
+    let definedPrefixex = yashe.getDefinedPrefixes();
+    let endpoint = null;
+    Object.keys(definedPrefixex).map(p =>{
+      if(p==prefixName){
+        if(definedPrefixex[p].includes('/wiki/Item:')){
+           endpoint = definedPrefixex[p].replace('http://','https://').split('/wiki/')[0]+'/w/';
+        }else{
+          Object.keys(ENTITY_TYPES).map(pref=>{
+            if(pref === definedPrefixex[p]){
+              endpoint =  WIKIDATA_ENDPOINT;
+            }
+          });
+        }
+      }
+    })
 
-
-    //Compare iriPrefix with the valid wikidata prefixes
-    for(const pref in ENTITY_TYPES){
-        if(pref === iriPrefix)
-          return true
-    }
-    return false
+  return endpoint;
 }
 
 
@@ -106,7 +108,7 @@ module.exports = {
 
     entityTypes:ENTITY_TYPES,
     namespaceShortCuts: NAMESPACE_SHORTCUTS,
-    isWikidataValidPrefix:isWikidataValidPrefix,
+    getEndPoint:getEndPoint,
     isWikidataEntitiesPrefix:isWikidataEntitiesPrefix,
     isWikidataPropertiesPrefix:isWikidataPropertiesPrefix
 

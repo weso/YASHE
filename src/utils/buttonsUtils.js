@@ -148,8 +148,33 @@ var drawButtons = function(yashe){
             Codemirror.signal(yashe,'collapseScreen');
           })
       );
- 
+
+
+
+   /*  var endpointButton = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.endpoint))
+    .addClass("yashe_endpointdBtn")
+    .attr('id','endpointBtn')
+    .attr("title", "Endpoint")
+    .click(function() { 
+          if($('.endpointInput').length>0){
+            $('.endpointInput').remove();
+          }else{
+             $('.yashe_buttons').
+              prepend( 
+                $( '<input class="endpointInput" type="text" id="endPoint" name="fname">')
+                .val(yashe.options.endpoint)
+                .change(function(){
+                   yashe.setOption('endpoint',$('.endpointInput').val())
+                }))
+          }
+         
+    }));
+
+
   
+    yashe.buttons.append(endpointButton); */
 
     //Draw buttons
     if(yashe.options.showUploadButton){

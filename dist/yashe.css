@@ -644,6 +644,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   .yashe .yashe_downloadBtn {
     margin-top: 2px;
     display: inline-block; }
+  .yashe .yashe_endpointdBtn {
+    margin-right: 8px; }
+  .yashe .endpointInput {
+    border-radius: 3px;
+    width: 330px;
+    border: 1px solid #222;
+    background: #f8dddd; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }

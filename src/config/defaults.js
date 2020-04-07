@@ -12,9 +12,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  "# Example 26  Simple ShEx Schema\n"+
-          "# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample\n\n"+
-          "PREFIX :       <http://example.org/>\n"+
+  value:  "PREFIX :       <http://example.org/>\n"+
           "PREFIX schema: <http://schema.org/>\n"+
           "PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>\n\n"+
     
