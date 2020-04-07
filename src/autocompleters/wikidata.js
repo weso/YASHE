@@ -2,7 +2,7 @@
 var $ = require("jquery"),
 rdfUtils = require('../utils/rdfUtils.js')
 
-var API_ENDPOINT = 'https://www.wikidata.org/w/api.php/';
+var API_ENDPOINT = 'https://www.wikidata.org/w/';
 var QUERY = {
 
   action:'wbsearchentities',
@@ -32,11 +32,16 @@ module.exports = function(yashe, name) {
           delete query.type
         }
 
+        let endpoint = rdfUtils.getEndPoint(yashe,prefix);
+        console.log(endpoint)
+        if(endpoint!=null){
+          API_ENDPOINT = endpoint;
+        }
 
         $.get(
             {
           
-              url: API_ENDPOINT + '?' + $.param(query),
+              url: API_ENDPOINT + 'api.php/?' + $.param(query),
               dataType: 'jsonp',
           
             }).done( function( data ) {
@@ -98,10 +103,10 @@ module.exports.isValidCompletionPosition = function(yashe) {
   //This line avoid the autocomplete in the prefix definition
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-
   if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint'){
     if(rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
-      || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)){
+      || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)
+      || rdfUtils.getEndPoint(yashe,prefixName)!=null){
         return true
     }
   }
