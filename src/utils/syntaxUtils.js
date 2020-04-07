@@ -139,12 +139,7 @@ var checkSyntax = function(yashe) {
 
       if(token.type=='shape'){
         yashe.defShapes.push(token.string);
-        
-        if(token.string.startsWith("<")){
-            yashe.usedPrefixes.push({
-                alias:token.string.substring(1,token.string.length),
-                line:l });
-        }else{
+        if(!token.string.startsWith("<")){
           yashe.usedPrefixes.push({
             alias:token.string.split(":")[0]+':',
             line:l });
