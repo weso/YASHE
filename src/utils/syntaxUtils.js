@@ -87,15 +87,7 @@ var checkSyntax = function(yashe) {
 
     //Is last '}' missing?  (See #104)
     if(openTokensCounter != closedTokensCounter){
-      var warningEl = yutils.svg.getElement(imgs.warning);
-      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
-        return errMsg;
-      });   
-      warningEl.style.marginTop = "2px";
-      warningEl.style.marginLeft = "2px";
-      warningEl.className = "parseErrorIcon";
-      yashe.setGutterMarker(l, "gutterErrorBar", "This line is invalid. Expected: '}'");
-      
+      setError(yashe.lastLine(),"This line is invalid. Expected: '}'",yashe)
       yashe.queryValid = false;
       return false;
     }
@@ -147,9 +139,17 @@ var checkSyntax = function(yashe) {
 
       if(token.type=='shape'){
         yashe.defShapes.push(token.string);
-        yashe.usedPrefixes.push({
+        
+        if(token.string.startsWith("<")){
+            yashe.usedPrefixes.push({
+                alias:token.string.substring(1,token.string.length),
+                line:l });
+        }else{
+          yashe.usedPrefixes.push({
             alias:token.string.split(":")[0]+':',
             line:l });
+        }  
+
       }
 
       if(token.type=='shapeRef'){
@@ -225,4 +225,3 @@ var checkSyntax = function(yashe) {
   module.exports = {
     checkSyntax:checkSyntax
   };
-  
