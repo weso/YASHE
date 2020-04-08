@@ -1,4 +1,6 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
+[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f)](https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard)
 
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
@@ -6,8 +8,6 @@ This tool performs lexical and syntactic analysis of the content of the editor, 
 autocomplete mechanisms. 
 In addition, it offers a simple way of integrating into other projects
 
-[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f)](https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard)
 <p align="center">
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
