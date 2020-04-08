@@ -11,7 +11,6 @@ describe('YASHE initialization',function() {
 describe('Grammar',function() {
 
     it('RDFGrammar Book Examples',function() {
-      
         cy.get('#rdfBookSelector').children()
         .each(($el, index, $list) => {
             if(!$el[0].disabled){
@@ -24,7 +23,6 @@ describe('Grammar',function() {
     })
 
     it('Wikidata Examples',function() {
-      
         cy.get('#wikiSelector').children()
         .each(($el, index, $list) => {
             if(!$el[0].disabled){
@@ -37,7 +35,6 @@ describe('Grammar',function() {
     })
 
     it('Other Examples',function() {
-      
         cy.get('#othersSelector').children()
         .each(($el, index, $list) => {
             if(!$el[0].disabled){
