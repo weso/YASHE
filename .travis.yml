@@ -20,6 +20,6 @@ branches:
 
 install:
   - npm ci
+
 script:
-  - npm run dev
   - $(npm bin)/cypress run --record
