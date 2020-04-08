@@ -40,7 +40,7 @@ var grammarTootlip = function(yashe, parent, html) {
  * 
  */
 
-var triggerTooltip = function( yashe, e) {
+var triggerTooltip = function(yashe, e) {
 
   var posX = e.clientX,
   posY = e.clientY + $( window ).scrollTop()
@@ -59,18 +59,18 @@ var triggerTooltip = function( yashe, e) {
     let endpoint = rdfUtils.getEndPoint(yashe,prefixName);
     if(endpoint!=null){
       checkEntity(wikiElement,endpoint)
-          .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+          .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
       .fail(
         ()=>{
           checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
-            .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+            .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
         });  
     }
   }
 
 }
 
-var loadTooltip = function(data,wikiElement,posX,posY){
+var loadTooltip = function(yashe,data,wikiElement,posX,posY){
   if(!data.error){
 
       var userLang;
@@ -107,6 +107,11 @@ var loadTooltip = function(data,wikiElement,posX,posY){
       }
 
       theme = yashe.getOption('theme');
+      let cssStyle = themeStyles['default'];
+      if(theme=='dark'){
+        cssStyle = themeStyles['dark'];
+      }
+
       //Jquery in 2020 coooool
       $( '<div class="CodeMirror cm-s-default CodeMirror-wrap">' )
         .css( 'position', 'absolute' )
@@ -117,7 +122,7 @@ var loadTooltip = function(data,wikiElement,posX,posY){
         } )
         .addClass('wikidataTooltip').css('height','auto')
         .append(
-          $('<div class="wikidata_tooltip">').css(themeStyles[theme])
+          $('<div class="wikidata_tooltip">').css(cssStyle)
           .append(
             $('<div>').html(entity).css(styles.title))
           .append(
@@ -195,7 +200,7 @@ const styles ={
 }
 
 const themeStyles ={
-  wiki:{
+  default:{
     'display': 'inline-block',
     'justify-content': 'center',
     'padding': '10px',
@@ -223,5 +228,5 @@ module.exports = {
   grammarTootlip:grammarTootlip,
   triggerTooltip:triggerTooltip,
   removeWikiToolTip:removeWikiToolTip,
-  debounce:debounce
+  debounce:debounce,
 };

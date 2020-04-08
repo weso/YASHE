@@ -1,5 +1,6 @@
 const keywordColor = 'rgb(255, 0, 0)';
 const prefixesColor = 'rgb(109, 15, 122)';
+const clearYashe = require('../utils/testUtils.js')
 
 describe('YASHE initialization',function() {
     it('Check YASHE exists',function() {
@@ -56,7 +57,7 @@ describe('Prefixes',function() {
 
     it('Select a prefix option from the prefix autocompleter hints',function() {
         cy.get('.CodeMirror-hints').children().first().click();
-         cy.window().then(win => {
+        cy.window().then(win => {
             expect(win.yashe.getValue()).to.equals('PREFIX wd: <http://www.wikidata.org/entity/>');         
         });
         cy.get('.CodeMirror-hints').should('not.exist');
@@ -92,11 +93,3 @@ describe('Prefixes',function() {
 
    
 })
-
-
-function clearYashe(){
-    cy.window().then(win => {
-        win.yashe.setValue("");       
-    });
-}
-

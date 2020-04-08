@@ -1,3 +1,5 @@
+const clearYashe = require('../utils/testUtils.js')
+
 describe('YASHE initialization',function() {
     it('Check YASHE exists',function() {
         cy.visit('http://localhost:4000/')
@@ -107,8 +109,3 @@ describe('Wikibase',function() {
 })
 
 
-function clearYashe(){
-    cy.window().then(win => {
-        win.yashe.setValue("");       
-    });
-}
