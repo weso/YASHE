@@ -13,6 +13,11 @@ cache:
   directories:
     # we also need to cache folder with Cypress binary
     - ~/.cache
+
+branches:
+  only:
+  - gh-pages
+  
 install:
   - npm ci
 script:
