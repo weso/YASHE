@@ -1,4 +1,5 @@
 const shapeColor = 'rgb(15, 122, 80)';
+const clearYashe = require('../utils/testUtils.js')
 
 describe('YASHE initialization',function() {
     it('Check YASHE exists',function() {
@@ -32,10 +33,3 @@ describe('Shapes',function() {
         cy.get('.cm-shape').should('have.css', 'color', shapeColor);
     })
 })
-
-
-function clearYashe(){
-    cy.window().then(win => {
-        win.yashe.setValue("");       
-    });
-}
