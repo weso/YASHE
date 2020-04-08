@@ -460,41 +460,4 @@ root.version = {
 $.ajax(settings).done(function (response) {
   console.log(response);
 });
-
-
-var Bloodhound = require('bloodhound-js');
-
- // Defining the local dataset
-   var engine = new Bloodhound({
-  local: ['dog', 'pig', 'moose'],
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  datumTokenizer: Bloodhound.tokenizers.whitespace
-});
-
-
-
-
-var typeahead = document.getElementsByClassName("typeahead")[0];
-typeahead.addEventListener("keyup",function(e){
- var aux = e.target.value
-
-  var promise = engine.initialize();
-
-  promise.then(function() {
-    
-  engine.search(
-    aux,
-    function(d) {
-      console.log(d);
-    },
-    function(d) {
-      console.log(d);
-    }
-  );
-  
-});
-
-
-})
-
  */
