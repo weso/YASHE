@@ -6,17 +6,6 @@
 [![website](https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F)](http://www.weso.es/YASHE/)
 
 
-<p align="center">
-  <a href="http://www.weso.es/"><img src="https://img.shields.io/badge/organization-WESO-FF2929" alt="organization"/></a>
-  <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page"><img src="https://img.shields.io/badge/poweredBy-Wikidata-00C472" alt="poweredBy"/></a>
- <img src="https://img.shields.io/github/license/weso/YASHE?color=A868E8" alt="license"/>
-  <a href="http://shex.io/"><img src="https://img.shields.io/badge/tool-Text Editor-51CAFF" alt="editor"/></a>
-  <a href="http://shex.io/"><img src="https://img.shields.io/badge/languaje-Shape Expressions (ShEx)-FF69B4" alt="editor"/></a>
-</p>
-
-
-
-
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
