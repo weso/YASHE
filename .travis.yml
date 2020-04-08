@@ -17,8 +17,9 @@ cache:
 branches:
   only:
   - gh-pages
-  
+
 install:
   - npm ci
 script:
+  - npm run dev
   - $(npm bin)/cypress run --record
