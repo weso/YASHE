@@ -446,9 +446,6 @@ root.version = {
   'yasgui-utils': yutils.version,
 };
 
-
-
-
 /* var settings = {
   "async": true,
   "crossDomain": true,
