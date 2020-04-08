@@ -22,4 +22,4 @@ install:
   - npm ci
 
 script:
-  - $(npm bin)/cypress run --record
+  - $(npm bin)/cypress run --record --key b64c49d5-9735-4d04-94e4-6b26ad91c05c
