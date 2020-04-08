@@ -1,6 +1,8 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
-[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f)](https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard)
+<p align="center">
+  <a href="https://travis-ci.com/weso/YASHE"><img src="https://travis-ci.com/weso/YASHE.svg?branch=gh-pages" alt="travis"/></a>
+  <a href="https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f" alt="codacy"/></a>
+</p>
 
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
