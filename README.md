@@ -1,32 +1,13 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/yashe"><img src="https://img.shields.io/npm/v/yashe" alt="npm"/></a>
-  <img src="https://img.shields.io/bundlephobia/min/yashe" alt="size"/>
-  <img src="https://img.shields.io/github/languages/top/weso/YASHE?color=yellow" alt="languaje"/>
-  <a href="http://www.weso.es/YASHE/"><img src="https://img.shields.io/website?url=http%3A%2F%2Fwww.weso.es%2FYASHE%2F" alt="web"/></a>
-  
-  
-</p>
-
-<p align="center">
-  <a href="http://www.weso.es/"><img src="https://img.shields.io/badge/organization-WESO-FF2929" alt="organization"/></a>
-  <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page"><img src="https://img.shields.io/badge/poweredBy-Wikidata-00C472" alt="poweredBy"/></a>
- <img src="https://img.shields.io/github/license/weso/YASHE?color=A868E8" alt="license"/>
-  <a href="http://shex.io/"><img src="https://img.shields.io/badge/tool-Text Editor-51CAFF" alt="editor"/></a>
-  <a href="http://shex.io/"><img src="https://img.shields.io/badge/languaje-Shape Expressions (ShEx)-FF69B4" alt="editor"/></a>
-</p>
-
-
-
-
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
 autocomplete mechanisms. 
 In addition, it offers a simple way of integrating into other projects
 
-<br>
+[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f)](https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard)
 <p align="center">
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
