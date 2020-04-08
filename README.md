@@ -1,11 +1,12 @@
 ![YASHE](./doc/imgs/yashe_logo.png)
-[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
 
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
 autocomplete mechanisms. 
 In addition, it offers a simple way of integrating into other projects
+
+[![Build Status](https://travis-ci.com/weso/YASHE.svg?branch=gh-pages)](https://travis-ci.com/weso/YASHE)
 <p align="center">
   <img src="https://github.com/weso/YASHE/blob/gh-pages/doc/imgs/yasheGIF.gif" alt="YASHE GIF"/>
 </p>
