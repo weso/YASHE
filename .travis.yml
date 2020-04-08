@@ -18,8 +18,12 @@ branches:
   only:
   - gh-pages
 
+env:
+  - CODECOV_TOKEN="c56328f0-9a6c-4028-b375-420a7e4253a9"
+
 install:
   - npm ci
 
 script:
   - npm run test
+  - bash <(curl -s https://codecov.io/bash)
