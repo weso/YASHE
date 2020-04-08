@@ -40,7 +40,7 @@ var grammarTootlip = function(yashe, parent, html) {
  * 
  */
 
-var triggerTooltip = function( yashe, e) {
+var triggerTooltip = function(yashe, e) {
 
   var posX = e.clientX,
   posY = e.clientY + $( window ).scrollTop()
@@ -59,18 +59,18 @@ var triggerTooltip = function( yashe, e) {
     let endpoint = rdfUtils.getEndPoint(yashe,prefixName);
     if(endpoint!=null){
       checkEntity(wikiElement,endpoint)
-          .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+          .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
       .fail(
         ()=>{
           checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
-            .done((data)=>{loadTooltip(data,wikiElement,posX,posY)})
+            .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
         });  
     }
   }
 
 }
 
-var loadTooltip = function(data,wikiElement,posX,posY){
+var loadTooltip = function(yashe,data,wikiElement,posX,posY){
   if(!data.error){
 
       var userLang;
