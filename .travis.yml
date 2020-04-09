@@ -13,7 +13,17 @@ cache:
   directories:
     # we also need to cache folder with Cypress binary
     - ~/.cache
+
+branches:
+  only:
+  - gh-pages
+
 install:
   - npm ci
+  - npm install -g codecov
+
 script:
-  - $(npm bin)/cypress run --record
+  - npm run test
+  - codecov
+
+
