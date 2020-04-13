@@ -102,25 +102,55 @@ $(document).ready(function() {
 
 
     //Add all the Wikidata examples to the selector  
-    var url = "https://api.github.com/repos/weso/YASHE/contents/doc/examples/wikidata";
+     var schemas = [];
     var wikiSelector = $('#wikiSelector');
-    $.ajax({
-      dataType: "json",
-      url: url,
-      success: function (data) {
-        data.forEach(function(element){
-            wikiSelector.append(
-              $( '<option>' ).text( element.name.replace(/-/g,' ') ).attr( 'value', element.name));
-        })
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://www.wikidata.org/w/api.php?action=query&list=allpages&apnamespace=640&aplimit=max&format=json",
+      "method": "GET",
+      "dataType":"jsonp"
       }
+
+    $.ajax(settings).done(function (response) {
+      var pages = response.query.allpages;
+      Object.keys(pages).forEach(function(page){
+        var schema={};
+        schema.pageid = pages[page].pageid;
+        settings.url="https://www.wikidata.org/w/api.php?action=query&pageids="+schema.pageid+"&prop=pageprops&format=json",
+
+        $.ajax(settings).done(function (response) {
+          var data = response.query.pages[schema.pageid].pageprops.displaytitle;
+          var idSplit=data.split('entityschema-title-id">')[1].split('</span>')[0];
+          var nameSplit=data.split('entityschema-title-label">');
+
+          schema.id=idSplit.substring(1,idSplit.length-1);
+          if(nameSplit.length>1){
+            schema.name=nameSplit[1].split('</span>')[0];
+          }
+
+          schema.conceptUri = 'https://www.wikidata.org/wiki/Special:EntitySchemaText/'+schema.id;
+          $.get(schema.conceptUri, function(data) {
+              schema.value=data;
+              schemas.push(schema);
+              wikiSelector.append(
+                $( '<option>' ).text( schema.id+" "+schema.name ).attr( 'value', schema.id));
+          }, 'text');
+        
+        });
+      })
     });
 
-     //Wikidata Selector Listener
+
+    //Wikidata Selector Listener
     wikiSelector.change(function(e) {
         var selected =  $('#wikiSelector option:selected').val();
-        setExample('wikidata',selected);
-        $('#othersSelector').val('');
+        var schema = schemas.filter(function(s){
+          return s.id === selected
+        })
+        if(schema)yashe.setValue(schema[0].value);
         $('#rdfBookSelector').val('');
+        $('#othersSelector').val('');
     });
 
 
