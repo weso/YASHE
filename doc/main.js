@@ -149,6 +149,8 @@ $(document).ready(function() {
           return s.id === selected
         })
         if(schema)yashe.setValue(schema[0].value);
+        $('#rdfBookSelector').val('');
+        $('#othersSelector').val('');
     });
 
 
