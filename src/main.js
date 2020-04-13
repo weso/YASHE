@@ -445,16 +445,3 @@ root.version = {
   'jquery': $.fn.jquery,
   'yasgui-utils': yutils.version,
 };
-
-/* var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://www.mediawiki.org/w/api.php?action=query&meta=tokens&format=json",
-  "method": "GET",
-  "dataType": 'jsonp',
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
- */
