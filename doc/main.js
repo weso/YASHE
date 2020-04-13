@@ -102,7 +102,7 @@ $(document).ready(function() {
 
 
     //Add all the Wikidata examples to the selector  
-     var schemas = [];
+    var schemas = [];
     var wikiSelector = $('#wikiSelector');
     var settings = {
       "async": true,
@@ -115,32 +115,19 @@ $(document).ready(function() {
     $.ajax(settings).done(function (response) {
       var pages = response.query.allpages;
       Object.keys(pages).forEach(function(page){
-        var schema={};
-        schema.pageid = pages[page].pageid;
-        settings.url="https://www.wikidata.org/w/api.php?action=query&pageids="+schema.pageid+"&prop=pageprops&format=json",
-
+        var pageid = pages[page].pageid;
+        settings.url="https://www.wikidata.org/w/api.php?action=query&pageids="+pageid+"&prop=revisions&rvslots=*&rvprop=content&formatversion=2&format=json";
         $.ajax(settings).done(function (response) {
-          var data = response.query.pages[schema.pageid].pageprops.displaytitle;
-          var idSplit=data.split('entityschema-title-id">')[1].split('</span>')[0];
-          var nameSplit=data.split('entityschema-title-label">');
-
-          schema.id=idSplit.substring(1,idSplit.length-1);
-          if(nameSplit.length>1){
-            schema.name=nameSplit[1].split('</span>')[0];
-          }
-
-          schema.conceptUri = 'https://www.wikidata.org/wiki/Special:EntitySchemaText/'+schema.id;
-          $.get(schema.conceptUri, function(data) {
-              schema.value=data;
-              schemas.push(schema);
-              wikiSelector.append(
-                $( '<option>' ).text( schema.id+" "+schema.name ).attr( 'value', schema.id));
-          }, 'text');
-        
+          var exist = response.query.pages;
+          if(exist){
+            var schema = JSON.parse(exist[0].revisions[0].slots.main.content);
+            schemas.push(schema);
+            wikiSelector.append(
+                $( '<option>' ).text( schema.id+" "+schema.labels.en ).attr( 'value', schema.id));
+          } 
         });
-      })
+      });
     });
-
 
     //Wikidata Selector Listener
     wikiSelector.change(function(e) {
@@ -148,7 +135,7 @@ $(document).ready(function() {
         var schema = schemas.filter(function(s){
           return s.id === selected
         })
-        if(schema)yashe.setValue(schema[0].value);
+        if(schema)yashe.setValue(schema[0].schemaText);
         $('#rdfBookSelector').val('');
         $('#othersSelector').val('');
     });
