@@ -95,13 +95,13 @@ describe('Wikibase',function() {
 
         //Type some entity to search and click the first one
         cy.get('.CodeMirror textarea')
-        .type('UB', { force: true });
+        .type('q', { force: true });
        
-        cy.wait(500)
+        cy.wait(700)
         cy.get('.CodeMirror-hints').children().first().click();
         
         cy.window().then(win => {
-            expect(win.yashe.getValue()).to.equals("PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:> \neagle:Q4993");       
+            expect(win.yashe.getValue()).to.equals("PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:> \neagle:Q5493");       
         });
     }) 
 
