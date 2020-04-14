@@ -3,8 +3,8 @@ PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:>
 PREFIX droid: <https://data.droidwiki.org/wiki/Item:>
 PREFIX plant: <http://wikibase.plantdata.io/wiki/Item:>
 PREFIX test: <https://test.wikidata.org/wiki/>
-PREFIX rhizome: <https://artbase.rhizome.org/wiki/>
-PREFIX docu: <http://wikidocumentaries.wmflabs.org/wiki/>
+PREFIX rhizome: <https://artbase.rhizome.org/wiki/Item:>
+PREFIX docu: <http://wikidocumentaries.wmflabs.org/wiki/Item:>
 PREFIX fact: <https://database.factgrid.de/wiki/Item:>
 
 registry:Q16 .
