@@ -1,0 +1,18 @@
+PREFIX registry: <https://wikibase-registry.wmflabs.org/wiki/Item:>
+PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:>
+PREFIX droid: <https://data.droidwiki.org/wiki/Item:>
+PREFIX plant: <http://wikibase.plantdata.io/wiki/Item:>
+PREFIX test: <https://test.wikidata.org/wiki/>
+PREFIX rhizome: <https://artbase.rhizome.org/wiki/>
+PREFIX docu: <http://wikidocumentaries.wmflabs.org/wiki/>
+PREFIX fact: <https://database.factgrid.de/wiki/Item:>
+
+registry:Q16 .
+eagle:Q4225 .
+droid:Q187 .
+plant:Q180732 .
+test:Q10 .
+rhizome:Q1382 .
+docu:Q3 .
+fact:Q99765 .
+
