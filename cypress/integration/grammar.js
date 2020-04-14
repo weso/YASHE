@@ -22,7 +22,8 @@ describe('Grammar',function() {
         })
     })
 
-    it('Wikidata Examples',function() {
+// Wikidata shapes could contain errors
+/*     it('Wikidata Examples',function() {
         cy.get('#wikiSelector').children()
         .each(($el, index, $list) => {
             if(!$el[0].disabled){
@@ -32,7 +33,7 @@ describe('Grammar',function() {
                 });
             }
         })
-    })
+    }) */
 
     it('Other Examples',function() {
         cy.get('#othersSelector').children()
