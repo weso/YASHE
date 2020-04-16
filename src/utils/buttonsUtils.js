@@ -151,20 +151,38 @@ var drawButtons = function(yashe){
 
 
 
-     var endpointButton = $("<div>", {
+     var shareLinkBtn = $("<div>", {
       class: "downloadBtns"
-    }).append($(yutils.svg.getElement(imgs.endpoint))
-    .addClass("yashe_endpointdBtn")
-    .attr('id','endpointBtn')
-    .attr("title", "Endpoint")
+    }).append($(yutils.svg.getElement(imgs.share))
+    .addClass("yashe_shareBtn")
+    .attr('id','shareBtn')
+    .attr("title", "ShareLink")
     .click(function() { 
-          console.log($.param(yashe.options.createShareLink(yashe)));
-         
+        let urlS = window.location.href.split('#shapes')[0]+'#'+$.param(yashe.options.createShareLink(yashe));
+        $('#inputLink').remove();
+        $('.yashe_buttons')
+        .prepend($('<input type="text" id="inputLink" class="shareInput">').val(urlS))
+          
+        $('#inputLink').select(); 
+
+
+        var api_url  = 'http://sho.rt/yourls-api.php';
+        var response = $.get( api_url, {
+            action:   "shorturl",
+            format:   "json",
+            url:      urlS
+            },
+            // callback function that will deal with the server response
+            function( data) {
+                // now do something with the data, for instance show new short URL:
+                alert(data.shorturl);
+            }
+        );
     }));
 
 
   
-    yashe.buttons.append(endpointButton); 
+    yashe.buttons.append(shareLinkBtn); 
 
     //Draw buttons
     if(yashe.options.showUploadButton){

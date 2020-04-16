@@ -293,6 +293,11 @@ const postProcessCmElement = function(yashe) {
   });
 
 
+  yashe.on('focus', function() {
+    $('#inputLink').remove();
+  });
+
+
   /**
    * Wikidata Tooltip Listener
    */
@@ -497,7 +502,7 @@ root.consumeShareLink = function(yashe, urlParams) {
 root.getUrlArguments = function(yashe, config) {
   var data = [
     {
-      name: 'yashe',
+      name: 'shapes',
       value:  yashe.getValue()
     }
   ];
