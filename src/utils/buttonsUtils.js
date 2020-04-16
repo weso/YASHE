@@ -151,30 +151,20 @@ var drawButtons = function(yashe){
 
 
 
-   /*  var endpointButton = $("<div>", {
+     var endpointButton = $("<div>", {
       class: "downloadBtns"
     }).append($(yutils.svg.getElement(imgs.endpoint))
     .addClass("yashe_endpointdBtn")
     .attr('id','endpointBtn')
     .attr("title", "Endpoint")
     .click(function() { 
-          if($('.endpointInput').length>0){
-            $('.endpointInput').remove();
-          }else{
-             $('.yashe_buttons').
-              prepend( 
-                $( '<input class="endpointInput" type="text" id="endPoint" name="fname">')
-                .val(yashe.options.endpoint)
-                .change(function(){
-                   yashe.setOption('endpoint',$('.endpointInput').val())
-                }))
-          }
+          console.log($.param(yashe.options.createShareLink(yashe)));
          
     }));
 
 
   
-    yashe.buttons.append(endpointButton); */
+    yashe.buttons.append(endpointButton); 
 
     //Draw buttons
     if(yashe.options.showUploadButton){

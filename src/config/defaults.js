@@ -89,6 +89,8 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     }
   },
   cursorHeight: 0.9,
+  createShareLink: YASHE.createShareLink,
+  consumeShareLink: YASHE.consumeShareLink,
 
   
   /**
