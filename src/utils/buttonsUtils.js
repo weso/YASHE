@@ -158,7 +158,7 @@ var drawButtons = function(yashe){
     .attr('id','shareBtn')
     .attr("title", "ShareLink")
     .click(function() { 
-        let urlS = window.location.href.split('#shapes')[0]+'#'+$.param(yashe.options.createShareLink(yashe));
+        let urlS = window.location.href.split('#')[0]+'#'+$.param(yashe.options.createShareLink(yashe));
         $('#inputLink').remove();
         $('.yashe_buttons')
         .prepend($('<input type="text" id="inputLink" class="shareInput">').val(urlS))
