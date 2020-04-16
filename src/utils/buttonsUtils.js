@@ -157,28 +157,12 @@ var drawButtons = function(yashe){
     .addClass("yashe_shareBtn")
     .attr('id','shareBtn')
     .attr("title", "ShareLink")
-    .click(function() { 
-      console.log(window.location.href.split('#')[0])
+    .click(function() {
         let urlS = window.location.href.split('#')[0]+'#'+$.param(yashe.options.createShareLink(yashe));
         $('#inputLink').remove();
         $('.yashe_buttons')
         .prepend($('<input type="text" id="inputLink" class="shareInput">').val(urlS))
-          
         $('#inputLink').select(); 
-
-
-        var api_url  = 'http://sho.rt/yourls-api.php';
-        var response = $.get( api_url, {
-            action:   "shorturl",
-            format:   "json",
-            url:      urlS
-            },
-            // callback function that will deal with the server response
-            function( data) {
-                // now do something with the data, for instance show new short URL:
-                alert(data.shorturl);
-            }
-        );
     }));
 
 
