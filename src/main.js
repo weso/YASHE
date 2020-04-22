@@ -399,6 +399,9 @@ root.autoComplete = function(yashe) {
 };
 
 // include the autocompleters we provide out-of-the-box
+root.registerAutocompleter('definedShapes',
+    require('./autocompleters/definedShapes.js'));
+
 root.registerAutocompleter('wikibase',
     require('./autocompleters/wikibase.js'));
 
@@ -506,7 +509,6 @@ root.getUrlArguments = function(yashe, config) {
       value:  yashe.getValue()
     }
   ];
-
 }
 
 require('./config/defaults.js');
