@@ -1,6 +1,7 @@
 "use strict";
 var $ = require("jquery")
 var yashe = require('../main.js')
+var syntaxUtils = require('../utils/syntaxUtils.js')
 var Trie = require('../../lib/trie.js')
 
 module.exports = function(yashe, name) {
