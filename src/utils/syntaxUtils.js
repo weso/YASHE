@@ -170,7 +170,7 @@ var checkSyntax = function(yashe) {
   * Check if the ShapeRefs are defined
  */
   var checkShapes = function(yashe){
-    /* let defShapes = yashe.defShapes;
+    let defShapes = yashe.defShapes;
     let shapeRefs = yashe.shapeRefs;
     for(let r in shapeRefs){
       let err=true;
@@ -182,7 +182,7 @@ var checkSyntax = function(yashe) {
         yashe.queryValid = false;
         return false;
       } 
-    } */
+    }
     return true;
   }
 

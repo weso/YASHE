@@ -275,6 +275,11 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
+      
+ /*        var cur = yashe.getCursor(), tokenOb = yashe.getTokenAt(cur);
+       
+    console.log(yashe.defShapes)
+    console.log(tokenOb.state.defShapes) */
     checkSyntax(yashe);
   });
 

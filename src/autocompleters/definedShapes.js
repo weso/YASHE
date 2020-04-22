@@ -12,14 +12,17 @@ module.exports = function(yashe, name) {
       return module.exports.isValidCompletionPosition(yashe);
     },
     get: function(token) {
-      
+    
         let completions = [];
+        //Object.keys(tokenOb.state.defShapes)
         yashe.defShapes.map(s=>{
             completions.push({
                 text: '@'+s,
                 displayText: '@'+s
             })
         })
+
+    
 
 
       return completions;
