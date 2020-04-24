@@ -86,6 +86,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #6d0f7a; }
   .yashe .cm-s-wiki .cm-prefixDelcIRI {
     color: #6d0f7a; }
+  .yashe .cm-s-wiki .cm-inlineShape {
+    color: #05a; }
   .yashe .cm-s-dark.CodeMirror {
     background: #2B2B2B;
     color: #A9B7C6;

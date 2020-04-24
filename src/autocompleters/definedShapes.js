@@ -15,6 +15,18 @@ module.exports = function(yashe, name) {
     
         let completions = [];
         //Object.keys(tokenOb.state.defShapes)
+
+             for (var l = 0; l < yashe.lineCount(); ++l) {
+                let lineTokens = yashe.getLineTokens(l);
+                //Get all the defined prefixes and all the used prefixes
+                //Get all the defined shapes and all the used shapes
+                for(let t in lineTokens){
+                  let token = lineTokens[t];
+                  console.log(token)
+                }
+
+             }
+        console.log(yashe.defShapes)
         yashe.defShapes.map(s=>{
             completions.push({
                 text: '@'+s,

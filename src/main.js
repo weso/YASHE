@@ -275,16 +275,11 @@ const postProcessCmElement = function(yashe) {
    * In this case, YASHE checks the sintax
    */
   yashe.on('change', function(yashe) {
-      
- /*        var cur = yashe.getCursor(), tokenOb = yashe.getTokenAt(cur);
-       
-    console.log(yashe.defShapes)
-    console.log(tokenOb.state.defShapes) */
     checkSyntax(yashe);
   });
 
   //Needed
-  //Without this, there is a bug 
+  //Without this, there is a bug . Fix https://github.com/weso/YASHE/issues/96
   yashe.on('changes', function(yashe) {
     checkSyntax(yashe);
   });
