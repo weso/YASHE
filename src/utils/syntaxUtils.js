@@ -96,6 +96,8 @@ var checkSyntax = function(yashe) {
     
     if(!checkPrefixes(yashe))return false;
     if(!checkShapes(yashe))return false;
+
+    yashe.shapes = Object.assign([],yashe.defShapes);
   
     yashe.prevQueryValid = yashe.queryValid;
     return true;
