@@ -40,6 +40,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   fixedGutter: true,
   syntaxErrorCheck: true,
   showTooltip: true,
+  showShareButton: true,
   showUploadButton: true,
   showDownloadButton: true,
   showCopyButton: true,

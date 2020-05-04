@@ -166,10 +166,13 @@ var drawButtons = function(yashe){
     }));
 
 
-  
-    yashe.buttons.append(shareLinkBtn); 
 
     //Draw buttons
+
+    if(yashe.options.showShareButton){
+        yashe.buttons.append(shareLinkBtn); 
+    }
+
     if(yashe.options.showUploadButton){
       yashe.buttons.append(uploadButton);
     }
