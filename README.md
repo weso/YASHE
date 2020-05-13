@@ -407,4 +407,5 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 * [ShExML](http://shexml.herminiogarcia.com/) Playground to convert ShExML to RDF and RML offering diferent syntaxes
 
 ## Forked By: :link:
+* [YASME](https://github.com/weso/YASME) Yet Another Shape Map Editor
 * [ShExML Editor](http://shexml.herminiogarcia.com/) ShExML is a language based on ShEx to map and merge heterogeneous data sources. It is designed with usability in mind trying to make the script creation easier to the user
