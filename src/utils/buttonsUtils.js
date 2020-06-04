@@ -108,6 +108,7 @@ var drawButtons = function(yashe){
       yashe.setOption("theme",themeValue)
 
       //Change fill of buttons
+      $('#shareBtn').css('fill', color)
       $('#uploadBntLabel').css('fill', color)
       $('#downloadBtn').css('fill', color)
       $('#copyBtn').css('fill', color)
