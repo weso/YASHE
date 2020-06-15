@@ -34,6 +34,7 @@ function getShapes(sTokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
+        console.log(slots)
         let nodes = slots.reduce((acc,slot)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
@@ -99,7 +100,11 @@ function getBeforeTriplesTokens(tokens){
     let start=true;
     return tokens.reduce((acc,t,index)=>{
         if(t.string=='{' || index == tokens.length-1)start=false;
-        if(start)acc.push(t);
+        if(start){
+            acc.push(t);
+        }else{
+            if(t.type!='punc' && index == tokens.length-1 )acc.push(t); // This is needed when a slot doesn't have any triple
+        }
         return acc;
     },[])
 }
@@ -130,8 +135,7 @@ function getSlots(tokens){
      let start=false;
      let open = 0;
      return tokens.reduce((acc,t,index)=>{
-
-
+   
         if(t.string=='{'){
             open++;
             start=true;
@@ -151,6 +155,8 @@ function getSlots(tokens){
         }
         
         slot.push(t);
+        
+
 
         if(index == tokens.length-1){
             acc.push(slot);
