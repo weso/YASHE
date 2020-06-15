@@ -13,10 +13,9 @@ function prettify(yashe){
 
     console.log(shapes)
 
-    /* yashe.setValue(shapes.reduce((acc,s)=>{
-        //console.log(s.toString())
+    yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString();
-    },"")); */
+    },""));
 }
 
 function getShapes(sTokens){
@@ -36,23 +35,6 @@ function getShapes(sTokens){
 
         let s = new Shape(nodes);
         acc.push(s);
-
-       /*  let sTokens = getBeforeTriplesTokens(shape);
-
-        let tTokens = getTripleTokens(shape);
-        let tTokens2 = getTripleTokens2(shape);
-
-        let f  = tTokens2.reduce((acc,t)=>{
-            acc.push(t.type,getTriples(id,t.tokens));
-            return acc;
-        },[])
-
-       // console.log(f)
-
-        let triples = getTriples(id,tTokens);
-
-        let s = new Node(sTokens,triples);
-        acc.push(s); */
 
         return acc;
 

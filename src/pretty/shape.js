@@ -5,10 +5,9 @@ class Shape{
     }
 
     toString(){
-        this.nodes.map(n=>{
-            str+=n.toString();
-        })
-        return str;
+        return this.nodes.reduce((acc,n)=>{
+            return acc+=n.toString();
+        },"");
     }
 }
 
