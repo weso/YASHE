@@ -12,15 +12,15 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  value:  `PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-start = @<human>
-
-<human> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q5 ];
+:User {
+  schema:name          xsd:string  ;
+  schema:birthDate     xsd:date?  ;
+  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
+  schema:knows         IRI @:User*
 }
 `,
 
@@ -75,8 +75,6 @@ start = @<human>
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
-    "Ctrl-F": YASHE.pretty,
-    "Cmd-F": YASHE.pretty,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
       if(yashe.getOption("fullScreen")){
