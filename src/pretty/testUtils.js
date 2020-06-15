@@ -48,13 +48,21 @@ function getTriples(shapeId,tokens) {
         let finish = true;
         let open = 0;
         return tokens.reduce((acc,token,index)=>{
+
+            if(token.skip) return acc;;
+
             singleTriple.push(token);             
             if(isFinishOfTriple(tokens,token,index,finish)){
                 if(singleTriple.length>1){
                         let before = getBeforeTriplesTokens(singleTriple);
                         let after = getTripleTokens(singleTriple);
                         let subTriples = getTriples(acc.length,after);
-                        let triple = new Node(before,subTriples);
+                        let comment ="";
+                        if( tokens[index+1] && tokens[index+1].type=='comment'){
+                            comment = tokens[index+1].string;
+                            tokens[index+1].skip = true;
+                        }
+                        let triple = new Node(before,subTriples,comment);
                         acc.push(triple);
                 }
                 singleTriple = [];
@@ -142,36 +150,6 @@ function getSlots(tokens){
      },[])
 }
 
-
-function getTripleTokens2(tokens){
-    let start=false;
-    let open = 0;
-    let aux = [];
-    let type = 'default';
-    return tokens.reduce((acc,t)=>{
-        if(start)aux.push(t);
-         
-        if((t.string.toLowerCase()=='and'|| t.string.toLowerCase()=='or') 
-            && !start){
-                type = t.string.toLowerCase();
-        }
-
-        if(t.string=='{'){
-            open++;
-            start=true;
-        }
-
-        if(t.string=='}')open--;
-        
-        if(open == 0 && start==true){
-            start=false;
-            acc.push({type:type,tokens:Object.assign([],aux)});
-            aux=[];
-        }
-
-        return acc;
-    },[])
-}
 
 
 function getTokens(){

@@ -1,8 +1,9 @@
 class Node{
 
-    constructor(constraints,triples){
+    constructor(constraints,triples,comment=''){
         this.constraints = constraints;
         this.triples = triples;
+        this.comment = comment;
     }
 
     toString(){
@@ -17,9 +18,11 @@ class Node{
             })
             str+=" }";
         }else{
-            str+=";\n";
+            str+="; ";
         }   
         
+        str+=this.comment +"\n";
+
         return str;
     }
 
