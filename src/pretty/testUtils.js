@@ -1,11 +1,16 @@
-let Node = require('./node.js');
+let Prefix = require('./prefix.js');
 let Shape = require('./shape.js');
+let Node = require('./node.js');
+let {getLongestPrefix,getSeparator} = require('./printUtils.js');
+
 
 function prettify(yashe){
     editor = yashe;
     let tokens = getTokens(yashe);
 
     let pTokens = getPrefixesTokens(tokens);
+    let prefixes = getPrefixes(pTokens);
+
     let starts = getStarts(tokens);
     let sTokens = getShapesTokens(tokens);
 
@@ -13,9 +18,14 @@ function prettify(yashe){
 
     console.log(shapes)
 
+    let str = getPrefixesStr(prefixes)+"\n";
+    str+=starts.reduce((acc,s)=>{
+        return acc+=s+"\n";
+    },"");
+
     yashe.setValue(shapes.reduce((acc,s)=>{
-        return acc+=s.toString();
-    },""));
+        return acc+=s.toString()+"\n\n";
+    },str));
 }
 
 function getShapes(sTokens){
@@ -49,7 +59,7 @@ function getTriples(shapeId,tokens) {
         let open = 0;
         return tokens.reduce((acc,token,index)=>{
 
-            if(token.skip) return acc;;
+            if(token.skip) return acc;
 
             singleTriple.push(token);             
             if(isFinishOfTriple(tokens,token,index,finish)){
@@ -231,6 +241,21 @@ function getShapesTokens(tokens){
         return acc;
 
     },[]);
+}
+
+
+function getPrefixes(pTokens){
+    return pTokens.reduce((acc,prefix)=>{
+        acc.push(new Prefix(prefix[1].string,prefix[2].string));
+        return acc;
+    },[]);
+}
+
+function getPrefixesStr(prefixes){
+    return prefixes.reduce((acc,p)=>{
+        let dif = getLongestPrefix(prefixes) - p.prefixName.length;
+        return acc+='PREFIX '+p.prefixName+getSeparator(dif)+p.prefixValue+'\n';
+    },'');
 }
 
 function getNonWsTokens(tokens){

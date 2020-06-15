@@ -8,21 +8,19 @@ class Node{
 
     toString(){
         let str = "";
-        this.constraints.map(c=>{
-            str+=" "+c.string;
+        let space = "";
+        this.constraints.map((c,index)=>{
+            if(index!=0)space=" ";
+            str+=space+c.string;
         });
         if(this.triples.length>0){
             str+=" {\n"
             this.triples.map(t=>{
-                str+=" "+t.toString();
+                str+="  "+t.toString()+ ";";
+                str+=" "+t.comment +"\n";
             })
-            str+=" }";
-        }else{
-            str+="; ";
-        }   
-        
-        str+=this.comment +"\n";
-
+            str+="} ";
+        } 
         return str;
     }
 
