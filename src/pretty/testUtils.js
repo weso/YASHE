@@ -1,4 +1,5 @@
 let Node = require('./node.js');
+let Shape = require('./shape.js');
 
 function prettify(yashe){
     editor = yashe;
@@ -10,7 +11,7 @@ function prettify(yashe){
 
     let shapes = getShapes(sTokens);
 
-    //console.log(shapes)
+    console.log(shapes)
 
     /* yashe.setValue(shapes.reduce((acc,s)=>{
         //console.log(s.toString())
@@ -23,12 +24,20 @@ function getShapes(sTokens){
     return sTokens.reduce((acc,shape)=>{
         let id  = acc.length;
         let shapeDef = shape[0].string;
+        let slots = getSlots(shape);
+        let nodes = slots.reduce((acc,slot)=>{
+            let constraints = getBeforeTriplesTokens(slot);
+            let tTokens = getTripleTokens(slot);
+            let triples = getTriples(id,tTokens);
+            let node = new Node(constraints,triples);
+            acc.push(node);
+            return acc;
+        },[]);
 
-        let splits = splitShape(shape);
-        console.log(splits)
+        let s = new Shape(nodes);
+        acc.push(s);
 
-
-        let sTokens = getBeforeTriplesTokens(shape);
+       /*  let sTokens = getBeforeTriplesTokens(shape);
 
         let tTokens = getTripleTokens(shape);
         let tTokens2 = getTripleTokens2(shape);
@@ -43,7 +52,7 @@ function getShapes(sTokens){
         let triples = getTriples(id,tTokens);
 
         let s = new Node(sTokens,triples);
-        acc.push(s);
+        acc.push(s); */
 
         return acc;
 
@@ -115,7 +124,7 @@ function getTripleTokens(tokens){
     },[])
 }
 
-function splitShape(tokens){
+function getSlots(tokens){
      let slot = [];
      let isMulti = false;
      let start=false;
