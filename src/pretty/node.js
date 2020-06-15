@@ -24,7 +24,8 @@ class Node{
         this.constraints.map((c,index)=>{
             let actual = c.string.length;
             let diference = previous - actual;
-            if(index==0){
+            console.log(c)
+            if(index==0 && c.type!='shape' && c.string!='and'&& c.string!='or' && this.constraints[index+1] && this.constraints[index+1].string!='{'){
                 separator=getSeparator(diference);
             }else{
                 separator = " ";
@@ -32,7 +33,7 @@ class Node{
             str+=c.string+separator;
         });
         if(this.triples.length>0){
-            str+=" {\n"
+            str+="{\n"
             this.triples.map(t=>{
                 str+="  "+t.toString(longest)+ ";";
                 str+=" "+t.comment +"\n";
