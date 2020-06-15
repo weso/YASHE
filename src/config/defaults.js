@@ -12,16 +12,17 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  "PREFIX :       <http://example.org/>\n"+
-          "PREFIX schema: <http://schema.org/>\n"+
-          "PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>\n\n"+
-    
-          ":User IRI {\n"+ 
-          "  schema:name          xsd:string  ;\n"+
-          "  schema:birthDate     xsd:date?  ;\n"+
-          "  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;\n"+
-          "  schema:knows         IRI @:User* \n"+
-          "}",
+  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+start = @<human>
+
+<human> EXTRA wdt:P31 {
+  wdt:P31 [wd:Q5 ];
+}
+`,
 
   highlightSelectionMatches: {
     showToken: /\w/
@@ -74,6 +75,8 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
+    "Ctrl-F": YASHE.pretty,
+    "Cmd-F": YASHE.pretty,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
       if(yashe.getOption("fullScreen")){

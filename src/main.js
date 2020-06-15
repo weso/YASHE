@@ -21,6 +21,7 @@ const buttonsUtils = require('./utils/buttonsUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
 const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
+const pretty = require('./pretty/testUtils.js');
 
 require('../lib/deparam.js');
 require('codemirror/addon/fold/foldcode.js');
@@ -203,6 +204,13 @@ const extendCmInstance = function(yashe) {
   yashe.disableCompleter = function(name) {
     removeCompleterFromSettings(yashe.options, name);
   };
+
+  yashe.wikiformat = function(){
+    formatUtils.wikiFormat(yashe);
+  }
+
+
+
   return yashe;
 };
 
@@ -370,6 +378,11 @@ root.storeContent = function(yashe) {
   }
 };
 
+
+root.pretty = function(yashe){
+  pretty.prettify(yashe);
+}
+
 /**
  * Checks YASHE content syntax
  * @param {object} yashe
@@ -511,6 +524,8 @@ root.getUrlArguments = function(yashe, config) {
   ];
 }
 
+
+
 require('./config/defaults.js');
 root.$ = $;
 root.version = {
@@ -519,3 +534,5 @@ root.version = {
   'jquery': $.fn.jquery,
   'yasgui-utils': yutils.version,
 };
+
+
