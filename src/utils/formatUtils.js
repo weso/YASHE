@@ -162,8 +162,8 @@ var copyLineDown = function(yashe) {
     for (var l = 7; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
-        console.log({line:lineTokens})
-        console.log({nonWs:nonWs})
+       // console.log({line:lineTokens})
+       // console.log({nonWs:nonWs})
         for(let t in lineTokens){
           let token = lineTokens[t];
           

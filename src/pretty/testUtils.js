@@ -10,12 +10,12 @@ function prettify(yashe){
 
     let shapes = getShapes(sTokens);
 
-    console.log(shapes)
+    //console.log(shapes)
 
-    yashe.setValue(shapes.reduce((acc,s)=>{
-        console.log(s.toString())
+    /* yashe.setValue(shapes.reduce((acc,s)=>{
+        //console.log(s.toString())
         return acc+=s.toString();
-    },""));
+    },"")); */
 }
 
 function getShapes(sTokens){
@@ -23,9 +23,23 @@ function getShapes(sTokens){
     return sTokens.reduce((acc,shape)=>{
         let id  = acc.length;
         let shapeDef = shape[0].string;
+
+        let splits = splitShape(shape);
+        console.log(splits)
+
+
         let sTokens = getBeforeTriplesTokens(shape);
 
         let tTokens = getTripleTokens(shape);
+        let tTokens2 = getTripleTokens2(shape);
+
+        let f  = tTokens2.reduce((acc,t)=>{
+            acc.push(t.type,getTriples(id,t.tokens));
+            return acc;
+        },[])
+
+       // console.log(f)
+
         let triples = getTriples(id,tTokens);
 
         let s = new Node(sTokens,triples);
@@ -97,6 +111,73 @@ function getTripleTokens(tokens){
         }
 
         if(open == 0 && start==true)start=false;
+        return acc;
+    },[])
+}
+
+function splitShape(tokens){
+     let slot = [];
+     let isMulti = false;
+     let start=false;
+     let open = 0;
+     return tokens.reduce((acc,t,index)=>{
+
+
+        if(t.string=='{'){
+            open++;
+            start=true;
+        }
+
+        if(t.string=='}'){
+            open--;
+        }
+
+        if(open == 0 && start==true)start=false;
+
+
+        if((t.string.toLowerCase() =='and' || t.string.toLowerCase() =='or')&& !start){
+            isMulti = true;
+            acc.push(slot);
+            slot = [];
+        }
+        
+        slot.push(t);
+
+        if(index == tokens.length-1){
+            acc.push(slot);
+        }
+
+         return acc;
+     },[])
+}
+
+
+function getTripleTokens2(tokens){
+    let start=false;
+    let open = 0;
+    let aux = [];
+    let type = 'default';
+    return tokens.reduce((acc,t)=>{
+        if(start)aux.push(t);
+         
+        if((t.string.toLowerCase()=='and'|| t.string.toLowerCase()=='or') 
+            && !start){
+                type = t.string.toLowerCase();
+        }
+
+        if(t.string=='{'){
+            open++;
+            start=true;
+        }
+
+        if(t.string=='}')open--;
+        
+        if(open == 0 && start==true){
+            start=false;
+            acc.push({type:type,tokens:Object.assign([],aux)});
+            aux=[];
+        }
+
         return acc;
     },[])
 }
