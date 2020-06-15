@@ -1,3 +1,5 @@
+let {getSeparator} = require('./printUtils.js')
+
 class Node{
 
     constructor(constraints,triples,comment=''){
@@ -6,17 +8,33 @@ class Node{
         this.comment = comment;
     }
 
-    toString(){
+    toString(previous){
+        let longest = 0;
+        this.triples.map(t=>{   
+            let token = t.constraints[0];
+            if(token.type=='string-2'){
+                if(token.string.length>longest){
+                    longest = token.string.length;
+                }
+            }
+        })
+
         let str = "";
-        let space = "";
+        let separator = "";
         this.constraints.map((c,index)=>{
-            if(index!=0)space=" ";
-            str+=space+c.string;
+            let actual = c.string.length;
+            let diference = previous - actual;
+            if(index==0){
+                separator=getSeparator(diference);
+            }else{
+                separator = " ";
+            }
+            str+=c.string+separator;
         });
         if(this.triples.length>0){
             str+=" {\n"
             this.triples.map(t=>{
-                str+="  "+t.toString()+ ";";
+                str+="  "+t.toString(longest)+ ";";
                 str+=" "+t.comment +"\n";
             })
             str+="} ";

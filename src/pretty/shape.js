@@ -6,7 +6,7 @@ class Shape{
 
     toString(){
         return this.nodes.reduce((acc,n)=>{
-            return acc+=n.toString();
+            return acc+=n.toString(0);
         },"");
     }
 }
