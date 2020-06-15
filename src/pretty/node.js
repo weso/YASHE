@@ -1,4 +1,4 @@
-let {getSeparator} = require('./printUtils.js')
+let {getSeparatorIfNeeded,getLongestTConstraint} = require('./printUtils.js')
 
 class Node{
 
@@ -8,40 +8,26 @@ class Node{
         this.comment = comment;
     }
 
-    toString(previous){
-        let longest = 0;
-        this.triples.map(t=>{   
-            let token = t.constraints[0];
-            if(token.type=='string-2'){
-                if(token.string.length>longest){
-                    longest = token.string.length;
-                }
-            }
-        })
-
+    toString(longest){
         let str = "";
-        let separator = "";
-        this.constraints.map((c,index)=>{
-            let actual = c.string.length;
-            let diference = previous - actual;
-            console.log(c)
-            if(index==0 && c.type!='shape' && c.string!='and'&& c.string!='or' && this.constraints[index+1] && this.constraints[index+1].string!='{'){
-                separator=getSeparator(diference);
-            }else{
-                separator = " ";
-            }
-            str+=c.string+separator;
+        this.constraints.map((token,index)=>{
+            let nexToken = this.constraints[index+1];
+            str+=token.string+getSeparatorIfNeeded(index,token,nexToken,longest);;
         });
         if(this.triples.length>0){
             str+="{\n"
             this.triples.map(t=>{
-                str+="  "+t.toString(longest)+ ";";
+                let currentLongest = getLongestTConstraint(this.triples);
+                str+="  "+t.toString(currentLongest)+ ";";
                 str+=" "+t.comment +"\n";
             })
             str+="} ";
         } 
         return str;
     }
+
+
+
 
 }
 module.exports = Node;

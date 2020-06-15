@@ -90,10 +90,45 @@ function getLongestPrefix(prefixes){
     },0);
 }
 
+
+function getLongestTConstraint(triples){
+    return triples.reduce((acc,t)=>{   
+        let token = t.constraints[0];
+        if(token.type=='string-2'){
+            if(token.string.length>acc){
+                acc = token.string.length;
+            }
+        }
+        return acc;
+    },0)
+}
+
+function needsSeparator(index,token,nexToken){
+  return    index==0 
+        && token.type!='shape' 
+        && token.string!='and'
+        && token.string!='or' 
+        && nexToken
+        && nexToken.string!='{';
+}
+
+
+function getSeparatorIfNeeded(index,token,nexToken,longest){
+    let separator = " ";
+    if(needsSeparator(index,token,nexToken)){
+        let actual = token.string.length;
+        let diference = longest - actual;
+        separator=getSeparator(diference);
+    }
+    return separator;
+}
+
 module.exports ={
     getSeparators:getSeparators,
     getLongestElements:getLongestElements,
     getSeparator:getSeparator,
-    getLongestPrefix:getLongestPrefix
+    getLongestPrefix:getLongestPrefix,
+    getLongestTConstraint:getLongestTConstraint,
+    getSeparatorIfNeeded:getSeparatorIfNeeded
 
 }
