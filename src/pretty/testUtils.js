@@ -14,6 +14,8 @@ function prettify(yashe){
     let starts = getStarts(tokens);
     let sTokens = getShapesTokens(tokens);
 
+    
+
     let shapes = getShapes(sTokens);
 
     //console.log(shapes)
@@ -28,10 +30,12 @@ function prettify(yashe){
     yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString()+"\n\n";
     },str));
+
 }
 
+
+
 function getShapes(sTokens){
-    references = [];
     return sTokens.reduce((acc,shape)=>{
         let id  = acc.length;
         let shapeDef = shape[0].string;
@@ -141,6 +145,7 @@ function getBeforeTriplesTokens(tokens){
         }else{
             if(t.type!='punc' && index == tokens.length-1 )acc.push(t); // This is needed when a slot doesn't have any triple
         }
+       
         return acc;
     },[])
 }
@@ -153,13 +158,7 @@ function getTripleTokens(tokens){
     return tokens.reduce((acc,t)=>{
         
         if(start){
-            // If the first token of the triples is a comment we don't want it
-            // because it's already defined in getBeforeTriplesTokens
-            if(isFirstToken && t.type=='comment'){
-                isFirstToken = false;
-            }else{
-                acc.push(t);
-            }
+            acc.push(t);
         }
         if(t.string=='{'){
             open++;

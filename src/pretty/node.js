@@ -9,15 +9,19 @@ class Node{
         this.firstComment = firstComment;
     }
 
-    toString(longest){
+    toString(longest,isTriple){
         let str = this.firstComment;
-        let triplesStart = "{ ";
+        let tripleComent = "";
         let forceSeparator = false;
         this.constraints.map((token,index)=>{
-
             if(token.type=='comment'){
-                triplesStart+=token.string;
-                forceSeparator = true;
+            
+                if(index==0){//If it's a comment before the constraints skip it
+                    forceSeparator = true;
+                }else{ //If not, add it to the finish of the line
+                    tripleComent+=token.string;
+                }
+                
             }else{
                 if(forceSeparator)index--;
                 let nexToken = this.constraints[index+1];
@@ -25,14 +29,20 @@ class Node{
             }
         });
         if(this.triples.length>0){
-            str+=triplesStart+="\n";
+            str+='{ '+tripleComent+"\n";
             this.triples.map(t=>{
                 let currentLongest = getLongestTConstraint(this.triples);
-                str+="  "+t.toString(currentLongest)+ ";";
+                str+="  "+t.toString(currentLongest,true);
                 str+=" "+t.comment +"\n";
             })
-            str+="} ";
-        } 
+            str+="}";
+        }else{
+           
+            if(isTriple)str+="; "+tripleComent;
+        }
+
+        
+        
         return str;
     }
 
