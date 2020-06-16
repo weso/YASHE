@@ -12,11 +12,14 @@ class Node{
     toString(longest){
         let str = this.firstComment;
         let triplesStart = "{ ";
+        let forceSeparator = false;
         this.constraints.map((token,index)=>{
 
             if(token.type=='comment'){
                 triplesStart+=token.string;
+                forceSeparator = true;
             }else{
+                if(forceSeparator)index--;
                 let nexToken = this.constraints[index+1];
                 str+=token.string+getSeparatorIfNeeded(index,token,nexToken,longest);;
             }
