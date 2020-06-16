@@ -16,12 +16,14 @@ function prettify(yashe){
 
     let shapes = getShapes(sTokens);
 
-    console.log(shapes)
+    //console.log(shapes)
 
     let str = getPrefixesStr(prefixes)+"\n";
     str+=starts.reduce((acc,s)=>{
         return acc+=s+"\n";
     },"");
+
+    str+='\n';
 
     yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString()+"\n\n";
@@ -34,7 +36,6 @@ function getShapes(sTokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
-        console.log(slots)
         let nodes = slots.reduce((acc,slot)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
@@ -69,10 +70,33 @@ function getTriples(shapeId,tokens) {
                         let after = getTripleTokens(singleTriple);
                         let subTriples = getTriples(acc.length,after);
                         let comment ="";
-                        if( tokens[index+1] && tokens[index+1].type=='comment'){
-                            comment = tokens[index+1].string;
-                            tokens[index+1].skip = true;
+                        let nextToken = tokens[index+1];
+                        //console.table({token:token,next:nextToken})
+                        
+                        let i =1;
+                        let comments=[];
+                        while(tokens[index+i] && tokens[index+i].type=='comment'){
+                            comments.push(tokens[index+i]);
+                            i++;
                         }
+                
+                        
+                        comments.map(c=>{
+                            if(c.start < token.start){
+                                comment+="\n  ";
+                            }
+                            comment+=" "+c.string;
+                            c.skip = true;
+                        })
+                    
+
+                      /*   if(nextToken && nextToken.type=='comment'){
+                            if(nextToken.start < token.start){
+                                comment+="\n  ";
+                            }
+                            comment += nextToken.string;
+                            nextToken.skip = true;
+                        } */
                         let triple = new Node(before,subTriples,comment);
                         acc.push(triple);
                 }

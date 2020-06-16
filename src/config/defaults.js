@@ -17,13 +17,8 @@ PREFIX schema: <http://schema.org/>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 :User {
-  schema:name          xsd:string  ; #comment
-} and {
-  schema:name          xsd:string  ;
-  schema:birthDate     xsd:date?  ;
-  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
-  schema:knows         IRI @:User*
-} or xsd:string MINLENGTH 3 @:User
+  schema:name   xsd:string  ; #comment
+} 
 `,
 
   highlightSelectionMatches: {
