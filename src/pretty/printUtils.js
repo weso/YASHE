@@ -108,8 +108,9 @@ function needsSeparator(index,token,nexToken){
         && token.type!='shape' 
         && token.string!='and'
         && token.string!='or' 
+        && token.string!='('
         && nexToken
-        && nexToken.string!='{';
+        && nexToken.string!='{' ;
 }
 
 
