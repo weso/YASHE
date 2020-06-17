@@ -5,7 +5,7 @@ let {getLongestPrefix,getSeparator} = require('./printUtils.js');
 
 
 function prettify(yashe){
-    editor = yashe;
+
     let tokens = getTokens(yashe);
 
     let pTokens = getPrefixesTokens(tokens);
@@ -30,6 +30,7 @@ function prettify(yashe){
     yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString()+"\n\n";
     },str));
+
 
 }
 
@@ -64,15 +65,14 @@ function getTriples(shapeId,tokens) {
         let finish = true;
         let open = 0;
         let isStartWithComent = false;
-        let firstComment = "";
-       
         return tokens.reduce((acc,token,index)=>{
 
             if(token.skip) return acc;
-            
+
             singleTriple.push(token);             
             if(isFinishOfTriple(tokens,token,index,finish)){
                 if(singleTriple.length>1){
+
                         let before = getBeforeTriplesTokens(singleTriple);
                         let after = getTripleTokens(singleTriple);
                         let subTriples = getTriples(acc.length,after);
@@ -94,7 +94,8 @@ function getTriples(shapeId,tokens) {
                             c.skip = true;
                         })
 
-                        acc.push(new Node(before,subTriples,comment));
+                        acc.push(new Node(before,subTriples,comment,start));
+                        start=false;
                 }
                 singleTriple = [];
             }

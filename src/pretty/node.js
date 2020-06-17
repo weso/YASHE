@@ -2,15 +2,15 @@ let {getSeparatorIfNeeded,getLongestTConstraint} = require('./printUtils.js')
 
 class Node{
 
-    constructor(constraints,triples,comment='',firstComment=''){
+    constructor(constraints,triples,comment='',emptyBrackets){
         this.constraints = constraints;
         this.triples = triples;
         this.comment = comment;
-        this.firstComment = firstComment;
+        this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
     }
 
     toString(longest,isTriple){
-        let str = this.firstComment;
+        let str = "";
         let tripleComent = "";
         let forceSeparator = false;
         this.constraints.map((token,index)=>{
@@ -28,6 +28,9 @@ class Node{
                 str+=token.string+getSeparatorIfNeeded(index,token,nexToken,longest);;
             }
         });
+
+        if(this.emptyBrackets)str+='{}';
+
         if(this.triples.length>0){
             str+='{ '+tripleComent+"\n";
             this.triples.map(t=>{
