@@ -10,7 +10,7 @@ class Node{
         this.afterTriples= afterTriples;
     }
 
-    toString(longest,isTriple,indent=1){
+    toString(longest,isTriple,indent=1,isLastTriple='false'){
         let str = "";
         let tripleComent = "";
         let forceSeparator = false;
@@ -39,9 +39,11 @@ class Node{
             let breakLine = "\n";
             if(isTriple && this.triples.length==1)breakLine = "";
             str+='{ '+tripleComent+breakLine;
-            this.triples.map(t=>{
+            this.triples.map((t,index)=>{
                 let currentLongest = getLongestTConstraint(this.triples);
-                str+=this.getIndent(indent)+t.toString(currentLongest,true,indent+1);
+                let isLastTriple = false;
+                if(index==this.triples.length-1)isLastTriple = true;
+                str+=this.getIndent(indent)+t.toString(currentLongest,true,indent+1,isLastTriple);
                 str+=" "+t.comment +breakLine;
             })
 
@@ -50,12 +52,15 @@ class Node{
             this.afterTriples.map(a=>{
                 str+=a.string+" ";
             })
-            if(isTriple)str+=";";
+            if(isTriple && !isLastTriple)str+=";";
         }else{
 
             if(this.emptyBrackets)str+='{}';
            
-            if(isTriple)str+="; "+tripleComent;
+            if(isTriple){
+                if(!isLastTriple)str+=';';
+                str+=tripleComent;
+            }
         }
 
         
