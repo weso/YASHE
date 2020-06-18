@@ -1,76 +1,3 @@
-function getSeparators(triple,longest){
-    let typeLength = triple.type.toString().length;
-    let constLength = triple.constraint.toString().length;
-    let facetLength = getFacetsString(triple.facets).length;
-    let refLength = triple.shapeRef.toString().length;
-    let cardLength;
-    if(triple.cardinality)cardLength = triple.cardinality.toString().length;
-    let bodyLength = constLength+facetLength+refLength;
-    if(triple.constraint.toString()=='.')bodyLength-=2;
-
-    let typeDiference = longest.type - typeLength;
-    let bodyDiference = longest.body - bodyLength;
-    let cardDiference = longest.card - cardLength;
-
-       
-    return{
-        type:getSeparator(typeDiference),
-        body:getSeparator(bodyDiference),
-        card:getSeparator(cardDiference),
-    }
-}
-
-function getLongestElements(triples){
-    let longestType = getLongestElement(triples,'type');
-    let longestConstraint = getLongestElement(triples,'constraint');
-    let longestFacet = getLongestFacet(triples,'facet');
-    let longestRef = getLongestElement(triples,'shapeRef');
-    let longestCard = getLongestElement(triples,'cardinality');
-    let longestBody = getLongestBody(triples);
-
-    return {
-        type:longestType,
-        body:longestBody,
-        card:longestCard
-    }
-}
-
-
-function getLongestElement(triples,element){
-      let size=0;
-      triples.forEach(triple => {
-          let value;
-          if(triple[element])value = triple[element].toString().length;
-          if(value>size)size = value;
-      });
-      return size;
-}
-
-function getLongestFacet(triples){
-    let size=0;
-    triples.forEach(triple => {
-        let value = getFacetsString(triple.facets).length;
-        if(value>size)size = value;
-    });
-    return size;
-}
-
-function getFacetsString(facets){
-    return facets.reduce((acc,f)=>{
-        return acc+=f.toString()+' ';
-    },'')+' ';
-}
-
-function getLongestBody(triples){
-    return triples.reduce((acc,t)=>{
-        let cValue = t.constraint.toString().length;
-        let fValue = getFacetsString(t.facets).length;
-        let rValue = t.shapeRef.toString().length;
-        let value = cValue+fValue+rValue;
-        if(value>acc)acc = value;
-        return acc;
-    },0);
-}
 
 
 function getSeparator(size){
@@ -91,6 +18,8 @@ function getLongestPrefix(prefixes){
 }
 
 
+
+
 function getLongestTConstraint(triples){
     return triples.reduce((acc,t)=>{   
         let token = t.constraints[0];
@@ -103,20 +32,31 @@ function getLongestTConstraint(triples){
     },0)
 }
 
-function needsSeparator(index,token,nexToken){
+function needsSeparator(index,token,nexToken,constraints){
   return    index==0 
         && token.type!='shape' 
         && token.string!='and'
         && token.string!='or' 
         && token.string!='('
         && nexToken
-        && nexToken.string!='{' ;
+        && nexToken.string!='{'
+        && hasConstraints(constraints) ;
+}
+
+function hasConstraints(constraints) {
+   
+    return constraints.reduce((acc,c)=>{
+        if(c.type!="string-2" 
+        && c.type!='variable-3'
+        && c.type!='comment')acc=true;
+        return acc;
+    },false)
 }
 
 
-function getSeparatorIfNeeded(index,token,nexToken,longest){
+function getSeparatorIfNeeded(index,token,nexToken,longest,constraints){
     let separator = " ";
-    if(needsSeparator(index,token,nexToken)){
+    if(needsSeparator(index,token,nexToken,constraints)){
         let actual = token.string.length;
         let diference = longest - actual;
         separator=getSeparator(diference);
@@ -125,11 +65,8 @@ function getSeparatorIfNeeded(index,token,nexToken,longest){
 }
 
 module.exports ={
-    getSeparators:getSeparators,
-    getLongestElements:getLongestElements,
     getSeparator:getSeparator,
     getLongestPrefix:getLongestPrefix,
     getLongestTConstraint:getLongestTConstraint,
     getSeparatorIfNeeded:getSeparatorIfNeeded
-
 }
