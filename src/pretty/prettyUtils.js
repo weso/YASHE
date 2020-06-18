@@ -199,8 +199,13 @@ function getSlots(tokens){
             slot = [];
         }
         
+        //If there is any prefix declaration after the Shape we don't want it
+        if(t.string.toLowerCase()!='prefix'
+        && t.type!='prefixDelcAlias' 
+        && t.type!='prefixDelcIRI'){
+            slot.push(t);
+        }
         
-        slot.push(t);
         
 
 
