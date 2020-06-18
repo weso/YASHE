@@ -10,16 +10,14 @@ function prettify(yashe){
 
     let pTokens = getPrefixesTokens(tokens);
     let prefixes = getPrefixes(pTokens);
-
     let starts = getStarts(tokens);
     let sTokens = getShapesTokens(tokens);
 
     
 
     let shapes = getShapes(sTokens);
-    console.log(shapes)
 
-    //console.log(shapes)
+    console.log({prefixes:prefixes,shapes:shapes})
 
     let str = getPrefixesStr(prefixes)+"\n";
     str+=starts.reduce((acc,s)=>{
@@ -42,6 +40,7 @@ function getShapes(sTokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
+        console.log(slots)
         let nodes = slots.reduce((acc,slot)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
@@ -103,7 +102,7 @@ function getAfterTripleTokens(tokens){
     let open = 0;
     return tokens.reduce((acc,t)=>{
         
-        if(open == 0 && start==true){
+        if(open == 0 && start){
             if(t.string  != ';'
              && t.string != '}')acc.push(t);
         }
@@ -168,7 +167,7 @@ function getTripleTokens(tokens){
             open--;
         }
 
-        if(open == 0 && start==true){
+        if(open == 0 && start){
             start=false;
         }
         return acc;
@@ -191,7 +190,7 @@ function getSlots(tokens){
             open--;
         }
 
-        if(open == 0 && start==true)start=false;
+        if(open == 0 && start)start=false;
 
 
         if((t.string.toLowerCase() =='and' || t.string.toLowerCase() =='or')&& !start){
@@ -199,6 +198,7 @@ function getSlots(tokens){
             acc.push(slot);
             slot = [];
         }
+        
         
         slot.push(t);
         
