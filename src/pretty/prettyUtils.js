@@ -17,6 +17,7 @@ function prettify(yashe){
     
 
     let shapes = getShapes(sTokens);
+    console.log(shapes)
 
     //console.log(shapes)
 
@@ -103,7 +104,8 @@ function getAfterTripleTokens(tokens){
     return tokens.reduce((acc,t)=>{
         
         if(open == 0 && start==true){
-            if(t.string != ';')acc.push(t);
+            if(t.string  != ';'
+             && t.string != '}')acc.push(t);
         }
 
         if(t.string=='{'){
