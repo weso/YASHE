@@ -19,7 +19,10 @@ class Node{
                 if(index==0){//If it's a comment before the constraints skip it
                     forceSeparator = true;
                 }else{ //If not, add it to the finish of the line
-                    tripleComent+=token.string;
+
+                    //Only if the first token wasn't a comment. 
+                    if(!forceSeparator) //Because it could be more after the first one 
+                        tripleComent+=token.string;
                 }
                 
             }else{
@@ -29,7 +32,7 @@ class Node{
             }
         });
 
-        if(this.emptyBrackets)str+='{}';
+        
 
         if(this.triples.length>0){
             str+='{ '+tripleComent+"\n";
@@ -39,7 +42,10 @@ class Node{
                 str+=" "+t.comment +"\n";
             })
             str+="}";
+            if(isTriple)str+=";";
         }else{
+
+            if(this.emptyBrackets)str+='{}';
            
             if(isTriple)str+="; "+tripleComent;
         }
