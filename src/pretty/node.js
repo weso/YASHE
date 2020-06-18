@@ -9,7 +9,7 @@ class Node{
         this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
     }
 
-    toString(longest,isTriple){
+    toString(longest,isTriple,indent=1){
         let str = "";
         let tripleComent = "";
         let forceSeparator = false;
@@ -35,13 +35,16 @@ class Node{
         
 
         if(this.triples.length>0){
-            str+='{ '+tripleComent+"\n";
+            let breakLine = "\n";
+            if(isTriple && this.triples.length==1)breakLine = "";
+            str+='{ '+tripleComent+breakLine;
             this.triples.map(t=>{
                 let currentLongest = getLongestTConstraint(this.triples);
-                str+="  "+t.toString(currentLongest,true);
-                str+=" "+t.comment +"\n";
+                str+=this.getIndent(indent)+t.toString(currentLongest,true,indent+1);
+                str+=" "+t.comment +breakLine;
             })
-            str+="}";
+            
+            str+=this.getIndent(indent-1)+"}";
             if(isTriple)str+=";";
         }else{
 
@@ -56,6 +59,13 @@ class Node{
     }
 
 
+    getIndent(tab) {
+        let indent = "";
+        for(let i=0;i<tab;i++){
+            indent+="  ";
+        }
+        return indent;
+    }
 
 
 }
