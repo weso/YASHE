@@ -15,8 +15,8 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   value:  `PREFIX :       <http://example.org/>
 PREFIX schema: <http://schema.org/>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-BASE <1> 
-IMPORT <2>
+BASE <http://www.wikidata.org/entity/> 
+IMPORT <http://schema.org/>
 :User  { 
   schema:name    {schema:1 . ; schema:1 .;schema:1 .;schema:1 .;schema:1 .;} xsd:string * ; 
 

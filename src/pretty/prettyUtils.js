@@ -4,33 +4,37 @@ let Node = require('./node.js');
 let {getLongestPrefix,getSeparator} = require('./printUtils.js');
 
 
+const BASE_KEYWORD = 'BASE   ';
+const IMPORT_KEYWORD = 'IMPORT ';
+
+
 function prettify(yashe){
 
     let tokens = getTokens(yashe);
 
     let directives = getDirectives(tokens);
-    console.log(directives)
-    let prefixes = getPrefixes(directives.prefixes);
-    let bases = getBases(directives.bases);
-    let imports = getImports(directives.prefixes);
+    let prefixes = getPrefixesStr(getPrefixes(directives.prefixes));
+    let bases = getDirectivesStr(directives.bases,BASE_KEYWORD);
+    let imports = getDirectivesStr(directives.imports,IMPORT_KEYWORD);
+    let directivesStr = prefixes+bases+imports;
+
 
     let starts = getStarts(tokens);
     let sTokens = getShapesTokens(tokens);
 
     
-
     let shapes = getShapes(sTokens);
 
-    /* let str = getPrefixesStr(prefixes)+"\n";
+    let str = directivesStr+"\n";
     str+=starts.reduce((acc,s)=>{
         return acc+=s+"\n";
     },"");
 
-    str='\n';
+    str+='\n';
 
     yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString()+"\n\n";
-    },str)); */
+    },str)); 
 
 
 }
@@ -236,44 +240,31 @@ function getTokens(){
 }
 
 function getDirectives(tokens){
-
-    let base,imprt,prefix = []; //base and imprt are undefined (js...)
+    let prefix = []; 
     let prefixCont= 0;
     let baseCont= 0;
     let importCont= 0; 
     return tokens.reduce((acc,token)=>{
-        if(token.type == 'keyword'){
-            if(token.string.toLowerCase()=='prefix'){
-                prefix = [];
-                prefix.push(token)
-                acc.prefixes[prefixCont]=prefix;
-                prefixCont++;   
-            }
-            if(token.string.toLowerCase()=='base'){
-                acc.bases[baseCont]=base;
-                baseCont++;  
-            }
-            if(token.string.toLowerCase()=='import'){
-                acc.imports[importCont]=imprt;
-                importCont++;  
-            }
-           
-        }else{
+        
+        if(token.type=='prefixDelcAlias'){ 
+            prefix.push(token);
+        }
 
-            if(token.type=='prefixDelcAlias' || token.type=='prefixDelcIRI'){
-                prefix.push(token);
-            }
+        if(token.type=='prefixDelcIRI'){
+            prefix.push(token);
+            acc.prefixes[prefixCont]=prefix;
+            prefixCont++;
+            prefix = []; 
+        }
 
-            if(token.type=='baseDecl'){
-                //base = token;
-                acc.bases[baseCont]=token;
-                baseCont++;  
-            }
+        if(token.type=='baseDecl'){
+            acc.bases[baseCont]=token;
+            baseCont++;  
+        }
 
-             if(token.type=='importDecl'){
-                imprt = token;
-            }
-     
+        if(token.type=='importDecl'){
+            acc.imports[importCont]=token;
+            importCont++;
         }
 
         return acc;
@@ -355,7 +346,7 @@ function getComentsAfterToken(token,tokens,index) {
 
 function getPrefixes(tokens){
     return tokens.reduce((acc,prefix)=>{
-        acc.push(new Prefix(prefix[1].string,prefix[2].string));
+        acc.push(new Prefix(prefix[0].string,prefix[1].string));
         return acc;
     },[]);
 }
@@ -367,19 +358,13 @@ function getPrefixesStr(prefixes){
     },'');
 }
 
-function getBases(tokens){
-    return tokens.reduce((acc,prefix)=>{
-        acc.push(new Prefix(prefix[1].string,prefix[2].string));
-        return acc;
-    },[]);
-}
 
-function getBasesStr(prefixes){
-    return prefixes.reduce((acc,p)=>{
-        let dif = getLongestPrefix(prefixes) - p.prefixName.length;
-        return acc+='PREFIX '+p.prefixName+getSeparator(dif)+p.prefixValue+'\n';
+function getDirectivesStr(directives,keyword) {
+    return directives.reduce((acc,d)=>{
+        return acc+=keyword+d.string+'\n';
     },'');
 }
+
 
 function getNonWsTokens(tokens){
     return tokens.filter(function(obj){
