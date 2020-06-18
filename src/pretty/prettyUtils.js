@@ -46,7 +46,6 @@ function getShapes(sTokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
-        console.log(slots)
         let nodes = slots.reduce((acc,slot)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
@@ -206,9 +205,7 @@ function getSlots(tokens){
         }
         
         //If there is any prefix declaration after the Shape we don't want it
-        if(t.string.toLowerCase()!='prefix'
-        && t.type!='prefixDelcAlias' 
-        && t.type!='prefixDelcIRI'){
+        if(!isDirective(t)){
             slot.push(t);
         }
         
@@ -341,6 +338,19 @@ function getComentsAfterToken(token,tokens,index) {
         c.skip = true;
     })
     return comment;
+}
+
+function isDirective(token) {
+    if( token.string.toLowerCase()=='prefix'
+        || token.string.toLowerCase()=='base'
+        || token.string.toLowerCase()=='import'
+        || token.type =='prefixDelcAlias' 
+        || token.type =='prefixDelcIRI'
+        || token.type =='baseDecl'
+        || token.type =='importDecl'){
+            return true;
+        }
+    return false;
 }
 
 
