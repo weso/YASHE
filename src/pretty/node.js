@@ -62,9 +62,6 @@ class Node{
                 str+=tripleComent;
             }
         }
-
-        
-        
         return str;
     }
 
