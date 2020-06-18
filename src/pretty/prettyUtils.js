@@ -73,10 +73,12 @@ function getTriples(shapeId,tokens) {
             if(isFinishOfTriple(tokens,token,index,finish)){
                 if(singleTriple.length>1){
                         let before = getBeforeTriplesTokens(singleTriple);
-                        let after = getTripleTokens(singleTriple);
-                        let subTriples = getTriples(acc.length,after);
+                        let tripleTokens = getTripleTokens(singleTriple);
+                        let subTriples = getTriples(acc.length,tripleTokens);
+                        let after = getAfterTripleTokens(singleTriple);
+         
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
-                        acc.push(new Node(before,subTriples,comment,start));
+                        acc.push(new Node(before,subTriples,comment,start,after));
                         start=false;
                 }
                 singleTriple = [];
@@ -95,27 +97,30 @@ function getTriples(shapeId,tokens) {
         },[])
 }
 
-/**
-*  Gets the comments after a token
-* */
-function getComentsAfterToken(token,tokens,index) {
-    let i =1;
-    let comment = "";
-    let comments=[];
-    while(tokens[index+i] && tokens[index+i].type=='comment'){
-        comments.push(tokens[index+i]);
-        i++;
-    }
-
-    comments.map(c=>{
-        if(c.start < token.start){
-            comment+="\n  ";
+function getAfterTripleTokens(tokens){
+    let start=false;
+    let open = 0;
+    return tokens.reduce((acc,t)=>{
+        
+        if(open == 0 && start==true){
+            if(t.string != ';')acc.push(t);
         }
-        comment+=" "+c.string;
-        c.skip = true;
-    })
-    return comment;
+
+        if(t.string=='{'){
+            open++;
+            start=true;
+        }
+
+        if(t.string=='}'){
+            open--;
+        }
+
+      
+        return acc;
+    },[])
 }
+
+
 
 function isFinishOfTriple(tokens,token,index,finish){
     return (token.string == ';' && finish) || index == tokens.length-1;
@@ -162,7 +167,6 @@ function getTripleTokens(tokens){
         }
 
         if(open == 0 && start==true){
-          console.log(tokens[index+1])
             start=false;
         }
         return acc;
@@ -287,6 +291,28 @@ function getShapesTokens(tokens){
         return acc;
 
     },[]);
+}
+
+/**
+*  Gets the comments after a token
+* */
+function getComentsAfterToken(token,tokens,index) {
+    let i =1;
+    let comment = "";
+    let comments=[];
+    while(tokens[index+i] && tokens[index+i].type=='comment'){
+        comments.push(tokens[index+i]);
+        i++;
+    }
+
+    comments.map(c=>{
+        if(c.start < token.start){
+            comment+="\n  ";
+        }
+        comment+=" "+c.string;
+        c.skip = true;
+    })
+    return comment;
 }
 
 
