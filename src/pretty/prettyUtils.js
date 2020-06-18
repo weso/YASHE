@@ -13,6 +13,7 @@ function prettify(yashe){
     let tokens = getTokens(yashe);
     let directives = getDirectives(tokens);
     let starts = getStarts(tokens);
+    let comments = getComments(tokens);
     let shapes = getShapes(tokens);
 
     let directivesStr = getDirectivesStr(directives);
@@ -30,7 +31,7 @@ function getShapes(tokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
-        let nodes = slots.reduce((acc,slot)=>{
+        let nodes = slots.reduce((acc,slot)=>{ //Sacar fuera
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
             let triples = getTriples(id,tTokens);
@@ -188,8 +189,8 @@ function getSlots(tokens){
             slot = [];
         }
         
-        //If there is any prefix declaration after the Shape we don't want it
-        if(!isDirective(t)){
+        //If there is any directive or start after the Shape we don't want it
+        if(!isDirective(t) && !isStart(t)){
             slot.push(t);
         }
         
@@ -258,18 +259,32 @@ function getDirectives(tokens){
 }
 
 function getStarts(tokens){
-    let starts=[];
-    for(let i=0;i<tokens.length;i++){
-        if(tokens[i].type == 'keyword' && tokens[i].string.toLowerCase()=='start'){
-            let str = tokens[i].string;
-            str+=" = ";
-            i++;
-            i++;
-            str+=tokens[i].string
-            starts.push(str);
+    return tokens.reduce((acc,t,index)=>{
+        if(t.type == 'keyword' && t.string.toLowerCase()=='start'){
+            let str = t.string+" = ";
+            str+=tokens[index+2].string
+            acc.push(str);
         }
-    }
-    return starts;
+        return acc;
+    },[])
+    
+}
+
+function getComments(tokens) {
+    let start=false;
+    let open = 0;
+    return tokens.reduce((acc,t)=>{
+          if(t.string=='{'){
+            open++;
+            start=true;
+        }
+
+        if(t.string=='}'){
+            open--;
+        }
+
+        if(open == 0 && start)start=false;
+    })
 }
 
 
@@ -333,7 +348,24 @@ function isDirective(token) {
         || token.type =='baseDecl'
         || token.type =='importDecl'){
             return true;
-        }
+    }
+    return false;
+}
+
+function isStart(token) {
+    console.table({token:token.string,
+    condicion1:token.string.toLowerCase()=='start'&& token.type =='keyword',
+    condicion2:token.string=='=' && token.type =='punc',
+    condicion3:token.type =='shapeRef'})
+    if( 
+        (token.string.toLowerCase()=='start'&& token.type =='keyword')
+        ||
+        (token.string=='=' && token.type =='punc')
+        ||
+        (token.type =='shapeRef')
+        ){
+        return true;
+    }
     return false;
 }
 

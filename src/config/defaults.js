@@ -24,7 +24,7 @@ IMPORT <http://schema.org/>
 } 
  PREFIX wd: <http://www.wikidata.org/entity/>
 
- 
+ start = @:User
 
 `,
 
