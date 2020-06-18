@@ -21,7 +21,7 @@ const buttonsUtils = require('./utils/buttonsUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
 const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
-const pretty = require('./pretty/testUtils.js');
+const pretty = require('./pretty/prettyUtils.js');
 
 require('../lib/deparam.js');
 require('codemirror/addon/fold/foldcode.js');
