@@ -11,38 +11,22 @@ const IMPORT_KEYWORD = 'IMPORT ';
 function prettify(yashe){
 
     let tokens = getTokens(yashe);
-
     let directives = getDirectives(tokens);
-    let prefixes = getPrefixesStr(getPrefixes(directives.prefixes));
-    let bases = getDirectivesStr(directives.bases,BASE_KEYWORD);
-    let imports = getDirectivesStr(directives.imports,IMPORT_KEYWORD);
-    let directivesStr = prefixes+bases+imports;
-
-
     let starts = getStarts(tokens);
-    let sTokens = getShapesTokens(tokens);
+    let shapes = getShapes(tokens);
 
-    
-    let shapes = getShapes(sTokens);
+    let directivesStr = getDirectivesStr(directives);
+    let startsStr = getStartsStr(starts);
+    let shapesStr = getShapesStr(shapes);
 
-    let str = directivesStr+"\n";
-    str+=starts.reduce((acc,s)=>{
-        return acc+=s+"\n";
-    },"");
-
-    str+='\n';
-
-    yashe.setValue(shapes.reduce((acc,s)=>{
-        return acc+=s.toString()+"\n\n";
-    },str)); 
-
+    yashe.setValue(directivesStr+startsStr+shapesStr) ;
 
 }
 
 
 
-function getShapes(sTokens){
-    return sTokens.reduce((acc,shape)=>{
+function getShapes(tokens){
+    return getShapesTokens(tokens).reduce((acc,shape)=>{
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
@@ -369,9 +353,28 @@ function getPrefixesStr(prefixes){
 }
 
 
-function getDirectivesStr(directives,keyword) {
+function getDirectivesStr(directives) {
+    let prefixesStr = getPrefixesStr(getPrefixes(directives.prefixes));
+    let basesStr = getConcreteDirectiveStr(directives.bases,BASE_KEYWORD);
+    let importsStr = getConcreteDirectiveStr(directives.imports,IMPORT_KEYWORD);
+    return prefixesStr+basesStr+importsStr+'\n';
+}
+
+function getConcreteDirectiveStr(directives,keyword) {
     return directives.reduce((acc,d)=>{
         return acc+=keyword+d.string+'\n';
+    },'');
+}
+
+function getStartsStr(starts) {
+    return starts.reduce((acc,s)=>{
+        return acc+=s+"\n";
+    },"")+'\n';
+}
+
+function getShapesStr(shapes) {
+    return shapes.reduce((acc,s)=>{
+        return acc+=s.toString()+"\n\n";
     },'');
 }
 
