@@ -8,8 +8,12 @@ function prettify(yashe){
 
     let tokens = getTokens(yashe);
 
-    let pTokens = getPrefixesTokens(tokens);
-    let prefixes = getPrefixes(pTokens);
+    let directives = getDirectives(tokens);
+    console.log(directives)
+    let prefixes = getPrefixes(directives.prefixes);
+    let bases = getBases(directives.bases);
+    let imports = getImports(directives.prefixes);
+
     let starts = getStarts(tokens);
     let sTokens = getShapesTokens(tokens);
 
@@ -17,18 +21,16 @@ function prettify(yashe){
 
     let shapes = getShapes(sTokens);
 
-    console.log({prefixes:prefixes,shapes:shapes})
-
-    let str = getPrefixesStr(prefixes)+"\n";
+    /* let str = getPrefixesStr(prefixes)+"\n";
     str+=starts.reduce((acc,s)=>{
         return acc+=s+"\n";
     },"");
 
-    str+='\n';
+    str='\n';
 
     yashe.setValue(shapes.reduce((acc,s)=>{
         return acc+=s.toString()+"\n\n";
-    },str));
+    },str)); */
 
 
 }
@@ -233,26 +235,54 @@ function getTokens(){
     return tokens;
 }
 
-function getPrefixesTokens(tokens){
-    let prefix = [];
-    let prefixCont = 0;
-    return tokens.reduce((acc,element)=>{
-        if(element.type == 'keyword' && element.string.toLowerCase()=='prefix'){
-            prefix = [];
-            prefix.push(element)
-            acc[prefixCont]=prefix;
-            prefixCont++;
+function getDirectives(tokens){
+
+    let base,imprt,prefix = []; //base and imprt are undefined (js...)
+    let prefixCont= 0;
+    let baseCont= 0;
+    let importCont= 0; 
+    return tokens.reduce((acc,token)=>{
+        if(token.type == 'keyword'){
+            if(token.string.toLowerCase()=='prefix'){
+                prefix = [];
+                prefix.push(token)
+                acc.prefixes[prefixCont]=prefix;
+                prefixCont++;   
+            }
+            if(token.string.toLowerCase()=='base'){
+                acc.bases[baseCont]=base;
+                baseCont++;  
+            }
+            if(token.string.toLowerCase()=='import'){
+                acc.imports[importCont]=imprt;
+                importCont++;  
+            }
+           
         }else{
 
-            if(element.type=='prefixDelcAlias' || element.type=='prefixDelcIRI'){
-                prefix.push(element);
+            if(token.type=='prefixDelcAlias' || token.type=='prefixDelcIRI'){
+                prefix.push(token);
             }
-            
+
+            if(token.type=='baseDecl'){
+                //base = token;
+                acc.bases[baseCont]=token;
+                baseCont++;  
+            }
+
+             if(token.type=='importDecl'){
+                imprt = token;
+            }
+     
         }
 
         return acc;
 
-    },[]);
+    },{
+        prefixes:[],
+        bases:[],
+        imports:[]
+    });
 }
 
 function getStarts(tokens){
@@ -323,14 +353,28 @@ function getComentsAfterToken(token,tokens,index) {
 }
 
 
-function getPrefixes(pTokens){
-    return pTokens.reduce((acc,prefix)=>{
+function getPrefixes(tokens){
+    return tokens.reduce((acc,prefix)=>{
         acc.push(new Prefix(prefix[1].string,prefix[2].string));
         return acc;
     },[]);
 }
 
 function getPrefixesStr(prefixes){
+    return prefixes.reduce((acc,p)=>{
+        let dif = getLongestPrefix(prefixes) - p.prefixName.length;
+        return acc+='PREFIX '+p.prefixName+getSeparator(dif)+p.prefixValue+'\n';
+    },'');
+}
+
+function getBases(tokens){
+    return tokens.reduce((acc,prefix)=>{
+        acc.push(new Prefix(prefix[1].string,prefix[2].string));
+        return acc;
+    },[]);
+}
+
+function getBasesStr(prefixes){
     return prefixes.reduce((acc,p)=>{
         let dif = getLongestPrefix(prefixes) - p.prefixName.length;
         return acc+='PREFIX '+p.prefixName+getSeparator(dif)+p.prefixValue+'\n';
