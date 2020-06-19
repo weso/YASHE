@@ -31,14 +31,23 @@ function getShapes(tokens){
         let id  = acc.length;
         let shapeDef = shape[0].string;
         let slots = getSlots(shape);
-        let nodes = slots.reduce((acc,slot)=>{ //Sacar fuera
+        let nodes = slots.reduce((acc,slot,index)=>{ //Sacar fuera
             let constraints = getBeforeTriplesTokens(slot);
             let tTokens = getTripleTokens(slot);
             let triples = getTriples(id,tTokens);
+
+        /*    console.log(slot[slot.length-1])
+           console.log(tokens[slot.length-1])
+            let comment = getComentsAfterToken(slot[slot.length-1],tokens,index); //We want the tokens after the Triple
+            console.log(comment) */
+            
+            
             let node = new Node(constraints,triples);
             acc.push(node);
             return acc;
         },[]);
+
+      // console.log(tokens)
 
         let s = new Shape(nodes);
         acc.push(s);
@@ -190,13 +199,10 @@ function getSlots(tokens){
         }
         
         //If there is any directive or start after the Shape we don't want it
-        if(!isDirective(t) && !isStart(t)){
+        if(!isDirective(t) && !isStart(t,tokens[index-1])){
             slot.push(t);
         }
-        
-        
-
-
+       
         if(index == tokens.length-1){
             acc.push(slot);
         }
@@ -274,7 +280,9 @@ function getComments(tokens) {
     let start=false;
     let open = 0;
     return tokens.reduce((acc,t)=>{
-          if(t.string=='{'){
+
+
+        if(t.string=='{'){
             open++;
             start=true;
         }
@@ -301,15 +309,15 @@ function getShapesTokens(tokens){
     let shapeCont = 0;
     let hasTripleStarted = false;
     //Separate shapes in arrays
-    return tokens.reduce((acc,element)=>{
+    return tokens.reduce((acc,t)=>{
 
-        if(element.type == 'shape'){
+        if(t.type == 'shape'){
             shape = [];
-            shape.push(element)
+            shape.push(t)
             acc[shapeCont]=shape;
             shapeCont++;
-        }else{
-            shape.push(element);
+        }else{         
+            shape.push(t);
         }
 
         return acc;
@@ -352,20 +360,10 @@ function isDirective(token) {
     return false;
 }
 
-function isStart(token) {
-    console.table({token:token.string,
-    condicion1:token.string.toLowerCase()=='start'&& token.type =='keyword',
-    condicion2:token.string=='=' && token.type =='punc',
-    condicion3:token.type =='shapeRef'})
-    if( 
-        (token.string.toLowerCase()=='start'&& token.type =='keyword')
-        ||
-        (token.string=='=' && token.type =='punc')
-        ||
-        (token.type =='shapeRef')
-        ){
-        return true;
-    }
+function isStart(token,previousToken) {
+    if((token.string.toLowerCase()=='start'&& token.type =='keyword')
+    || (token.string=='=' && token.type =='punc')
+    || (token.type =='shapeRef' && previousToken.string == '=')) return true;
     return false;
 }
 

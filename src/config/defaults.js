@@ -19,8 +19,6 @@ BASE <http://www.wikidata.org/entity/>
 IMPORT <http://schema.org/>
 :User  { 
   schema:name    {schema:1 . ; schema:1 .;schema:1 .;schema:1 .;schema:1 .;} xsd:string * ; 
-
-  
 } 
  PREFIX wd: <http://www.wikidata.org/entity/>
 
