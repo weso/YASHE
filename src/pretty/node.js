@@ -1,4 +1,7 @@
-let {getSeparatorIfNeeded,getLongestTConstraint} = require('./printUtils.js')
+let {getSeparatorIfNeeded,
+    getLongestTConstraint,
+    getValueSetSize,
+    getIndent} = require('./printUtils.js')
 
 class Node{
 
@@ -14,7 +17,12 @@ class Node{
         let str = "";
         let tripleComent = "";
         let forceSeparator = false;
+        let valueSet = false;
+        let valueSetSize = getValueSetSize(this.constraints);
         this.constraints.map((token,index)=>{
+            let nexToken = this.constraints[index+1];
+            let separator = getSeparatorIfNeeded(index,token,nexToken,longest,this.constraints);
+
             if(token.type=='comment'){
             
                 if(index==0){//If it's a comment before the constraints skip it
@@ -28,26 +36,43 @@ class Node{
                 
             }else{
                 if(forceSeparator)index--;
-                let nexToken = this.constraints[index+1];
-                str+=token.string+getSeparatorIfNeeded(index,token,nexToken,longest,this.constraints);
+                if(nexToken && nexToken.string=='[' && valueSetSize>1){
+                    separator = " ";
+                }
+
+                if(token.type=='valueSet' && valueSetSize>1){
+                    valueSet = true;
+                    str+='\n'+getIndent(indent);
+                }
+
+               
+                str+=token.string+separator;
+                
+                if(nexToken && nexToken.string==']' && valueSet){
+                    str+='\n'+getIndent(indent-1);
+                }
             }
         });
 
-        
+
 
         if(this.triples.length>0){
             let breakLine = "\n";
-            if(isTriple && this.triples.length==1)breakLine = "";
-            str+='{ '+tripleComent+breakLine;
+            if(isTriple && this.triples.length==1){
+                breakLine = "";
+                indent--;
+                indent--;
+            } 
+            str+='{'+tripleComent+breakLine;
             this.triples.map((t,index)=>{
                 let currentLongest = getLongestTConstraint(this.triples);
                 let isLastTriple = false;
                 if(index==this.triples.length-1)isLastTriple = true;
-                str+=this.getIndent(indent)+t.toString(currentLongest,true,indent+1,isLastTriple);
+                str+=getIndent(indent)+t.toString(currentLongest,true,indent+1,isLastTriple);
                 str+=" "+t.comment +breakLine;
             })
 
-            str+=this.getIndent(indent-1)+"}";
+            str+=getIndent(indent-1)+"}";
             if(this.afterTriples.length>0)str+=" ";
             this.afterTriples.map(a=>{
                 str+=a.string+" ";
@@ -63,15 +88,6 @@ class Node{
             }
         }
         return str;
-    }
-
-
-    getIndent(tab) {
-        let indent = "";
-        for(let i=0;i<tab;i++){
-            indent+="  ";
-        }
-        return indent;
     }
 
 
