@@ -1,18 +1,15 @@
 
 class Prefix {
 
-    constructor(prefixName='',prefixValue='http://example.org/'){
+    constructor(prefixName='',prefixValue='http://example.org/',comment=''){
         this.prefixName = prefixName;
         this.prefixValue = prefixValue;
+        this.comment = comment;
     }
 
 
-    getPrefixName(){
-        return this.prefixName;
-    }
-
-    getPrefixValue(){
-        return this.prefixValue;
+    toString(separator){
+        return 'PREFIX '+this.prefixName+separator+this.prefixValue+this.comment+'\n';
     }
 
 }

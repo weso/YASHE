@@ -12,40 +12,28 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX :        <http://example.org/>
-PREFIX schema:  <http://schema.org/>
-PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+  value:  `PREFIX :        <http://example.org/> #1
+PREFIX schema:  <http://schema.org/> #2
+base      <http://example.org/> #3
+import <http://example.org/> #4
+
+start = @:pepe #5
 
 
-:User {
-  schema:name  . #e   
-}
-#1111111111111111111111111
-#22222222222222222222222
-#33333333333333333333
 
-PREFIX wd: <http://www.wikidata.org/entity/>
-
-:User2 {
-  schema:name  . #e   
+:pepe{
+ schema: . 
 }
 
-PREFIX wdt: <http://www.wikidata.org/entity/>
 
-#21111111111111111111111111
-#_22222222222222222222222
-#233333333333333333333
 
-start = @:User2
 
-:User3 {
-  schema:name  .  
-}
-#31111111111111111111111111
-PREFIX wdtt: <http://www.wikidata.org/entity/>
-#322222222222222222222222
-start = @:User3
-#_33333333333333333333
+
+
+
+
+
+
 
 
 `,
