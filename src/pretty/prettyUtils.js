@@ -31,7 +31,7 @@ function getShapes(tokens){
         let nodes = getNodes(shapeTokens);
         let comments = getCommentsAfterShape(shapeTokens);
         
-        acc.push(new Shape(nodes));
+        acc.push(new Shape(nodes,comments));
         return acc;
 
     },[])
@@ -41,6 +41,7 @@ function getNodes(shapeTokens){
     return getSlots(shapeTokens).reduce((acc,slot,index)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
+            console.log({constraints:constraints,triples:triples})
 
             let node = new Node(constraints,triples);
             acc.push(node);
@@ -56,7 +57,7 @@ function getCommentsAfterShape(shapeTokens){
             i++;
         }
         return acc;
-    },[])
+    },[]).reverse();
 }
 
 function getTriples(tokens) {
@@ -77,9 +78,9 @@ function getTriples(tokens) {
                         let tripleTokens = getTripleTokens(singleTriple);
                         let subTriples = getTriples(tripleTokens);
                         let after = getAfterTripleTokens(singleTriple);
-         
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
-                        acc.push(new Node(before,subTriples,comment,start,after));
+
+                        acc.push(new Node(before,subTriples,"",start,after));
                         start=false;
                 }
                 singleTriple = [];
@@ -131,18 +132,20 @@ function isFinishOfTriple(tokens,token,index,finish){
 function getBeforeTriplesTokens(tokens){
     let start=true;
     return tokens.reduce((acc,t,index)=>{
+        
         if(t.string=='{'){ //Break condition 1
             //We want the comments after the '{'
             let comment = getComentsAfterToken(t,tokens,index);
             acc.push({type:'comment',string:comment});
             start = false;
         }
+
         if(index == tokens.length-1)start=false; //Break condition 2
 
         if(start){
             acc.push(t);
         }else{
-            if(t.type!='punc' && index == tokens.length-1 )acc.push(t); // This is needed when a slot doesn't have any triple
+            if(t.type!='punc' && t.type!='comment' && index == tokens.length-1 )acc.push(t); // This is needed when a slot doesn't have any triple
         }
        
         return acc;
@@ -330,19 +333,15 @@ function getShapesTokens(tokens){
 function getComentsAfterToken(token,tokens,index) {
     let i =1;
     let comment = "";
-    let comments=[];
     while(tokens[index+i] && tokens[index+i].type=='comment'){
-        comments.push(tokens[index+i]);
-        i++;
-    }
-
-    comments.map(c=>{
-        if(c.start < token.start){
+        if(tokens[index+i].start < token.start){
             comment+="\n  ";
         }
         comment+=" "+c.string;
-        c.skip = true;
-    })
+        tokens[index+i].skip = true;
+        i++;
+    }
+
     return comment;
 }
 

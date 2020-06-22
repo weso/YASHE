@@ -12,28 +12,38 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `# Example 26  Simple ShEx Schema 
-# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
+  value:  `PREFIX :        <http://example.org/>
+PREFIX schema:  <http://schema.org/>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
 
-PREFIX :       <http://example.org/>
-PREFIX schema: <http://schema.org/>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 :User {
-schema:name .#e
+  schema:name  . #e  
 }
+#1111111111111111111111111
+			#22222222222222222222222
 
-#2
+
+#33333333333333333333
+
 
 :User2 {
-schema:name .#e
+  schema:name  . #e  
 }
+#21111111111111111111111111
+			#_22222222222222222222222
 
-#3
-:User3 {
-schema:name .#e
-}
 
+#233333333333333333333
+
+
+:User3 {schema:name  . #e  }#31111111111111111111111111
+			#322222222222222222222222
+
+
+
+
+#_33333333333333333333
 
 `,
 
