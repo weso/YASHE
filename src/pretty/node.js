@@ -21,7 +21,7 @@ class Node{
         let valueSetSize = getValueSetSize(this.constraints);
         this.constraints.map((token,index)=>{
             let nexToken = this.constraints[index+1];
-            let separator = getSeparatorIfNeeded(index,token,nexToken,longest,this.constraints);
+            let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints);
 
             if(token.type=='comment'){
             
@@ -59,9 +59,10 @@ class Node{
         if(this.triples.length>0){
             let breakLine = "\n";
             if(isTriple && this.triples.length==1){
-                breakLine = "";
-                indent--;
-                indent--;
+                if(tripleComent==''){// If there is any comment after '{' we need to force the breakline
+                    breakLine = "";
+                    indent--;
+                }
             } 
             str+='{'+tripleComent+breakLine;
             this.triples.map((t,index)=>{

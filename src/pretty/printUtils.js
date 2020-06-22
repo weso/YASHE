@@ -44,14 +44,15 @@ function getLongestTConstraint(triples){
     },0)
 }
 
-function needsSeparator(index,token,nexToken,constraints){
+function needsSeparator(index,token,nexToken,triplesLenght,constraints){
+  if(triplesLenght==1)return true;
   return    index==0 
         && token.type!='shape' 
         && token.string!='and'
         && token.string!='or' 
         && token.string!='('
         && nexToken
-        && nexToken.string!='{'
+        && nexToken.string!='{' 
         && hasConstraints(constraints) ;
 }
 
@@ -66,9 +67,9 @@ function hasConstraints(constraints) {
 }
 
 
-function getSeparatorIfNeeded(index,token,nexToken,longest,constraints){
+function getSeparatorIfNeeded(index,token,nexToken,triplesLenght,longest,constraints){
     let separator = " ";
-    if(needsSeparator(index,token,nexToken,constraints)){
+    if(needsSeparator(index,token,nexToken,triplesLenght,constraints)){
         let actual = token.string.length;
         let diference = longest - actual;
         separator=getSeparator(diference);

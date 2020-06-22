@@ -11,8 +11,7 @@ const IMPORT_KEYWORD = 'IMPORT ';
 function prettify(yashe){
 
     let tokens = getTokens(yashe);
-    let firstComments = getFirstComments(tokens);
-    console.log(firstComments)
+    let firstComments = getFirstComments(tokens); //Comments at the beginning of the file if exists
     let directivesAndStarts = getDirectivesAndStarts(tokens);
     let comments = getComments(tokens);
     let shapes = getShapes(tokens);
@@ -136,7 +135,7 @@ function getBeforeTriplesTokens(tokens){
     let start=true;
     return tokens.reduce((acc,t,index)=>{
         
-        if(t.string=='{'){ //Break condition 1
+        if(t.string=='{' && start){ //Break condition 1
             //We want the comments after the '{'
             let comment = getComentsAfterToken(t,tokens,index);
             acc.push({type:'comment',string:comment});
@@ -367,7 +366,6 @@ function getFirstComments(tokens){
     let i =0;
     let comment = "";
     while(tokens[i] && tokens[i].type=='comment'){
-        console.log({t:tokens[i],con:tokens[i].string.startsWith('#')})
         if(tokens[i].string.startsWith('#') && i>0){
             comment+="\n";
         }
@@ -375,7 +373,8 @@ function getFirstComments(tokens){
         i++;
     }
 
-    return comment+'\n\n';
+    if(comment!='')comment+='\n\n';
+    return comment;
 }
 
 function isDirective(token) {
