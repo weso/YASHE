@@ -29,15 +29,22 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 :User2 {
   schema:name  . #e   
 }
+
+PREFIX wdt: <http://www.wikidata.org/entity/>
+
 #21111111111111111111111111
 #_22222222222222222222222
 #233333333333333333333
+
+start = @:User2
 
 :User3 {
   schema:name  .  
 }
 #31111111111111111111111111
+PREFIX wdtt: <http://www.wikidata.org/entity/>
 #322222222222222222222222
+start = @:User3
 #_33333333333333333333
 
 

@@ -41,7 +41,6 @@ function getNodes(shapeTokens){
     return getSlots(shapeTokens).reduce((acc,slot,index)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
-            console.log({constraints:constraints,triples:triples})
 
             let node = new Node(constraints,triples);
             acc.push(node);
@@ -56,6 +55,11 @@ function getCommentsAfterShape(shapeTokens){
             acc.push(t);
             i++;
         }
+
+        if(isDirective(t) || isStart(t,shapeTokens[index+1])){
+            i++;
+        }
+
         return acc;
     },[]).reverse();
 }
@@ -361,7 +365,7 @@ function isDirective(token) {
 function isStart(token,previousToken) {
     if((token.string.toLowerCase()=='start'&& token.type =='keyword')
     || (token.string=='=' && token.type =='punc')
-    || (token.type =='shapeRef' && previousToken.string == '=')) return true;
+    || (token.type =='shapeRef' && previousToken &&  previousToken.string == '=')) return true;
     return false;
 }
 
