@@ -11,7 +11,7 @@ class Node{
         this.comment = comment;
         this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
         this.afterTriples= afterTriples;
-        this.finalParenthesis = finalParenthesis;
+        this.finalParenthesis = finalParenthesis; 
     }
 
     toString(longest,isTriple,indent=1,isLastTriple='false'){
@@ -90,10 +90,8 @@ class Node{
             }
         }
 
-        if(this.finalParenthesis){
-          console.log('entra')
-            str+=')';
-        }
+        if(this.finalParenthesis)str+=')';
+        
         return str;
     }
 
