@@ -12,30 +12,19 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX :        <http://example.org/> #1
-PREFIX schema:  <http://schema.org/> #2
-base      <http://example.org/> #3
-import <http://example.org/> #4
+  value:  `# Example 26  Simple ShEx Schema 
+# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
 
-start = @:pepe #5
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-
-
-:pepe{
- schema: . 
+:User {
+  schema:name          xsd:string  ;
+  schema:birthDate     xsd:date?  ;
+  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
+  schema:knows         IRI @:User*
 }
-
-
-
-
-
-
-
-
-
-
-
-
 `,
 
   highlightSelectionMatches: {

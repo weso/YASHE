@@ -26,7 +26,7 @@ function getIndent(tab) {
 
 function getLongestPrefix(prefixes){
     return prefixes.reduce((acc,p) =>{
-        if(p.prefixName.length>acc)acc=p.prefixName.length;
+        if(p.alias.string.length>acc)acc=p.alias.string.length;
         return acc;
     },0);
 }
