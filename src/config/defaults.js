@@ -12,18 +12,20 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `# Example 26  Simple ShEx Schema 
-# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
+  value:  `# Example 84  IF-THEN-ELSE pattern example
+# https://book.validatingrdf.com/bookHtml010.html#sec108
 
 PREFIX :       <http://example.org/>
 PREFIX schema: <http://schema.org/>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
 
-:User {
-  schema:name { #444
-    xsd:string  . 
-  }; 
-}
+:Product (
+  NOT  { a [ schema:Vehicle ] } OR
+       { schema:vehicleEngine . ;
+        schema:fuelType .
+       }
+ ) AND ({ a [schema:Vehicle] } OR
+        { schema:category xsd:string } )
 
 `,
 

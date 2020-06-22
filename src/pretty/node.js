@@ -5,12 +5,13 @@ let {getSeparatorIfNeeded,
 
 class Node{
 
-    constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[]){
+    constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[],finalParenthesis=''){
         this.constraints = constraints;
         this.triples = triples;
         this.comment = comment;
         this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
         this.afterTriples= afterTriples;
+        this.finalParenthesis = finalParenthesis;
     }
 
     toString(longest,isTriple,indent=1,isLastTriple='false'){
@@ -87,6 +88,11 @@ class Node{
                 if(!isLastTriple)str+=';';
                 str+=tripleComent;
             }
+        }
+
+        if(this.finalParenthesis){
+          console.log('entra')
+            str+=')';
         }
         return str;
     }

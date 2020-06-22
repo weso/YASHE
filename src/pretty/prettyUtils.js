@@ -39,11 +39,20 @@ function getNodes(shapeTokens){
     return getSlots(shapeTokens).reduce((acc,slot,index)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
+            let paranthesis = hasFinalParenthesis(slot);
 
-            let node = new Node(constraints,triples);
+
+            let node = new Node(constraints,triples,'',null,[],paranthesis);
             acc.push(node);
             return acc;
     },[]);
+}
+
+function hasFinalParenthesis(slot){
+    return slot.reverse().reduce((acc,t)=>{
+        if(t.string==')')acc=true;
+        return acc;
+    },false)
 }
 
 function getCommentsAfterShape(shapeTokens){

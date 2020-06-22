@@ -51,6 +51,8 @@ function needsSeparator(index,token,nexToken,triplesLenght,constraints){
         && token.string!='and'
         && token.string!='or' 
         && token.string!='('
+        && token.string!='$'
+        && token.string!='&'
         && nexToken
         && nexToken.string!='{' 
         && hasConstraints(constraints) ;
