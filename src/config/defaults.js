@@ -12,40 +12,26 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  value:  `# Example 26  Simple ShEx Schema 
+# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
 
-start = @<human>
+PREFIX :       <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-<human> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q5];
-  wdt:P21 [wd:Q6581097 wd:Q6581072 wd:Q1097630 wd:Q1052281 wd:Q2449503 wd:Q48270]?;   # gender
-  wdt:P19 . ?;                     # place of birth
-  wdt:P569 . ? ;                 # date of birth
-  wdt:P735 . * ;                 # given name
-  wdt:P734 . * ;                 # family name
-  wdt:P106 . * ;                 # occupation
-  wdt:P27 @<country> *;  # country of citizenship
-  wdt:P22 @<human> *;           # father
-  wdt:P25 @<human> *;           # mother
-  wdt:P3373 @<human> *;         # sibling
-  wdt:P26 @<human> *;           # spouse
-  wdt:P40 @<human> *;           # children
-  wdt:P1038 @<human> *;         # relatives
-  wdt:P103 @<language> *;
-  wdt:P1412 @<language> *;
-  wdt:P6886  @<language> *;
-  rdfs:label rdf:langString+;
+:User {
+schema:name .#e
 }
 
-<country> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
+#2
+
+:User2 {
+schema:name .#e
 }
 
-<language> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q34770 wd:Q1288568] +;
+#3
+:User3 {
+schema:name .#e
 }
 
 

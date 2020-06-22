@@ -14,6 +14,7 @@ function prettify(yashe){
     let directives = getDirectives(tokens);
     let starts = getStarts(tokens);
     let comments = getComments(tokens);
+    //console.log(comments);
     let shapes = getShapes(tokens);
 
     let directivesStr = getDirectivesStr(directives);
@@ -25,39 +26,40 @@ function prettify(yashe){
 }
 
 
-
 function getShapes(tokens){
-    return getShapesTokens(tokens).reduce((acc,shape)=>{
-        let id  = acc.length;
-        let shapeDef = shape[0].string;
-        let slots = getSlots(shape);
-        let nodes = slots.reduce((acc,slot,index)=>{ //Sacar fuera
-            let constraints = getBeforeTriplesTokens(slot);
-            let tTokens = getTripleTokens(slot);
-            let triples = getTriples(id,tTokens);
-
-        /*    console.log(slot[slot.length-1])
-           console.log(tokens[slot.length-1])
-            let comment = getComentsAfterToken(slot[slot.length-1],tokens,index); //We want the tokens after the Triple
-            console.log(comment) */
-            
-            
-            let node = new Node(constraints,triples);
-            acc.push(node);
-            return acc;
-        },[]);
-
-      // console.log(tokens)
-
-        let s = new Shape(nodes);
-        acc.push(s);
-
+    return getShapesTokens(tokens).reduce((acc,shapeTokens)=>{
+        let nodes = getNodes(shapeTokens);
+        let comments = getCommentsAfterShape(shapeTokens);
+        
+        acc.push(new Shape(nodes));
         return acc;
 
     },[])
 }
 
-function getTriples(shapeId,tokens) {
+function getNodes(shapeTokens){
+    return getSlots(shapeTokens).reduce((acc,slot,index)=>{
+            let constraints = getBeforeTriplesTokens(slot);
+            let triples = getTriples(getTripleTokens(slot));
+
+            let node = new Node(constraints,triples);
+            acc.push(node);
+            return acc;
+    },[]);
+}
+
+function getCommentsAfterShape(shapeTokens){
+    let i = 0;
+    return shapeTokens.reverse().reduce((acc,t,index)=>{
+        if(t.type=='comment' && index == i){ //index == i is needed in order not to take comments after a differtent token ('}')
+            acc.push(t);
+            i++;
+        }
+        return acc;
+    },[])
+}
+
+function getTriples(tokens) {
         let triples = [];
         let singleTriple = [];
         let start = false;
@@ -73,7 +75,7 @@ function getTriples(shapeId,tokens) {
                 if(singleTriple.length>1){
                         let before = getBeforeTriplesTokens(singleTriple);
                         let tripleTokens = getTripleTokens(singleTriple);
-                        let subTriples = getTriples(acc.length,tripleTokens);
+                        let subTriples = getTriples(tripleTokens);
                         let after = getAfterTripleTokens(singleTriple);
          
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
@@ -150,7 +152,6 @@ function getBeforeTriplesTokens(tokens){
 
 function getTripleTokens(tokens){
     let start=false;
-    let isFirstToken=false;
     let open = 0;
     return tokens.reduce((acc,t,index)=>{
         
@@ -159,7 +160,6 @@ function getTripleTokens(tokens){
         if(t.string=='{'){
             open++;
             start=true;
-            isFirstToken = true;
         }
 
         if(t.string=='}'){
@@ -277,22 +277,21 @@ function getStarts(tokens){
 }
 
 function getComments(tokens) {
-    let start=false;
     let open = 0;
     return tokens.reduce((acc,t)=>{
-
-
         if(t.string=='{'){
             open++;
-            start=true;
         }
 
         if(t.string=='}'){
             open--;
         }
 
-        if(open == 0 && start)start=false;
-    })
+        if(open == 0 && t.type=='comment'){
+            acc.push(t);
+        }
+        return acc;
+    },[])
 }
 
 
@@ -305,7 +304,6 @@ function getComments(tokens) {
  */
 function getShapesTokens(tokens){
     let shape = []
-    let brackets=0
     let shapeCont = 0;
     let hasTripleStarted = false;
     //Separate shapes in arrays
@@ -313,10 +311,11 @@ function getShapesTokens(tokens){
 
         if(t.type == 'shape'){
             shape = [];
+            
             shape.push(t)
             acc[shapeCont]=shape;
             shapeCont++;
-        }else{         
+        }else{    
             shape.push(t);
         }
 

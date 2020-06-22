@@ -36,12 +36,12 @@ class Node{
                 
             }else{
                 if(forceSeparator)index--;
-                if(nexToken && nexToken.string=='[' && valueSetSize>1){
+                if(nexToken && nexToken.string=='[' && valueSetSize>2){
                     separator = " ";
                 }
 
-                if(token.type=='valueSet' && valueSetSize>1){
-                    valueSet = true;
+                if(token.type=='valueSet' && valueSetSize>2){
+                    valueSet = true;    
                     str+='\n'+getIndent(indent);
                 }
 
