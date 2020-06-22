@@ -11,17 +11,15 @@ const IMPORT_KEYWORD = 'IMPORT ';
 function prettify(yashe){
 
     let tokens = getTokens(yashe);
-    let directives = getDirectives(tokens);
-    let starts = getStarts(tokens);
+
+    let directives = getDirectivesAndStarts(tokens);
     let comments = getComments(tokens);
-    //console.log(comments);
     let shapes = getShapes(tokens);
 
-    let directivesStr = getDirectivesStr(directives);
-    let startsStr = getStartsStr(starts);
+    let directivesStr = getDirectivesAndStartsStr(directives);
     let shapesStr = getShapesStr(shapes);
 
-    yashe.setValue(directivesStr+startsStr+shapesStr) ;
+    yashe.setValue(directivesStr+shapesStr) ;
 
 }
 
@@ -234,12 +232,10 @@ function getTokens(){
     return tokens;
 }
 
-function getDirectives(tokens){
+function getDirectivesAndStarts(tokens){
     let prefix = []; 
     let prefixCont= 0;
-    let baseCont= 0;
-    let importCont= 0; 
-    return tokens.reduce((acc,token)=>{
+    return tokens.reduce((acc,token,index)=>{
         
         if(token.type=='prefixDelcAlias'){ 
             prefix.push(token);
@@ -253,13 +249,16 @@ function getDirectives(tokens){
         }
 
         if(token.type=='baseDecl'){
-            acc.bases[baseCont]=token;
-            baseCont++;  
+            acc.bases.push(token);
         }
 
         if(token.type=='importDecl'){
-            acc.imports[importCont]=token;
-            importCont++;
+            acc.imports.push(token);
+        }
+
+        if(token.type == 'keyword' && token.string.toLowerCase()=='start'){
+            let str = token.string+" = "+tokens[index+2].string;
+            acc.starts.push(str);
         }
 
         return acc;
@@ -267,20 +266,9 @@ function getDirectives(tokens){
     },{
         prefixes:[],
         bases:[],
-        imports:[]
+        imports:[],
+        starts:[]
     });
-}
-
-function getStarts(tokens){
-    return tokens.reduce((acc,t,index)=>{
-        if(t.type == 'keyword' && t.string.toLowerCase()=='start'){
-            let str = t.string+" = ";
-            str+=tokens[index+2].string
-            acc.push(str);
-        }
-        return acc;
-    },[])
-    
 }
 
 function getComments(tokens) {
@@ -385,11 +373,12 @@ function getPrefixesStr(prefixes){
 }
 
 
-function getDirectivesStr(directives) {
+function getDirectivesAndStartsStr(directives) {
     let prefixesStr = getPrefixesStr(getPrefixes(directives.prefixes));
     let basesStr = getConcreteDirectiveStr(directives.bases,BASE_KEYWORD);
     let importsStr = getConcreteDirectiveStr(directives.imports,IMPORT_KEYWORD);
-    return prefixesStr+basesStr+importsStr+'\n';
+    let startsStr = getStartsStr(directives.starts);
+    return prefixesStr+basesStr+importsStr+'\n'+startsStr;
 }
 
 function getConcreteDirectiveStr(directives,keyword) {
