@@ -10,7 +10,46 @@ const IMPORT_KEYWORD = 'IMPORT ';
 
 function prettify(yashe){
 
+    let cursor = yashe.getCursor();
+    let tok = yashe.getTokenAt({line:cursor.line,ch:cursor.ch})
+    tok.line = cursor.line;
+
+    console.log(tok)
+
+    let cont = 0;
+    let nomore = true;
+    for (var l = 0; l <= cursor.line; ++l) {
+        let lineTokens = yashe.getLineTokens(l);
+        for(let t in lineTokens){
+            let token = lineTokens[t];
+            if(token.type!='ws' && nomore){
+                cont++;
+                //console.log({token:token,cont:cont})
+            }
+
+            console.log({token:token,tok:tok})
+            if(token.start == tok.start 
+            && token.end == tok.end
+            && l == tok.line
+            && token.string == tok.string
+            && token.type == tok.type){
+                nomore=false;
+                console.log({token:token,igual:token==tok})    
+            }
+            
+        }
+     }
+
+
+   
+     // yashe.setCursor({line:tok.line,ch:tok.end})
+
+
+
     let tokens = getTokens(yashe);
+
+    //console.log(tokens)
+
     let firstComments = getFirstComments(tokens); //Comments at the beginning of the file if exists
     let directivesAndStarts = getDirectivesAndStarts(tokens);
     let comments = getComments(tokens);
@@ -20,6 +59,22 @@ function prettify(yashe){
     let shapesStr = getShapesStr(shapes);
 
     yashe.setValue(firstComments+directivesStr+shapesStr) ;
+
+    let aux =0;
+    for (var l = 0; l < yashe.lineCount(); ++l) {
+        let lineTokens = yashe.getLineTokens(l);
+        for(let t in lineTokens){
+            let token = lineTokens[t];
+            if(token.type!='ws')aux++;
+            if(cont==aux){
+                console.log(token)
+                yashe.setCursor({line:l,ch:token.end})
+                return;
+            }
+        }
+    }
+    //yashe.setCursor({line:,ch:tok.end})
+
 
 }
 
