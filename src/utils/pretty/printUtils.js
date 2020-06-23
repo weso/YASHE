@@ -1,5 +1,3 @@
-
-
 function getSeparator(size){
     let space = ' ';
     let separator = '  ';

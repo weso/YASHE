@@ -18,10 +18,11 @@ const syntaxUtils = require('./utils/syntaxUtils.js');
 const tooltipUtils = require('./utils/tooltipUtils.js');
 const formatUtils = require('./utils/formatUtils.js');
 const buttonsUtils = require('./utils/buttonsUtils.js');
+const prettyUtils = require('./utils/pretty/prettyUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
 const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
-const pretty = require('./pretty/prettyUtils.js');
+
 
 require('../lib/deparam.js');
 require('codemirror/addon/fold/foldcode.js');
@@ -379,9 +380,9 @@ root.storeContent = function(yashe) {
 };
 
 
-root.pretty = function(yashe){
+root.prettify = function(yashe){
   if(!yashe.hasErrors()){
-    pretty.prettify(yashe);
+    prettyUtils.prettify(yashe);
   }
 }
 
