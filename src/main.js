@@ -380,7 +380,9 @@ root.storeContent = function(yashe) {
 
 
 root.pretty = function(yashe){
-  pretty.prettify(yashe);
+  if(!yashe.hasErrors()){
+    pretty.prettify(yashe);
+  }
 }
 
 /**

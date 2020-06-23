@@ -40,8 +40,6 @@ function getNodes(shapeTokens){
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
             let paranthesis = hasFinalParenthesis(slot);
-
-
             let node = new Node(constraints,triples,'',null,[],paranthesis);
             acc.push(node);
             return acc;
