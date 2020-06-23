@@ -12,20 +12,36 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `# Example 84  IF-THEN-ELSE pattern example
-# https://book.validatingrdf.com/bookHtml010.html#sec108
-
-PREFIX :       <http://example.org/>
+  value:  `PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
-PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX jps: <https://jpsearch.go.jp/term/property#>
+PREFIX type: <https://jpsearch.go.jp/term/type/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX jpshape: <https://jpsearch.go.jp/shape/>
 
-:Product (
-  NOT  { a [ schema:Vehicle ] } OR
-       { schema:vehicleEngine . ;
-        schema:fuelType .
-       }
- ) AND ({ a [schema:Vehicle] } OR
-        { schema:category xsd:string } )
+jpshape:CHO IRI {
+	a IRI ;
+	rdfs:label Literal ;
+	schema:name Literal+ ;
+	schema:contributor (@jpshape:CHO OR IRI)* ;
+	schema:temporal (@jpshape:CHO OR IRI)* ;
+	schema:spatial (@jpshape:CHO OR IRI)* ;
+	schema:about IRI* ;
+	schema:identifier Literal* ;
+	schema:isbn Literal* ;
+	schema:issn Literal* ;
+	schema:inLanguage IRI* ;
+	schema:image IRI* ;
+	schema:description Literal* ;
+	schema:isPartOf (@jpshape:CHO OR IRI)* ;
+	schema:relatedLink IRI* ;
+	schema:creator (@jpshape:CHO OR IRI)* ;
+	schema:publisher (@jpshape:CHO OR IRI)* ;
+}
+
+
 
 `,
 

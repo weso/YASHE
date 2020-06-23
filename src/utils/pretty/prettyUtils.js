@@ -27,52 +27,6 @@ function prettify(yashe){
     setCursor(yashe,cursorPosition);
 }
 
-function getCursorPosition(yashe){
-    let cursor = yashe.getCursor();
-    let cursorToken = yashe.getTokenAt({line:cursor.line,ch:cursor.ch})
-    cursorToken.line = cursor.line;
-
-    let position = 0;
-    for (var l = 0; l <= cursor.line; ++l) {
-        let lineTokens = yashe.getLineTokens(l);
-        for(let t in lineTokens){
-            let token = lineTokens[t];
-            if(token.type!='ws'){
-                position++;
-            }
-
-            if(isCursorToken(token,cursorToken,l)){
-                return position;
-            }
-        }
-     }
-     return position;
-}
-
-function setCursor(yashe,position){
-    let currentPostion =0;
-    for (var l = 0; l < yashe.lineCount(); ++l) {
-        let lineTokens = yashe.getLineTokens(l);
-        for(let t in lineTokens){
-            let token = lineTokens[t];
-            if(token.type!='ws')currentPostion++;
-            if(position==currentPostion){
-                yashe.setCursor({line:l,ch:token.end})
-                return;
-            }
-        }
-    }
-}
-
-function isCursorToken(token1,token2,line){
-    return  token1.start == token2.start 
-            && token1.end == token2.end
-            && token1.string == token2.string
-            && token1.type == token2.type
-            && line == token2.line;
-}
-
-
 function getShapes(tokens){
     return getShapesTokens(tokens).reduce((acc,shapeTokens)=>{
         let nodes = getNodes(shapeTokens);
@@ -96,10 +50,7 @@ function getNodes(shapeTokens){
 }
 
 function hasFinalParenthesis(slot){
-    return slot.reverse().reduce((acc,t)=>{
-        if(t.string==')')acc=true;
-        return acc;
-    },false)
+    return slot[slot.length-1].string ==')';
 }
 
 function getCommentsAfterShape(shapeTokens){
@@ -428,6 +379,52 @@ function isDirective(token) {
             return true;
     }
     return false;
+}
+
+
+function getCursorPosition(yashe){
+    let cursor = yashe.getCursor();
+    let cursorToken = yashe.getTokenAt({line:cursor.line,ch:cursor.ch})
+    cursorToken.line = cursor.line;
+
+    let position = 0;
+    for (var l = 0; l <= cursor.line; ++l) {
+        let lineTokens = yashe.getLineTokens(l);
+        for(let t in lineTokens){
+            let token = lineTokens[t];
+            if(token.type!='ws'){
+                position++;
+            }
+
+            if(isCursorToken(token,cursorToken,l)){
+                return position;
+            }
+        }
+     }
+     return position;
+}
+
+function setCursor(yashe,position){
+    let currentPostion =0;
+    for (var l = 0; l < yashe.lineCount(); ++l) {
+        let lineTokens = yashe.getLineTokens(l);
+        for(let t in lineTokens){
+            let token = lineTokens[t];
+            if(token.type!='ws')currentPostion++;
+            if(position==currentPostion){
+                yashe.setCursor({line:l,ch:token.end})
+                return;
+            }
+        }
+    }
+}
+
+function isCursorToken(token1,token2,line){
+    return  token1.start == token2.start 
+            && token1.end == token2.end
+            && token1.string == token2.string
+            && token1.type == token2.type
+            && line == token2.line;
 }
 
 function isStart(token,previousToken) {
