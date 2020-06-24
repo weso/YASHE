@@ -40,7 +40,6 @@ function getShapes(tokens){
 
 function getNodes(shapeTokens){
     return getSlots(shapeTokens).reduce((acc,slot,index)=>{
-        console.log(slot)
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
             let paranthesis = hasFinalParenthesis(slot);
@@ -57,8 +56,7 @@ function isEmptyBrackets(tokens,triples){
         if(t.string=='{')acc= true;
         return acc;
     },false);
-    console.log({key:key,l:triples.length,cond:key && triples})
-    return key && triples;
+    return key && triples.length==0;
 }
 
 

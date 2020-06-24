@@ -43,7 +43,7 @@ function getLongestTConstraint(triples){
 }
 
 function needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrackets){
-  if(triplesLenght==1 || emptyBrackets)return true;
+  if(isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints))return true;
   return   index==0 
         && token.type!='shape' 
         && token.string!='and'
@@ -56,8 +56,14 @@ function needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrac
         && hasConstraints(constraints) ;
 }
 
+function isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints){
+    if(triplesLenght==1 || emptyBrackets){
+        return constraints && constraints.length<=2;
+    }
+    return false; 
+}
+
 function hasConstraints(constraints) {
-   
     return constraints.reduce((acc,c)=>{
         if(c.type!="string-2" 
         && c.type!='variable-3'
