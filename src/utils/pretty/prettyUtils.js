@@ -40,14 +40,27 @@ function getShapes(tokens){
 
 function getNodes(shapeTokens){
     return getSlots(shapeTokens).reduce((acc,slot,index)=>{
+        console.log(slot)
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
             let paranthesis = hasFinalParenthesis(slot);
-            let node = new Node(constraints,triples,'',null,[],paranthesis);
+            let emptyBrackets = isEmptyBrackets(slot,triples);
+
+            let node = new Node(constraints,triples,'',emptyBrackets,[],paranthesis);
             acc.push(node);
             return acc;
     },[]);
 }
+
+function isEmptyBrackets(tokens,triples){
+    let key = tokens.reduce((acc,t)=>{
+        if(t.string=='{')acc= true;
+        return acc;
+    },false);
+    console.log({key:key,l:triples.length,cond:key && triples})
+    return key && triples;
+}
+
 
 function hasFinalParenthesis(slot){
     return slot[slot.length-1].string ==')';
