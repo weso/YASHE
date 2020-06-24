@@ -88,7 +88,13 @@ class Node{
             if(isTriple && !isLastTriple)str+=";";
         }else{
 
-            if(this.emptyBrackets)str+='{}';
+            if(this.emptyBrackets){
+                str+='{}';
+                if(this.afterTriples.length>0)str+=" ";
+                this.afterTriples.map(a=>{
+                    str+=a.string+" ";
+                })
+            }
            
             if(isTriple){
                 if(!isLastTriple)str+=';';
