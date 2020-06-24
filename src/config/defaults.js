@@ -12,34 +12,23 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX schema: <http://schema.org/>
-PREFIX jps: <https://jpsearch.go.jp/term/property#>
-PREFIX type: <https://jpsearch.go.jp/term/type/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX jpshape: <https://jpsearch.go.jp/shape/>
+  value:  `PREFIX registry: <https://wikibase-registry.wmflabs.org/wiki/Item:>
+PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:>
+PREFIX droid: <https://data.droidwiki.org/wiki/Item:>
+PREFIX plant: <http://wikibase.plantdata.io/wiki/Item:>
+PREFIX test: <https://test.wikidata.org/wiki/>
+PREFIX rhizome: <https://artbase.rhizome.org/wiki/Item:>
+PREFIX docu: <http://wikidocumentaries.wmflabs.org/wiki/Item:>
+PREFIX fact: <https://database.factgrid.de/wiki/Item:>
 
-jpshape:CHO IRI {
-	a IRI ;
-	rdfs:label Literal ;
-	schema:name Literal+ ;
-	schema:contributor (@jpshape:CHO OR IRI)* ;
-	schema:temporal (@jpshape:CHO OR IRI)* ;
-	schema:spatial (@jpshape:CHO OR IRI)* ;
-	schema:about IRI* ;
-	schema:identifier Literal* ;
-	schema:isbn Literal* ;
-	schema:issn Literal* ;
-	schema:inLanguage IRI* ;
-	schema:image IRI* ;
-	schema:description Literal* ;
-	schema:isPartOf (@jpshape:CHO OR IRI)* ;
-	schema:relatedLink IRI* ;
-	schema:creator (@jpshape:CHO OR IRI)* ;
-	schema:publisher (@jpshape:CHO OR IRI)* ;
-}
+registry:Q16 .
+eagle:Q4225 .
+droid:Q187 .
+plant:Q180732 .
+test:Q10 .
+rhizome:Q1382 .
+docu:Q3 .
+fact:Q99765 .
 
 
 

@@ -46,6 +46,11 @@ class Node{
                     str+='\n'+getIndent(indent);
                 }
 
+                let lower = token.string.toLowerCase();
+                if( lower == 'and' || lower == 'or'){
+                    str+=' ';
+                }
+
                
                 str+=token.string+separator;
                 

@@ -149,7 +149,7 @@ function getBeforeTriplesTokens(tokens){
             start = false;
         }
 
-        if(index == tokens.length-1)start=false; //Break condition 2
+        if(index == tokens.length-1 && t.string!='.')start=false; //Break condition 2
 
         if(start){
             acc.push(t);
