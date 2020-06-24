@@ -88,8 +88,9 @@ function getTriples(tokens) {
                         let subTriples = getTriples(tripleTokens);
                         let after = getAfterTripleTokens(singleTriple);
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
-
-                        acc.push(new Node(before,subTriples,comment,start,after));
+                        let emptyBrackets = start && subTriples.length==0;
+              
+                        acc.push(new Node(before,subTriples,comment,emptyBrackets,after));
                         start=false;
                 }
                 singleTriple = [];

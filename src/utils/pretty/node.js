@@ -22,7 +22,8 @@ class Node{
         let valueSetSize = getValueSetSize(this.constraints);
         this.constraints.map((token,index)=>{
             let nexToken = this.constraints[index+1];
-            let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints);
+            let nexToken2 = this.constraints[index+2];
+            let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
 
             if(token.type=='comment'){
             

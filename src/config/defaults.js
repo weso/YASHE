@@ -12,23 +12,23 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX registry: <https://wikibase-registry.wmflabs.org/wiki/Item:>
-PREFIX eagle: <https://wiki.eagle-network.eu/wiki/Item:>
-PREFIX droid: <https://data.droidwiki.org/wiki/Item:>
-PREFIX plant: <http://wikibase.plantdata.io/wiki/Item:>
-PREFIX test: <https://test.wikidata.org/wiki/>
-PREFIX rhizome: <https://artbase.rhizome.org/wiki/Item:>
-PREFIX docu: <http://wikidocumentaries.wmflabs.org/wiki/Item:>
-PREFIX fact: <https://database.factgrid.de/wiki/Item:>
+  value:  `# Example 26  Simple ShEx Schema 
+# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
 
-registry:Q16 .
-eagle:Q4225 .
-droid:Q187 .
-plant:Q180732 .
-test:Q10 .
-rhizome:Q1382 .
-docu:Q3 .
-fact:Q99765 .
+PREFIX :        <http://example.org/>
+PREFIX schema:  <http://schema.org/>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+
+
+:User {
+  schema:name    {} ; 
+  schema:birthDate  xsd:date ? ; 
+  schema:gender     [ schema:Male schema:Female ]  OR xsd:string ; 
+  schema:knows      IRI @:User *  
+}
+
+
+
 
 
 
