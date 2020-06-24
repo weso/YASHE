@@ -33,7 +33,7 @@ function getLongestPrefix(prefixes){
 function getLongestTConstraint(triples){
     return triples.reduce((acc,t)=>{   
         let token = t.constraints[0];
-        if(token.type=='string-2'){
+        if(token.type=='string-2' || token.type=='variable-3'){
             if(token.string.length>acc){
                 acc = token.string.length;
             }
