@@ -10,6 +10,9 @@ const IMPORT_KEYWORD = 'IMPORT ';
 
 function prettify(yashe){
 
+    // Save the value before the prettify it
+    let previousValue = yashe.getValue();
+
     //  Cursor and tokens
     let cursorPosition = getCursorPosition(yashe);
     let tokens = getTokens(yashe);
@@ -22,9 +25,17 @@ function prettify(yashe){
     //  Strings
     let directivesStr = getDirectivesAndStartsStr(directivesAndStarts);
     let shapesStr = getShapesStr(shapes);
+    let prettified = firstComments+directivesStr+shapesStr;
 
-    yashe.setValue(firstComments+directivesStr+shapesStr) ;
-    setCursor(yashe,cursorPosition);
+    // Is there any change?
+    // It is true that without this check the user
+    // wouldn't appreciate the difference but yashe
+    // would be doing operations that would appear 
+    // in the undo stack
+    if(previousValue!=prettified){
+        yashe.setValue(prettified) ;
+        setCursor(yashe,cursorPosition);
+    }
 }
 
 function getShapes(tokens){
