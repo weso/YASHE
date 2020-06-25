@@ -1,4 +1,8 @@
-let {getSeparatorIfNeeded,getLongestTConstraint,getValueSetSize,getIndent,
+let {
+    getSeparatorIfNeeded,
+    getLongestTConstraint,
+    getValueSetSize,
+    getIndent,
     LINE_BREAK,
     WHITE_SPACE,
     EMPTY_STRING,
@@ -14,8 +18,7 @@ let {getSeparatorIfNeeded,getLongestTConstraint,getValueSetSize,getIndent,
     VALUESET_TYPE,
     AND_KEYWORD,
     OR_KEYWORD
-    } = require('./printUtils.js');
-
+} = require('./printUtils.js');
 
 
 class Node{
@@ -57,26 +60,14 @@ class Node{
                 
             }else{
                 if(forceSeparator)index--;
-                if(nexToken && nexToken.string==OPENING_SQUARE_BRACKET && valueSetSize>VALUESET_LINE_LIMIT){
-                    separator = WHITE_SPACE;
-                }
-
-                if(token.type==VALUESET_TYPE && valueSetSize>VALUESET_LINE_LIMIT){
-                    valueSet = true;    
-                    acc.str+=LINE_BREAK+getIndent(indent);
-                }
-
-                let lower = token.string.toLowerCase();
-                if( lower == AND_KEYWORD || lower == OR_KEYWORD){
-                    acc.str+=WHITE_SPACE;
-                }
-
-               
-                acc.str+=token.string+separator;
+        
+                separator = this.modifySeparatorIfNeeded(separator,nexToken,valueSetSize);
+                valueSet = this.isLongValueSet(token,valueSetSize);
+                acc.str += this.getOpeningValueSetIfNeeded(valueSet,indent);
+                acc.str += this.getWhiteSpaceIfNeeded(token);
+                acc.str += token.string+separator;
+                acc.str += this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
                 
-                if(nexToken && nexToken.string==CLOSING_SQUARE_BRACKET && valueSet){
-                    acc.str+=LINE_BREAK+getIndent(indent-1);
-                }
             }
             return acc;
         },{
@@ -85,15 +76,45 @@ class Node{
         });
     }
 
+    isLongValueSet(token,valueSetSize){
+        return token.type==VALUESET_TYPE && valueSetSize>VALUESET_LINE_LIMIT;
+    }
+
+    getOpeningValueSetIfNeeded(valueSet,indent){
+        if(valueSet)
+            return LINE_BREAK+getIndent(indent);
+        return EMPTY_STRING;
+    }
+
+    modifySeparatorIfNeeded(separator,nexToken,valueSetSize){
+        if(nexToken && nexToken.string==OPENING_SQUARE_BRACKET && valueSetSize>VALUESET_LINE_LIMIT){
+            return WHITE_SPACE;
+        }
+        return separator;
+    }
+    
+    getWhiteSpaceIfNeeded(token){
+        let lower = token.string.toLowerCase();
+        if( lower == AND_KEYWORD || lower == OR_KEYWORD)
+            return WHITE_SPACE;
+        return EMPTY_STRING
+    }
+
+    getClosingValueSetIfNeeded(nexToken,valueSet,indent){
+        if(nexToken && nexToken.string==CLOSING_SQUARE_BRACKET && valueSet)
+            return LINE_BREAK+getIndent(indent-1);
+        return EMPTY_STRING;
+    }
+
 
     getTriplesString(indent,tripleComent,isTriple,isLastTriple){
         let str = EMPTY_STRING;
 
-        str+= this.getSubTriplesStrIfNeeded(indent,tripleComent,isTriple);
-        str+= this.getEmptyBracketsIfNeeded();
-        str+= this.getAfterTriplesStr();
-        str+= this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent);
-        str+= this.getFinalParenthesisIfNeeded();
+        str += this.getSubTriplesStrIfNeeded(indent,tripleComent,isTriple);
+        str += this.getEmptyBracketsIfNeeded();
+        str += this.getAfterTriplesStr();
+        str += this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent);
+        str += this.getFinalParenthesisIfNeeded();
     
         return str;
     }
