@@ -8,7 +8,10 @@ let {
     EMPTY_STRING,
     VALUESET_LINE_LIMIT,
     EMPTY_BRACKETS,
-    FINAL_PARENTHESIS,
+} = require('./printUtils.js');
+
+let {
+    CLOSING_PARENTHESIS,
     OPENING_CURLY_BRACKET,
     CLOSING_CURLY_BRACKET,
     OPENING_SQUARE_BRACKET,
@@ -18,8 +21,7 @@ let {
     VALUESET_TYPE,
     AND_KEYWORD,
     OR_KEYWORD
-} = require('./printUtils.js');
-
+} = require('../constUtils.js');
 
 class Node{
 
@@ -41,6 +43,7 @@ class Node{
         return str;
     }
 
+    //This method could be prettier
     getConstraints(longest,indent){
         let valueSetSize = getValueSetSize(this.constraints);
         let forceSeparator = false;
@@ -53,7 +56,8 @@ class Node{
             
                 forceSeparator = this.startsWithComment(index);//If it's a comment before the constraints skip it
                 acc.tripleComment+= this.getTripleComment(forceSeparator,token); //If not, add it to the finish of the line
-        
+
+
             }else{
                 
                 index     = this.decrementIndexIfNeeded(forceSeparator);
@@ -140,7 +144,7 @@ class Node{
 
     getFinalParenthesisIfNeeded(){
         if(this.finalParenthesis)
-            return FINAL_PARENTHESIS;
+            return CLOSING_PARENTHESIS;
         return EMPTY_STRING;
     }
 

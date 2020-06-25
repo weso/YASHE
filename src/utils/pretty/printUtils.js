@@ -1,34 +1,26 @@
-const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
+let {
+    OPENING_PARENTHESIS,
+    CLOSING_PARENTHESIS,
+    OPENING_CURLY_BRACKET,
+    OPENING_SQUARE_BRACKET,
+    CLOSING_SQUARE_BRACKET,
+    DOLLAR,
+    AMPERSAND,
+    AND_KEYWORD,
+    OR_KEYWORD,
+    SHAPE_TYPE,
+    COMMENT_TYPE,
+    VALUESET_TYPE,
+    PREFIXED_IRI,
+    IRI
+} = require('../constUtils.js');
 
-// Symbols
+const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
 const LINE_BREAK = '\n';
 const WHITE_SPACE = ' ';
 const DOUBLE_WHITE_SPACE = '  ';
 const EMPTY_STRING = '';
 const EMPTY_BRACKETS = '{}';
-const OPENING_PARENTHESIS = '(';
-const FINAL_PARENTHESIS = ')';
-const OPENING_CURLY_BRACKET= '{';
-const CLOSING_CURLY_BRACKET= '}';
-const OPENING_SQUARE_BRACKET= '[';
-const CLOSING_SQUARE_BRACKET= ']';
-const SEMICOLON=';';
-const DOLLAR = '$';
-const AMPERSAND = '&';
-
-// Types
-const SHAPE_TYPE = 'shape'
-const COMMENT_TYPE = 'comment';
-const VALUESET_TYPE = 'valueSet';
-const PREFIXED_IRI = 'string-2';
-const IRI = 'variable-3';
-
-// Keywords
-const AND_KEYWORD = 'and';
-const OR_KEYWORD = 'or';
-
-
-
 
 function getSeparator(size){
     let space = WHITE_SPACE;
@@ -140,14 +132,4 @@ module.exports ={
     WHITE_SPACE:WHITE_SPACE,
     EMPTY_STRING:EMPTY_STRING,
     EMPTY_BRACKETS:EMPTY_BRACKETS,
-    FINAL_PARENTHESIS:FINAL_PARENTHESIS,
-    OPENING_CURLY_BRACKET:OPENING_CURLY_BRACKET,
-    CLOSING_CURLY_BRACKET:CLOSING_CURLY_BRACKET,
-    OPENING_SQUARE_BRACKET:OPENING_SQUARE_BRACKET,
-    CLOSING_SQUARE_BRACKET:CLOSING_SQUARE_BRACKET,
-    SEMICOLON:SEMICOLON,
-    COMMENT_TYPE:COMMENT_TYPE,
-    VALUESET_TYPE:VALUESET_TYPE,
-    AND_KEYWORD:AND_KEYWORD,
-    OR_KEYWORD:OR_KEYWORD
 }
