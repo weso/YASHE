@@ -74,7 +74,7 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
-    "Ctrl-F": YASHE.pretty,
+    "Ctrl-Shift-F": YASHE.pretty,
     "Cmd-F": YASHE.pretty,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
