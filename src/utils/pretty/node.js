@@ -191,8 +191,8 @@ class Node{
     }
     
     getWhiteSpaceIfNeeded(token){
-        let lower = token.string.toLowerCase();
-        if( lower == AND_KEYWORD || lower == OR_KEYWORD)
+        let upper = token.string.toUpperCase();
+        if( upper == AND_KEYWORD || upper == OR_KEYWORD)
             return WHITE_SPACE;
         return EMPTY_STRING
     }

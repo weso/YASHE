@@ -71,8 +71,8 @@ function needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrac
   if(isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints))return true;
   return   index==0 
         && token.type!= SHAPE_TYPE 
-        && token.string!= AND_KEYWORD
-        && token.string!= OR_KEYWORD
+        && token.string.toUpperCase()!= AND_KEYWORD
+        && token.string.toUpperCase()!= OR_KEYWORD
         && token.string!= OPENING_PARENTHESIS
         && token.string!= DOLLAR
         && token.string!= AMPERSAND
