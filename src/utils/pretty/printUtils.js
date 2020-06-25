@@ -1,25 +1,38 @@
 const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
 
-// Symbols and Keywords
+// Symbols
 const LINE_BREAK = '\n';
 const WHITE_SPACE = ' ';
+const DOUBLE_WHITE_SPACE = '  ';
 const EMPTY_STRING = '';
 const EMPTY_BRACKETS = '{}';
+const OPENING_PARENTHESIS = '(';
 const FINAL_PARENTHESIS = ')';
 const OPENING_CURLY_BRACKET= '{';
 const CLOSING_CURLY_BRACKET= '}';
 const OPENING_SQUARE_BRACKET= '[';
 const CLOSING_SQUARE_BRACKET= ']';
 const SEMICOLON=';';
+const DOLLAR = '$';
+const AMPERSAND = '&';
+
+// Types
+const SHAPE_TYPE = 'shape'
 const COMMENT_TYPE = 'comment';
 const VALUESET_TYPE = 'valueSet';
+const PREFIXED_IRI = 'string-2';
+const IRI = 'variable-3';
+
+// Keywords
 const AND_KEYWORD = 'and';
 const OR_KEYWORD = 'or';
 
 
+
+
 function getSeparator(size){
-    let space = ' ';
-    let separator = '  ';
+    let space = WHITE_SPACE;
+    let separator = DOUBLE_WHITE_SPACE;
     for(let i=0;i<size;i++){
         separator+=space;
     }
@@ -33,9 +46,9 @@ function getSeparator(size){
 * I have better things to do
 * */
 function getIndent(tab) {
-    let indent = "";
+    let indent = EMPTY_STRING;
     for(let i=0;i<tab;i++){
-        indent+="  ";
+        indent+=DOUBLE_WHITE_SPACE;
     }
     return indent;
 }
@@ -52,7 +65,7 @@ function getLongestPrefix(prefixes){
 function getLongestTConstraint(triples){
     return triples.reduce((acc,t)=>{   
         let token = t.constraints[0];
-        if(token.type=='string-2' || token.type=='variable-3'){
+        if(token.type==PREFIXED_IRI || token.type==IRI){
             if(token.string.length>acc){
                 acc = token.string.length;
             }
@@ -61,17 +74,18 @@ function getLongestTConstraint(triples){
     },0)
 }
 
+
 function needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrackets){
   if(isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints))return true;
   return   index==0 
-        && token.type!='shape' 
-        && token.string!='and'
-        && token.string!='or' 
-        && token.string!='('
-        && token.string!='$'
-        && token.string!='&'
+        && token.type!= SHAPE_TYPE 
+        && token.string!= AND_KEYWORD
+        && token.string!= OR_KEYWORD
+        && token.string!= OPENING_PARENTHESIS
+        && token.string!= DOLLAR
+        && token.string!= AMPERSAND
         && nexToken
-        && nexToken.string!='{' 
+        && nexToken.string!=OPENING_CURLY_BRACKET 
         && hasConstraints(constraints) ;
 }
 
@@ -84,16 +98,15 @@ function isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints){
 
 function hasConstraints(constraints) {
     return constraints.reduce((acc,c)=>{
-        if(c.type!="string-2" 
-        && c.type!='variable-3'
-        && c.type!='comment')acc=true;
+        if(c.type!=PREFIXED_IRI && c.type!=IRI && c.type!=COMMENT_TYPE)
+            acc=true;
         return acc;
     },false)
 }
 
 
 function getSeparatorIfNeeded(index,token,nexToken,triplesLenght,longest,constraints,emptyBrackets){
-    let separator = " ";
+    let separator = WHITE_SPACE;
     if(needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrackets)){
         let actual = token.string.length;
         let diference = longest - actual;
@@ -107,9 +120,9 @@ function getValueSetSize(tokens){
     let start = false;
     let stop = false;
     return tokens.reduce((acc,t)=>{
-        if(t.string == ']')stop=true;
-        if(start && !stop && t.type=='valueSet')acc.push(t);
-        if(t.string == '[')start=true;
+        if(t.string == CLOSING_SQUARE_BRACKET)stop=true;
+        if(start && !stop && t.type==VALUESET_TYPE)acc.push(t);
+        if(t.string == OPENING_SQUARE_BRACKET)start=true;
         
         return acc;
     },[]).length;
