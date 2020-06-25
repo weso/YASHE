@@ -381,7 +381,6 @@ root.storeContent = function(yashe) {
 
 
 root.prettify = function(yashe){
-  console.log('eeeo')
   if(!yashe.hasErrors()){
     prettyUtils.prettify(yashe);
     if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail

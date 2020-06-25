@@ -154,7 +154,7 @@ var copyLineDown = function(yashe) {
     return $.trim(formattedQuery.replace(/\n\s*\n/g, "\n"));
   };
 
-  //IN PROGRESS
+
   /* var wikiFormat = function(yashe){
     
     let first = 0;
@@ -215,7 +215,6 @@ var copyLineDown = function(yashe) {
     commentLines:commentLines,
     copyLineUp: copyLineUp,
     copyLineDown: copyLineDown,
-    doAutoFormat:doAutoFormat,
-   
+    doAutoFormat:doAutoFormat
   };
   
