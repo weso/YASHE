@@ -155,7 +155,7 @@ var copyLineDown = function(yashe) {
   };
 
 
-  var wikiFormat = function(yashe){
+  /* var wikiFormat = function(yashe){
     
     let first = 0;
     let salto = "\n     ";
@@ -173,7 +173,7 @@ var copyLineDown = function(yashe) {
            
             //console.log({token:token,t:t,length:lineTokens.length,next:next})
             //console.log({line:l,col:{start:token.start,end:token.end},string:token.string})      
-           /*  yashe.replaceRange(salto+token.string+" #wikidataEntity \n   "
+            yashe.replaceRange(salto+token.string+" #wikidataEntity \n   "
             ,{line:l,ch:token.start},{line:l,ch:token.end})
             
             
@@ -182,7 +182,7 @@ var copyLineDown = function(yashe) {
             l++;  
               salto = "";
             }
-            first++; */
+            first++; 
            // console.log('break2')
           //  break;
             
@@ -190,7 +190,7 @@ var copyLineDown = function(yashe) {
           
         }
     }
-  }
+  } */
 
   var getNonWsLineTokens = function(lineTokens){
     return lineTokens.reduce((acc,t)=>{
@@ -216,6 +216,5 @@ var copyLineDown = function(yashe) {
     copyLineUp: copyLineUp,
     copyLineDown: copyLineDown,
     doAutoFormat:doAutoFormat,
-    wikiFormat:wikiFormat
   };
   
