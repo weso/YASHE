@@ -1,24 +1,8 @@
-let {
-    OPENING_PARENTHESIS,
-    CLOSING_PARENTHESIS,
-    OPENING_CURLY_BRACKET,
-    OPENING_SQUARE_BRACKET,
-    CLOSING_SQUARE_BRACKET,
-    DOLLAR,
-    AMPERSAND,
-    AND_KEYWORD,
-    OR_KEYWORD,
-    SHAPE_TYPE,
-    COMMENT_TYPE,
-    VALUESET_TYPE,
-    PREFIXED_IRI,
-    IRI
-} = require('../constUtils.js');
-
 const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
 const LINE_BREAK = '\n';
 const WHITE_SPACE = ' ';
 const DOUBLE_WHITE_SPACE = '  ';
+const TRIPLE_WHITE_SPACE = '   ';
 const EMPTY_STRING = '';
 const EMPTY_BRACKETS = '{}';
 
@@ -120,7 +104,47 @@ function getValueSetSize(tokens){
     },[]).length;
 }
 
+
+function getDirectivesAndStartsStr(directives) {
+    let prefixesStr = getPrefixesStr(directives.prefixes,PREFIX_KEYWORD+WHITE_SPACE);
+    let basesStr = getConcreteDirectiveStr(directives.bases,BASE_KEYWORD+TRIPLE_WHITE_SPACE);
+    let importsStr = getConcreteDirectiveStr(directives.imports,IMPORT_KEYWORD+WHITE_SPACE);
+    let startsStr = getStartsStr(directives.starts); 
+    return prefixesStr+basesStr+importsStr+'\n'+startsStr;
+}
+
+
+function getPrefixesStr(prefixes,keyword){
+    return prefixes.reduce((acc,p)=>{
+        let dif = getLongestPrefix(prefixes) - p.alias.string.length;
+        return acc+= keyword+p.alias.string+getSeparator(dif)+p.iri.string+p.comments+'\n';
+    },'');
+}
+
+function getConcreteDirectiveStr(directives,keyword) {
+    return directives.reduce((acc,d)=>{
+        return acc+=keyword+d.token.string+d.comments+'\n';
+    },'');
+}
+
+
+function getStartsStr(starts) {
+    return starts.reduce((acc,s)=>{
+        return acc+=s+"\n";
+    },"")+'\n';
+}
+
+function getShapesStr(shapes) {
+    return shapes.reduce((acc,s)=>{
+        return acc+=s.toString()+"\n\n";
+    },'');
+}
+
+
+
 module.exports ={
+    getDirectivesAndStartsStr:getDirectivesAndStartsStr,
+    getShapesStr:getShapesStr,
     getSeparator:getSeparator,
     getLongestPrefix:getLongestPrefix,
     getLongestTConstraint:getLongestTConstraint,
@@ -133,3 +157,26 @@ module.exports ={
     EMPTY_STRING:EMPTY_STRING,
     EMPTY_BRACKETS:EMPTY_BRACKETS,
 }
+
+let {
+    OPENING_PARENTHESIS,
+    CLOSING_PARENTHESIS,
+    OPENING_CURLY_BRACKET,
+    OPENING_SQUARE_BRACKET,
+    CLOSING_SQUARE_BRACKET,
+    DOLLAR,
+    AMPERSAND,
+
+    SHAPE_TYPE,
+    COMMENT_TYPE,
+    VALUESET_TYPE,
+    PREFIXED_IRI,
+    IRI,
+
+    PREFIX_KEYWORD,
+    BASE_KEYWORD,
+    IMPORT_KEYWORD,
+    AND_KEYWORD,
+    OR_KEYWORD
+    
+} = require('../constUtils.js');

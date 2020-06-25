@@ -1,28 +1,3 @@
-let {
-    getSeparatorIfNeeded,
-    getLongestTConstraint,
-    getValueSetSize,
-    getIndent,
-    LINE_BREAK,
-    WHITE_SPACE,
-    EMPTY_STRING,
-    VALUESET_LINE_LIMIT,
-    EMPTY_BRACKETS,
-} = require('./printUtils.js');
-
-let {
-    CLOSING_PARENTHESIS,
-    OPENING_CURLY_BRACKET,
-    CLOSING_CURLY_BRACKET,
-    OPENING_SQUARE_BRACKET,
-    CLOSING_SQUARE_BRACKET,
-    SEMICOLON,
-    COMMENT_TYPE,
-    VALUESET_TYPE,
-    AND_KEYWORD,
-    OR_KEYWORD
-} = require('../constUtils.js');
-
 class Node{
 
     constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[],finalParenthesis=''){
@@ -207,4 +182,30 @@ class Node{
 
 
 }
+
 module.exports = Node;
+
+let {
+    getSeparatorIfNeeded,
+    getLongestTConstraint,
+    getValueSetSize,
+    getIndent,
+    LINE_BREAK,
+    WHITE_SPACE,
+    EMPTY_STRING,
+    VALUESET_LINE_LIMIT,
+    EMPTY_BRACKETS,
+} = require('./printUtils.js');
+
+let {
+    CLOSING_PARENTHESIS,
+    OPENING_CURLY_BRACKET,
+    CLOSING_CURLY_BRACKET,
+    OPENING_SQUARE_BRACKET,
+    CLOSING_SQUARE_BRACKET,
+    SEMICOLON,
+    COMMENT_TYPE,
+    VALUESET_TYPE,
+    AND_KEYWORD,
+    OR_KEYWORD
+} = require('../constUtils.js');

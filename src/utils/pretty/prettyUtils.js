@@ -1,32 +1,3 @@
-let Shape = require('./shape.js');
-let Node = require('./node.js');
-let {getLongestPrefix,getSeparator} = require('./printUtils.js');
-let {
-    OPENING_CURLY_BRACKET,
-    CLOSING_CURLY_BRACKET,
-    CLOSING_PARENTHESIS
-    SEMICOLON,
-    EQUALS,
-
-    SHAPE_TYPE,
-    COMMENT_TYPE,
-    WS_TYPE,
-    PREFIX_ALIAS_TYPE,
-    PREFIX_IRI_TYPE,
-    BASE_TYPE,
-    IMPORT_TYPE,
-    PUNC_TYPE,
-    KEYWORD_TYPE,
-    SHAPE_REF_TYPE
-
-    PREFIX_KEYWORD,
-    BASE_KEYWORD,
-    IMPORT_KEYWORD,
-    AND_KEYWORD,
-    OR_KEYWORD,
-    START_KEYWORD
-} = require('../constUtils.js');
-
 function prettify(yashe){
 
     // Save the value before the prettify it
@@ -175,11 +146,6 @@ function getAfterTripleTokens(tokens){
 }
 
 
-
-function isFinishOfTriple(tokens,token,index,finish){
-    return (token.string == SEMICOLON && finish) || index == tokens.length-1;
-}
-
 function getBeforeTriplesTokens(tokens){
     let start=true;
     return tokens.reduce((acc,t,index)=>{
@@ -246,7 +212,7 @@ function getSlots(tokens){
         if(open == 0 && start)start=false;
 
 
-        if((t.string.toUpperCase() ==AND_KEYWORD || t.string.toUpperCase() ==OR_KEYWORD)&& !start){
+        if((t.string.toUpperCase() == AND_KEYWORD || t.string.toUpperCase() == OR_KEYWORD)&& !start){
             isMulti = true;
             acc.push(slot);
             slot = [];
@@ -476,44 +442,9 @@ function isStart(token,previousToken) {
     return false;
 }
 
-
-
-function getPrefixesStr(prefixes,keyword){
-    return prefixes.reduce((acc,p)=>{
-        let dif = getLongestPrefix(prefixes) - p.alias.string.length;
-        return acc+= keyword+p.alias.string+getSeparator(dif)+p.iri.string+p.comments+'\n';
-    },'');
+function isFinishOfTriple(tokens,token,index,finish){
+    return (token.string == SEMICOLON && finish) || index == tokens.length-1;
 }
-
-
-function getDirectivesAndStartsStr(directives) {
-    let prefixesStr = getPrefixesStr(directives.prefixes,PREFIX_KEYWORD);
-    let basesStr = getConcreteDirectiveStr(directives.bases,BASE_KEYWORD);
-    let importsStr = getConcreteDirectiveStr(directives.imports,IMPORT_KEYWORD);
-    let startsStr = getStartsStr(directives.starts); 
-    return prefixesStr+basesStr+importsStr+'\n'+startsStr;
-}
-
-
-
-function getConcreteDirectiveStr(directives,keyword) {
-    return directives.reduce((acc,d)=>{
-        return acc+=keyword+d.token.string+d.comments+'\n';
-    },'');
-}
-
-function getStartsStr(starts) {
-    return starts.reduce((acc,s)=>{
-        return acc+=s+"\n";
-    },"")+'\n';
-}
-
-function getShapesStr(shapes) {
-    return shapes.reduce((acc,s)=>{
-        return acc+=s.toString()+"\n\n";
-    },'');
-}
-
 
 function getNonWsTokens(tokens){
     return tokens.filter(function(obj){
@@ -525,3 +456,38 @@ function getNonWsTokens(tokens){
 module.exports = {
     prettify:prettify,
 }
+
+
+let Shape = require('./shape.js');
+let Node = require('./node.js');
+let {
+    getLongestPrefix,
+    getSeparator,
+    getDirectivesAndStartsStr,
+    getShapesStr
+} = require('./printUtils.js');
+let {
+    OPENING_CURLY_BRACKET,
+    CLOSING_CURLY_BRACKET,
+    CLOSING_PARENTHESIS,
+    SEMICOLON,
+    EQUALS,
+
+    SHAPE_TYPE,
+    COMMENT_TYPE,
+    WS_TYPE,
+    PREFIX_ALIAS_TYPE,
+    PREFIX_IRI_TYPE,
+    BASE_TYPE,
+    IMPORT_TYPE,
+    PUNC_TYPE,
+    KEYWORD_TYPE,
+    SHAPE_REF_TYPE,
+
+    PREFIX_KEYWORD,
+    BASE_KEYWORD,
+    IMPORT_KEYWORD,
+    AND_KEYWORD,
+    OR_KEYWORD,
+    START_KEYWORD
+} = require('../constUtils.js');

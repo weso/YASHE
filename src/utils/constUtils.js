@@ -28,9 +28,9 @@ const SHAPE_REF_TYPE = 'shapeRef';
 // Keywords
 const AND_KEYWORD = 'AND';
 const OR_KEYWORD = 'OR';
-const PREFIX_KEYWORD = 'PREFIX ';
-const BASE_KEYWORD = 'BASE   ';
-const IMPORT_KEYWORD = 'IMPORT ';
+const PREFIX_KEYWORD = 'PREFIX';
+const BASE_KEYWORD = 'BASE';
+const IMPORT_KEYWORD = 'IMPORT';
 const START_KEYWORD = 'START';
 
 
