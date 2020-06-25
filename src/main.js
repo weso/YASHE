@@ -206,9 +206,9 @@ const extendCmInstance = function(yashe) {
     removeCompleterFromSettings(yashe.options, name);
   };
 
-  yashe.wikiformat = function(){
+/*   yashe.wikiformat = function(){
     formatUtils.wikiFormat(yashe);
-  }
+  } */
 
 
 
