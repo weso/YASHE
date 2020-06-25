@@ -81,17 +81,7 @@ class Node{
                     indent--;
                 }
             } 
-            str+='{'+tripleComent+breakLine;
-            this.triples.map((t,index)=>{
-                let currentLongest = getLongestTConstraint(this.triples);
-                let isLastTriple = false;
-                if(index==this.triples.length-1)isLastTriple = true;
-                str+=getIndent(indent)+t.toString(currentLongest,true,indent+1,isLastTriple);
-                str+=" "+t.comment +breakLine;
-            })
-
-            str+= getIndent(indent-1)+"}";
-            
+            str+=this.getSubTriplesStr(indent,tripleComent,breakLine);  
         }
 
         str+= this.getEmptyBracketsIfNeeded();
@@ -101,6 +91,19 @@ class Node{
         if(this.finalParenthesis)str+=')';
         return str;
     }
+
+
+    getSubTriplesStr(indent,tripleComent,breakLine){
+        let str='{'+tripleComent+breakLine;
+        this.triples.map((t,index)=>{
+            let currentLongest = getLongestTConstraint(this.triples);
+            str+= getIndent(indent);
+            str+= t.toString(currentLongest,true,indent+1,this.isLastTriple(index));
+            str+=" "+t.comment +breakLine;
+        })
+        return str + getIndent(indent-1)+"}";
+    }
+
 
     getAfterTriplesStr(){
         let str='';
@@ -123,6 +126,11 @@ class Node{
         if(this.emptyBrackets && this.triples.length<=0)return '{}';
         return '';
     }
+
+    isLastTriple(index){
+        return index==this.triples.length-1;
+    }
+
 
 
 
