@@ -72,6 +72,19 @@ class Node{
 
 
     getTriplesString(indent,tripleComent,isTriple,isLastTriple){
+        let str = '';
+
+        str+= this.getSubTriplesStrIfNeeded(indent,tripleComent,isTriple);
+        str+= this.getEmptyBracketsIfNeeded();
+        str+= this.getAfterTriplesStr();
+        str+= this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent);
+        str+= this.getFinalParenthesisIfNeeded();
+    
+        return str;
+    }
+
+
+    getSubTriplesStrIfNeeded(indent,tripleComent,isTriple){
         let str='';
         if(this.triples.length>0){
             let breakLine = "\n";
@@ -83,12 +96,6 @@ class Node{
             } 
             str+=this.getSubTriplesStr(indent,tripleComent,breakLine);  
         }
-
-        str+= this.getEmptyBracketsIfNeeded();
-        str+= this.getAfterTriplesStr();
-        str+= this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent);
-
-        if(this.finalParenthesis)str+=')';
         return str;
     }
 
@@ -124,6 +131,11 @@ class Node{
 
     getEmptyBracketsIfNeeded(){
         if(this.emptyBrackets && this.triples.length<=0)return '{}';
+        return '';
+    }
+
+    getFinalParenthesisIfNeeded(){
+        if(this.finalParenthesis)return ')';
         return '';
     }
 
