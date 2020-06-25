@@ -86,6 +86,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #6d0f7a; }
   .yashe .cm-s-wiki .cm-prefixDelcIRI {
     color: #6d0f7a; }
+  .yashe .cm-s-wiki .cm-baseDecl {
+    color: #6d0f7a; }
+  .yashe .cm-s-wiki .cm-importDecl {
+    color: #6d0f7a; }
   .yashe .cm-s-dark.CodeMirror {
     background: #2B2B2B;
     color: #A9B7C6;
@@ -150,6 +154,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   .yashe .cm-s-dark .cm-prefixDelcAlias {
     color: #f8c4ffc0; }
   .yashe .cm-s-dark .cm-prefixDelcIRI {
+    color: #f8c4ffc0; }
+  .yashe .cm-s-dark .cm-baseDecl {
+    color: #f8c4ffc0; }
+  .yashe .cm-s-dark .cm-importDecl {
     color: #f8c4ffc0; }
   .yashe .cm-s-dark .CodeMirror-cursor {
     border-left: 1px solid #A9B7C6; }

@@ -9,7 +9,7 @@ var $ = require("jquery"), YASHE = require("../main.js"), CodeMirror = require('
 YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   mode: "shex",
 
-  /**
+ /**
 	 *  Default shape 
 	 */
   value:  `PREFIX :       <http://example.org/>
@@ -22,9 +22,8 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
   schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
   schema:knows         IRI @:User*
 }
-`,
-
-  highlightSelectionMatches: {
+`
+, highlightSelectionMatches: {
     showToken: /\w/
   },
   theme:"wiki",
@@ -75,6 +74,8 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
+    "Ctrl-F": YASHE.pretty,
+    "Cmd-F": YASHE.pretty,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
       if(yashe.getOption("fullScreen")){
