@@ -8,21 +8,25 @@ class Node{
     constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[],finalParenthesis=''){
         this.constraints = constraints;
         this.triples = triples;
-        this.comment = comment;
+        this.comment = comment; //Comment at the end
         this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
-        this.afterTriples= afterTriples;
-        this.finalParenthesis = finalParenthesis; 
+        this.afterTriples= afterTriples; // Whatever after {}
+        this.finalParenthesis = finalParenthesis;  //Is an
     }
 
     toString(longest,isTriple,indent=1,isLastTriple='false'){
-        let str = "";
-        let tripleComent = "";
+        let {tripleComent,str}=this.getConstraintsString(longest);
+        str+=this.getTriplesString(indent,tripleComent,isTriple,isLastTriple);
+       
+        return str;
+    }
+
+    getConstraintsString(longest){
+        let valueSetSize = getValueSetSize(this.constraints);
         let forceSeparator = false;
         let valueSet = false;
-        let valueSetSize = getValueSetSize(this.constraints);
-        this.constraints.map((token,index)=>{
+        return this.constraints.reduce((acc,token,index)=>{
             let nexToken = this.constraints[index+1];
-            let nexToken2 = this.constraints[index+2];
             let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
 
             if(token.type=='comment'){
@@ -33,7 +37,7 @@ class Node{
 
                     //Only if the first token wasn't a comment. 
                     if(!forceSeparator) //Because it could be more after the first one 
-                        tripleComent+=token.string;
+                        acc.tripleComent+=token.string;
                 }
                 
             }else{
@@ -44,25 +48,31 @@ class Node{
 
                 if(token.type=='valueSet' && valueSetSize>2){
                     valueSet = true;    
-                    str+='\n'+getIndent(indent);
+                    acc.str+='\n'+getIndent(indent);
                 }
 
                 let lower = token.string.toLowerCase();
                 if( lower == 'and' || lower == 'or'){
-                    str+=' ';
+                    acc.str+=' ';
                 }
 
                
-                str+=token.string+separator;
+                acc.str+=token.string+separator;
                 
                 if(nexToken && nexToken.string==']' && valueSet){
-                    str+='\n'+getIndent(indent-1);
+                    acc.str+='\n'+getIndent(indent-1);
                 }
             }
+            return acc;
+        },{
+            str:'',
+            tripleComent:''
         });
+    }
 
 
-
+    getTriplesString(indent,tripleComent,isTriple,isLastTriple){
+        let str='';
         if(this.triples.length>0){
             let breakLine = "\n";
             if(isTriple && this.triples.length==1){
@@ -80,32 +90,40 @@ class Node{
                 str+=" "+t.comment +breakLine;
             })
 
-            str+=getIndent(indent-1)+"}";
-            if(this.afterTriples.length>0)str+=" ";
-            this.afterTriples.map(a=>{
-                str+=a.string+" ";
-            })
-            if(isTriple && !isLastTriple)str+=";";
-        }else{
-
-            if(this.emptyBrackets){
-                str+='{}';
-                if(this.afterTriples.length>0)str+=" ";
-                this.afterTriples.map(a=>{
-                    str+=a.string+" ";
-                })
-            }
-           
-            if(isTriple){
-                if(!isLastTriple)str+=';';
-                str+=tripleComent;
-            }
+            str+= getIndent(indent-1)+"}";
+            
         }
 
+        str+= this.getEmptyBracketsIfNeeded();
+        str+= this.getAfterTriplesStr();
+        str+= this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent);
+
         if(this.finalParenthesis)str+=')';
-        
         return str;
     }
+
+    getAfterTriplesStr(){
+        let str='';
+        if(this.afterTriples.length>0)str+=' ';
+        return this.afterTriples.reduce((acc,a)=>{
+            return acc+=a.string+' ';
+        },str);
+    }
+
+    getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent){
+        let str='';
+        if(isTriple){
+            if(!isLastTriple)str+=';';
+            str+=tripleComent;
+        }
+        return str;
+    }
+
+    getEmptyBracketsIfNeeded(){
+        if(this.emptyBrackets && this.triples.length<=0)return '{}';
+        return '';
+    }
+
 
 
 }
