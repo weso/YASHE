@@ -1,3 +1,22 @@
+const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
+
+// Symbols and Keywords
+const LINE_BREAK = '\n';
+const WHITE_SPACE = ' ';
+const EMPTY_STRING = '';
+const EMPTY_BRACKETS = '{}';
+const FINAL_PARENTHESIS = ')';
+const OPENING_CURLY_BRACKET= '{';
+const CLOSING_CURLY_BRACKET= '}';
+const OPENING_SQUARE_BRACKET= '[';
+const CLOSING_SQUARE_BRACKET= ']';
+const SEMICOLON=';';
+const COMMENT_TYPE = 'comment';
+const VALUESET_TYPE = 'valueSet';
+const AND_KEYWORD = 'and';
+const OR_KEYWORD = 'or';
+
+
 function getSeparator(size){
     let space = ' ';
     let separator = '  ';
@@ -102,5 +121,20 @@ module.exports ={
     getLongestTConstraint:getLongestTConstraint,
     getSeparatorIfNeeded:getSeparatorIfNeeded,
     getValueSetSize:getValueSetSize,
-    getIndent:getIndent
+    getIndent:getIndent,
+    VALUESET_LINE_LIMIT:VALUESET_LINE_LIMIT,
+    LINE_BREAK:LINE_BREAK,
+    WHITE_SPACE:WHITE_SPACE,
+    EMPTY_STRING:EMPTY_STRING,
+    EMPTY_BRACKETS:EMPTY_BRACKETS,
+    FINAL_PARENTHESIS:FINAL_PARENTHESIS,
+    OPENING_CURLY_BRACKET:OPENING_CURLY_BRACKET,
+    CLOSING_CURLY_BRACKET:CLOSING_CURLY_BRACKET,
+    OPENING_SQUARE_BRACKET:OPENING_SQUARE_BRACKET,
+    CLOSING_SQUARE_BRACKET:CLOSING_SQUARE_BRACKET,
+    SEMICOLON:SEMICOLON,
+    COMMENT_TYPE:COMMENT_TYPE,
+    VALUESET_TYPE:VALUESET_TYPE,
+    AND_KEYWORD:AND_KEYWORD,
+    OR_KEYWORD:OR_KEYWORD
 }

@@ -1,7 +1,22 @@
-let {getSeparatorIfNeeded,
-    getLongestTConstraint,
-    getValueSetSize,
-    getIndent} = require('./printUtils.js')
+let {getSeparatorIfNeeded,getLongestTConstraint,getValueSetSize,getIndent,
+    LINE_BREAK,
+    WHITE_SPACE,
+    EMPTY_STRING,
+    VALUESET_LINE_LIMIT,
+    EMPTY_BRACKETS,
+    FINAL_PARENTHESIS,
+    OPENING_CURLY_BRACKET,
+    CLOSING_CURLY_BRACKET,
+    OPENING_SQUARE_BRACKET,
+    CLOSING_SQUARE_BRACKET,
+    SEMICOLON,
+    COMMENT_TYPE,
+    VALUESET_TYPE,
+    AND_KEYWORD,
+    OR_KEYWORD
+    } = require('./printUtils.js');
+
+
 
 class Node{
 
@@ -14,7 +29,7 @@ class Node{
         this.finalParenthesis = finalParenthesis;  //Is an
     }
 
-    toString(longest,isTriple,indent=1,isLastTriple='false'){
+    toString(longest,isTriple,indent=1,isLastTriple=false){
         let {tripleComent,str}=this.getConstraintsString(longest);
         str+=this.getTriplesString(indent,tripleComent,isTriple,isLastTriple);
        
@@ -29,7 +44,7 @@ class Node{
             let nexToken = this.constraints[index+1];
             let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
 
-            if(token.type=='comment'){
+            if(token.type==COMMENT_TYPE){
             
                 if(index==0){//If it's a comment before the constraints skip it
                     forceSeparator = true;
@@ -42,37 +57,37 @@ class Node{
                 
             }else{
                 if(forceSeparator)index--;
-                if(nexToken && nexToken.string=='[' && valueSetSize>2){
-                    separator = " ";
+                if(nexToken && nexToken.string==OPENING_SQUARE_BRACKET && valueSetSize>VALUESET_LINE_LIMIT){
+                    separator = WHITE_SPACE;
                 }
 
-                if(token.type=='valueSet' && valueSetSize>2){
+                if(token.type==VALUESET_TYPE && valueSetSize>VALUESET_LINE_LIMIT){
                     valueSet = true;    
-                    acc.str+='\n'+getIndent(indent);
+                    acc.str+=LINE_BREAK+getIndent(indent);
                 }
 
                 let lower = token.string.toLowerCase();
-                if( lower == 'and' || lower == 'or'){
-                    acc.str+=' ';
+                if( lower == AND_KEYWORD || lower == OR_KEYWORD){
+                    acc.str+=WHITE_SPACE;
                 }
 
                
                 acc.str+=token.string+separator;
                 
-                if(nexToken && nexToken.string==']' && valueSet){
-                    acc.str+='\n'+getIndent(indent-1);
+                if(nexToken && nexToken.string==CLOSING_SQUARE_BRACKET && valueSet){
+                    acc.str+=LINE_BREAK+getIndent(indent-1);
                 }
             }
             return acc;
         },{
-            str:'',
-            tripleComent:''
+            str:EMPTY_STRING,
+            tripleComent:EMPTY_STRING
         });
     }
 
 
     getTriplesString(indent,tripleComent,isTriple,isLastTriple){
-        let str = '';
+        let str = EMPTY_STRING;
 
         str+= this.getSubTriplesStrIfNeeded(indent,tripleComent,isTriple);
         str+= this.getEmptyBracketsIfNeeded();
@@ -85,58 +100,60 @@ class Node{
 
 
     getSubTriplesStrIfNeeded(indent,tripleComent,isTriple){
-        let str='';
+        let str = EMPTY_STRING;
         if(this.triples.length>0){
-            let breakLine = "\n";
+            let linebreak = LINE_BREAK;
             if(isTriple && this.triples.length==1){
-                if(tripleComent==''){// If there is any comment after '{' we need to force the breakline
-                    breakLine = "";
+                if(tripleComent==EMPTY_STRING){// If there is any comment after '{' we need to force the breakline
+                    linebreak = EMPTY_STRING;
                     indent--;
                 }
             } 
-            str+=this.getSubTriplesStr(indent,tripleComent,breakLine);  
+            str+=this.getSubTriplesStr(indent,tripleComent,linebreak);  
         }
         return str;
     }
 
 
-    getSubTriplesStr(indent,tripleComent,breakLine){
-        let str='{'+tripleComent+breakLine;
+    getSubTriplesStr(indent,tripleComent,linebreak){
+        let str=OPENING_CURLY_BRACKET+tripleComent+linebreak;
         this.triples.map((t,index)=>{
             let currentLongest = getLongestTConstraint(this.triples);
             str+= getIndent(indent);
             str+= t.toString(currentLongest,true,indent+1,this.isLastTriple(index));
-            str+=" "+t.comment +breakLine;
+            str+= WHITE_SPACE+t.comment +linebreak;
         })
-        return str + getIndent(indent-1)+"}";
+        return str + getIndent(indent-1)+CLOSING_CURLY_BRACKET;
     }
 
 
     getAfterTriplesStr(){
-        let str='';
-        if(this.afterTriples.length>0)str+=' ';
+        let str = EMPTY_STRING;
+        if(this.afterTriples.length>0)str+=WHITE_SPACE;
         return this.afterTriples.reduce((acc,a)=>{
-            return acc+=a.string+' ';
+            return acc+=a.string+WHITE_SPACE;
         },str);
     }
 
     getSemicolonIfNeeded(isTriple,isLastTriple,tripleComent){
-        let str='';
+        let str = EMPTY_STRING;
         if(isTriple){
-            if(!isLastTriple)str+=';';
+            if(!isLastTriple)str+=SEMICOLON;
             str+=tripleComent;
         }
         return str;
     }
 
     getEmptyBracketsIfNeeded(){
-        if(this.emptyBrackets && this.triples.length<=0)return '{}';
-        return '';
+        if(this.emptyBrackets && this.triples.length<=0)
+            return EMPTY_BRACKETS;
+        return EMPTY_STRING;
     }
 
     getFinalParenthesisIfNeeded(){
-        if(this.finalParenthesis)return ')';
-        return '';
+        if(this.finalParenthesis)
+            return FINAL_PARENTHESIS;
+        return EMPTY_STRING;
     }
 
     isLastTriple(index){
