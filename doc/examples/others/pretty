@@ -1,5 +1,6 @@
-# Example 26  Simple ShEx Schema 
-						# https://book.validatingrdf.com/bookHtml010.html#ch040%3AShExSimpleExample
+
+# PRESS CTRL-F / Cmd-F 
+
 PREFIX :        <http://example.org/>
 									PREFIX schema:  <http://schema.org/>
 
