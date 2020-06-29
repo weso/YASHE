@@ -47,11 +47,6 @@
 
       	<div class="row" id="aboutYQuery">
       	<div class="col-md-12">
-      	<h1>About YASHE</h1>
-        YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yasqe.yasgui.org/'>YASQE</a> (which is based on SPARQL)
-        This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. 
-        It has features like: syntax highlighting, visual aid elements (tooltips) and autocomplete mechanisms. In addition, it offers a simple way of integrating into other projects.
-      
         <div class="selectors">
             <select id="rdfBookSelector" class="exSelector form-control">
               <option value="" disabled selected>Validating RDF Data Book Examples</option>
@@ -75,6 +70,12 @@
         (or, if you would like to instantiate YASHE from an existing text area, use <code>var yashe = YASHE.fromTextArea(document.getElementById('textAreaItem'));</code>
         </div>
         </div>
+
+        <h1>About YASHE</h1>
+        YASHE is a <a target="_blank" href='http://shex.io/shex-semantics/'>ShEx</a> editor which started as a fork of <a target="_blank" href='https://yasqe.yasgui.org/'>YASQE</a> (which is based on SPARQL)
+        This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. 
+        It has features like: syntax highlighting, visual aid elements (tooltips) and autocomplete mechanisms. In addition, it offers a simple way of integrating into other projects.
+      
 
         <div class="row" id="features">
           <div class="col-md-12">
@@ -188,15 +189,35 @@
         persistent:null
       });
 
-      yashe.setSize(1135,400);
-
-      //yashe.prettify();
-      //yashe.wikiformat();
-      //yashe.prettify();
-
+      yashe.setSize(1135,500);
     </script>
 
+    <style>
 
+.showLoader{
+    padding-top: 15%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .loader {
+    border: 16px solid #f3f3f3 !important; 
+    border-top: 16px solid #3498db !important;
+    border-bottom: 16px solid #3498db !important; 
+    border-radius: 50% !important;
+    width: 200px !important;
+    height: 200px !important;
+    animation: spin 2s linear infinite !important;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+    </style>
 
 
 </body>

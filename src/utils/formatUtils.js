@@ -154,31 +154,110 @@ var copyLineDown = function(yashe) {
     return $.trim(formattedQuery.replace(/\n\s*\n/g, "\n"));
   };
 
+function getTokens(yashe){
+    let tokens =[];
+    if(yashe!=undefined){
+        for (var l = 0; l < yashe.lineCount(); ++l) {
+            let lineTokens = getNonWsTokens(yashe.getLineTokens(l));
+            lineTokens.forEach(token =>{
+                tokens.push(token);
+            })
 
-  var wikiFormat = function(yashe){
+        }
+    }
+    return tokens;
+}
+
+
+function getNonWsTokens(tokens){
+    return tokens.filter(function(obj){
+        return obj.type != 'ws';
+    })
+}
+
+  var wikiFormat = async function(yashe){
+
+    $('.CodeMirror-lines').hide();
+
+     $('.CodeMirror-lines').parent().append(
+       $('<div class="showLoader"><div class="loader"></div></div>')
+     )
+
+    let tks = getTokens(yashe)
+    let str = '';
+    for(let token in tks){
+      if(tks[token].string.split(':')[0]=='wd' || tks[token].string.split(':')[0]=='wdt'  && tks[token].string.split(':')[1]!='' ){
+            let entity = tks[token].string.split(':')[1].toUpperCase();
+            let language = (navigator.language || navigator.userLanguage).split("-")[0];
+            var API_ENDPOINT = 'https://www.wikidata.org/w/';
+            var QUERY_ID = {
+                    action:'wbgetentities',
+                    ids:entity,
+                    format: 'json', 
+            }
+
+            let result = await $.get({
+                    url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
+                    dataType: 'jsonp',
+            })
+            //+result.entities[entity].labels[language].value+"
+              
+            if(result.entities){
+              str+=' '+ tks[token].string+" #"+result.entities[entity].labels[language].value+"\n";
+            }else{
+              str+=' '+ tks[token].string+' ';
+            }
+            //
+      }else{
+        
+        str+=' '+tks[token].string;
+        if(tks[token].type=='comment')str+="\n"
+      }
+    }
 
     
-    for (var l = 7; l < yashe.lineCount(); ++l) {
+    //yashe.refresh();
+
+     $('.showLoader').hide();
+    $('.CodeMirror-lines').show();
+
+    yashe.setValue(str);
+    yashe.prettify();
+
+    
+    /* for (var l = 7; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
         for(let t in lineTokens){
           let token = lineTokens[t];
           //console.log(next)
-          if(token.string.split(':')[0]=='wd' && !token.skip){
-            console.log(token)
-           
-            //console.log({token:token,t:t,length:lineTokens.length,next:next})
-            //console.log({line:l,col:{start:token.start,end:token.end},string:token.string})
-           
-             yashe.replaceRange(token.string+" #human \n",{line:l,ch:token.start},{line:l,ch:token.end})
-            
-            
+          if(token.string.split(':')[0]=='wd'){
+            let entity = token.string.split(':')[1].toUpperCase();
+            let language = (navigator.language || navigator.userLanguage).split("-")[0];
+            var API_ENDPOINT = 'https://www.wikidata.org/w/';
+            var QUERY_ID = {
+                    action:'wbgetentities',
+                    ids:entity,
+                    format: 'json', 
+            }
 
+            let result = await $.get({
+                    url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
+                    dataType: 'jsonp',
+            })
+            
+                  console.log(result.entities[entity].labels[language])
+
+          
+          yashe.replaceRange(token.string+" #"+result.entities[entity].labels[language].value+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+          yashe.prettify();
             
           }
           
         }
-    }
+    } */
+
+    
   }
 
   var getNonWsLineTokens = function(lineTokens){

@@ -166,6 +166,18 @@ var drawButtons = function(yashe){
         $('#inputLink').select(); 
     }));
 
+    var wikiBtn = $("<div>", {
+      class: "downloadBtns"
+    }).append($(yutils.svg.getElement(imgs.tag))
+    .addClass("yashe_wikiBtn")
+    .attr('id','wikiBtn')
+    .attr("title", "WikiFormat")
+    .click(function() {
+        yashe.wikiformat();
+    }));
+
+
+   
 
 
     //Draw buttons
@@ -173,6 +185,8 @@ var drawButtons = function(yashe){
     if(yashe.options.showShareButton){
         yashe.buttons.append(shareLinkBtn); 
     }
+
+    yashe.buttons.append(wikiBtn); 
 
     if(yashe.options.showUploadButton){
       yashe.buttons.append(uploadButton);

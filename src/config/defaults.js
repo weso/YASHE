@@ -20,10 +20,32 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 start = @<human>
 
 <human> EXTRA wdt:P31 {
-  wdt:P31 [
-    wd:Q5 #1
-    wd:Q11574 #2
-  ];
+  wdt:P31 [wd:Q5];
+  wdt:P21 [wd:Q6581097 wd:Q6581072 wd:Q1097630 wd:Q1052281 wd:Q2449503 wd:Q48270]?;  
+  wdt:P19 . ?;                    
+  wdt:P569 . ? ;                
+  wdt:P735 . * ;                
+  wdt:P734 . * ;                 
+  wdt:P106 . * ;                
+  wdt:P27 @<country> *; 
+  wdt:P22 @<human> *;         
+  wdt:P25 @<human> *;          
+  wdt:P3373 @<human> *;        
+  wdt:P26 @<human> *;          
+  wdt:P40 @<human> *;          
+  wdt:P1038 @<human> *;         
+  wdt:P103 @<language> *;
+  wdt:P1412 @<language> *;
+  wdt:P6886  @<language> *;
+  rdfs:label rdf:langString+;
+}
+
+<country> EXTRA wdt:P31 {
+  wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
+}
+
+<language> EXTRA wdt:P31 {
+  wdt:P31 [wd:Q34770 wd:Q1288568] +;
 }
 `,
 
