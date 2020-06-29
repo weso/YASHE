@@ -1,4 +1,4 @@
-const VALUESET_LINE_LIMIT = 0; // Sets the máximun number of values inside a valueSet
+const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
 const LINE_BREAK = '\n';
 const WHITE_SPACE = ' ';
 const DOUBLE_WHITE_SPACE = '  ';

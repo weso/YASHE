@@ -29,8 +29,6 @@ class Node{
 
             if(token.type==COMMENT_TYPE){
 
-                console.log({token:token.string,valueSet:valueSet})
-      
                 if(valueSet){
                     acc.str+= token.string;
                     acc.str  += this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
