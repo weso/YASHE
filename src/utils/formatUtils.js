@@ -155,42 +155,31 @@ var copyLineDown = function(yashe) {
   };
 
 
-  /* var wikiFormat = function(yashe){
+  var wikiFormat = function(yashe){
+
     
-    let first = 0;
-    let salto = "\n     ";
     for (var l = 7; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
-       // console.log({line:lineTokens})
-       // console.log({nonWs:nonWs})
         for(let t in lineTokens){
           let token = lineTokens[t];
-          
-          let next = getNextNonWSLineToken(yashe,lineTokens,parseInt(t));
           //console.log(next)
-          if(token.string.split(':')[0]=='wd' ){
+          if(token.string.split(':')[0]=='wd' && !token.skip){
+            console.log(token)
            
             //console.log({token:token,t:t,length:lineTokens.length,next:next})
-            //console.log({line:l,col:{start:token.start,end:token.end},string:token.string})      
-             yashe.replaceRange(salto+token.string+" #wikidataEntity \n   "
-            ,{line:l,ch:token.start},{line:l,ch:token.end})
+            //console.log({line:l,col:{start:token.start,end:token.end},string:token.string})
+           
+             yashe.replaceRange(token.string+" #human \n",{line:l,ch:token.start},{line:l,ch:token.end})
             
             
 
-            if(first==0){
-            l++;  
-              salto = "";
-            }
-            first++; 
-           // console.log('break2')
-          //  break;
             
           }
           
         }
     }
-  } */
+  }
 
   var getNonWsLineTokens = function(lineTokens){
     return lineTokens.reduce((acc,t)=>{
@@ -215,6 +204,7 @@ var copyLineDown = function(yashe) {
     commentLines:commentLines,
     copyLineUp: copyLineUp,
     copyLineDown: copyLineDown,
-    doAutoFormat:doAutoFormat
+    doAutoFormat:doAutoFormat,
+    wikiFormat:wikiFormat
   };
   

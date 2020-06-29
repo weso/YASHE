@@ -28,10 +28,18 @@ class Node{
             let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
 
             if(token.type==COMMENT_TYPE){
-            
-                forceSeparator = this.startsWithComment(index);//If it's a comment before the constraints skip it
-                acc.tripleComment+= this.getTripleComment(forceSeparator,token); //If not, add it to the finish of the line
 
+                console.log({token:token.string,valueSet:valueSet})
+      
+                if(valueSet){
+                    acc.str+= token.string;
+                    acc.str  += this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
+                }else{
+                    forceSeparator = this.startsWithComment(index);//If it's a comment before the constraints skip it
+                    acc.tripleComment+= this.getTripleComment(forceSeparator,token); //If not, add it to the finish of the line
+                }
+                
+                
 
             }else{
                 

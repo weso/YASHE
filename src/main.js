@@ -206,10 +206,16 @@ const extendCmInstance = function(yashe) {
     removeCompleterFromSettings(yashe.options, name);
   };
 
-/*   yashe.wikiformat = function(){
+  yashe.wikiformat = function(){
     formatUtils.wikiFormat(yashe);
-  } */
+  }
 
+  yashe.prettify = function(){
+    if(!yashe.hasErrors()){
+      prettyUtils.prettify(yashe);
+      if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+    }
+  }
 
 
   return yashe;
@@ -383,7 +389,7 @@ root.storeContent = function(yashe) {
 root.prettify = function(yashe){
   if(!yashe.hasErrors()){
     prettyUtils.prettify(yashe);
-    if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+   // if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
   }
 }
 
