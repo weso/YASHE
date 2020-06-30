@@ -23,15 +23,26 @@ class Node{
         let valueSetSize = getValueSetSize(this.constraints);
         let forceSeparator = false;
         let valueSet = false;
+        let previousToken;
         return this.constraints.reduce((acc,token,index)=>{
+       
+            if(token.skip)return acc;
+            
             let nexToken = this.constraints[index+1];
             let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
 
             if(token.type==COMMENT_TYPE){
 
-                if(valueSet){
+               console.log({previousToken:previousToken.string,token:token.string,nexToken:nexToken})
+
+                if(previousToken.string=='['){
                     acc.str+= token.string;
-                    acc.str  += this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
+                }else if(nexToken && nexToken.string=='['){
+                    acc.str+= '[ '+token.string;
+                    nexToken.skip = true;
+                }else if(valueSet){
+                    acc.str+= token.string;
+                    acc.str+= this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
                 }else{
                     forceSeparator = this.startsWithComment(index);//If it's a comment before the constraints skip it
                     acc.tripleComment+= this.getTripleComment(forceSeparator,token); //If not, add it to the finish of the line
@@ -43,13 +54,15 @@ class Node{
                 
                 index     = this.decrementIndexIfNeeded(forceSeparator);
                 separator = this.modifySeparatorIfNeeded(separator,nexToken,valueSetSize);
-                valueSet  = this.isLongValueSet(token,valueSetSize);
-                acc.str  += this.getOpeningValueSetIfNeeded(valueSet,indent);
+                valueSet  = this.isValueSet(token,valueSetSize);
+                acc.str  += this.getOpeningValueSetIfNeeded(valueSet,indent,nexToken);
                 acc.str  += this.getWhiteSpaceIfNeeded(token);
                 acc.str  += this.getTokenString(token,separator);
                 acc.str  += this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
                 
             }
+
+            previousToken = token;
             return acc;
         },{
             str:EMPTY_STRING,
@@ -148,7 +161,7 @@ class Node{
         return token.string+separator;
     }
 
-    isLongValueSet(token,valueSetSize){
+    isValueSet(token,valueSetSize){
         return token.type==VALUESET_TYPE && valueSetSize>VALUESET_LINE_LIMIT;
     }
 
@@ -158,7 +171,7 @@ class Node{
         return index;
     }
 
-    getOpeningValueSetIfNeeded(valueSet,indent){
+    getOpeningValueSetIfNeeded(valueSet,indent,nexToken){
         if(valueSet)
             return LINE_BREAK+getIndent(indent);
         return EMPTY_STRING;

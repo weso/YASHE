@@ -197,11 +197,11 @@ var drawButtons = function(yashe){
     }
 
     if(yashe.options.showCopyButton){
-      yashe.buttons.append(copyButton);
+     // yashe.buttons.append(copyButton);
     }
 
     if(yashe.options.showDeleteButton){
-      yashe.buttons.append(deleteButton);
+     // yashe.buttons.append(deleteButton);
     }
 
     if(yashe.options.showThemeButton){

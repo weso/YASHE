@@ -176,8 +176,8 @@ function getNonWsTokens(tokens){
 }
 
   var wikiFormat = async function(yashe){
-
-    $('.CodeMirror-lines').hide();
+yashe.prettify();
+    /* $('.CodeMirror-lines').hide();
 
      $('.CodeMirror-lines').parent().append(
        $('<div class="showLoader"><div class="loader"></div></div>')
@@ -222,16 +222,16 @@ function getNonWsTokens(tokens){
     $('.CodeMirror-lines').show();
 
     yashe.setValue(str);
-    yashe.prettify();
+    yashe.prettify(); */
 
     
-    /* for (var l = 7; l < yashe.lineCount(); ++l) {
+    for (var l = 7; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
         for(let t in lineTokens){
           let token = lineTokens[t];
           //console.log(next)
-          if(token.string.split(':')[0]=='wd'){
+          if(token.string.split(':')[0]=='wd' || token.string.split(':')[0]=='wdt'){
             let entity = token.string.split(':')[1].toUpperCase();
             let language = (navigator.language || navigator.userLanguage).split("-")[0];
             var API_ENDPOINT = 'https://www.wikidata.org/w/';
@@ -255,7 +255,7 @@ function getNonWsTokens(tokens){
           }
           
         }
-    } */
+    }
 
     
   }
