@@ -177,6 +177,7 @@ function getNonWsTokens(tokens){
 
   var wikiFormat = async function(yashe){
     yashe.prettify();
+    yashe.setOption('readOnly',true);
     /* $('.CodeMirror-lines').hide();
 
      $('.CodeMirror-lines').parent().append(
@@ -247,7 +248,7 @@ function getNonWsTokens(tokens){
             })
             
                  // console.log(result.entities[entity].labels[language])
-                 console.log('')
+  
           if(result.entities){
                 yashe.replaceRange(token.string+" #"+result.entities[entity].labels[language].value+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
                 yashe.prettify();
@@ -259,6 +260,8 @@ function getNonWsTokens(tokens){
           
         }
     }
+
+    yashe.setOption('readOnly',false);
 
     
   }

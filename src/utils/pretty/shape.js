@@ -4,7 +4,6 @@ class Shape{
         this.nodes = nodes;
         this.comments = comments;
         this.directivesAndStarts = directivesAndStarts;
-        console.log(this.directivesAndStarts)
     }
 
     getCommentsStr(){

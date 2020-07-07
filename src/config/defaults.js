@@ -25,7 +25,9 @@ start = @<human>
  
 }
 
-PREFIX wd:    <http://www.wikidata.org/entity/>
+#aaa
+
+PREFIX wd:    <http://www.wikidata.org/entity/> #edfe
 PREFIX wdt:   <http://www.wikidata.org/prop/direct/>
 
 start = @<human>

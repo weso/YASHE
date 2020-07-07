@@ -73,13 +73,17 @@ function hasFinalParenthesis(slot){
 function getCommentsAfterShape(shapeTokens){
     let i = 0;
     return shapeTokens.reverse().reduce((acc,t,index)=>{
+
         if(t.type==COMMENT_TYPE && index == i){ //index == i is needed in order not to take comments after a differtent token (CLOSING_CURLY_BRACKET)
-            acc.push(t);
+            if(!isDirective(shapeTokens[index+1])){//check that it's not a directive comment
+                acc.push(t);
+            }
             i++;
         }
 
+         
         if(isDirective(t) || isStart(t,shapeTokens[index+1])){
-            i++;
+            i++
         }
 
         return acc;
@@ -393,6 +397,7 @@ function getFirstComments(tokens){
 }
 
 function isDirective(token) {
+    if(!token)return false;
     if( token.string.toUpperCase()==PREFIX_KEYWORD
         || token.string.toUpperCase()==BASE_KEYWORD
         || token.string.toUpperCase()==IMPORT_KEYWORD
