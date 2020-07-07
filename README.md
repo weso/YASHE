@@ -34,6 +34,7 @@ In addition, it offers a simple way of integrating into other projects
 * [Developing YASHE](#developing-yashe-construction)
 * [Used By](#used-by-link)
 * [Forked By](#forked-by-link)
+* [Thanks](#thanks)
 
 ## Features :clipboard:
 
@@ -409,3 +410,13 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 ## Forked By: :link:
 * [YASME](https://github.com/weso/YASME) Yet Another Shape Map Editor
 * [ShExML Editor](http://shexml.herminiogarcia.com/) ShExML is a language based on ShEx to map and merge heterogeneous data sources. It is designed with usability in mind trying to make the script creation easier to the user
+
+## Thanks!
+A big thanks goes out to:
+* Laurens Rietveld for his great work on the YASQE library
+* Maxime Lefrançois for his tips at the beginning of the project and for his work on the YATE library in which I could be inspired
+
+A big thanks transitively goes out to:
+* The people behind the MediaWiki API which I use for autocompleting Wikidata entities and properties.
+* Marijn Haverbeke for his great work on the CodeMirror library syntax highlighting library
+* Richard Cyganiak for his simple but effective Prefix.cc service, which I use for autocompleting prefixes.
