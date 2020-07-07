@@ -80,7 +80,7 @@
     "file-reader": "^1.1.1",
     "gulp-uglify": "^3.0.2",
     "gulp-uglify-es": "^2.0.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "jsonp": "^0.2.1",
     "prettier": "^1.4.4",
     "read-file": "^0.2.0",
