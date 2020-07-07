@@ -34,7 +34,7 @@ In addition, it offers a simple way of integrating into other projects
 * [Developing YASHE](#developing-yashe-construction)
 * [Used By](#used-by-link)
 * [Forked By](#forked-by-link)
-* [Thanks](#thanks)
+* [Thanks!!!](#thanks)
 
 ## Features :clipboard:
 
