@@ -1,4 +1,4 @@
-const VALUESET_LINE_LIMIT = 0; // Sets the máximun number of values inside a valueSet
+const VALUESET_LINE_LIMIT = 2; // Sets the máximun number of values inside a valueSet
 const LINE_BREAK = '\n';
 const WHITE_SPACE = ' ';
 const DOUBLE_WHITE_SPACE = '  ';
@@ -32,7 +32,7 @@ function getIndent(tab) {
 
 function getLongestPrefix(prefixes){
     return prefixes.reduce((acc,p) =>{
-        if(p.alias.string.length>acc)acc=p.alias.string.length;
+        if(p.alias && p.alias.string.length>acc)acc=p.alias.string.length;
         return acc;
     },0);
 }
@@ -116,8 +116,11 @@ function getDirectivesAndStartsStr(directives) {
 
 function getPrefixesStr(prefixes,keyword){
     return prefixes.reduce((acc,p)=>{
-        let dif = getLongestPrefix(prefixes) - p.alias.string.length;
-        return acc+= keyword+p.alias.string+getSeparator(dif)+p.iri.string+p.comments+'\n';
+        if(p.alias){
+            let dif = getLongestPrefix(prefixes) - p.alias.string.length;
+            return acc+= keyword+p.alias.string+getSeparator(dif)+p.iri.string+p.comments+'\n';
+        }
+        return acc;
     },'');
 }
 

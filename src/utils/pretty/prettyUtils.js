@@ -32,11 +32,16 @@ function getShapes(tokens){
     return getShapesTokens(tokens).reduce((acc,shapeTokens)=>{
         let nodes = getNodes(shapeTokens);
         let comments = getCommentsAfterShape(shapeTokens);
-        
-        acc.push(new Shape(nodes,comments));
+        let prefixes = getPrefixesAfterShape(shapeTokens);
+
+        acc.push(new Shape(nodes,comments,prefixes));
         return acc;
 
     },[])
+}
+
+function getPrefixesAfterShape(shapeTokens){
+    return getDirectivesAndStartsStr(getDirectivesAndStarts(shapeTokens.reverse()));
 }
 
 function getNodes(shapeTokens){

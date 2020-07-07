@@ -176,7 +176,7 @@ function getNonWsTokens(tokens){
 }
 
   var wikiFormat = async function(yashe){
-yashe.prettify();
+    yashe.prettify();
     /* $('.CodeMirror-lines').hide();
 
      $('.CodeMirror-lines').parent().append(
@@ -225,13 +225,13 @@ yashe.prettify();
     yashe.prettify(); */
 
     
-    for (var l = 7; l < yashe.lineCount(); ++l) {
+    for (var l = 1; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
-        for(let t in lineTokens){
-          let token = lineTokens[t];
+        for(let t in nonWs){
+          let token = nonWs[t];
           //console.log(next)
-          if(token.string.split(':')[0]=='wd' || token.string.split(':')[0]=='wdt'){
+          if(token.string.split(':')[0]=='wd' || token.string.split(':')[0]=='wdt' && token.string.split(':')[1]!='' ){
             let entity = token.string.split(':')[1].toUpperCase();
             let language = (navigator.language || navigator.userLanguage).split("-")[0];
             var API_ENDPOINT = 'https://www.wikidata.org/w/';
@@ -246,11 +246,14 @@ yashe.prettify();
                     dataType: 'jsonp',
             })
             
-                  console.log(result.entities[entity].labels[language])
-
+                 // console.log(result.entities[entity].labels[language])
+                 console.log('')
+          if(result.entities){
+                yashe.replaceRange(token.string+" #"+result.entities[entity].labels[language].value+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+                yashe.prettify();
+          }
           
-          yashe.replaceRange(token.string+" #"+result.entities[entity].labels[language].value+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
-          yashe.prettify();
+      
             
           }
           

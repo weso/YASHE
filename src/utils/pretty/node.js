@@ -33,11 +33,10 @@ class Node{
 
             if(token.type==COMMENT_TYPE){
 
-               console.log({previousToken:previousToken.string,token:token.string,nexToken:nexToken})
-
-                if(previousToken.string=='['){
+               //console.log({previousToken:previousToken.string,token:token.string,nexToken:nexToken})
+                if(previousToken.string=='[' && valueSetSize>2){
                     acc.str+= token.string;
-                }else if(nexToken && nexToken.string=='['){
+                }else if(nexToken && nexToken.string=='[' && valueSetSize>2){
                     acc.str+= '[ '+token.string;
                     nexToken.skip = true;
                 }else if(valueSet){
@@ -45,7 +44,7 @@ class Node{
                     acc.str+= this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
                 }else{
                     forceSeparator = this.startsWithComment(index);//If it's a comment before the constraints skip it
-                    acc.tripleComment+= this.getTripleComment(forceSeparator,token); //If not, add it to the finish of the line
+                    acc.tripleComment = this.getTripleComment(forceSeparator,token) + acc.tripleComment ; //If not, add it to the finish of the line
                 }
                 
                 
