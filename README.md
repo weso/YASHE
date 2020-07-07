@@ -5,7 +5,7 @@
 </p>
 
 # YASHE
-*YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](http://yasqe.yasgui.org/) (which is based on SPARQL). 
+*YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](https://github.com/Triply-Dev/YASGUI.YASQE-deprecated) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
 autocomplete mechanisms. 
 In addition, it offers a simple way of integrating into other projects
@@ -413,8 +413,8 @@ contributions as Github pull requests.  To develop *YASHE* locally:
 
 ## Thanks!
 A big thanks goes out to:
-* Laurens Rietveld for his great work on the YASQE library
-* Maxime Lefrançois for his tips at the beginning of the project and for his work on the YATE library in which I could be inspired
+* Laurens Rietveld for his great work on the [YASQE library](https://github.com/Triply-Dev/YASGUI.YASQE-deprecated)
+* Maxime Lefrançois for his tips at the beginning of the project and for his work on the [YATE library](https://github.com/perfectkb/yate) in which I could be inspired
 
 A big thanks transitively goes out to:
 * The people behind the MediaWiki API which I use for autocompleting Wikidata entities and properties.
