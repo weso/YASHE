@@ -14,7 +14,10 @@ class Shape{
     }
 
     getDirectivesAndStartsStr(){
-        return '\n\n'+this.directivesAndStarts
+        let str = '';
+        if(this.directivesAndStarts.trim()!='')
+            str = '\n\n'+this.directivesAndStarts;
+        return str;
     }
 
     toString(){

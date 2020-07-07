@@ -8,14 +8,14 @@ function prettify(yashe){
     let tokens = getTokens(yashe);
 
     //  Objects
-    let firstComments = getFirstComments(tokens);
-    let directivesAndStarts = getDirectivesAndStarts(tokens);
+    let initialComments = getFirstComments(tokens);
+    let initialDirectivesAndStarts = getInitialDirectivesAndStarts(tokens);
     let shapes = getShapes(tokens);
 
     //  Strings
-    let directivesStr = getDirectivesAndStartsStr(directivesAndStarts);
+    let initialDirectivesAndStartsStr = getDirectivesAndStartsStr(initialDirectivesAndStarts);
     let shapesStr = getShapesStr(shapes);
-    let prettified = firstComments+directivesStr+shapesStr;
+    let prettified = initialComments+initialDirectivesAndStartsStr+shapesStr;
 
     // Is there any change?
     // It is true that without this check the user
@@ -253,10 +253,15 @@ function getTokens(){
 }
 
 
+function getInitialDirectivesAndStarts(tokens){
+    return getDirectivesAndStarts(tokens,SHAPE_TYPE);
+}
+
+
 /**
 Sorry Acebal
  */
-function getDirectivesAndStarts(tokens){
+function getDirectivesAndStarts(tokens,breakCondition){
     let prefix = {};
     let base = {};
     let importt = {};
@@ -264,7 +269,13 @@ function getDirectivesAndStarts(tokens){
     let baseCont = 0;
     let importCont = 0;
     let startCont = 0;
+    let stop = false;
     return tokens.reduce((acc,t,index)=>{
+
+        if(stop)return acc;
+        if(t.type == breakCondition)stop=true;
+
+
         if(t.string.toUpperCase()==PREFIX_KEYWORD){
             prefix = {};
             prefix.comments = getComentsAfterToken(t,tokens,index); 

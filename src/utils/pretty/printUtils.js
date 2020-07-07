@@ -134,12 +134,12 @@ function getConcreteDirectiveStr(directives,keyword) {
 function getStartsStr(starts) {
     return starts.reduce((acc,s)=>{
         return acc+=s+"\n";
-    },"")+'\n';
+    },"");
 }
 
 function getShapesStr(shapes) {
     return shapes.reduce((acc,s)=>{
-        return acc+=s.toString()+"\n\n";
+        return acc+='\n'+s.toString()+'\n';
     },'');
 }
 
