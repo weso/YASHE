@@ -226,9 +226,11 @@ function getNonWsTokens(tokens){
     yashe.prettify(); */
 
     
-    for (var l = 1; l < yashe.lineCount(); ++l) {
+    for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
+      let valueSetSize = getValueSetSizeIfClosed(nonWs);
+      let comments = '';
         for(let t in nonWs){
           let token = nonWs[t];
           //console.log(next)
@@ -246,15 +248,20 @@ function getNonWsTokens(tokens){
                     url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
                     dataType: 'jsonp',
             })
+
             
-                 // console.log(result.entities[entity].labels[language])
-  
-          if(result.entities){
-                yashe.replaceRange(token.string+" #"+result.entities[entity].labels[language].value+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+            if(result.entities){
+              comments +=' #'+result.entities[entity].labels[language].value;
+              valueSetSize--;
+              if(valueSetSize<0){
+                let replacement = '';
+                comments +=''
+                comments!='' ? replacement = comments : replacement = result.entities[entity].labels[language].value;
+                yashe.replaceRange(token.string+replacement+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
                 yashe.prettify();
-          }
-          
-      
+              }
+            }
+        
             
           }
           
@@ -264,6 +271,24 @@ function getNonWsTokens(tokens){
     yashe.setOption('readOnly',false);
 
     
+  }
+
+  /**
+   *  Gets an array of linetokens. If the line closes the valueSet ']' return its size, otherwise 0
+   * @param {Array} nonWs 
+   */
+  var getValueSetSizeIfClosed = function(nonWs){
+    let open = false;
+    let close = false;
+    let size = nonWs.reduce((acc,t)=>{
+      if(t.string=='[')open=true;
+      if(t.string==']')close=true;
+      if(t.type=='valueSet')acc++;
+      return acc;
+    },0)
+
+    if(open && close)return size;
+    return 0;
   }
 
   var getNonWsLineTokens = function(lineTokens){

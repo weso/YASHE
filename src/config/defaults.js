@@ -12,26 +12,16 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+  value:  `
 PREFIX wd:    <http://www.wikidata.org/entity/>
 PREFIX wdt:   <http://www.wikidata.org/prop/direct/>
 
-start = @<human>
 
-<human> EXTRA wdt:P31 { 
+<human>  { 
   wdt:P31     [ wd:Q5 ] ;  
-  wdt:P21 [ wd:Q6581097 wd:Q6581072 ] ? ; 
- 
+  wdt:P21     [ wd:Q6581097 wd:Q6581072 ] ? ; 
+  wdt:P21     [ wd:Q6581097 wd:Q6581072 wd:Q42 ] ? ; 
 }
-
-#aaa
-
-PREFIX wd:    <http://www.wikidata.org/entity/> #edfe
-PREFIX wdt:   <http://www.wikidata.org/prop/direct/>
-
-start = @<human>
-
 
 `,
 
