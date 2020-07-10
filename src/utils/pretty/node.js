@@ -6,12 +6,14 @@ class Node{
         this.comment = comment; //Comment at the end
         this.emptyBrackets = emptyBrackets; //ej: schema:name    {};
         this.afterTriples= afterTriples; // Whatever after {}
-        this.finalParenthesis = finalParenthesis;  //Is an
+        this.finalParenthesis = finalParenthesis;  
+        this.hasAleardyAComment = false; //This is used in the methor getSemicolonIfNeeded due not to set the comment again if it has been already seted 
     }
 
     toString(longest,isTriple,indent=1,isLastTriple=false){
         let str = EMPTY_STRING;
         let constraints=this.getConstraints(longest,indent);
+        console.log(constraints)
         str+=constraints.str;
         str+=this.getTriplesString(indent,constraints.tripleComment,isTriple,isLastTriple);
        
@@ -88,12 +90,17 @@ class Node{
         let str = EMPTY_STRING;
         if(this.triples.length>0){
             let linebreak = LINE_BREAK;
-            if(isTriple && this.triples.length==1){
-                if(tripleComment==EMPTY_STRING){// If there is any comment after '{' we need to force the breakline
-                    linebreak = EMPTY_STRING;
-                    indent--;
+            if(isTriple){
+                if(this.triples.length==1) {
+                    if(tripleComment==EMPTY_STRING){// If there is any comment after '{' we need to force the breakline
+                        linebreak = EMPTY_STRING;
+                        indent--;
+                    }
+                }else{
+                    console.log('comentario') 
                 }
-            } 
+            }
+            
             str+=this.getSubTriplesStr(indent,tripleComment,linebreak);  
         }
         return str;
@@ -101,7 +108,9 @@ class Node{
 
 
     getSubTriplesStr(indent,tripleComment,linebreak){
+        if(tripleComment!='')this.hasAleardyAComment=true;
         let str=OPENING_CURLY_BRACKET+tripleComment+linebreak;
+        if(tripleComment!='')tripleComment='';
         this.triples.map((t,index)=>{
             let currentLongest = getLongestTConstraint(this.triples);
             str+= getIndent(indent);
@@ -124,7 +133,7 @@ class Node{
         let str = EMPTY_STRING;
         if(isTriple){
             if(!isLastTriple)str+=SEMICOLON;
-            str+=tripleComment;
+            if(!this.hasAleardyAComment)str+=tripleComment;
         }
         return str;
     }
