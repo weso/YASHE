@@ -13,7 +13,6 @@ class Node{
     toString(longest,isTriple,indent=1,isLastTriple=false){
         let str = EMPTY_STRING;
         let constraints=this.getConstraints(longest,indent);
-        console.log(constraints)
         str+=constraints.str;
         str+=this.getTriplesString(indent,constraints.tripleComment,isTriple,isLastTriple);
        
@@ -75,7 +74,6 @@ class Node{
 
     getTriplesString(indent,tripleComment,isTriple,isLastTriple){
         let str = EMPTY_STRING;
-
         str += this.getSubTriplesStrIfNeeded(indent,tripleComment,isTriple);
         str += this.getEmptyBracketsIfNeeded();
         str += this.getAfterTriplesStr();
@@ -91,13 +89,12 @@ class Node{
         if(this.triples.length>0){
             let linebreak = LINE_BREAK;
             if(isTriple){
-                if(this.triples.length==1) {
-                    if(tripleComment==EMPTY_STRING){// If there is any comment after '{' we need to force the breakline
+                if(this.triples.length==1) { 
+                    console.log(this.hasComments(this.triples))
+                    if(tripleComment==EMPTY_STRING && this.hasComments(this.triples)){// If there is any comment after '{' we need to force the breakline
                         linebreak = EMPTY_STRING;
                         indent--;
                     }
-                }else{
-                    console.log('comentario') 
                 }
             }
             
@@ -108,7 +105,7 @@ class Node{
 
 
     getSubTriplesStr(indent,tripleComment,linebreak){
-        if(tripleComment!='')this.hasAleardyAComment=true;
+        this.hasAleardyAComment=true;
         let str=OPENING_CURLY_BRACKET+tripleComment+linebreak;
         if(tripleComment!='')tripleComment='';
         this.triples.map((t,index)=>{
@@ -206,7 +203,12 @@ class Node{
     }
 
 
-
+    hasComments(triples){
+        return triples.reduce((acc,t)=>{
+            if(t.type=='comment')acc = true;
+            return acc;
+        },false)
+    }
 
 }
 

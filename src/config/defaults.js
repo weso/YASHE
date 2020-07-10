@@ -19,12 +19,14 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   
   start = @<human>
   
-  <human> EXTRA wdt:P31 { #sadf
-    wdt:P31  { #asd
-      wd:Q5  .  
+  <human> EXTRA wdt:P31 {
+    wdt:P31  {
+      wd:Q5  .   #asd
     } 
   }
   
+  
+
   
 `,
 
