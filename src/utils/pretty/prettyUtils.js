@@ -29,32 +29,7 @@ function prettify(yashe){
     // in the undo stack
     if(previousValue!=prettified){
         yashe.setValue(prettified) ;
-
-        let maxStart = 0;
-        for (var l = 0; l < yashe.lineCount(); ++l) {
-            let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
-            for(let t in lineTokens){
-                let token = lineTokens[t];
-                if(token.type == 'comment') {
-                    console.log({token:token.string,lineTokens:lineTokens})
-                    if(token.start>maxStart)maxStart=token.start;
-                }
-            }
-    
-        }
-
-        for (var l = 0; l < yashe.lineCount(); ++l) {
-            let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
-            for(let t in lineTokens){
-                let token = lineTokens[t];
-                if(token.type == 'comment') {
-                    console.log('ee')
-                    yashe.replaceRange(printUtils.getSeparator(maxStart-token.start)+token.string,{line:l,ch:token.start},{line:l,ch:token.end})
-                }
-            }
-    
-        }
-
+        prettifyComments();
         setCursor(yashe,cursorPosition);
     }
 }
@@ -478,6 +453,32 @@ function setCursor(yashe,position){
         }
     }
 }
+
+
+function prettifyComments(){
+    let longest = getLongestCommentedLine();
+    for (var l = 0; l < yashe.lineCount(); ++l) {
+        let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
+        lineTokens.map(t=>{
+            if(t.type == 'comment') {
+                yashe.replaceRange(printUtils.getSeparator(longest-t.start)+t.string,{line:l,ch:t.start},{line:l,ch:t.end})
+            }
+        });
+    }
+}
+
+function getLongestCommentedLine(){
+    let longest = 0;
+    for (var l = 0; l < yashe.lineCount(); ++l) {
+        let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
+        let lastLineToken = lineTokens[lineTokens.length-1];
+        if(lastLineToken)
+            if(lastLineToken.start>longest)
+                longest = lastLineToken.start;
+    }
+    return longest;
+}
+
 
 function isCursorToken(token1,token2,line){
     return  token1.start == token2.start 
