@@ -12,18 +12,19 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX wd:    <http://www.wikidata.org/entity/>
-  PREFIX wdt:   <http://www.wikidata.org/prop/direct/>
-  
-  start = @<human>
-  
-  <human> EXTRA wdt:P31 {
-    wdt:P31  {
-      wd:Q5  .   #asd
-    } 
-  }
+  value:  `PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+start=@<#operating_system>
+
+<#operating_system> {
+    p:P31 { ps:P31 { p:P279 {ps:P279 [wd:Q9135]}+} } ;
+
+}
   
   
 

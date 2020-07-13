@@ -88,16 +88,17 @@ class Node{
         let str = EMPTY_STRING;
         if(this.triples.length>0){
             let linebreak = LINE_BREAK;
-            if(isTriple){
+            // This is off at this moment
+            /* if(isTriple){
                 if(this.triples.length==1) { 
+                    console.log('p')
                     // If there isn't any comment after '{' don't force the breakline
                     if(tripleComment==EMPTY_STRING && !this.hasComments(this.triples[0])){
-                        console.log('entra')
                         linebreak = EMPTY_STRING;
                         indent--;
                     }
                 }
-            }
+            } */
             
             str+=this.getSubTriplesStr(indent,tripleComment,linebreak);  
         }
@@ -206,7 +207,7 @@ class Node{
 
     hasComments(triple){
         return triple.constraints.reduce((acc,c)=>{
-            if(c.type=='comment')acc = true;
+            if(c.type=='comment' && c.start)acc = true; //c.start just to check it's a real comment token
             return acc;
         },false)
     }

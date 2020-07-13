@@ -249,7 +249,7 @@ function getNonWsTokens(tokens){
                     dataType: 'jsonp',
             })
 
-            
+            console.log('debug')
             if(result.entities){
               comments +=' #'+result.entities[entity].labels[language].value;
               valueSetSize--;
@@ -261,11 +261,11 @@ function getNonWsTokens(tokens){
                 yashe.prettify();
               }
             }
-        
-            
+  
           }
           
         }
+
     }
 
     yashe.setOption('readOnly',false);
@@ -289,6 +289,26 @@ function getNonWsTokens(tokens){
 
     if(open && close)return size;
     return 0;
+  }
+
+  /**
+   * Are the triples closed in the same line? 
+   * Eg: wdt:P31 { wd:Q5}   -> True
+   *     wdt:P31 { 
+   *        wd:Q5 #human
+   *     }   -> False
+   * @param {Array} nonWs 
+   */
+  var isTripleClosed = function(nonWs){
+    let open = false;
+    let close = false;
+    let size = nonWs.map(t=>{
+      if(t.string=='{')open=true;
+      if(t.string=='}')close=true;
+    })
+
+    if(open && close)return true;
+    return false;
   }
 
   var getNonWsLineTokens = function(lineTokens){
