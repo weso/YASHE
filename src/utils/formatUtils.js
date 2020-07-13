@@ -178,54 +178,7 @@ function getNonWsTokens(tokens){
   var wikiFormat = async function(yashe){
     yashe.prettify();
     yashe.setOption('readOnly',true);
-    /* $('.CodeMirror-lines').hide();
 
-     $('.CodeMirror-lines').parent().append(
-       $('<div class="showLoader"><div class="loader"></div></div>')
-     )
-
-    let tks = getTokens(yashe)
-    let str = '';
-    for(let token in tks){
-      if(tks[token].string.split(':')[0]=='wd' || tks[token].string.split(':')[0]=='wdt'  && tks[token].string.split(':')[1]!='' ){
-            let entity = tks[token].string.split(':')[1].toUpperCase();
-            let language = (navigator.language || navigator.userLanguage).split("-")[0];
-            var API_ENDPOINT = 'https://www.wikidata.org/w/';
-            var QUERY_ID = {
-                    action:'wbgetentities',
-                    ids:entity,
-                    format: 'json', 
-            }
-
-            let result = await $.get({
-                    url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
-                    dataType: 'jsonp',
-            })
-            //+result.entities[entity].labels[language].value+"
-              
-            if(result.entities){
-              str+=' '+ tks[token].string+" #"+result.entities[entity].labels[language].value+"\n";
-            }else{
-              str+=' '+ tks[token].string+' ';
-            }
-            //
-      }else{
-        
-        str+=' '+tks[token].string;
-        if(tks[token].type=='comment')str+="\n"
-      }
-    }
-
-    
-    //yashe.refresh();
-
-     $('.showLoader').hide();
-    $('.CodeMirror-lines').show();
-
-    yashe.setValue(str);
-    yashe.prettify(); */
-
-    
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = yashe.getLineTokens(l);
       let nonWs = getNonWsLineTokens(lineTokens)
@@ -248,8 +201,7 @@ function getNonWsTokens(tokens){
                     url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
                     dataType: 'jsonp',
             })
-
-            console.log('debug')
+            
             if(result.entities){
               comments +=' #'+result.entities[entity].labels[language].value;
               valueSetSize--;
@@ -258,6 +210,8 @@ function getNonWsTokens(tokens){
                 comments +=''
                 comments!='' ? replacement = comments : replacement = result.entities[entity].labels[language].value;
                 yashe.replaceRange(token.string+replacement+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+                //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
+                yashe.setCursor({line:l+20,ch:token.start}); 
                 yashe.prettify();
               }
             }
