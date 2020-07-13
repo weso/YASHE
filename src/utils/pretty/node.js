@@ -90,8 +90,9 @@ class Node{
             let linebreak = LINE_BREAK;
             if(isTriple){
                 if(this.triples.length==1) { 
-                    console.log(this.hasComments(this.triples))
-                    if(tripleComment==EMPTY_STRING && this.hasComments(this.triples)){// If there is any comment after '{' we need to force the breakline
+                    // If there isn't any comment after '{' don't force the breakline
+                    if(tripleComment==EMPTY_STRING && !this.hasComments(this.triples[0])){
+                        console.log('entra')
                         linebreak = EMPTY_STRING;
                         indent--;
                     }
@@ -203,9 +204,9 @@ class Node{
     }
 
 
-    hasComments(triples){
-        return triples.reduce((acc,t)=>{
-            if(t.type=='comment')acc = true;
+    hasComments(triple){
+        return triple.constraints.reduce((acc,c)=>{
+            if(c.type=='comment')acc = true;
             return acc;
         },false)
     }
