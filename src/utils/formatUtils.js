@@ -159,8 +159,9 @@ var copyLineDown = function(yashe) {
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors())return;
     yashe.prettify();
+    let history = yashe.getHistory();
     yashe.setOption('readOnly',true);
-
+    
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
@@ -201,9 +202,9 @@ var copyLineDown = function(yashe) {
 
     }
 
+    yashe.setHistory(history);
     yashe.setOption('readOnly',false);
 
-    
   }
 
   /**
