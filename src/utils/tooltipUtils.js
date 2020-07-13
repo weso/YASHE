@@ -1,6 +1,6 @@
 "use strict";
 var $ = require("jquery"),
-    rdfUtils = require('./rdfUtils.js')
+    wikiUtils = require('./wikiUtils.js')
 
 /**
  * Write our own tooltip, to avoid loading another library for just this functionality. For now, we only use tooltip for showing parse errors, so this is quite a tailored solution
@@ -56,7 +56,7 @@ var triggerTooltip = function(yashe, e) {
   var wikiElement = token.split(':')[1]
 
   if(wikiElement!== undefined  && wikiElement!== ''){
-    let endpoint = rdfUtils.getEndPoint(yashe,prefixName);
+    let endpoint = wikiUtils.getEndPoint(yashe,prefixName);
     if(endpoint!=null){
       checkEntity(wikiElement,endpoint)
           .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})

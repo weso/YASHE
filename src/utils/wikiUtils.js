@@ -103,12 +103,25 @@ var isWikidataPropertiesPrefix = function(yashe,prefixName){
     return false
 }
 
+var isWikidataPrefix = function(yashe,token){
+    var prefixName = token.string.split(':')[0]
+    if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint' || token.type=='valueSet'){
+        if(isWikidataEntitiesPrefix(yashe,prefixName) 
+          || isWikidataPropertiesPrefix(yashe,prefixName)
+          || getEndPoint(yashe,prefixName)!=null){
+            return true
+        }
+    }
+    return false;
+}
+
 
 module.exports = {
 
     entityTypes:ENTITY_TYPES,
     namespaceShortCuts: NAMESPACE_SHORTCUTS,
     getEndPoint:getEndPoint,
+    isWikidataPrefix:isWikidataPrefix,
     isWikidataEntitiesPrefix:isWikidataEntitiesPrefix,
     isWikidataPropertiesPrefix:isWikidataPropertiesPrefix
 

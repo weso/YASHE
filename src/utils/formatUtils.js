@@ -1,5 +1,6 @@
-var CodeMirror = require("codemirror")
+const CodeMirror = require("codemirror")
 const $ = require('jquery')
+const wikiUtils = require('../utils/wikiUtils.js')
 
 "use strict";
 var commentLines = function(yashe) {
@@ -154,40 +155,18 @@ var copyLineDown = function(yashe) {
     return $.trim(formattedQuery.replace(/\n\s*\n/g, "\n"));
   };
 
-function getTokens(yashe){
-    let tokens =[];
-    if(yashe!=undefined){
-        for (var l = 0; l < yashe.lineCount(); ++l) {
-            let lineTokens = getNonWsTokens(yashe.getLineTokens(l));
-            lineTokens.forEach(token =>{
-                tokens.push(token);
-            })
-
-        }
-    }
-    return tokens;
-}
-
-
-function getNonWsTokens(tokens){
-    return tokens.filter(function(obj){
-        return obj.type != 'ws';
-    })
-}
 
   var wikiFormat = async function(yashe){
     yashe.prettify();
     yashe.setOption('readOnly',true);
 
     for (var l = 0; l < yashe.lineCount(); ++l) {
-      let lineTokens = yashe.getLineTokens(l);
-      let nonWs = getNonWsLineTokens(lineTokens)
-      let valueSetSize = getValueSetSizeIfClosed(nonWs);
+      let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
+      let valueSetSize = getValueSetSizeIfClosed(lineTokens);
       let comments = '';
-        for(let t in nonWs){
-          let token = nonWs[t];
-          //console.log(next)
-          if(token.string.split(':')[0]=='wd' || token.string.split(':')[0]=='wdt' && token.string.split(':')[1]!='' ){
+        for(let t in lineTokens){
+          let token = lineTokens[t];
+          if(wikiUtils.isWikidataPrefix(yashe,token)){
             let entity = token.string.split(':')[1].toUpperCase();
             let language = (navigator.language || navigator.userLanguage).split("-")[0];
             var API_ENDPOINT = 'https://www.wikidata.org/w/';
@@ -201,7 +180,6 @@ function getNonWsTokens(tokens){
                     url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
                     dataType: 'jsonp',
             })
-            
             if(result.entities){
               comments +=' #'+result.entities[entity].labels[language].value;
               valueSetSize--;
@@ -229,12 +207,12 @@ function getNonWsTokens(tokens){
 
   /**
    *  Gets an array of linetokens. If the line closes the valueSet ']' return its size, otherwise 0
-   * @param {Array} nonWs 
+   * @param {Array} lineTokens 
    */
-  var getValueSetSizeIfClosed = function(nonWs){
+  var getValueSetSizeIfClosed = function(lineTokens){
     let open = false;
     let close = false;
-    let size = nonWs.reduce((acc,t)=>{
+    let size = lineTokens.reduce((acc,t)=>{
       if(t.string=='[')open=true;
       if(t.string==']')close=true;
       if(t.type=='valueSet')acc++;
@@ -245,25 +223,6 @@ function getNonWsTokens(tokens){
     return 0;
   }
 
-  /**
-   * Are the triples closed in the same line? 
-   * Eg: wdt:P31 { wd:Q5}   -> True
-   *     wdt:P31 { 
-   *        wd:Q5 #human
-   *     }   -> False
-   * @param {Array} nonWs 
-   */
-  var isTripleClosed = function(nonWs){
-    let open = false;
-    let close = false;
-    let size = nonWs.map(t=>{
-      if(t.string=='{')open=true;
-      if(t.string=='}')close=true;
-    })
-
-    if(open && close)return true;
-    return false;
-  }
 
   var getNonWsLineTokens = function(lineTokens){
     return lineTokens.reduce((acc,t)=>{
@@ -272,23 +231,13 @@ function getNonWsTokens(tokens){
     },[]);
   }
 
-  var getNextNonWSLineToken = function(yashe,lineTokens,lineIndex){
-      let i = 1;
-      let token = lineTokens[lineIndex+i];
-      //console.log(token)
-      while(token && token.type=='ws'){
-        i++;
-        token = lineTokens[lineIndex+i];
-      }
-      return token;
-  }
-
 
   module.exports = {
     commentLines:commentLines,
     copyLineUp: copyLineUp,
     copyLineDown: copyLineDown,
     doAutoFormat:doAutoFormat,
-    wikiFormat:wikiFormat
+    getNonWsLineTokens:getNonWsLineTokens,
+    wikiFormat:wikiFormat,
   };
   

@@ -1,6 +1,7 @@
 "use strict";
 var $ = require("jquery"),
-rdfUtils = require('../utils/rdfUtils.js')
+wikiUtils = require('../utils/wikiUtils.js');
+const { isWikidataPrefix } = require("../utils/wikiUtils.js");
 
 var API_ENDPOINT = 'https://www.wikidata.org/w/';
 var QUERY = {
@@ -26,13 +27,13 @@ module.exports = function(yashe, name) {
         query.search=possibleEntity
 
         //Add extra param if it is a property
-        if(rdfUtils.isWikidataPropertiesPrefix(yashe,prefix)){
+        if(wikiUtils.isWikidataPropertiesPrefix(yashe,prefix)){
           query.type='property';
         }else{
           delete query.type;
         }
 
-        let endpoint = rdfUtils.getEndPoint(yashe,prefix);
+        let endpoint = wikiUtils.getEndPoint(yashe,prefix);
         if(endpoint!=null){
           API_ENDPOINT = endpoint;
         }
@@ -108,21 +109,12 @@ module.exports.isValidCompletionPosition = function(yashe) {
   //The cursor should stay at the end of the token
   if(token.end!=cur.ch)return false
 
-  var prefixName = token.string.split(':')[0]
+ 
   var previousToken = yashe.getPreviousNonWsToken(cur.line, token);
 
   //This line avoid the autocomplete in the prefix definition
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-  if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint'){
-    if(rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
-      || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)
-      || rdfUtils.getEndPoint(yashe,prefixName)!=null){
-        return true
-    }
-  }
+  return wikiUtils.isWikidataPrefix(yashe,token);
 
- 
-  return false;
-  
 };

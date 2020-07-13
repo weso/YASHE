@@ -12,90 +12,21 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX wd: <http://www.wikidata.org/entity/>
-  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  value:  `PREFIX p:    <http://www.wikidata.org/prop/>
+  PREFIX ps:   <http://www.wikidata.org/prop/statement/>
+  PREFIX pq:   <http://www.wikidata.org/prop/qualifier/>
+  PREFIX wd:   <http://www.wikidata.org/entity/>
+  PREFIX wdt:  <http://www.wikidata.org/prop/direct/>
+  PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
   
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
+  start = @<#operating_system>
+  
+  <#operating_system> {
+    p:P31  [ wd:Q9135 ] ;  #instancia de #sistema operativo  
+    p:P31  [ wd:Q42 ] ;  #instancia de #Douglas Adams  
+    p:P31  [ wd:Q5 ] #instancia de #ser humano  
   }
   
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
-  
-  <country> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-  }
-  
-  <language> EXTRA wdt:P31 {
-    wdt:P31 [wd:Q34770 wd:Q1288568] +;
-  }
   
   
 

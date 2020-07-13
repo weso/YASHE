@@ -50,6 +50,15 @@ function getLongestTConstraint(triples){
     },0)
 }
 
+function getLongesTripleStr(triples){
+    return triples.reduce((acc,t)=>{
+        let actual = t.toString().length;
+        if(actual>acc)acc=actual
+        return acc;
+    },0)
+
+}
+
 
 function needsSeparator(index,token,nexToken,triplesLenght,constraints,emptyBrackets){
   if(isJustEmptyBrackets(triplesLenght,emptyBrackets,constraints))return true;
@@ -151,6 +160,7 @@ module.exports ={
     getSeparator:getSeparator,
     getLongestPrefix:getLongestPrefix,
     getLongestTConstraint:getLongestTConstraint,
+    getLongesTripleStr:getLongesTripleStr,
     getSeparatorIfNeeded:getSeparatorIfNeeded,
     getValueSetSize:getValueSetSize,
     getIndent:getIndent,

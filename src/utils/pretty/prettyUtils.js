@@ -17,6 +17,11 @@ function prettify(yashe){
     let shapesStr = getShapesStr(shapes);
     let prettified = initialComments+initialDirectivesAndStartsStr+shapesStr;
 
+
+  
+
+ 
+
     // Is there any change?
     // It is true that without this check the user
     // wouldn't appreciate the difference but yashe
@@ -24,6 +29,32 @@ function prettify(yashe){
     // in the undo stack
     if(previousValue!=prettified){
         yashe.setValue(prettified) ;
+
+        let maxStart = 0;
+        for (var l = 0; l < yashe.lineCount(); ++l) {
+            let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
+            for(let t in lineTokens){
+                let token = lineTokens[t];
+                if(token.type == 'comment') {
+                    console.log({token:token.string,lineTokens:lineTokens})
+                    if(token.start>maxStart)maxStart=token.start;
+                }
+            }
+    
+        }
+
+        for (var l = 0; l < yashe.lineCount(); ++l) {
+            let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
+            for(let t in lineTokens){
+                let token = lineTokens[t];
+                if(token.type == 'comment') {
+                    console.log('ee')
+                    yashe.replaceRange(printUtils.getSeparator(maxStart-token.start)+token.string,{line:l,ch:token.start},{line:l,ch:token.end})
+                }
+            }
+    
+        }
+
         setCursor(yashe,cursorPosition);
     }
 }
@@ -481,6 +512,7 @@ module.exports = {
 
 let Shape = require('./shape.js');
 let Node = require('./node.js');
+let formatUtils = require('../formatUtils.js');
 let {
     getLongestPrefix,
     getSeparator,
@@ -512,3 +544,4 @@ let {
     OR_KEYWORD,
     START_KEYWORD
 } = require('../constUtils.js');
+const printUtils = require('./printUtils.js');

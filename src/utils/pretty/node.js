@@ -10,8 +10,9 @@ class Node{
         this.hasAleardyAComment = false; //This is used in the methor getSemicolonIfNeeded due not to set the comment again if it has been already seted 
     }
 
-    toString(longest,isTriple,indent=1,isLastTriple=false){
+    toString(longest,currentLongestStr,isTriple,indent=1,isLastTriple=false){
         let str = EMPTY_STRING;
+        
         let constraints=this.getConstraints(longest,indent);
         str+=constraints.str;
         str+=this.getTriplesString(indent,constraints.tripleComment,isTriple,isLastTriple);
@@ -112,9 +113,10 @@ class Node{
         if(tripleComment!='')tripleComment='';
         this.triples.map((t,index)=>{
             let currentLongest = getLongestTConstraint(this.triples);
+            let currentLongestStr = getLongesTripleStr(this.triples);
             str+= getIndent(indent);
-            str+= t.toString(currentLongest,true,indent+1,this.isLastTriple(index));
-            str+= WHITE_SPACE+t.comment +linebreak;
+            str+= t.toString(currentLongest,currentLongestStr,true,indent+1,this.isLastTriple(index));
+            str+= WHITE_SPACE + t.comment +linebreak;
         })
         return str + getIndent(indent-1)+CLOSING_CURLY_BRACKET;
     }
@@ -212,6 +214,8 @@ class Node{
         },false)
     }
 
+   
+
 }
 
 module.exports = Node;
@@ -219,6 +223,7 @@ module.exports = Node;
 let {
     getSeparatorIfNeeded,
     getLongestTConstraint,
+    getLongesTripleStr,
     getValueSetSize,
     getIndent,
     LINE_BREAK,
@@ -226,6 +231,7 @@ let {
     EMPTY_STRING,
     VALUESET_LINE_LIMIT,
     EMPTY_BRACKETS,
+    getSeparator,
 } = require('./printUtils.js');
 
 let {
