@@ -157,6 +157,7 @@ var copyLineDown = function(yashe) {
 
 
   var wikiFormat = async function(yashe){
+    if(yashe.hasErrors())return;
     yashe.prettify();
     yashe.setOption('readOnly',true);
 
@@ -181,7 +182,7 @@ var copyLineDown = function(yashe) {
                     dataType: 'jsonp',
             })
             if(result.entities){
-              comments +=' #'+result.entities[entity].labels[language].value;
+              comments +=' # '+result.entities[entity].labels[language].value;
               valueSetSize--;
               if(valueSetSize<0){
                 let replacement = '';

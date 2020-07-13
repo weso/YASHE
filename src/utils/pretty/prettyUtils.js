@@ -17,11 +17,6 @@ function prettify(yashe){
     let shapesStr = getShapesStr(shapes);
     let prettified = initialComments+initialDirectivesAndStartsStr+shapesStr;
 
-
-  
-
- 
-
     // Is there any change?
     // It is true that without this check the user
     // wouldn't appreciate the difference but yashe
@@ -459,11 +454,13 @@ function prettifyComments(){
     let longest = getLongestCommentedLine();
     for (var l = 0; l < yashe.lineCount(); ++l) {
         let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
-        lineTokens.map(t=>{
-            if(t.type == 'comment') {
-                yashe.replaceRange(printUtils.getSeparator(longest-t.start)+t.string,{line:l,ch:t.start},{line:l,ch:t.end})
-            }
-        });
+        if(!hasOnlyComments(lineTokens)){
+            lineTokens.map(t=>{
+                if(t.type == 'comment') {
+                    yashe.replaceRange(printUtils.getSeparator(longest-t.start)+t.string,{line:l,ch:t.start},{line:l,ch:t.end})
+                }
+            });
+        }
     }
 }
 
@@ -477,6 +474,16 @@ function getLongestCommentedLine(){
                 longest = lastLineToken.start;
     }
     return longest;
+}
+
+/**
+ * Returns true if the line has onlyComments
+ */
+function hasOnlyComments(lineTokens){
+    return lineTokens.reduce((acc,t)=>{
+        if(t.type!='comment')acc=false;
+        return acc;
+    },true);
 }
 
 
