@@ -156,6 +156,11 @@ var copyLineDown = function(yashe) {
   };
 
 
+
+
+
+
+
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors())return;
     yashe.prettify();
@@ -171,19 +176,9 @@ var copyLineDown = function(yashe) {
           if(wikiUtils.isWikidataPrefix(yashe,token)){
             let entity = token.string.split(':')[1].toUpperCase();
             let language = (navigator.language || navigator.userLanguage).split("-")[0];
-            var API_ENDPOINT = 'https://www.wikidata.org/w/';
-            var QUERY_ID = {
-                    action:'wbgetentities',
-                    ids:entity,
-                    format: 'json', 
-            }
-
-            let result = await $.get({
-                    url: API_ENDPOINT + 'api.php?' + $.param(QUERY_ID),
-                    dataType: 'jsonp',
-            })
+            let result = await wikiUtils.getEntity(entity,wikiUtils.wikidataEndpoint);
             if(result.entities){
-              comments +=' # '+result.entities[entity].labels[language].value;
+              comments +=' # '+wikiUtils.getEntityData(entity,result).title
               valueSetSize--;
               if(valueSetSize<0){
                 let replacement = '';

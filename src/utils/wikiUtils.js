@@ -167,6 +167,7 @@ module.exports = {
 
     entityTypes:ENTITY_TYPES,
     namespaceShortCuts: NAMESPACE_SHORTCUTS,
+    wikidataEndpoint:WIKIDATA_ENDPOINT,
     getEndPoint:getEndPoint,
     isWikidataPrefix:isWikidataPrefix,
     isWikidataEntitiesPrefix:isWikidataEntitiesPrefix,
