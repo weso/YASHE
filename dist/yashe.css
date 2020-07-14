@@ -95,9 +95,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: #A9B7C6;
     border: 10px; }
   .yashe .cm-s-dark .cm-shape {
-    color: #68BEEB; }
+    color: #8fd5fa; }
   .yashe .cm-s-dark .cm-keyword {
-    color: #f00; }
+    color: #ff5656; }
   .yashe .cm-s-dark .cm-atom {
     color: #219; }
   .yashe .cm-s-dark .cm-number {
@@ -109,26 +109,24 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   .yashe .cm-s-dark .cm-property,
   .yashe .cm-s-dark .cm-operator {
     color: #05a; }
-  .yashe .cm-s-dark .cm-variable-2 {
-    color: #68BEEB; }
   .yashe .cm-s-dark .cm-variable-3 {
-    color: #68BEEB; }
+    color: #8fd5fa; }
   .yashe .cm-s-dark .cm-comment {
     color: #999; }
   .yashe .cm-s-dark .cm-string {
     color: #b98003; }
   .yashe .cm-s-dark .cm-string-2 {
-    color: #7DB647; }
+    color: #a1df67; }
   .yashe .cm-s-dark .cm-constraint {
-    color: #7DB647; }
+    color: #a1df67; }
   .yashe .cm-s-dark .cm-valueSet {
-    color: #7DB647; }
+    color: #a1df67; }
   .yashe .cm-s-dark .cm-constraintKeyword {
-    color: #f00; }
+    color: #ff5656; }
   .yashe .cm-s-dark .cm-facet {
-    color: #f00; }
+    color: #ff5656; }
   .yashe .cm-s-dark .cm-shapeRef {
-    color: #68BEEB; }
+    color: #8fd5fa; }
   .yashe .cm-s-dark .cm-meta {
     color: #555; }
   .yashe .cm-s-dark .cm-qualifier {
@@ -142,13 +140,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   .yashe .cm-s-dark .cm-attribute {
     color: #00c; }
   .yashe .cm-s-dark .cm-hr {
-    color: #999; }
+    color: #e42727; }
   .yashe .cm-s-dark .cm-link {
     color: #00c; }
   .yashe .cm-s-dark .cm-punc {
     color: #FFFFFF; }
   .yashe .cm-s-dark .cm-logical {
-    color: #B271FF; }
+    color: #ff5656; }
   .yashe .cm-s-dark .cm-at {
     color: #68BEEB; }
   .yashe .cm-s-dark .cm-prefixDelcAlias {

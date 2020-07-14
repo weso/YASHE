@@ -72,7 +72,7 @@ var triggerTooltip = function(yashe, e) {
 
 var loadTooltip = function(yashe,data,wikiElement,posX,posY){
     var entityData  = wikiUtils.getEntityData(wikiElement,data);
-    if(entityData.title!=''){
+    if(entityData && entityData.title!=''){
       let theme = yashe.getOption('theme');
       let cssStyle = themeStyles['default'];
       if(theme=='dark'){

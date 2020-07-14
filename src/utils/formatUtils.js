@@ -178,15 +178,18 @@ var copyLineDown = function(yashe) {
             let language = (navigator.language || navigator.userLanguage).split("-")[0];
             let result = await wikiUtils.getEntity(entity,wikiUtils.wikidataEndpoint);
             if(result.entities){
-              comments +=' # '+wikiUtils.getEntityData(entity,result).title
-              valueSetSize--;
+              let entityData = wikiUtils.getEntityData(entity,result);
+              if(entityData){
+                comments +=' # '+entityData.title;
+                valueSetSize--;
+              }
               if(valueSetSize<0){
                 let replacement = '';
                 comments +=''
                 comments!='' ? replacement = comments : replacement = result.entities[entity].labels[language].value;
                 yashe.replaceRange(token.string+replacement+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
                 //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
-                yashe.setCursor({line:l+20,ch:token.start}); 
+                yashe.setCursor({line:l+10,ch:token.start}); 
                 yashe.prettify();
               }
             }
