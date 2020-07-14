@@ -58,11 +58,11 @@ var triggerTooltip = function(yashe, e) {
   if(wikiElement!== undefined  && wikiElement!== ''){
     let endpoint = wikiUtils.getEndPoint(yashe,prefixName);
     if(endpoint!=null){
-      checkEntity(wikiElement,endpoint)
+      wikiUtils.getEntity(wikiElement,endpoint)
           .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
       .fail(
         ()=>{
-          checkEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
+          wikiUtils.getEntity(wikiElement,endpoint.replace('/w/','/wiki/'))
             .done((data)=>{loadTooltip(yashe,data,wikiElement,posX,posY)})
         });  
     }
@@ -71,42 +71,9 @@ var triggerTooltip = function(yashe, e) {
 }
 
 var loadTooltip = function(yashe,data,wikiElement,posX,posY){
-  if(!data.error){
-
-      var userLang;
-      var entity = '';
-      var description=''
-      var theme;
-      //Gets the preference languaje from the navigator
-      userLang = (navigator.language || navigator.userLanguage).split("-")[0]
-
-
-      var content = data.entities[wikiElement.toUpperCase()]
-
-      //Check if the property/entity exist
-      if(!content.labels)return;
-
-      //Some properties and entities are only avalible in English
-      //So if they do not exist we take it in English
-      if(content.labels[userLang] && content.descriptions[userLang]){
-         
-          entity = content.labels[userLang].value +' ('+wikiElement+')'
-          description = content.descriptions[userLang].value
-
-      }else{
-
-          let lb = content.labels['en'];
-          let desc = content.descriptions['en'];
-          if(lb){
-            entity = lb.value +' ('+wikiElement+')';
-          }
-          if(desc){
-             description = desc.value
-          }
-          
-      }
-
-      theme = yashe.getOption('theme');
+    var entityData  = wikiUtils.getEntityData(wikiElement,data);
+    if(entityData.title!=''){
+      let theme = yashe.getOption('theme');
       let cssStyle = themeStyles['default'];
       if(theme=='dark'){
         cssStyle = themeStyles['dark'];
@@ -124,23 +91,12 @@ var loadTooltip = function(yashe,data,wikiElement,posX,posY){
         .append(
           $('<div class="wikidata_tooltip">').css(cssStyle)
           .append(
-            $('<div>').html(entity).css(styles.title))
+            $('<div>').html(entityData.title).css(styles.title))
           .append(
-            $('<div>').html(description).css(styles.description)))
+            $('<div>').html(entityData.description).css(styles.description)))
         .appendTo('body').fadeIn( 'slow' );
     }
-}
-
-//  U S A R         M  É  T  O  D  O    P  Á  R  A  M  S
-var checkEntity = function (entity,endPoint){
-  return $.get(
-    {
-  
-      url: endPoint+'api.php?action=wbgetentities&format=json&ids='+entity,
-      dataType: 'jsonp',
-  
-    })
-     
+    
 }
 
 

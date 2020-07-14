@@ -21,7 +21,7 @@ function prettify(yashe){
     // It is true that without this check the user
     // wouldn't appreciate the difference but yashe
     // would be doing operations that would appear 
-    // in the undo stack
+    // in the undo/redo stack
     if(previousValue!=prettified){
         yashe.setValue(prettified) ;
         prettifyComments();

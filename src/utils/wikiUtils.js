@@ -38,7 +38,11 @@ const NAMESPACE_SHORTCUTS = {
         wdata: 'http://www.wikidata.org/wiki/Special:EntityData/'
     }
 
-const WIKIDATA_ENDPOINT= 'https://www.wikidata.org/w/'
+const WIKIDATA_ENDPOINT= 'https://www.wikidata.org/w/';
+const GET_ENTITY_QUERY = {
+  action:'wbgetentities',
+  format: 'json'
+}
 
 
 
@@ -115,6 +119,49 @@ var isWikidataPrefix = function(yashe,token){
     return false;
 }
 
+var getEntity = function(entity,endpoint){
+  GET_ENTITY_QUERY.ids = entity;
+  return $.get({
+      url: endpoint+'api.php?'+$.param(GET_ENTITY_QUERY),
+      dataType: 'jsonp',
+  });
+}
+
+var getEntityData = function(element,data){
+  var userLang;
+  var content;
+  var entityData = {title:'',description:''}
+  if(!data.error){
+    //Gets the preference languaje from the navigator
+    userLang = (navigator.language || navigator.userLanguage).split("-")[0]
+
+    content = data.entities[element.toUpperCase()]
+
+    //Check if the property/entity exist
+    if(!content.labels)return;
+
+    //Some properties and entities are only avalible in English
+    if(content.labels[userLang] && content.descriptions[userLang]){
+       
+      entityData.title = content.labels[userLang].value +' ('+element+')'
+      entityData.description = content.descriptions[userLang].value
+
+    }else{ //English by default
+
+        let lb = content.labels['en'];
+        let desc = content.descriptions['en'];
+        if(lb){
+          entityData.title = lb.value +' ('+element+')';
+        }
+        if(desc){
+          entityData.description = desc.value
+        }
+        
+    }
+  }
+  return entityData;
+}
+
 
 module.exports = {
 
@@ -123,6 +170,8 @@ module.exports = {
     getEndPoint:getEndPoint,
     isWikidataPrefix:isWikidataPrefix,
     isWikidataEntitiesPrefix:isWikidataEntitiesPrefix,
-    isWikidataPropertiesPrefix:isWikidataPropertiesPrefix
+    isWikidataPropertiesPrefix:isWikidataPropertiesPrefix,
+    getEntity:getEntity,
+    getEntityData:getEntityData
 
 }

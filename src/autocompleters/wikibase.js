@@ -40,7 +40,7 @@ module.exports = function(yashe, name) {
 
         getEntities(API_ENDPOINT,query)
           .done((data)=>setHints(data,callback))
-          .fail(
+          .fail( //I had to do this for one wikibase instance I don't know why...
               ()=>getEntities(API_ENDPOINT.replace('/w/','/wiki/'),query)
               .done((data)=>setHints(data,callback))
           )
