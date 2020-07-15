@@ -69,6 +69,7 @@ start = @<human>
   syntaxErrorCheck: true,
   showTooltip: true,
   showShareButton: true,
+  showWikiBtn:true,
   showUploadButton: true,
   showDownloadButton: true,
   showCopyButton: true,
