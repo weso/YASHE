@@ -12,19 +12,16 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-
-start = @<human>
-
-<human> EXTRA wdt:P31 {
-  wdt:P31 [
-    wd:Q5 #1
-    wd:Q11574 #2
-  ];
-}
+  value:  `PREFIX :       <http://example.org/>
+  PREFIX schema: <http://schema.org/>
+  PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+  
+  :User {
+    schema:name          xsd:string  ;
+    schema:birthDate     xsd:date?  ;
+    schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
+    schema:knows         IRI @:User*
+  }
 `,
 
   highlightSelectionMatches: {
