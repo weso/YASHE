@@ -93,7 +93,7 @@ var yashe = YASHE(document.getElementById('domId'), {
 ``
 
 
-Initialize YASQE from an existing text area (see CodeMirror for more info)
+Initialize YASHE from an existing text area (see CodeMirror for more info)
 YASHE.fromTextArea(textArea: DOM element, config: Object) → YASHE instance: yashe
 [Codepen Example](https://codepen.io/mistermboy/pen/OJPWZWX)
 
