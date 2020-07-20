@@ -4,6 +4,7 @@
   <a href="https://app.codacy.com/gh/weso/YASHE?utm_source=github.com&utm_medium=referral&utm_content=weso/YASHE&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/f1af6dd839d14bfd80503b74c5f02c8f" alt="codacy"/></a>
 </p>
 
+
 # YASHE
 *YASHE* (Yet Another ShEx Editor) is a [Shape Expressions (ShEx)](http://shex.io/) editor which started as a fork of [*YASQE*](https://github.com/Triply-Dev/YASGUI.YASQE-deprecated) (which is based on SPARQL). 
 This tool performs lexical and syntactic analysis of the content of the editor, thus offering the user a realtime syntactic error detector. It has features like: syntax highlighting, visual aid elements (tooltips) and
@@ -420,3 +421,8 @@ A big thanks transitively goes out to:
 * The people behind the MediaWiki API which I use for autocompleting Wikidata entities and properties.
 * Marijn Haverbeke for his great work on the CodeMirror library syntax highlighting library
 * Richard Cyganiak for his simple but effective Prefix.cc service, which I use for autocompleting prefixes.
+
+
+<p align="center">
+<img src="https://contributors-img.web.app/image?repo=weso/YASHE" alt="contributors"/></a>
+</p>
