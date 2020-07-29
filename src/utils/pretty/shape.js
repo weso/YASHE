@@ -21,7 +21,7 @@ class Shape{
 
     toString(){
         return this.nodes.reduce((acc,n)=>{
-            return acc+=n.toString(0,0) + this.getCommentsStr() + this.getDirectivesAndStartsStr();
+            return acc+=n.toString() + this.getCommentsStr() + this.getDirectivesAndStartsStr();
         },"");
     }
 }

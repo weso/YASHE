@@ -172,7 +172,6 @@ var copyLineDown = function(yashe) {
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
-      console.log(valueSetSize)
       let comments = '';
         for(let t in lineTokens){
           let token = lineTokens[t];
