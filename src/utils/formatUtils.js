@@ -2,8 +2,6 @@ const CodeMirror = require("codemirror")
 const $ = require('jquery')
 const wikiUtils = require('../utils/wikiUtils.js')
 
-let cache = {};
-
 "use strict";
 var commentLines = function(yashe) {
     var startLine = yashe.getCursor(true).line;
@@ -158,11 +156,6 @@ var copyLineDown = function(yashe) {
   };
 
 
-
-
-
-
-
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors())return;
     yashe.prettify();
@@ -177,32 +170,17 @@ var copyLineDown = function(yashe) {
           let token = lineTokens[t];
           if(wikiUtils.isWikidataPrefix(yashe,token)){
             let entity = token.string.split(':')[1].toUpperCase();
-            let finalReplacement;
-            let cachedItem = isInCache(entity);
-            if(cachedItem){
-              comments +=' # '+cachedItem;
-              valueSetSize--;
-              finalReplacement = cachedItem;
-            }else{
-              let language = (navigator.language || navigator.userLanguage).split("-")[0];
-              let result = await wikiUtils.getEntity(entity,wikiUtils.wikidataEndpoint);
-              if(result.entities){
-                let entityData = wikiUtils.getEntityData(entity,result);
-                addToCache(entity,entityData.title);
-                if(entityData){
-                  comments +=' # '+entityData.title;
-                  valueSetSize--;
-                  finalReplacement = entityData.title;
-                }
+            let result = await wikiUtils.getEntity(entity,wikiUtils.wikidataEndpoint);
+            if(result.entities){
+              let entityData = wikiUtils.getEntityData(entity,result);
+              if(entityData){
+                comments +=' # '+entityData.title;
+                valueSetSize--;
               }
             }
 
-
             if(valueSetSize<0){ //problem?
-              let replacement = '';
-              comments +=''
-              comments!='' ? replacement = comments : replacement = finalReplacement;
-              yashe.replaceRange(token.string+replacement+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+              yashe.replaceRange(token.string+comments+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
               //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
               yashe.setCursor({line:l+10,ch:token.start}); 
               yashe.prettify();
@@ -217,19 +195,6 @@ var copyLineDown = function(yashe) {
     yashe.setHistory(history);
     yashe.setOption('readOnly',false);
 
-  }
-
-
-  var isInCache = function(entity){
-    for(let item in cache){
-      if(item==entity)return cache[item];
-    }
-    return false;
-  }
-
-  var addToCache = function(entity,result){
-    cache[entity] = result;
-    console.log(cache)
   }
 
 

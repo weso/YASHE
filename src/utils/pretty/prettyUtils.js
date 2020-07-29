@@ -11,6 +11,13 @@ function prettify(yashe){
     let initialComments = getFirstComments(tokens);
     let initialDirectivesAndStarts = getInitialDirectivesAndStarts(tokens);
     let shapes = getShapes(tokens);
+    shapes.reduce((acc,s)=>{
+        let str = s.toString();
+        console.log(str)
+        return acc;
+    },'')
+
+    console.log(shapes)
 
     //  Strings
     let initialDirectivesAndStartsStr = getDirectivesAndStartsStr(initialDirectivesAndStarts);
@@ -463,6 +470,7 @@ function prettifyComments(){
         }
     }
 }
+
 
 function getLongestCommentedLine(){
     let longest = 0;
