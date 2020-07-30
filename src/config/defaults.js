@@ -13,12 +13,17 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
 	 *  Default shape 
 	 */
   value:  `
+ 
   PREFIX wd:    <http://www.wikidata.org/entity/>
 PREFIX wdt:   <http://www.wikidata.org/prop/direct/>
 
 <human>{
-  wdt:p31  wd:q5
+  wdt:p31  {wdt:p31 wd:q5}   [ wd:q42 #asd
+  ] 
 }
+
+
+
 
 
 

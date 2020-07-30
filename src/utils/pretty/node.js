@@ -12,7 +12,7 @@ class Node{
 
     toString(longest=0,isTriple,indent=1,isLastTriple=false){
         let str = EMPTY_STRING;
-        let constraints=this.getConstraints(longest,indent);
+        let constraints=this.getConstraints(this.constraints,longest,indent);
         str+=constraints.str;
         str+=this.getTriplesString(indent,constraints.tripleComment,isTriple,isLastTriple);
        
@@ -20,20 +20,19 @@ class Node{
     }
 
     //This method could be prettier
-    getConstraints(longest,indent){
-        let valueSetSize = getValueSetSize(this.constraints);
+    getConstraints(constraints,longest,indent){
+        let valueSetSize = getValueSetSize(constraints);
         let forceSeparator = false;
         let valueSet = false;
         let previousToken;
-        return this.constraints.reduce((acc,token,index)=>{
+        return constraints.reduce((acc,token,index)=>{
        
             if(token.skip)return acc;
             
-            let nexToken = this.constraints[index+1];
-            let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,this.constraints,this.emptyBrackets);
+            let nexToken = constraints[index+1];
+            let separator = getSeparatorIfNeeded(index,token,nexToken,this.triples.length,longest,constraints,this.emptyBrackets);
 
             if(token.type==COMMENT_TYPE){
-
                //console.log({previousToken:previousToken.string,token:token.string,nexToken:nexToken})
                 if(previousToken.string=='[' && valueSetSize>2){
                     acc.str+= token.string;
@@ -41,6 +40,7 @@ class Node{
                     acc.str+= '[ '+token.string;
                     nexToken.skip = true;
                 }else if(valueSet){
+             
                     acc.str+= token.string;
                     acc.str+= this.getClosingValueSetIfNeeded(nexToken,valueSet,indent);
                 }else{
@@ -76,7 +76,7 @@ class Node{
         let str = EMPTY_STRING;
         str += this.getSubTriplesStrIfNeeded(indent,tripleComment,isTriple);
         str += this.getEmptyBracketsIfNeeded();
-        str += this.getAfterTriplesStr();
+        str += this.getAfterTriplesStr(indent);
         str += this.getSemicolonIfNeeded(isTriple,isLastTriple,tripleComment);
         str += this.getFinalParenthesisIfNeeded();
     
@@ -120,13 +120,18 @@ class Node{
     }
 
 
-    getAfterTriplesStr(){
+    getAfterTriplesStr(indent){
         let str = EMPTY_STRING;
-        if(this.afterTriples.length>0)str+=WHITE_SPACE;
-        return this.afterTriples.reduce((acc,a)=>{
-            return acc+=a.string+WHITE_SPACE;
-        },str);
+        if(this.afterTriples.length>0){
+            str+=WHITE_SPACE;
+        }else{
+            return '';
+        }
+        let constraints = this.getConstraints(this.afterTriples,0,indent);
+        return constraints.str+constraints.tripleComment;
     }
+
+
 
     getSemicolonIfNeeded(isTriple,isLastTriple,tripleComment){
         let str = EMPTY_STRING;

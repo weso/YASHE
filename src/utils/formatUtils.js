@@ -208,14 +208,17 @@ var copyLineDown = function(yashe) {
   var getValueSetSizeIfClosed = function(lineTokens){
     let open = false;
     let close = false;
+    let decrement = true;
     let size = lineTokens.reduce((acc,t)=>{
-      console.log(t)
       if(t.string=='[')open=true;
       if(t.string==']')close=true;
       if(t.type=='valueSet')acc++;
+      if(t.type=='variable-3')decrement=false;
+      if(t.type=='string-2')decrement=false;
       return acc;
     },0)
 
+    if(decrement)size--;
     if(open && close)return size;
     return 0;
   }
