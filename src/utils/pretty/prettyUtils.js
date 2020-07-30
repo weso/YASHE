@@ -36,7 +36,7 @@ function getShapes(tokens){
         let prefixes = getPrefixesAfterShape(shapeTokens);
 
         acc.push(new Shape(nodes,comments,prefixes));
-        return acc;11
+        return acc;
 
     },[])
 }

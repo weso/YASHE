@@ -178,14 +178,16 @@ var copyLineDown = function(yashe) {
                 valueSetSize--;
               }
             }
+          }else{
+            if(token.type=='valueSet')valueSetSize--;
+          }
 
-            if(valueSetSize<0){ //problem?
-              yashe.replaceRange(token.string+comments+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
-              //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
-              yashe.setCursor({line:l+10,ch:token.start}); 
-              yashe.prettify();
-            }
-  
+          if(valueSetSize<0){ 
+            valueSetSize = 0;
+            yashe.replaceRange(token.string+comments+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
+            //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
+            yashe.setCursor({line:l+10,ch:token.start}); 
+            yashe.prettify();
           }
           
         }
@@ -206,6 +208,7 @@ var copyLineDown = function(yashe) {
     let open = false;
     let close = false;
     let size = lineTokens.reduce((acc,t)=>{
+      console.log(t)
       if(t.string=='[')open=true;
       if(t.string==']')close=true;
       if(t.type=='valueSet')acc++;

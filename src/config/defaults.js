@@ -21,19 +21,11 @@ start = @<human>
 
 <human> EXTRA wdt:P31 {       
   wdt:P1038 @<human> *;       
-  wdt:P103 @<language> *;
-  wdt:P1412 @<language> *;
-  wdt:P6886  @<language> *;
-  rdfs:label rdf:langString+;
+
+  wdt:P1038  [ wdt:p31 <human> wdt:p31  ]
 }
 
-<country> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
-}
 
-<language> EXTRA wdt:P31 {
-  wdt:P31 [wd:Q34770 wd:Q1288568] +;
-} 
 
 
 `,
