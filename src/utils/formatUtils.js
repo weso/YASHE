@@ -183,11 +183,12 @@ var copyLineDown = function(yashe) {
           }
 
           if(valueSetSize<0){ 
-            valueSetSize = 0;
             yashe.replaceRange(token.string+comments+" \n",{line:l,ch:token.start},{line:l,ch:token.end})
             //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
             yashe.setCursor({line:l+10,ch:token.start}); 
             yashe.prettify();
+            valueSetSize = 0;
+            comments = '';
           }
           
         }
