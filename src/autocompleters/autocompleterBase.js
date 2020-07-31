@@ -186,7 +186,7 @@ module.exports = function(YASHE, yashe) {
     var startChar;
     //For the wikidata completer we recive the {text, displayText} object
     if(completer.name == 'wikibase' || completer.name == 'definedShapes'
-      || completer.name == 'prefixesAndKeywords'){
+      || completer.name == 'prefixes' || completer.name == 'keywords'){
 
       for (var i = 0; i < suggestions.length; i++) {
         hintList.push({

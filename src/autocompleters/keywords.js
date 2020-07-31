@@ -13,14 +13,9 @@ module.exports = function(yashe, name) {
     get: function(token) {
       
      var trie = new Trie()
-     var prefixes = module.exports.PREFIXES
-     for(var prefix in prefixes){
-        trie.insert(prefix+":");
-     }
      for(var key in KEYWORDS){
       trie.insert(KEYWORDS[key]);
      }
-
 
      var completions = trie.autoComplete(token.toLowerCase())
      var final = []
@@ -28,11 +23,7 @@ module.exports = function(yashe, name) {
      for(var c in completions){
 
         var text = completions[c]
-        var displayText = completions[c]
-
-        if(!module.exports.isInPrefixList(completions[c])){
-          text = text.toUpperCase()
-        }
+        var displayText = completions[c];
 
         list =  {
           text: text,
@@ -53,36 +44,20 @@ module.exports = function(yashe, name) {
 };
 
 module.exports.isValidCompletionPosition = function(yashe) {
-  module.exports.PREFIXES = yashe.getDefinedPrefixes();
   let token = yashe.getCompleteToken();
-  if(token.string.length>0 
-    && token.type != 'ws' 
-    && token.type != 'punc' 
-    && !token.string.includes(':'))return true;
-  return false
+  for(let k in KEYWORDS){
+    if(token.string==KEYWORDS[k])return false;
+  }
+  if(token.string.length>1)return true;
+  return false;
 };
 
-
-
-module.exports.isInPrefixList = function(completion){
-
-  for(var prefix in module.exports.PREFIXES){
-      if(completion == prefix+":")return true
-  }
-  return false
-
-}
-
-module.exports.PREFIXES = []
 
 var KEYWORDS = [
   'base',
   'prefix',
   'import',
   'external',
-  'or',
-  'and',
-  'not"',
   'iri',
   'bnode',
   'literal',

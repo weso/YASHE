@@ -431,8 +431,17 @@ root.registerAutocompleter('wikibase',
 root.registerAutocompleter('prefixDefinition',
     require('./autocompleters/prefixDefinition.js'));
 
-root.registerAutocompleter('prefixesAndKeywords',
-    require('./autocompleters/prefixesAndKeywords.js'));
+    root.registerAutocompleter('keywords',
+    require('./autocompleters/keywords.js'));
+
+    root.registerAutocompleter('prefixes',
+    require('./autocompleters/prefixes.js'));
+
+
+
+
+/* root.registerAutocompleter('prefixesAndKeywords',
+    require('./autocompleters/prefixesAndKeywords.js')); */
 
 
 /**
