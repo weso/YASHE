@@ -48,14 +48,18 @@ module.exports = function(yashe, name) {
     },
     async: false,
     bulk: false,
-    autoShow: false
+    autoShow: true
   };
 };
 
 module.exports.isValidCompletionPosition = function(yashe) {
   module.exports.PREFIXES = yashe.getDefinedPrefixes();
-
-  return true
+  let token = yashe.getCompleteToken();
+  if(token.string.length>0 
+    && token.type != 'ws' 
+    && token.type != 'punc' 
+    && !token.string.includes(':'))return true;
+  return false
 };
 
 

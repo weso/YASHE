@@ -24,7 +24,11 @@ module.exports = function(yashe, name) {
     },
     async: false,
     bulk: false,
-    autoShow: false
+    autoShow: false/* ,
+    callbacks: {
+      validPosition: yashe.autocompleters.notifications.show,
+      invalidPosition: yashe.autocompleters.notifications.hide
+    } */
   };
 };
 
