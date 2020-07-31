@@ -431,10 +431,10 @@ root.registerAutocompleter('wikibase',
 root.registerAutocompleter('prefixDefinition',
     require('./autocompleters/prefixDefinition.js'));
 
-    root.registerAutocompleter('keywords',
+root.registerAutocompleter('keywords',
     require('./autocompleters/keywords.js'));
 
-    root.registerAutocompleter('prefixes',
+root.registerAutocompleter('prefixes',
     require('./autocompleters/prefixes.js'));
 
 

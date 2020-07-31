@@ -48,7 +48,8 @@ module.exports.isValidCompletionPosition = function(yashe) {
   for(let k in KEYWORDS){
     if(token.string==KEYWORDS[k])return false;
   }
-  if(token.string.length>1)return true;
+  if(token.string.length>1
+    && !token.string.includes(':'))return true;
   return false;
 };
 
