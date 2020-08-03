@@ -210,6 +210,10 @@ const extendCmInstance = function(yashe) {
     formatUtils.wikiFormat(yashe);
   }
 
+  yashe.stopWikiFormat = function(){
+    formatUtils.stopWikiFormat(yashe);
+  }
+
   yashe.prettify = function(){
     if(!yashe.hasErrors()){
       prettyUtils.prettify(yashe);

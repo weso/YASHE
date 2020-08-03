@@ -1,6 +1,9 @@
-const CodeMirror = require("codemirror")
-const $ = require('jquery')
-const wikiUtils = require('../utils/wikiUtils.js')
+const CodeMirror = require("codemirror");
+const $ = require('jquery');
+const wikiUtils = require('../utils/wikiUtils.js');
+let yutils = require("yasgui-utils");
+let imgs = require("./imgs.js");
+let wikiMsg = $("<div class='completionNotification'></div>");
 
 "use strict";
 var commentLines = function(yashe) {
@@ -158,12 +161,7 @@ var copyLineDown = function(yashe) {
 
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors())return;
-
-    let wikiMsg = $("<div class='completionNotification'></div>")
-    .show()
-    .text("Wikiformat in progress")
-    .appendTo($(yashe.getWrapperElement()));
-
+    notifyUser(yashe);
     yashe.prettify();
     let history = yashe.getHistory();
     yashe.setOption('readOnly',true);
@@ -173,6 +171,7 @@ var copyLineDown = function(yashe) {
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
       let comments = '';
         for(let t in lineTokens){
+          if(!yashe.wikiFormatInProgress)return;
           let token = lineTokens[t];
           if(wikiUtils.isWikidataPrefix(yashe,token)){
             let entity = token.string.split(':')[1].toUpperCase();
@@ -201,10 +200,31 @@ var copyLineDown = function(yashe) {
 
     }
     yashe.prettify();
-    wikiMsg.hide();
+    stopWikiFormat(yashe);
     yashe.setHistory(history);
     yashe.setOption('readOnly',false);
 
+  }
+
+  var notifyUser = function(yashe){
+    yashe.wikiFormatInProgress = true;
+    $('#wikiBtn').attr("title", "STOP");
+    $('#wikiBtn').empty();
+    $('#wikiBtn').removeClass("yashe_wikiBtn");
+    $('#wikiBtn').removeClass("yashe_wikiBtnAfter");
+    $('#wikiBtn').addClass("yashe_stopBtn");
+    $('#wikiBtn').append($(yutils.svg.getElement(imgs.stop)));
+    wikiMsg.show().text("Wikiformat in progress").appendTo($(yashe.getWrapperElement()));
+  }
+
+  var stopWikiFormat = function(yashe){
+    yashe.wikiFormatInProgress = false;
+    $('#wikiBtn').attr("title", "WikiFormat");
+    $('#wikiBtn').empty();
+    $('#wikiBtn').removeClass("yashe_stopBtn");
+    $('#wikiBtn').addClass("yashe_wikiBtnAfter");
+    $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
+    wikiMsg.hide();
   }
 
 
@@ -246,5 +266,6 @@ var copyLineDown = function(yashe) {
     doAutoFormat:doAutoFormat,
     getNonWsLineTokens:getNonWsLineTokens,
     wikiFormat:wikiFormat,
+    stopWikiFormat:stopWikiFormat
   };
   

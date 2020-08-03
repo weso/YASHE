@@ -12,18 +12,41 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX wdata:  <http://www.wikidata.org/wiki/Special:EntityData/>
-  PREFIX p:      <http://www.wikidata.org/prop/>
-  PREFIX wd:     <http://www.wikidata.org/entity/>
-  PREFIX ps:     <http://www.wikidata.org/prop/statement/>
-  PREFIX pq:     <http://www.wikidata.org/prop/qualifier/>
-  PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+  value:  `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   
-  <#sequence_assembly>  {
-    ( p:P2576 { ps:P2576  xsd:string } |
-      ps:P4333 {xsd:string    p:P4333 } )  
+  start = @<human>
+  
+  <human> EXTRA wdt:P31 {
+    wdt:P31 [wd:Q5];
+    wdt:P21 [wd:Q6581097 wd:Q6581072 wd:Q1097630 wd:Q1052281 wd:Q2449503 wd:Q48270]?;  
+    wdt:P19 . ?;                     
+    wdt:P569 . ? ;                 
+    wdt:P735 . * ;                
+    wdt:P734 . * ;                 
+    wdt:P106 . * ;              
+    wdt:P27 @<country> *;  
+    wdt:P22 @<human> *;          
+    wdt:P25 @<human> *;         
+    wdt:P3373 @<human> *;         
+    wdt:P26 @<human> *;           
+    wdt:P40 @<human> *;         
+    wdt:P1038 @<human> *;        
+    wdt:P103 @<language> *;
+    wdt:P1412 @<language> *;
+    wdt:P6886  @<language> *;
+    rdfs:label rdf:langString+;
   }
   
+  <country> EXTRA wdt:P31 {
+    wdt:P31 [wd:Q6256 wd:Q3024240 wd:Q3624078] +;
+  }
+  
+  <language> EXTRA wdt:P31 {
+    wdt:P31 [wd:Q34770 wd:Q1288568] +;
+  }
 
 `,
 
@@ -52,6 +75,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   showDeleteButton: true,
   showThemeButton: true,
   showFullScreenButton: true,
+  wikiFormatInProgress:false,
   onQuotaExceeded: function(e) {
     //fail silently
     console.warn("Could not store in localstorage. Skipping..", e);

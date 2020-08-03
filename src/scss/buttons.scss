@@ -226,7 +226,7 @@
 	}
 
 	.yashe_shareBtn{
-		margin-right: 2px;
+		margin-right: px;
 		margin-top: 2px;
 	}
 	
@@ -237,7 +237,20 @@
 	}
 
 	.yashe_wikiBtn{
-		margin-top: 3px;
-		margin-right: 3px;
-		
+		margin-top: 3px !important;
+		margin-right: 2px !important;
+	}
+
+
+	.yashe_wikiBtnAfter{
+		margin-top: 3px !important;
+		margin-right: 6px !important;
+		margin-left: -1px !important;
+	}
+
+
+	.yashe_stopBtn{
+		margin-right: 10px;
+		margin-left: -1px !important;
+		fill: red;
 	}

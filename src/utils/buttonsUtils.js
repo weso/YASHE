@@ -155,7 +155,12 @@ var drawButtons = function(yashe){
     .attr('id','wikiBtn')
     .attr("title", "WikiFormat")
     .click(function() {
+      if(!yashe.wikiFormatInProgress){
         yashe.wikiformat();
+      }else{
+        yashe.stopWikiFormat();
+      }
+        
     }));
 
 
