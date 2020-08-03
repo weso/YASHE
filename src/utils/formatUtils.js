@@ -163,15 +163,17 @@ var copyLineDown = function(yashe) {
     if(yashe.hasErrors())return;
     notifyUser(yashe);
     yashe.prettify();
-    let history = yashe.getHistory();
-    yashe.setOption('readOnly',true);
+    let history = disableEditor(yashe);
     
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
       let comments = '';
         for(let t in lineTokens){
-          if(!yashe.wikiFormatInProgress)return;
+          if(!yashe.wikiFormatInProgress){
+            enableEditor(yashe,history);
+            return;
+          }
           let token = lineTokens[t];
           if(wikiUtils.isWikidataPrefix(yashe,token)){
             let entity = token.string.split(':')[1].toUpperCase();
@@ -201,9 +203,7 @@ var copyLineDown = function(yashe) {
     }
     yashe.prettify();
     stopWikiFormat(yashe);
-    yashe.setHistory(history);
-    yashe.setOption('readOnly',false);
-
+    enableEditor(yashe,history);
   }
 
   var notifyUser = function(yashe){
@@ -225,6 +225,15 @@ var copyLineDown = function(yashe) {
     $('#wikiBtn').addClass("yashe_wikiBtnAfter");
     $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
     wikiMsg.hide();
+  }
+
+  var disableEditor = function(yashe){
+    yashe.setOption('readOnly',true);
+    return yashe.getHistory();
+  }
+  var enableEditor = function(yashe,history){
+    yashe.setHistory(history);
+    yashe.setOption('readOnly',false);
   }
 
 
