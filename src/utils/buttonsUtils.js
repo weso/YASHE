@@ -154,7 +154,7 @@ var drawButtons = function(yashe){
     }).append($(yutils.svg.getElement(imgs.tag))
     .addClass("yashe_wikiBtn")
     .attr('id','wikiBtn')
-    .attr("title", "Add Wikidata Comments")
+    .attr("title", "Generate Wikidata Comments")
     .click(function() {
       if(!yashe.wikiFormatInProgress){
         yashe.wikiformat();
