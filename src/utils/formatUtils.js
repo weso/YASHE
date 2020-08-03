@@ -158,6 +158,12 @@ var copyLineDown = function(yashe) {
 
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors())return;
+
+    let wikiMsg = $("<div class='completionNotification'></div>")
+    .show()
+    .text("Wikiformat in progress")
+    .appendTo($(yashe.getWrapperElement()));
+
     yashe.prettify();
     let history = yashe.getHistory();
     yashe.setOption('readOnly',true);
@@ -195,6 +201,7 @@ var copyLineDown = function(yashe) {
 
     }
     yashe.prettify();
+    wikiMsg.hide();
     yashe.setHistory(history);
     yashe.setOption('readOnly',false);
 

@@ -34,7 +34,7 @@ class Node{
 
             if(token.type==COMMENT_TYPE){
                //console.log({previousToken:previousToken.string,token:token.string,nexToken:nexToken})
-                if(previousToken.string=='[' && valueSetSize>2){
+                if(previousToken && previousToken.string=='[' && valueSetSize>2){
                     acc.str+= token.string;
                 }else if(nexToken && nexToken.string=='[' && valueSetSize>2){
                     acc.str+= '[ '+token.string;
