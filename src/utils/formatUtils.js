@@ -210,16 +210,16 @@ var copyLineDown = function(yashe) {
     yashe.wikiFormatInProgress = true;
     $('#wikiBtn').attr("title", "STOP");
     $('#wikiBtn').empty();
+    $('#wikiBtn').append($(yutils.svg.getElement(imgs.stop)));
     $('#wikiBtn').removeClass("yashe_wikiBtn");
     $('#wikiBtn').removeClass("yashe_wikiBtnAfter");
     $('#wikiBtn').addClass("yashe_stopBtn");
-    $('#wikiBtn').append($(yutils.svg.getElement(imgs.stop)));
-    wikiMsg.show().text("Wikiformat in progress").appendTo($(yashe.getWrapperElement()));
+    wikiMsg.show().text("Adding Wikidata Comments").appendTo($(yashe.getWrapperElement()));
   }
 
   var stopWikiFormat = function(yashe){
     yashe.wikiFormatInProgress = false;
-    $('#wikiBtn').attr("title", "WikiFormat");
+    $('#wikiBtn').attr("title", "Add Wikidata Comments");
     $('#wikiBtn').empty();
     $('#wikiBtn').removeClass("yashe_stopBtn");
     $('#wikiBtn').addClass("yashe_wikiBtnAfter");

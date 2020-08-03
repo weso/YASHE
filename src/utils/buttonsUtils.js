@@ -95,6 +95,7 @@ var drawButtons = function(yashe){
       //Change fill of buttons
       $('#shareBtn').css('fill', color);
       $('#wikiBtn').css('fill', color);
+      $('#wikiBtn').css('fill', color);
       $('#uploadBntLabel').css('fill', color);
       $('#downloadBtn').css('fill', color);
       $('#copyBtn').css('fill', color);
@@ -153,7 +154,7 @@ var drawButtons = function(yashe){
     }).append($(yutils.svg.getElement(imgs.tag))
     .addClass("yashe_wikiBtn")
     .attr('id','wikiBtn')
-    .attr("title", "WikiFormat")
+    .attr("title", "Add Wikidata Comments")
     .click(function() {
       if(!yashe.wikiFormatInProgress){
         yashe.wikiformat();

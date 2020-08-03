@@ -237,20 +237,27 @@
 	}
 
 	.yashe_wikiBtn{
-		margin-top: 3px !important;
-		margin-right: 2px !important;
+		margin-right: 8px !important;
 	}
 
 
 	.yashe_wikiBtnAfter{
-		margin-top: 3px !important;
-		margin-right: 6px !important;
-		margin-left: -1px !important;
+		margin-right: 14px !important;
+		margin-left: -3px !important;
 	}
 
 
 	.yashe_stopBtn{
 		margin-right: 10px;
 		margin-left: -1px !important;
-		fill: red;
+		fill: red !important;
+	}
+
+	.yashe_stopBtn:hover{
+		filter: 
+			invert(0)
+			sepia(0)
+			hue-rotate(0deg)
+			saturate(0)
+			brightness(0) !important;
 	}

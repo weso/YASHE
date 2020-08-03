@@ -658,16 +658,16 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     width: 250px;
     border: 1px solid #222; }
   .yashe .yashe_wikiBtn {
-    margin-top: 3px !important;
-    margin-right: 2px !important; }
+    margin-right: 8px !important; }
   .yashe .yashe_wikiBtnAfter {
-    margin-top: 3px !important;
-    margin-right: 6px !important;
-    margin-left: -1px !important; }
+    margin-right: 14px !important;
+    margin-left: -3px !important; }
   .yashe .yashe_stopBtn {
     margin-right: 10px;
     margin-left: -1px !important;
-    fill: red; }
+    fill: red !important; }
+  .yashe .yashe_stopBtn:hover {
+    filter: invert(0) sepia(0) hue-rotate(0deg) saturate(0) brightness(0) !important; }
   .yashe .CodeMirror {
     line-height: 1.5em;
     border: 1px solid #d1d1d1; }
@@ -713,7 +713,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     background-color: #f7f7f7;
     position: absolute;
     padding: 0px 5px;
-    right: 0px;
+    right: 1.5%;
     bottom: 0px;
     font-size: 90%; }
   .yashe .parseErrorIcon {
