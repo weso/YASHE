@@ -66,6 +66,10 @@ var checkSyntax = function(yashe) {
         warningEl.className = "parseErrorIcon";
         yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
   
+
+        //$('.CodeMirror-gutters').css('box-shadow','0px 0px 6px 1px #FFB5B5');
+        $('.CodeMirror-linenumber').css('color','#FF4A4A')
+      //  $('.CodeMirror-gutters').css('background',' #FFE3E3');
         yashe.queryValid = false;
         return false;
       }
@@ -99,6 +103,8 @@ var checkSyntax = function(yashe) {
 
     yashe.shapes = Object.assign([],yashe.defShapes);
   
+    $('.CodeMirror-gutters').css('box-shadow','none');
+    $('.CodeMirror-linenumber').css('color','#999') 
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };

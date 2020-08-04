@@ -201,7 +201,7 @@ var copyLineDown = function(yashe) {
         }
 
     }
-    yashe.prettify();
+    
     stopWikiFormat(yashe);
     enableEditor(yashe,history);
   }
@@ -225,6 +225,9 @@ var copyLineDown = function(yashe) {
     $('#wikiBtn').addClass("yashe_wikiBtnAfter");
     $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
     wikiMsg.hide();
+    setTimeout(() => { //Just to wait for the last comment
+      yashe.prettify();
+    }, 400);
   }
 
   var disableEditor = function(yashe){
