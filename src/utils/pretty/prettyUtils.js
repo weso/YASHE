@@ -12,8 +12,6 @@ function prettify(yashe){
     let initialDirectivesAndStarts = getInitialDirectivesAndStarts(tokens);
     let shapes = getShapes(tokens);
 
-    console.log(shapes)
-
     //  Strings
     let initialDirectivesAndStartsStr = getDirectivesAndStartsStr(initialDirectivesAndStarts);
     let shapesStr = getShapesStr(shapes);
@@ -133,9 +131,6 @@ function getTriples(tokens) {
         },[])
 }
 
-function isMultiElementOneOf(token){
-    return token.string == '|';
-}
 
 function getAfterTripleTokens(tokens){
     let start=false;
@@ -519,6 +514,10 @@ function getNonWsTokens(tokens){
     })
 }
 
+function isMultiElementOneOf(token){
+    return token.string == LOGICAL_OR;
+}
+
 
 module.exports = {
     prettify:prettify,
@@ -538,6 +537,7 @@ let {
     OPENING_CURLY_BRACKET,
     CLOSING_CURLY_BRACKET,
     CLOSING_PARENTHESIS,
+    LOGICAL_OR,
     SEMICOLON,
     EQUALS,
 
