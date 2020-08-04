@@ -164,7 +164,7 @@ var copyLineDown = function(yashe) {
     notifyUser(yashe);
     yashe.prettify();
     let history = disableEditor(yashe);
-    
+    console.log('dale papi')
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
@@ -185,8 +185,9 @@ var copyLineDown = function(yashe) {
                 valueSetSize--;
               }
             }
+            if(isDecrementNeeded(token))valueSetSize--;
           }else{
-            if(token.type=='valueSet')valueSetSize--;
+            if(isDecrementNeeded(token))valueSetSize--;
           }
 
           if(valueSetSize<0){ 
@@ -204,6 +205,12 @@ var copyLineDown = function(yashe) {
     
     stopWikiFormat(yashe);
     enableEditor(yashe,history);
+  }
+
+  var isDecrementNeeded = function(token){
+    return token.type=='valueSet'
+            || token.type=='string-2' 
+            || token.type=='variable-3';
   }
 
   var notifyUser = function(yashe){
@@ -225,7 +232,7 @@ var copyLineDown = function(yashe) {
     $('#wikiBtn').addClass("yashe_wikiBtnAfter");
     $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
     wikiMsg.hide();
-    setTimeout(() => { //Just to wait for the last comment
+    setTimeout(() => { //Just to wait until the last comment is setted
       yashe.prettify();
     }, 400);
   }

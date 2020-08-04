@@ -216,6 +216,7 @@ const extendCmInstance = function(yashe) {
 
   yashe.prettify = function(){
     if(!yashe.hasErrors()){
+      console.log('e')
       prettyUtils.prettify(yashe);
       if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
     }
