@@ -217,7 +217,7 @@ const extendCmInstance = function(yashe) {
   yashe.prettify = function(){
     if(!yashe.hasErrors()){
       prettyUtils.prettify(yashe);
-      //if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+      if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
     }
   }
 
@@ -393,7 +393,7 @@ root.storeContent = function(yashe) {
 root.prettify = function(yashe){
   if(!yashe.hasErrors()){
     prettyUtils.prettify(yashe);
-    //if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+    if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
   }
 }
 
