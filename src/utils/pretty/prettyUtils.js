@@ -12,6 +12,8 @@ function prettify(yashe){
     let initialDirectivesAndStarts = getInitialDirectivesAndStarts(tokens);
     let shapes = getShapes(tokens);
 
+    console.log(shapes)
+
     //  Strings
     let initialDirectivesAndStartsStr = getDirectivesAndStartsStr(initialDirectivesAndStarts);
     let shapesStr = getShapesStr(shapes);
@@ -102,8 +104,8 @@ function getTriples(tokens) {
 
             if(token.skip) return acc; //Is a comment that is part of the previous triple
             singleTriple.push(token);     
-
-            if(isFinishOfTriple(tokens,token,index,finish)){
+            let multiElementOneOf = isMultiElementOneOf(token);
+            if(isFinishOfTriple(tokens,token,index,finish) || multiElementOneOf){
                 if(singleTriple.length>1){
                         let before = getBeforeTriplesTokens(singleTriple);
                         let tripleTokens = getTripleTokens(singleTriple);
@@ -112,7 +114,7 @@ function getTriples(tokens) {
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
                         let emptyBrackets = start && subTriples.length==0;
               
-                        acc.push(new Node(before,subTriples,comment,emptyBrackets,after));
+                        acc.push(new Node(before,subTriples,comment,emptyBrackets,after,'',multiElementOneOf));
                         start=false;
                 }
                 singleTriple = [];
@@ -129,6 +131,10 @@ function getTriples(tokens) {
      
             return acc;
         },[])
+}
+
+function isMultiElementOneOf(token){
+    return token.string == '|';
 }
 
 function getAfterTripleTokens(tokens){

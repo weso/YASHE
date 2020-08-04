@@ -164,7 +164,6 @@ var copyLineDown = function(yashe) {
     notifyUser(yashe);
     yashe.prettify();
     let history = disableEditor(yashe);
-    console.log('dale papi')
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
@@ -193,8 +192,9 @@ var copyLineDown = function(yashe) {
           if(valueSetSize<0){ 
             let endOfLine = lineTokens[lineTokens.length-1].end
             yashe.replaceRange(' # '+comments,{line:l,ch:endOfLine},{line:l,ch:endOfLine})
+            if(yashe.hasErrors(yashe))yashe.undo(); 
             //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
-            yashe.setCursor({line:l+10,ch:token.start}); 
+            yashe.setCursor({line:l+10,ch:token.start});
             valueSetSize = 0;
             comments = '';
           }

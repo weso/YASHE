@@ -1,6 +1,6 @@
 class Node{
 
-    constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[],finalParenthesis=''){
+    constructor(constraints,triples,comment='',emptyBrackets,afterTriples=[],finalParenthesis='',multiElementOneOf=false){
         this.constraints = constraints;
         this.triples = triples;
         this.comment = comment;                     //Comment at the end
@@ -8,6 +8,7 @@ class Node{
         this.afterTriples= afterTriples;            // Whatever after {}
         this.finalParenthesis = finalParenthesis;  
         this.hasAleardyAComment = false;            //This is used in the methor getSemicolonIfNeeded due not to set the comment again if it has been already seted 
+        this.multiElementOneOf = multiElementOneOf;
     }
 
     toString(longest=0,isTriple,indent=1,isLastTriple=false){
@@ -136,7 +137,9 @@ class Node{
     getSemicolonIfNeeded(isTriple,isLastTriple,tripleComment){
         let str = EMPTY_STRING;
         if(isTriple){
-            if(!isLastTriple)str+=SEMICOLON;
+            if(!isLastTriple){
+                if(!this.multiElementOneOf)str+=SEMICOLON;
+            }
             if(!this.hasAleardyAComment)str+=tripleComment;
         }
         return str;

@@ -12,12 +12,13 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX wd:    <http://www.wikidata.org/entity/>
-  <human>{ 
-    wd:a  [ wd:Q5 ]  
-  }
-  
-
+  value:  `PREFIX p:    <http://www.wikidata.org/entity/>
+  PREFIX ps:    <http://www.wikidata.org/entity/>
+  PREFIX xsd:    <http://www.wikidata.org/entity/>
+    <#sequence_assembly>  {
+      ( p:P2576 { ps:P2576  xsd:string } |
+        ps:P4333 {xsd:string    p:P4333 } )  
+    }
 `,
 
   highlightSelectionMatches: {
