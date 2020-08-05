@@ -1,9 +1,8 @@
 const CodeMirror = require("codemirror");
 const $ = require('jquery');
 const wikiUtils = require('../utils/wikiUtils.js');
-let yutils = require("yasgui-utils");
-let imgs = require("./imgs.js");
-let wikiMsg = $("<div class='completionNotification'></div>");
+let interact = require("./interactUtils.js");
+
 
 "use strict";
 var commentLines = function(yashe) {
@@ -161,19 +160,19 @@ var copyLineDown = function(yashe) {
 
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors()){
-      showAlertMsg();
+      interact.showAlertMsg();
       return;
     }
-    notifyUser(yashe);
+    interact.startWikiFormat(yashe);
     yashe.prettify();
-    let history = disableEditor(yashe);
+    let history = interact.disableEditor(yashe);
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
       let comments = '';
         for(let t in lineTokens){
           if(!yashe.wikiFormatInProgress){
-            enableEditor(yashe,history);
+            interact.enableEditor(yashe,history);
             return;
           }
           let token = lineTokens[t];
@@ -206,60 +205,14 @@ var copyLineDown = function(yashe) {
 
     }
     
-    stopWikiFormat(yashe);
-    enableEditor(yashe,history);
+    interact.stopWikiFormat(yashe);
+    interact.enableEditor(yashe,history);
   }
 
   var isDecrementNeeded = function(token){
     return token.type=='valueSet'
             || token.type=='string-2' 
             || token.type=='variable-3';
-  }
-
-  var notifyUser = function(yashe){
-    yashe.wikiFormatInProgress = true;
-    $('#wikiBtn').attr("title", "STOP");
-    $('#wikiBtn').empty();
-    $('#wikiBtn').append($(yutils.svg.getElement(imgs.stop)));
-    $('#wikiBtn').removeClass("yashe_wikiBtn");
-    $('#wikiBtn').removeClass("yashe_wikiBtnAfter");
-    $('#wikiBtn').addClass("yashe_stopBtn");
-    wikiMsg.show().text("Adding Wikidata Comments").appendTo($(yashe.getWrapperElement()));
-  }
-
-  var stopWikiFormat = function(yashe){
-    yashe.wikiFormatInProgress = false;
-    $('#wikiBtn').attr("title", "Add Wikidata Comments");
-    $('#wikiBtn').empty();
-    $('#wikiBtn').removeClass("yashe_stopBtn");
-    $('#wikiBtn').addClass("yashe_wikiBtnAfter");
-    $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
-    wikiMsg.hide();
-    setTimeout(() => { //Just to wait until the last comment is setted
-      yashe.prettify();
-    }, 400);
-  }
-
-  var disableEditor = function(yashe){
-    yashe.setOption('readOnly',true);
-    return yashe.getHistory();
-  }
-  var enableEditor = function(yashe,history){
-    yashe.setHistory(history);
-    yashe.setOption('readOnly',false);
-  }
-
-
-  var showAlertMsg = function(){
-    let alertMsg = $("<div class='completionNotification'></div>");
-      alertMsg
-        .show()
-        .text("I can't do that...Fix the errors before")
-        .appendTo($(yashe.getWrapperElement()));
-     
-      setTimeout(() => {
-        alertMsg.hide()
-      }, 3000);
   }
 
   /**
@@ -299,7 +252,6 @@ var copyLineDown = function(yashe) {
     copyLineDown: copyLineDown,
     doAutoFormat:doAutoFormat,
     getNonWsLineTokens:getNonWsLineTokens,
-    wikiFormat:wikiFormat,
-    stopWikiFormat:stopWikiFormat
+    wikiFormat:wikiFormat
   };
   

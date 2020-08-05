@@ -108,10 +108,10 @@ function getTriples(tokens) {
                         let before = getBeforeTriplesTokens(singleTriple);
                         let tripleTokens = getTripleTokens(singleTriple);
                         let subTriples = getTriples(tripleTokens);
-                        let after = getAfterTripleTokens(singleTriple);
+                        let after = getAfterTripleTokens(singleTriple,multiElementOneOf);
                         let comment = getComentsAfterToken(token,tokens,index); //We want the tokens after the Triple
                         let emptyBrackets = start && subTriples.length==0;
-              
+
                         acc.push(new Node(before,subTriples,comment,emptyBrackets,after,'',multiElementOneOf));
                         start=false;
                 }
@@ -132,10 +132,10 @@ function getTriples(tokens) {
 }
 
 
-function getAfterTripleTokens(tokens){
+function getAfterTripleTokens(tokens,multiElementOneOf){
     let start=false;
     let open = 0;
-    return tokens.reduce((acc,t)=>{
+    let after = tokens.reduce((acc,t)=>{
         
         if(open == 0 && start){
             if(t.string  != SEMICOLON
@@ -154,6 +154,9 @@ function getAfterTripleTokens(tokens){
       
         return acc;
     },[])
+
+    if(after.length==0 && multiElementOneOf)after.push(tokens[tokens.length-1]);
+    return after;
 }
 
 

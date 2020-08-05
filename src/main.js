@@ -19,6 +19,7 @@ const tooltipUtils = require('./utils/tooltipUtils.js');
 const formatUtils = require('./utils/formatUtils.js');
 const buttonsUtils = require('./utils/buttonsUtils.js');
 const prettyUtils = require('./utils/pretty/prettyUtils.js');
+const interact = require('./utils/interactUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
 const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
@@ -211,13 +212,15 @@ const extendCmInstance = function(yashe) {
   }
 
   yashe.stopWikiFormat = function(){
-    formatUtils.stopWikiFormat(yashe);
+    interact.stopWikiFormat(yashe);
   }
 
   yashe.prettify = function(){
     if(!yashe.hasErrors()){
       prettyUtils.prettify(yashe);
       if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+    }else{
+
     }
   }
 
@@ -393,7 +396,7 @@ root.storeContent = function(yashe) {
 root.prettify = function(yashe){
   if(!yashe.hasErrors()){
     prettyUtils.prettify(yashe);
-    if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+   // if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
   }
 }
 
