@@ -160,7 +160,10 @@ var copyLineDown = function(yashe) {
 
 
   var wikiFormat = async function(yashe){
-    if(yashe.hasErrors())return;
+    if(yashe.hasErrors()){
+      showAlertMsg();
+      return;
+    }
     notifyUser(yashe);
     yashe.prettify();
     let history = disableEditor(yashe);
@@ -246,6 +249,18 @@ var copyLineDown = function(yashe) {
     yashe.setOption('readOnly',false);
   }
 
+
+  var showAlertMsg = function(){
+    let alertMsg = $("<div class='completionNotification'></div>");
+      alertMsg
+        .show()
+        .text("I can't do that...Fix the errors before")
+        .appendTo($(yashe.getWrapperElement()));
+     
+      setTimeout(() => {
+        alertMsg.hide()
+      }, 3000);
+  }
 
   /**
    *  Gets an array of linetokens. If the line closes the valueSet ']' return its size, otherwise 0
