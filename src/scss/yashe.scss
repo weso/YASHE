@@ -20,17 +20,23 @@
   		color: red;
   		font-weight: bold;
   		float:left;
-  	}
+	  }
+	  
+	  .notification{
+		color: #999;
+		background-color: #f7f7f7;
+		position: absolute;
+		padding: 0px 5px;
+		right: 1.5%;
+		bottom: 0px;
+	  	font-size: 90%;
+	  }
 
-  	.completionNotification {
-  		color: #999;
-  		background-color: #f7f7f7;
-  		position: absolute;
-  		padding: 0px 5px;
-  		right: 1.5%;
-  		bottom: 0px;
-		font-size: 90%;
-  	}
+  	  .completionNotification {}
+	  
+	  .wikiFormatNotification{}
+
+	  .prettyNotification{}
 
 
 

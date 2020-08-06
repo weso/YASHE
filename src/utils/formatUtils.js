@@ -160,7 +160,7 @@ var copyLineDown = function(yashe) {
 
   var wikiFormat = async function(yashe){
     if(yashe.hasErrors()){
-      interact.showAlertMsg();
+      interact.showErrAlertMsg(yashe);
       return;
     }
     interact.startWikiFormat(yashe);
@@ -172,7 +172,7 @@ var copyLineDown = function(yashe) {
       let comments = ' # ';
         for(let t in lineTokens){
           if(!yashe.wikiFormatInProgress){
-            interact.enableEditor(yashe,history);
+            interact.stopWikiFormat(yashe,history);
             return;
           }
           let token = lineTokens[t];
@@ -204,9 +204,7 @@ var copyLineDown = function(yashe) {
         }
 
     }
-    
-    interact.stopWikiFormat(yashe);
-    interact.enableEditor(yashe,history);
+    interact.stopWikiFormat(yashe,history);
   }
 
   var isDecrementNeeded = function(token){

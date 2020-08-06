@@ -212,7 +212,7 @@ const extendCmInstance = function(yashe) {
   }
 
   yashe.stopWikiFormat = function(){
-    interact.stopWikiFormat(yashe);
+    yashe.wikiFormatInProgress = false;
   }
 
   yashe.prettify = function(){
@@ -395,7 +395,7 @@ root.storeContent = function(yashe) {
 
 root.prettify = function(yashe){
   if(!yashe.hasErrors()){
-    prettyUtils.prettify(yashe);
+    prettyUtils.prettify(yashe);   
    // if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
   }
 }

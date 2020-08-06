@@ -260,7 +260,7 @@ module.exports = function(YASHE, yashe) {
         //only draw when the user needs to use a keypress to summon autocompletions
         if (!completer.autoshow) {
           if (!completionNotifications[completer.name])
-            completionNotifications[completer.name] = $("<div class='completionNotification'></div>");
+            completionNotifications[completer.name] = $("<div class='notification completionNotification'></div>");
           completionNotifications[completer.name]
             .show()
             .text("Press CTRL - <spacebar> to autocomplete")

@@ -27,6 +27,7 @@ function prettify(yashe){
         prettifyComments();
         setCursor(yashe,cursorPosition);
     }
+    
 }
 
 function getShapes(tokens){
@@ -456,6 +457,7 @@ function setCursor(yashe,position){
 
 function prettifyComments(){
     let longest = getLongestCommentedLine();
+    let history = yashe.getHistory();
     for (var l = 0; l < yashe.lineCount(); ++l) {
         let lineTokens = formatUtils.getNonWsLineTokens(yashe.getLineTokens(l));
         if(!hasOnlyComments(lineTokens)){
@@ -466,6 +468,7 @@ function prettifyComments(){
             });
         }
     }
+    yashe.setHistory(history);
 }
 
 

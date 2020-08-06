@@ -156,12 +156,9 @@ var drawButtons = function(yashe){
     .attr('id','wikiBtn')
     .attr("title", "Generate Wikidata Comments")
     .click(function() {
-      if(!yashe.wikiFormatInProgress){
-        yashe.wikiformat();
-      }else{
-        yashe.stopWikiFormat();
-      }
-        
+      !yashe.wikiFormatInProgress ?  
+          yashe.wikiformat() :  
+          yashe.stopWikiFormat();
     }));
 
 

@@ -1,16 +1,15 @@
 let yutils = require("yasgui-utils");
 let imgs = require("./imgs.js");
-let wikiMsg = $("<div class='completionNotification'></div>");
+let wikiNotification = $("<div class='notification wikiFormatNotification'></div>");
 
-var showErrAlertMsg = function(){
-  let alertMsg = $("<div class='completionNotification'></div>");
-    alertMsg
+var showErrAlertMsg = function(yashe){
+  wikiNotification
       .show()
       .text("I can't do that...Fix the errors before")
       .appendTo($(yashe.getWrapperElement()));
     
     setTimeout(() => {
-      alertMsg.hide()
+      wikiNotification.hide()
     }, 3000);
 }
 
@@ -22,19 +21,20 @@ var startWikiFormat = function(yashe){
   $('#wikiBtn').removeClass("yashe_wikiBtn");
   $('#wikiBtn').removeClass("yashe_wikiBtnAfter");
   $('#wikiBtn').addClass("yashe_stopBtn");
-  wikiMsg.show().text("Adding Wikidata Comments").appendTo($(yashe.getWrapperElement()));
+  wikiNotification.show().text("Adding Wikidata Comments").appendTo($(yashe.getWrapperElement()));
 }
 
-var stopWikiFormat = function(yashe){
+var stopWikiFormat = function(yashe,history){
   yashe.wikiFormatInProgress = false;
-  $('#wikiBtn').attr("title", "Add Wikidata Comments");
-  $('#wikiBtn').empty();
-  $('#wikiBtn').removeClass("yashe_stopBtn");
-  $('#wikiBtn').addClass("yashe_wikiBtnAfter");
-  $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
-  wikiMsg.hide();
   setTimeout(() => { //Just to wait until the last comment is setted
+    $('#wikiBtn').attr("title", "Add Wikidata Comments");
+    $('#wikiBtn').empty();
+    $('#wikiBtn').removeClass("yashe_stopBtn");
+    $('#wikiBtn').addClass("yashe_wikiBtnAfter");
+    $('#wikiBtn').append($(yutils.svg.getElement(imgs.tag)));
+    wikiNotification.hide();
     yashe.prettify();
+    enableEditor(yashe,history);
   }, 400);
 }
 
@@ -55,4 +55,5 @@ module.exports ={
   enableEditor:enableEditor,
   disableEditor:disableEditor,
   showErrAlertMsg:showErrAlertMsg
+
 }

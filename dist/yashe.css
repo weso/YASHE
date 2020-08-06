@@ -708,7 +708,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     color: red;
     font-weight: bold;
     float: left; }
-  .yashe .completionNotification {
+  .yashe .notification {
     color: #999;
     background-color: #f7f7f7;
     position: absolute;
