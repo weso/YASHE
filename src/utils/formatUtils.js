@@ -169,7 +169,7 @@ var copyLineDown = function(yashe) {
     for (var l = 0; l < yashe.lineCount(); ++l) {
       let lineTokens = getNonWsLineTokens(yashe.getLineTokens(l));
       let valueSetSize = getValueSetSizeIfClosed(lineTokens);
-      let comments = '';
+      let comments = ' # ';
         for(let t in lineTokens){
           if(!yashe.wikiFormatInProgress){
             interact.enableEditor(yashe,history);
@@ -191,9 +191,9 @@ var copyLineDown = function(yashe) {
             if(isDecrementNeeded(token))valueSetSize--;
           }
 
-          if(valueSetSize<0){ 
+          if(valueSetSize<0 && comments!=' # '){ 
             let endOfLine = lineTokens[lineTokens.length-1].end
-            yashe.replaceRange(' # '+comments,{line:l,ch:endOfLine},{line:l,ch:endOfLine})
+            yashe.replaceRange(comments,{line:l,ch:endOfLine},{line:l,ch:endOfLine})
             if(yashe.hasErrors(yashe))yashe.undo(); 
             //For some reason I'm not able to make codemirror scroll methods work, so I'm forcing the scroll with the cursor
             yashe.setCursor({line:l+10,ch:token.start});
