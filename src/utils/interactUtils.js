@@ -27,7 +27,7 @@ var startWikiFormat = function(yashe){
 var stopWikiFormat = function(yashe,history){
   yashe.wikiFormatInProgress = false;
   setTimeout(() => { //Just to wait until the last comment is setted
-    $('#wikiBtn').attr("title", "Add Wikidata Comments");
+    $('#wikiBtn').attr("title", "Generate Wikidata Comments");
     $('#wikiBtn').empty();
     $('#wikiBtn').removeClass("yashe_stopBtn");
     $('#wikiBtn').addClass("yashe_wikiBtnAfter");

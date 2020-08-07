@@ -220,7 +220,7 @@ const extendCmInstance = function(yashe) {
       prettyUtils.prettify(yashe);
       if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
     }else{
-
+      interact.showErrAlertMsg(yashe);
     }
   }
 
@@ -396,7 +396,9 @@ root.storeContent = function(yashe) {
 root.prettify = function(yashe){
   if(!yashe.hasErrors()){
     prettyUtils.prettify(yashe);   
-   // if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+    if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
+  }else{
+    interact.showErrAlertMsg(yashe);
   }
 }
 
@@ -406,8 +408,10 @@ root.prettify = function(yashe){
  * @return {string} Check result
  */
 const checkSyntax = function(yashe) {
-  return syntaxUtils.checkSyntax(yashe);
+  syntaxUtils.checkSyntax(yashe);
+  return syntaxUtils.reCheckSyntax(yashe);
 };
+
 
 
 // ---- Static Utils -----

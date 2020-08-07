@@ -67,9 +67,6 @@ var checkSyntax = function(yashe) {
         yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
   
 
-        //$('.CodeMirror-gutters').css('box-shadow','0px 0px 6px 1px #FFB5B5');
-        $('.CodeMirror-linenumber').css('color','#FF4A4A')
-      //  $('.CodeMirror-gutters').css('background',' #FFE3E3');
         yashe.queryValid = false;
         return false;
       }
@@ -103,8 +100,6 @@ var checkSyntax = function(yashe) {
 
     yashe.shapes = Object.assign([],yashe.defShapes);
   
-    $('.CodeMirror-gutters').css('box-shadow','none');
-    $('.CodeMirror-linenumber').css('color','#999') 
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };
@@ -225,6 +220,14 @@ var checkSyntax = function(yashe) {
       yashe.setGutterMarker(line, "gutterErrorBar", warningEl);
   }
 
+
+  var reCheckSyntax =  function(yashe){
+    setTimeout(() => {
+      checkSyntax(yashe);
+    }, 380);
+  }
+
   module.exports = {
-    checkSyntax:checkSyntax
+    checkSyntax:checkSyntax,
+    reCheckSyntax:reCheckSyntax
   };
