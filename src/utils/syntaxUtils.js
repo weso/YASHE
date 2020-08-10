@@ -76,13 +76,17 @@ var checkSyntax = function(yashe) {
       let lineTokens = yashe.getLineTokens(l);
       for(let t in lineTokens){
         let token = lineTokens[t];
-        //This is only necessary to verify the if the last '}' is missing  (See #104)
+        // This is only necessary to verify the if the last '}' is missing 
+        // (See #104 https://github.com/weso/YASHE/issues/104)
         if(token.string=='{'){
           openBracketsCounter++;
         }
         if(token.string=='}'){
           closedBracketsCounter++;
         }
+
+        //This is only necessary to verify the if the last ')' is missing  (See #104)
+        // (See #150 https://github.com/weso/YASHE/issues/150)
         if(token.string=='('){
           openParenthesisCounter++;
         }
@@ -94,13 +98,14 @@ var checkSyntax = function(yashe) {
       updateShapesAndPrefixes(yashe,l);
     }
 
-    //Is last '}' missing?  (See #104)
+    //Is last '}' missing?  (See #104 https://github.com/weso/YASHE/issues/104)
     if(openBracketsCounter != closedBracketsCounter){
       setError(yashe.lastLine(),"This line is invalid. Expected: '}'",yashe)
       yashe.queryValid = false;
       return false;
     }
 
+    //Is last ')' missing?  (See #150 https://github.com/weso/YASHE/issues/150)
     if(openParenthesisCounter != closedParenthesisCounter){
       setError(yashe.lastLine(),"This line is invalid. Expected: ')'",yashe)
       yashe.queryValid = false;
@@ -134,8 +139,7 @@ var checkSyntax = function(yashe) {
       let token = lineTokens[t];
   
 
-      if(token.type=='string-2' || 
-        token.type=='constraint'){
+      if(token.type=='string-2'|| (token.type=='constraint' && token.string.includes(":"))){
         yashe.usedPrefixes.push({
             alias:token.string.split(":")[0]+':',
             line:l });
