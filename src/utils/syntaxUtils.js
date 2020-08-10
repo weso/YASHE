@@ -15,6 +15,8 @@ var checkSyntax = function(yashe) {
     let closedBracketsCounter = 0;
     let openParenthesisCounter = 0;
     let closedParenthesisCounter = 0;
+    let openSquareBracketsCounter = 0;
+    let closedSquareBracketsCounter = 0;
     for (var l = 0; l < yashe.lineCount(); ++l) {
 
       var precise = false;
@@ -76,8 +78,7 @@ var checkSyntax = function(yashe) {
       let lineTokens = yashe.getLineTokens(l);
       for(let t in lineTokens){
         let token = lineTokens[t];
-        // This is only necessary to verify the if the last '}' is missing 
-        // (See #104 https://github.com/weso/YASHE/issues/104)
+
         if(token.string=='{'){
           openBracketsCounter++;
         }
@@ -85,14 +86,20 @@ var checkSyntax = function(yashe) {
           closedBracketsCounter++;
         }
 
-        //This is only necessary to verify the if the last ')' is missing  (See #104)
-        // (See #150 https://github.com/weso/YASHE/issues/150)
         if(token.string=='('){
           openParenthesisCounter++;
         }
         if(token.string==')'){
           closedParenthesisCounter++;
         }
+
+        if(token.string=='['){
+          openSquareBracketsCounter++;
+        }
+        if(token.string==']'){
+          closedSquareBracketsCounter++;
+        }
+
       }
     
       updateShapesAndPrefixes(yashe,l);
@@ -108,6 +115,13 @@ var checkSyntax = function(yashe) {
     //Is last ')' missing?  (See #150 https://github.com/weso/YASHE/issues/150)
     if(openParenthesisCounter != closedParenthesisCounter){
       setError(yashe.lastLine(),"This line is invalid. Expected: ')'",yashe)
+      yashe.queryValid = false;
+      return false;
+    }
+
+    //Is last ']' missing?  (See #163 https://github.com/weso/YASHE/issues/163)
+    if(openSquareBracketsCounter != closedSquareBracketsCounter){
+      setError(yashe.lastLine(),"This line is invalid. Expected: ']'",yashe)
       yashe.queryValid = false;
       return false;
     }
@@ -185,7 +199,6 @@ var checkSyntax = function(yashe) {
 
   }
 
-  
 
 /**
   * Check if the ShapeRefs are defined
