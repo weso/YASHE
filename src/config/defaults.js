@@ -17,6 +17,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
   
   :Person  [ schema:Person 
+  ]
   
 `,
 
@@ -67,8 +68,8 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     "Ctrl-Up": YASHE.copyLineUp,
     "Cmd-Down": YASHE.copyLineDown,
     "Cmd-Up": YASHE.copyLineUp,
-    "Shift-Ctrl-F": YASHE.doAutoFormat,
-    "Shift-Cmd-F": YASHE.doAutoFormat,
+    "Shift-Ctrl-F": YASHE.prettify,
+    "Shift-Cmd-F": YASHE.prettify,
     "Ctrl-S": YASHE.storeContent,
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,

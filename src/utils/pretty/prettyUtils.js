@@ -11,6 +11,7 @@ function prettify(yashe){
     let initialComments = getFirstComments(tokens);
     let initialDirectivesAndStarts = getInitialDirectivesAndStarts(tokens);
     let shapes = getShapes(tokens);
+    console.log(shapes)
 
     //  Strings
     let initialDirectivesAndStartsStr = getDirectivesAndStartsStr(initialDirectivesAndStarts);
@@ -47,7 +48,7 @@ function getPrefixesAfterShape(shapeTokens){
 }
 
 function getNodes(shapeTokens){
-    return getSlots(shapeTokens).reduce((acc,slot,index)=>{
+    return getSlots(shapeTokens).reduce((acc,slot)=>{
             let constraints = getBeforeTriplesTokens(slot);
             let triples = getTriples(getTripleTokens(slot));
             let paranthesis = hasFinalParenthesis(slot);
@@ -172,7 +173,7 @@ function getBeforeTriplesTokens(tokens){
             start = false;
         }
 
-        if(index == tokens.length-1 && t.string!='.')start=false; //Break condition 2
+        if(index == tokens.length-1 && t.string!='.' && t.string!=']')start=false; //Break condition 2 -> If it's the last token break unless it's a . or ] which we want it
 
         if(start){
             acc.push(t);
