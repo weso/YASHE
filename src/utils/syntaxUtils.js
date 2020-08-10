@@ -11,8 +11,10 @@ var checkSyntax = function(yashe) {
     resetValues(yashe);
     
     var state = null;
-    let openTokensCounter = 0;
-    let closedTokensCounter = 0;
+    let openBracketsCounter = 0;
+    let closedBracketsCounter = 0;
+    let openParenthesisCounter = 0;
+    let closedParenthesisCounter = 0;
     for (var l = 0; l < yashe.lineCount(); ++l) {
 
       var precise = false;
@@ -76,10 +78,16 @@ var checkSyntax = function(yashe) {
         let token = lineTokens[t];
         //This is only necessary to verify the if the last '}' is missing  (See #104)
         if(token.string=='{'){
-          openTokensCounter++;
+          openBracketsCounter++;
         }
         if(token.string=='}'){
-          closedTokensCounter++;
+          closedBracketsCounter++;
+        }
+        if(token.string=='('){
+          openParenthesisCounter++;
+        }
+        if(token.string==')'){
+          closedParenthesisCounter++;
         }
       }
     
@@ -87,8 +95,14 @@ var checkSyntax = function(yashe) {
     }
 
     //Is last '}' missing?  (See #104)
-    if(openTokensCounter != closedTokensCounter){
+    if(openBracketsCounter != closedBracketsCounter){
       setError(yashe.lastLine(),"This line is invalid. Expected: '}'",yashe)
+      yashe.queryValid = false;
+      return false;
+    }
+
+    if(openParenthesisCounter != closedParenthesisCounter){
+      setError(yashe.lastLine(),"This line is invalid. Expected: ')'",yashe)
       yashe.queryValid = false;
       return false;
     }
@@ -224,7 +238,7 @@ var checkSyntax = function(yashe) {
   var reCheckSyntax =  function(yashe){
     setTimeout(() => {
       checkSyntax(yashe);
-    }, 380);
+    }, 400);
   }
 
   module.exports = {

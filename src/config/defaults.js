@@ -12,31 +12,12 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX p: <http://www.wikidata.org/prop/>
-  PREFIX ps: <http://www.wikidata.org/prop/statement/>
-  PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
-  PREFIX :       <http://example.org/>
-  PREFIX schema: <http://schema.org/>
-  PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
-  
-  start = @<#sequence_assembly>
-  
-  # Result query SELECT ?item WHERE { ?item wdt:P2576 ?id }
-  
-  <#sequence_assembly> {
-    # UCSC Genome Browser assembly ID or GenBank assembly accession 
-    ( p:P2576 { ps:P2576 xsd:string } | 
-      p:P4333 { ps:P4333 xsd:string }
-    ) ; 
-    ( schema:isRelatedTo @:Product |
-      schema:isSimilarTo @:Product )
-  }
-  
-  :Product
-    
-    
+  value:  `PREFIX :        <http://example.org/>
+  PREFIX schema:  <http://schema.org/>
+  PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
   
   
+  :Product ( schema:name 
   
 `,
 
