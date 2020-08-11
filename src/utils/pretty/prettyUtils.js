@@ -107,6 +107,7 @@ function getTriples(tokens) {
             let multiElementOneOf = isMultiElementOneOf(token);
             if(isFinishOfTriple(tokens,token,index,finish) || multiElementOneOf){
                 if(singleTriple.length>1){
+                    console.log(singleTriple)
                         let before = getBeforeTriplesTokens(singleTriple);
                         let tripleTokens = getTripleTokens(singleTriple);
                         let subTriples = getTriples(tripleTokens);

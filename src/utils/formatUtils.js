@@ -163,6 +163,7 @@ var copyLineDown = function(yashe) {
       interact.showErrAlertMsg(yashe);
       return;
     }
+
     interact.startWikiFormat(yashe);
     yashe.prettify();
     let history = interact.disableEditor(yashe);
@@ -186,12 +187,9 @@ var copyLineDown = function(yashe) {
                 valueSetSize--;
               }
             }
-            if(isDecrementNeeded(token))valueSetSize--;
-          }else{
-            if(isDecrementNeeded(token))valueSetSize--;
           }
-
-          if(valueSetSize<0 && comments!=' # '){ 
+          
+          if(isLastToken(t,lineTokens) && comments!=' # '){ 
             let endOfLine = lineTokens[lineTokens.length-1].end
             yashe.replaceRange(comments,{line:l,ch:endOfLine},{line:l,ch:endOfLine})
             if(yashe.hasErrors(yashe))yashe.undo(); 
@@ -207,10 +205,8 @@ var copyLineDown = function(yashe) {
     interact.stopWikiFormat(yashe,history);
   }
 
-  var isDecrementNeeded = function(token){
-    return token.type=='valueSet'
-            || token.type=='string-2' 
-            || token.type=='variable-3';
+  var isLastToken = function(token,tokens){
+    return  token == tokens.length-1;
   }
 
   /**
@@ -228,11 +224,11 @@ var copyLineDown = function(yashe) {
       if(t.type=='variable-3')decrement=false;
       if(t.type=='string-2')decrement=false;
       return acc;
-    },0)
+    },1)
 
     if(decrement)size--;
     if(open && close)return size;
-    return 0;
+    return 1;
   }
 
 

@@ -12,12 +12,16 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX :       <http://example.org/>
-  PREFIX schema: <http://schema.org/>
-  PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+  value:  `
   
-  :Person  [ schema:Person 
-  ]
+  prefix schema: <http://schema.org/>
+  prefix : <http>
+  
+  :Person  {
+    schema:asd  {
+      schema:asd  .  
+    } or{ schema:sdaf .}
+  }
   
 `,
 
@@ -74,8 +78,6 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
     "Cmd-S": YASHE.storeConten,
     "Ctrl-Enter": YASHE.executeQuery,
     "Cmd-Enter": YASHE.executeQuery,
-    "Ctrl-F": YASHE.prettify,
-    "Cmd-F": YASHE.prettify,
     F11: function(yashe) {
       yashe.setOption("fullScreen", !yashe.getOption("fullScreen"));
       if(yashe.getOption("fullScreen")){
