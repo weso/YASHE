@@ -87,10 +87,11 @@ inlineShapeAtom ==> ['(',shapeExpression,')'].
 inlineShapeAtom ==> ['.'].
 
 %[20] OK
-shapeOrRef ==> [shapeDefinition].
-shapeOrRef ==> ['ATPNAME_NS'].
-shapeOrRef ==> ['ATPNAME_LN'].
-shapeOrRef ==> ['@',shapeExprLabel].
+shapeOrRef ==> [or(shapeDefinition,shapeRef)].
+
+shapeRef ==> ['ATPNAME_NS'].
+shapeRef ==> ['ATPNAME_LN'].
+shapeRef ==> ['@',shapeExprLabel].
 
 %[21] OK
 inlineShapeOrRef ==> [inlineShapeDefinition].
@@ -138,10 +139,16 @@ numericLength ==> ['TOTALDIGITS'].
 numericLength ==> ['FRACTIONDIGITS'].
 
 %[30] OK
-shapeDefinition ==>[*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}',*(annotation),semanticActions].
+shapeDefinition ==>[*(qualifier),'{',?(tripleExpression),'}',*(annotation),semanticActions].
 
 %[31] OK
-inlineShapeDefinition ==> [*(or(extraPropertySet,'CLOSED')),'{',?(tripleExpression),'}'].
+inlineShapeDefinition ==> [*(qualifier),'{',?(tripleExpression),'}'].
+
+qualifier ==> [or(extension,extraPropertySet,'CLOSED')].
+
+extension ==> ['EXTENDS', +(shapeRef)].
+extension ==> ['&', +(shapeRef)].
+
 
 %[32] OK
 extraPropertySet ==> ['EXTRA',+(predicate)].
@@ -307,6 +314,7 @@ tm_regex([
 
 % Terminals where name of terminal is uppercased ten content
 tm_keywords([
+'EXTENDS',
 'BASE',
 'PREFIX',
 'IMPORT',

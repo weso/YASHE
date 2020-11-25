@@ -31,7 +31,6 @@ var checkSyntax = function(yashe) {
         precise
       );
   
-      
   
       var state = token.state;
   
