@@ -72,6 +72,7 @@ module.exports.isInPrefixList = function(completion){
 module.exports.PREFIXES = []
 
 var KEYWORDS = [
+  'extends',
   'base',
   'prefix',
   'import',
