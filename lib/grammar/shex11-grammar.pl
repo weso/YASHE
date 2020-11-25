@@ -47,7 +47,7 @@ startActions ==> [+(codeDecl)].
 statement ==> [or(directive,notStartAction)].
 
 %[9] OK
-shapeExprDecl ==> [shapeExprLabel,or(shapeExpression,'EXTERNAL')].
+shapeExprDecl ==> [?('KW_ABSTRACT'),shapeExprLabel,or(shapeExpression,'EXTERNAL')].
 
 %[10] OK
 shapeExpression ==> [shapeOr].
@@ -299,6 +299,7 @@ tm_regex([
 'STRING_LITERAL2',
 'STRING_LITERAL_LONG1',
 'STRING_LITERAL_LONG2',
+'KW_ABSTRACT',
 'A_TOKEN',
 'AND_TOKEN',
 'DOUBLE_SLASH'
@@ -306,7 +307,6 @@ tm_regex([
 
 % Terminals where name of terminal is uppercased ten content
 tm_keywords([
-
 'BASE',
 'PREFIX',
 'IMPORT',
