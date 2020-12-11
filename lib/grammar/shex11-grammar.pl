@@ -139,16 +139,18 @@ numericLength ==> ['TOTALDIGITS'].
 numericLength ==> ['FRACTIONDIGITS'].
 
 %[30] OK
-shapeDefinition ==>[*(qualifier),'{',?(tripleExpression),'}',*(annotation),semanticActions].
+shapeDefinition ==>[inlineShapeDefinition,*(annotation),semanticActions].
 
 %[31] OK
 inlineShapeDefinition ==> [*(qualifier),'{',?(tripleExpression),'}'].
 
-qualifier ==> [or(extension,extraPropertySet,'CLOSED')].
+qualifier ==> [or(extension,restriction,extraPropertySet,'CLOSED')].
 
 extension ==> ['EXTENDS', +(shapeRef)].
 extension ==> ['&', +(shapeRef)].
 
+restriction ==> ['RESTRICTS',shapeRef].
+restriction ==> ['-',shapeRef].
 
 %[32] OK
 extraPropertySet ==> ['EXTRA',+(predicate)].
@@ -314,6 +316,7 @@ tm_regex([
 
 % Terminals where name of terminal is uppercased ten content
 tm_keywords([
+'RESTRICTS',
 'EXTENDS',
 'BASE',
 'PREFIX',

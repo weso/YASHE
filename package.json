@@ -1,7 +1,7 @@
 {
   "name": "@weso/yashe",
   "description": "Yet Another ShEx Editor",
-  "version": "1.3.9",
+  "version": "1.3.13",
   "main": "src/main.js",
   "license": "MIT",
   "author": "Pablo Menéndez",
@@ -55,7 +55,6 @@
   },
   "bugs": "https://github.com/weso/YASHE/issues/",
   "keywords": [
-    "JavaScript",
     "ShEx",
     "Editor",
     "Semantic Web",
@@ -100,5 +99,8 @@
       "require": "codemirror",
       "global": "CodeMirror"
     }
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   }
 }
