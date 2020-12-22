@@ -35,6 +35,10 @@ require('codemirror/addon/edit/matchbrackets.js');
 require('codemirror/addon/runmode/runmode.js');
 require('codemirror/addon/display/fullscreen.js');
 require('../lib/grammar/tokenizer.js');
+require('codemirror/addon/search/search.js');
+require('codemirror/addon/search/jump-to-line.js');
+require('codemirror/addon/dialog/dialog.js');
+
 
 /**
  * Main YASHE constructor.

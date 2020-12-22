@@ -505,6 +505,30 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     content: "\25BE"; }
   .yashe .CodeMirror-foldgutter-folded:after {
     content: "\25B8"; }
+  .yashe .CodeMirror-dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: inherit;
+    z-index: 15;
+    padding: .1em .8em;
+    overflow: hidden;
+    color: inherit; }
+  .yashe .CodeMirror-dialog-top {
+    border-bottom: 1px solid #eee;
+    top: 0; }
+  .yashe .CodeMirror-dialog-bottom {
+    border-top: 1px solid #eee;
+    bottom: 0; }
+  .yashe .CodeMirror-dialog input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 20em;
+    color: inherit;
+    font-family: monospace; }
+  .yashe .CodeMirror-dialog button {
+    font-size: 70%; }
   .yashe .yashe_btn {
     color: #333;
     border: 1px solid transparent;
