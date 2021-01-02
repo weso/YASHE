@@ -82,12 +82,10 @@ function getCommentsAfterShape(shapeTokens){
 }
 
 function getTriples(tokens) {
-        let triples = [];
         let singleTriple = [];
         let start = false;
         let finish = true;
         let open = 0;
-        let isStartWithComent = false;
         return tokens.reduce((acc,token,index)=>{
 
             if(token.skip) return acc; //Is a comment that is part of the previous triple
@@ -233,7 +231,7 @@ function getSlots(tokens){
 
 
 
-function getTokens(){
+function getTokens(yashe){
     let tokens =[];
     if(yashe!=undefined){
         for (var l = 0; l < yashe.lineCount(); ++l) {
@@ -321,7 +319,6 @@ function getDirectivesAndStarts(tokens){
 function getShapesTokens(tokens){
     let shape = []
     let shapeCont = 0;
-    let hasTripleStarted = false;
     //Separate shapes in arrays
     return tokens.reduce((acc,t)=>{
 
