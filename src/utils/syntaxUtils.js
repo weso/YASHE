@@ -43,14 +43,14 @@ var checkSyntax = function(yashe) {
         }
   
   
-        var warningEl = yutils.svg.getElement(imgs.warning);
+        var errorEl = yutils.svg.getElement(imgs.error);
         if (state.errorMsg) {
-          require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+          require("./tooltipUtils.js").grammarTootlip(yashe, errorEl, function() {
             return $("<div/>").text(token.state.errorMsg).html();
           });
         } else if (state.possibleCurrent && state.possibleCurrent.length > 0) {
-          //				warningEl.style.zIndex = "99999999";
-          require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+          //				errorEl.style.zIndex = "99999999";
+          require("./tooltipUtils.js").grammarTootlip(yashe, errorEl, function() {
             var expectedEncoded = [];
             state.possibleCurrent.forEach(function(expected) {
               expectedEncoded.push(
@@ -60,10 +60,10 @@ var checkSyntax = function(yashe) {
             return "This line is invalid. Expected: " + expectedEncoded.join(", ");
           });
         }
-        warningEl.style.marginTop = "2px";
-        warningEl.style.marginLeft = "2px";
-        warningEl.className = "parseErrorIcon";
-        yashe.setGutterMarker(l, "gutterErrorBar", warningEl);
+        errorEl.style.marginTop = "2px";
+        errorEl.style.marginLeft = "2px";
+        errorEl.className = "parseErrorIcon";
+        yashe.setGutterMarker(l, "gutterErrorBar", errorEl);
   
         yashe.queryValid = false;
         return false;
@@ -208,16 +208,29 @@ var checkSyntax = function(yashe) {
   }
 
   var setError= function(line,errMsg,yashe) {
-     var warningEl = yutils.svg.getElement(imgs.warning);
-      require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+     var errorEl = yutils.svg.getElement(imgs.error);
+      require("./tooltipUtils.js").grammarTootlip(yashe, errorEl, function() {
         return errMsg;
       });   
-      warningEl.style.marginTop = "2px";
-      warningEl.style.marginLeft = "2px";
-      warningEl.className = "parseErrorIcon";
-      yashe.setGutterMarker(line, "gutterErrorBar", warningEl);
+      errorEl.style.marginTop = "2px";
+      errorEl.style.marginLeft = "2px";
+      errorEl.className = "parseErrorIcon";
+      yashe.setGutterMarker(line, "gutterErrorBar", errorEl);
   }
 
+
+  var setWarning= function(line,errMsg,yashe) {
+    var warningEl = yutils.svg.getElement(imgs.warning);
+     require("./tooltipUtils.js").grammarTootlip(yashe, warningEl, function() {
+       return errMsg;
+     });   
+     warningEl.style.marginTop = "2px";
+     warningEl.style.marginLeft = "2px";
+     warningEl.className = "parseErrorIcon";
+     yashe.setGutterMarker(line, "gutterErrorBar", warningEl);
+ }
+
   module.exports = {
-    checkSyntax:checkSyntax
+    checkSyntax:checkSyntax,
+    setWarning:setWarning
   };

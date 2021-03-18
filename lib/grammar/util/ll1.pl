@@ -33,14 +33,14 @@ ll1_tables:-
 validate_rules:-
 	NT=>_,
 	\+ (_=>RHS, memberchk(NT,RHS) ),
-	format("Warning: unused non-terminal: ~w~n",[NT]),
+	format("Error: unused non-terminal: ~w~n",[NT]),
 	fail.
 validate_rules:-
 	% (Check the untranslated rules)
 	LHS ==> RHS,
 	\+RHS=[],
 	\+RHS=[_|_],
-	format("Warning: atomic RHS: ~w~n",[LHS=>RHS]),
+	format("Error: atomic RHS: ~w~n",[LHS=>RHS]),
 	fail.
 validate_rules:-
 	_ => RHS,
@@ -51,7 +51,7 @@ validate_rules:-
 validate_rules:-
 	tm(T),
 	\+declared_terminal(T),
-	format("Warning: undeclared terminal: ~w~n",[T]),
+	format("Error: undeclared terminal: ~w~n",[T]),
 	fail.
 validate_rules:-
 	declared_terminal(T),

@@ -22,6 +22,7 @@ const prettyUtils = require('./utils/pretty/prettyUtils.js');
 const prefixFold = require('./utils/prefixFold.js');
 const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
+const { debounce } = require('./utils/tooltipUtils.js');
 
 
 require('../lib/deparam.js');
@@ -221,6 +222,10 @@ const extendCmInstance = function(yashe) {
     }
   }
 
+  yashe.setWarning = function(line,errMsg){
+    syntaxUtils.setWarning(line,errMsg,yashe);
+  }
+
 
   return yashe;
 };
@@ -396,6 +401,7 @@ root.prettify = function(yashe){
    // if(yashe.hasErrors())yashe.undo(); //Just in case the prettify fail
   }
 }
+
 
 /**
  * Checks YASHE content syntax
