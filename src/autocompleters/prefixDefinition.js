@@ -27,7 +27,7 @@ module.exports = function(yashe, completerName) {
 
         prefixArray.sort();
         callback(prefixArray);
-      });
+      },'jsonp');
     },
     preProcessToken: function(token) {
       return module.exports.preprocessPrefixTokenForCompletion(yashe, token);
