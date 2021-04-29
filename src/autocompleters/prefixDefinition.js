@@ -27,7 +27,7 @@ module.exports = function(yashe, completerName) {
 
         prefixArray.sort();
         callback(prefixArray);
-      });
+      },'jsonp');
     },
     preProcessToken: function(token) {
       return module.exports.preprocessPrefixTokenForCompletion(yashe, token);
@@ -123,4 +123,4 @@ module.exports.appendPrefixIfNeeded = function(yashe, completerName) {
 };
 
 module.exports.fetchFrom = 
-  "https://prefix.cc/popular/all.file.json";
+  "http://prefix.cc/popular/all.file.json";
