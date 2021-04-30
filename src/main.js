@@ -24,6 +24,8 @@ const autocompletersBase = require('./autocompleters/autocompleterBase.js');
 const Clipboard = require('clipboard');
 
 
+
+
 require('../lib/deparam.js');
 require('codemirror/addon/fold/foldcode.js');
 require('codemirror/addon/fold/foldgutter.js');
@@ -548,5 +550,4 @@ root.version = {
   'jquery': $.fn.jquery,
   'yasgui-utils': yutils.version,
 };
-
 

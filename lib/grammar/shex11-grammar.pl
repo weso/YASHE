@@ -230,7 +230,7 @@ iriRange ==> [iri,?(['~',*(exclusion)])].
 iriRange ==> ['.',+(exclusion)].
 
 %[49] OK
-exclusion ==>['-',or(iri,literal,'LANGTAG'),?('~')].
+exclusion ==>['-',iri,?('~')].
 
 %[50] OK
 include ==> ['&',tripleExprLabel].
@@ -264,8 +264,11 @@ numericLiteral ==>['INTEGER'].
 numericLiteral ==>['DECIMAL'].
 numericLiteral ==>['DOUBLE'].
 
-%[129s] OK
-rdfLiteral ==> [string,?(['^','^',datatype])].
+%[129s] 
+rdfLiteral ==> [string, rdfLit].
+rdfLit ==> ['LANGTAG'].
+rdfLit ==> ['^','^',datatype].
+rdfLit ==> [].
 
 %[134s] OK
 booleanLiteral ==> [or('TRUE', 'FALSE')].
