@@ -11,7 +11,6 @@ module.exports = function(yashe, name) {
       return module.exports.isValidCompletionPosition(yashe);
     },
     get: function(token) {
-    console.log('holaa')
      var trie = new Trie()
      var prefixes = module.exports.PREFIXES
      for(var prefix in prefixes){
