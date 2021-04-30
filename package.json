@@ -73,7 +73,7 @@
     "directory": "@weso/YASHE"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bloodhound-js": "^1.2.3",
     "bootstrap": "^4.4.1",
     "codemirror": "^5.52.2",
