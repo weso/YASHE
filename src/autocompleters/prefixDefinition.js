@@ -17,7 +17,7 @@ module.exports = function(yashe, completerName) {
       return module.exports.isValidCompletionPosition(yashe);
     },
     get: function(token, callback) {
-      $.get(module.exports.fetchFrom,'jsonp',function(data) {
+      $.get(module.exports.fetchFrom,function(data) {
         var prefixArray = [];
         for (var prefix in data) {
           if (prefix == "bif") continue; // skip this one! see #231
@@ -27,7 +27,7 @@ module.exports = function(yashe, completerName) {
 
         prefixArray.sort();
         callback(prefixArray);
-      },'jsonp');
+      });
     },
     preProcessToken: function(token) {
       return module.exports.preprocessPrefixTokenForCompletion(yashe, token);
