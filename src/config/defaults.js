@@ -12,7 +12,7 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-  value:  `PREFIX :       <http://example.org/>
+   value:  `PREFIX :       <http://example.org/>
 PREFIX schema: <http://schema.org/>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
@@ -23,7 +23,6 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
   schema:knows         IRI @:User*
 }
 `,
-
   highlightSelectionMatches: {
     showToken: /\w/
   },
