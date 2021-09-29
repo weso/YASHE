@@ -114,7 +114,7 @@ module.exports.isValidCompletionPosition = function(yashe) {
   //This line avoid the autocomplete in the prefix definition
   if(previousToken.string.toUpperCase() == 'PREFIX')return false
 
-  if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint'){
+  if(token.type == 'shape' || token.type=='string-2' || token.type=='constraint' || token.type=='valueSet'){
     if(rdfUtils.isWikidataEntitiesPrefix(yashe,prefixName) 
       || rdfUtils.isWikidataPropertiesPrefix(yashe,prefixName)
       || rdfUtils.getEndPoint(yashe,prefixName)!=null){
@@ -122,7 +122,5 @@ module.exports.isValidCompletionPosition = function(yashe) {
     }
   }
 
- 
   return false;
-  
 };
