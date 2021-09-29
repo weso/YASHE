@@ -12,16 +12,14 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
   /**
 	 *  Default shape 
 	 */
-   value:  `PREFIX :       <http://example.org/>
-PREFIX schema: <http://schema.org/>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-
-:User {
-  schema:name          xsd:string  @:User ;
-  schema:birthDate     xsd:date?  ;
-  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
-  schema:knows         IRI @:User*
-}
+   value:  `PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+   PREFIX wd: <http://www.wikidata.org/entity/>
+   PREFIX :       <http://example.org/>
+   
+   :User {
+     wdt:P31 [wd:]
+   }
+   
 `,
   highlightSelectionMatches: {
     showToken: /\w/
