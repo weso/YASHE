@@ -13,14 +13,15 @@ YASHE.defaults = $.extend(true, {}, YASHE.defaults, {
 	 *  Default shape 
 	 */
    value:  `PREFIX :       <http://example.org/>
-   PREFIX schema: <http://schema.org/>
-   PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-   :User {
-     schema:name          xsd:string  @:User ;
-     schema:birthDate     xsd:date?  ;
-     schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
-     schema:knows         IRI @:User*
-   }
+PREFIX schema: <http://schema.org/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+:User {
+  schema:name          xsd:string  @:User ;
+  schema:birthDate     xsd:date?  ;
+  schema:gender        [ schema:Male schema:Female ] OR xsd:string ;
+  schema:knows         IRI @:User*
+}
    `,
   highlightSelectionMatches: {
     showToken: /\w/
