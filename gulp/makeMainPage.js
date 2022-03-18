@@ -4,7 +4,7 @@ var gulp = require("gulp"),
   source = require("vinyl-source-stream"),
   embedlr = require("gulp-embedlr"),
   minifyCSS = require("gulp-cssnano");
-uglify = require("gulp-uglify"), sass = require("gulp-sass"), buffer = require("vinyl-buffer"), concat = require(
+uglify = require("gulp-uglify"), sass = require("gulp-sass")(require('node-sass')), buffer = require("vinyl-buffer"), concat = require(
   "gulp-concat"
 );
 
