@@ -56,7 +56,7 @@ describe('Wikibase',function() {
             expect(win.yashe.getValue()).to.equals("PREFIX p: <http://www.wikidata.org/prop/> \np:P31");       
         });
     })  
-
+ /*
     it('Entity autocompleter works with another wikibase instance',function() {
         clearYashe();
         
@@ -80,7 +80,7 @@ describe('Wikibase',function() {
     })
 
 
-   /*  it('Entity autocompleter works with another wikibase instance (special case)',function() {
+    it('Entity autocompleter works with another wikibase instance (special case)',function() {
         // I've found that at least one wikibase instance (https://wiki.eagle-network.eu/wiki/Main_Page)
         // have one small diference in the API call 
         
