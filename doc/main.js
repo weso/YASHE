@@ -104,6 +104,7 @@ $(document).ready(function() {
     //Add all the Wikidata examples to the selector  
     var schemas = [];
     var wikiSelector = $('#wikiSelector');
+   
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -130,7 +131,8 @@ $(document).ready(function() {
     });
 
     //Wikidata Selector Listener
-    wikiSelector.change(function(e) {
+    wikiSelector[0].onchange = function(){
+        console.log('vamosho')
         var selected =  $('#wikiSelector option:selected').val();
         var schema = schemas.filter(function(s){
           return s.id === selected
@@ -138,12 +140,13 @@ $(document).ready(function() {
         if(schema)yashe.setValue(schema[0].schemaText);
         $('#rdfBookSelector').val('');
         $('#othersSelector').val('');
-    });
+    };
 
 
     //Others Examples Selector Listener
     var othersSelector = $('#othersSelector');
     othersSelector.change(function(e) {
+        console.log('others')
         var selected =  $('#othersSelector option:selected').val();
         setExample('others',selected);
         $('#rdfBookSelector').val('');
@@ -159,6 +162,10 @@ $(document).ready(function() {
     }
 
 
+
+    console.log(rdfBookSelector)
+    console.log(wikiSelector)
+    console.log(othersSelector)
 
 
 });

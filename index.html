@@ -11,6 +11,10 @@
   <link href="doc/doc.min.css" rel="stylesheet" type="text/css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   </head>
   <body>
 
@@ -56,11 +60,10 @@
             <select id="rdfBookSelector" class="exSelector form-control">
               <option value="" disabled selected>Validating RDF Data Book Examples</option>
             </select>
-        
-            <select id="wikiSelector" class="wikiSelector form-control">
-              <option value="" disabled selected>Wikidata Examples</option>
+    
+            <select id="wikiSelector" class="wikiSelector form-control js-example-basic-single" >
+              <option value="" disabled selected>Wikidata Schemas</option>
             </select>
-
             <select  id="othersSelector" class="form-control">
               <option value="" disabled selected>Other Examples</option>
               <option value="japan">Japan Sarch Metadata</option>
@@ -189,6 +192,10 @@
       });
 
       yashe.setSize(1135,400);
+
+      $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+      });
 
     </script>
 
