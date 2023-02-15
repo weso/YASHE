@@ -24,6 +24,7 @@ In addition, it offers a simple way of integrating into other projects
   - [JsDelivr](#JsDelivr)
   - [Github](#Github)
 * [Getting Started](#Getting-started)
+* [Getting Started](#Getting-started)
   - [React.js](#Reactjs)
 * [Configuration](#Configuration)
 * [Events](#Events)
@@ -33,6 +34,7 @@ In addition, it offers a simple way of integrating into other projects
 * [API](#API)
 * [Statics](#Statics)
 * [Developing YASHE](#developing-yashe-construction)
+  - [Docker](#Docker)
 * [Used By](#used-by-link)
 * [Forked By](#forked-by-link)
 * [Thanks!!!](#thanks)
@@ -396,10 +398,29 @@ YASHE.getCompleteToken(doc: yashe, token: Object, cursor: Object) //→ token: O
 
 ## Developing YASHE :construction:
 Feel free to fork and develop this tool.  You can submit your
-contributions as Github pull requests.  To develop *YASHE* locally:
+contributions as GitHub pull requests.  To develop *YASHE* locally:
 
 * `npm install`
 * `npm run dev` for local development
+
+### Docker
+You can also deploy YASHE with Docker. The only important requirement is that you have Docker installed and running on your computer.
+Then, you just need to follow these steps.
+
+1. Download the latest version of the repository, either as a ZIP file or by cloning the master branch.
+```shell
+git clone https://github.com/weso/yashe
+```
+
+2. Then move to the docker folder from inside YASHE:
+```shell
+cd yashe/docker
+```
+
+3. Build yashe image: `docker-compose build`.
+
+4. Finally, execute `docker-compose up`. This will deploy the container and expose the port 4000.
+
 
 ## Used By: :link:
 
