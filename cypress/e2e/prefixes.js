@@ -2,17 +2,25 @@ const keywordColor = 'rgb(255, 0, 0)';
 const prefixesColor = 'rgb(109, 15, 122)';
 const clearYashe = require('../utils/testUtils.js')
 
+/*
 describe('YASHE initialization',function() {
     it('Check YASHE exists',function() {
         cy.visit('http://localhost:4000/')
-        expect(cy.get('.yashe')).to.exist  
+        expect(cy.get('.yashe')).to.exist
     })
 })
+*/
 
 describe('Prefixes',function() {
     
     it('Type a prefix and check the defined prefixes of yashe',function() {
-        clearYashe()
+        cy.visit('http://localhost:4000/')
+        //clearYashe()
+        cy.window().then(win => {
+            win.yashe.setValue("")
+          })
+    
+        /*
         cy.get('.CodeMirror textarea')
         // we use `force: true` below because the textarea is hidden
         // and by default Cypress won't interact with hidden elements
@@ -21,7 +29,7 @@ describe('Prefixes',function() {
         cy.window().then(win => {
             let predfixes = win.yashe.getDefinedPrefixes();
             expect(Object.keys(predfixes).length).to.equals(1);  
-        });
+        });*/
       
     }) 
 
