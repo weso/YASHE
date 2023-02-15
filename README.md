@@ -403,7 +403,7 @@ contributions as GitHub pull requests.  To develop *YASHE* locally:
 * `npm install`
 * `npm run dev` for local development
 
-### Docker:
+### Docker
 You can also deploy YASHE with Docker. The only important requirement is that you have Docker installed and running on your computer.
 Then, you just need to follow these steps.
 
@@ -412,7 +412,7 @@ Then, you just need to follow these steps.
 git clone https://github.com/weso/yashe
 ```
 
-2. Then move to the docker folder from inside YASHE. For that:
+2. Then move to the docker folder from inside YASHE:
 ```shell
 cd yashe/docker
 ```
