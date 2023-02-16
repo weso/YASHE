@@ -22,7 +22,7 @@
     "browserify-shim": "^3.8.12",
     "browserify-transform-tools": "^1.6.0",
     "clipboard": "^2.0.4",
-    "cypress": "^4.10.0",
+    "cypress": "^4.12.1",
     "eslint": "^6.4.0",
     "eslint-config-google": "^0.14.0",
     "exorcist": "^0.4.0",
