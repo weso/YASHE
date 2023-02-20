@@ -8,8 +8,6 @@ var checkSyntax = function(yashe) {
     yashe.queryValid = true;
     yashe.clearGutter("gutterErrorBar");
 
-    resetValues(yashe);
-    
     var state = null;
     let openTokensCounter = 0;
     let closedTokensCounter = 0;
@@ -32,8 +30,7 @@ var checkSyntax = function(yashe) {
       );
   
   
-      var state = token.state;
-  
+      state = token.state;
       if (state.OK == false) {
         if (!yashe.options.syntaxErrorCheck) {
           //the library we use already marks everything as being an error. Overwrite this class attribute.
@@ -80,8 +77,7 @@ var checkSyntax = function(yashe) {
           closedTokensCounter++;
         }
       }
-    
-      updateShapesAndPrefixes(yashe,l);
+
     }
 
     //Is last '}' missing?  (See #104)
@@ -91,121 +87,12 @@ var checkSyntax = function(yashe) {
       return false;
     }
 
-    
-    
-    if(!checkPrefixes(yashe))return false;
-    if(!checkShapes(yashe))return false;
 
-    yashe.shapes = Object.assign([],yashe.defShapes);
-  
+    state.resetDefs(); // Get rid of the old shapes and prefixes in case the names of the defined shapes change
     yashe.prevQueryValid = yashe.queryValid;
     return true;
   };
 
-  var resetValues = function(yashe){
-    yashe.defPrefixes = [];
-    yashe.usedPrefixes = [];
-    yashe.defShapes = [];
-    yashe.shapeRefs = [];
-  }
-
-
-  var updateShapesAndPrefixes = function(yashe,l) {
-    let lineTokens = yashe.getLineTokens(l);
-    //Get all the defined prefixes and all the used prefixes
-    //Get all the defined shapes and all the used shapes
-    for(let t in lineTokens){
-      let token = lineTokens[t];
-  
-
-      if(token.type=='string-2' || 
-        token.type=='constraint'){
-        yashe.usedPrefixes.push({
-            alias:token.string.split(":")[0]+':',
-            line:l });
-      }
-
-      if(token.type=='valueSet'){
-        if(token.string.includes(":") && !token.string.startsWith("<")){
-            yashe.usedPrefixes.push({
-                alias:token.string.split(":")[0]+':',
-                line:l });
-        }  
-      }
-
-
-      if(token.type=='prefixDelcAlias'){
-        yashe.defPrefixes.push(token.string);
-      }
-
-      if(token.type=='shape'){
-        yashe.defShapes.push(token.string);
-        if(!token.string.startsWith("<") && !token.string.startsWith("_:")){
-          yashe.usedPrefixes.push({
-            alias:token.string.split(":")[0]+':',
-            line:l });
-        }  
-
-      }
-
-      if(token.type=='shapeRef'){
-        yashe.shapeRefs.push({
-            ref:token.string.slice(1,token.string.length),
-            line:l });
-      }
-
-      //Necesary when the ShapeRef is "@:"
-      if(token.string=='@'){
-        yashe.shapeRefs.push({
-            ref:'@:',
-            line:l });
-      }
-    
-    }
-
-  }
-
-  
-
-/**
-  * Check if the ShapeRefs are defined
- */
-  var checkShapes = function(yashe){
-    let defShapes = yashe.defShapes;
-    let shapeRefs = yashe.shapeRefs;
-    for(let r in shapeRefs){
-      let err=true;
-      for(let s in defShapes){
-        if(defShapes[s]==shapeRefs[r].ref)err=false;
-      }
-      if(err){
-        setError(shapeRefs[r].line,"Shape '" + shapeRefs[r].ref + "' is not defined",yashe);
-        yashe.queryValid = false;
-        return false;
-      } 
-    }
-    return true;
-  }
-
-/**
-  * Check if the Prefixes are defined
- */
-  var checkPrefixes = function(yashe){
-    let defPrefixes = yashe.defPrefixes;
-    let usedPrefixes = yashe.usedPrefixes;
-    for(let p in usedPrefixes){
-      let err=true;
-      for(let d in defPrefixes){
-        if(defPrefixes[d]==usedPrefixes[p].alias)err=false;
-      }
-      if(err){
-        setError(usedPrefixes[p].line,"Prefix '" + usedPrefixes[p].alias + "' is not defined",yashe);
-        yashe.queryValid = false;
-        return false;
-      } 
-    }
-    return true;
-  }
 
   var setError= function(line,errMsg,yashe) {
      var warningEl = yutils.svg.getElement(imgs.warning);
